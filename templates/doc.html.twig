@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Documentation | {{ parent() }}{% endblock %}
+
+{% block body %}
+    <redoc spec-url="{{ path('api_doc_json') }}"></redoc>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="//cdn.jsdelivr.net/npm/redoc@2.0.0-alpha.38/bundles/redoc.standalone.js"></script>
+{% endblock %}
