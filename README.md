@@ -16,6 +16,6 @@ Run:
 composer install
 ```
 
-##Usage
+## Usage
 
 Navigate to `index.php` for documentation.
