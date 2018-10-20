@@ -1,0 +1,12 @@
+---
+deployment:
+ tasks:
+ - export DEPLOYPATH=/home/glutenfr/data.ivanstanojevic.me
+ - composer install
+ - /bin/cp ./bin $DEPLOYPATH
+ - /bin/cp ./config $DEPLOYPATH
+ - /bin/cp ./src $DEPLOYPATH
+ - /bin/cp ./templates $DEPLOYPATH
+ - /bin/cp ./vendor $DEPLOYPATH
+ - /bin/cp ./.htaccess $DEPLOYPATH
+ - /bin/cp ./.index.php $DEPLOYPATH
