@@ -1,3 +1,3 @@
 #index:
 #    path: /
-#    controller: App\Controller\TleController::index
+#    controller: App\Controller\Api\TleController::index

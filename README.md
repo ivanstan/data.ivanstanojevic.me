@@ -1,12 +1,14 @@
-# Two line elements JSON API
+# Opendata
 
-Provides storage, update, management and API for NORAD's two line 
-elements sets used to predict satellite positions.
+Provides storage, update, management for:
+
+* Two line satellite elements
+* METER
 
 ## Installation
 Setup database connection in `.env` file:
 ```
-DATABASE_URL=mysql://username:password@127.0.0.1:3306/tle
+DATABASE_URL=mysql://username:password@127.0.0.1:3306/opendata
 ```
 
 Run:

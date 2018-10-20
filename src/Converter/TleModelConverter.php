@@ -13,14 +13,14 @@ class TleModelConverter
     }
 
     /**
-     * @param Tle[]
+     * @param Tle[] $collection
      *
      * @return TleModel[]
      */
-    public function convertCollection($tle): array
+    public function collection($collection): array
     {
         $result = [];
-        foreach ($tle as $item) {
+        foreach ($collection as $item) {
             $result[] = $this->convert($item);
         }
 

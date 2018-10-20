@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Tle;
+use App\Model\PaginationCollection;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -13,8 +14,6 @@ class TleRepository extends ServiceEntityRepository
     public const SORT_NAME = 'name';
 
     public static $sort = [self::SORT_ID, self::SORT_NAME];
-
-    public const PAGE_SIZE = 50;
 
     public function __construct(RegistryInterface $registry)
     {
@@ -31,24 +30,30 @@ class TleRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    /**
-     * @return Tle[]|Collection
-     */
-    public function search(string $query = null, $sort = null, $sortDir = null, int $pageSize, int $offset)
+    public function collection(
+        ?string $search,
+        string $sort,
+        string $sortDir,
+        int $pageSize,
+        int $offset
+    ): PaginationCollection
     {
         $builder = $this->createQueryBuilder('tle');
 
         // search
-        if ($query) {
+        if ($search) {
             $builder
                 ->where(
                     $builder->expr()->orX(
-                        $builder->expr()->like('tle.satelliteId', ':query'),
-                        $builder->expr()->like('tle.name', ':query')
+                        $builder->expr()->like('tle.satelliteId', ':search'),
+                        $builder->expr()->like('tle.name', ':search')
                     )
                 )
-                ->setParameter('query', '%'.$query.'%');
+                ->setParameter('search', '%'.$search.'%');
         }
+
+        // get total
+        $total = \count($builder->getQuery()->getResult());
 
         // sort
         $builder->orderBy('tle.'.$sort, $sortDir);
@@ -57,6 +62,11 @@ class TleRepository extends ServiceEntityRepository
         $builder->setMaxResults($pageSize);
         $builder->setFirstResult($offset);
 
-        return $builder->getQuery()->getResult();
+        $collection = new PaginationCollection();
+
+        $collection->setCollection($builder->getQuery()->getResult());
+        $collection->setTotal($total);
+
+        return $collection;
     }
 }

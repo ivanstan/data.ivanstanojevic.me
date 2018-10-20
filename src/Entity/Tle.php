@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Field\IdField;
 use App\Field\NameField;
 use App\Field\TleField;
 use Doctrine\ORM\Mapping as ORM;
@@ -12,17 +13,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Tle
 {
+    use IdField;
     use NameField;
     use TleField;
-
-    /**
-     * @var int
-     *
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(name="id", type="integer")
-     */
-    private $id;
 
     /**
      * @var \DateTime
@@ -45,14 +38,6 @@ class Tle
     public function update(): void
     {
         $this->setUpdatedAt(new \DateTime());
-    }
-
-    /**
-     * @return int
-     */
-    public function getId(): int
-    {
-        return $this->id;
     }
 
     public function getUpdatedAt(): \DateTime

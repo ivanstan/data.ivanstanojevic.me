@@ -74,6 +74,9 @@
     "ocramius/proxy-manager": {
         "version": "2.2.2"
     },
+    "php-ai/php-ml": {
+        "version": "0.6.2"
+    },
     "psr/cache": {
         "version": "1.0.1"
     },
@@ -85,6 +88,9 @@
     },
     "psr/simple-cache": {
         "version": "1.0.1"
+    },
+    "safran-cassiopee/php-metar-decoder": {
+        "version": "v0.7"
     },
     "symfony/apache-pack": {
         "version": "1.0",
@@ -110,6 +116,9 @@
             "ref": "e3868d2f4a5104f19f844fe551099a00c6562527"
         }
     },
+    "symfony/css-selector": {
+        "version": "v4.1.6"
+    },
     "symfony/debug": {
         "version": "v4.1.6"
     },
@@ -117,6 +126,9 @@
         "version": "v4.1.6"
     },
     "symfony/doctrine-bridge": {
+        "version": "v4.1.6"
+    },
+    "symfony/dom-crawler": {
         "version": "v4.1.6"
     },
     "symfony/dotenv": {
@@ -199,8 +211,5 @@
     },
     "zendframework/zend-eventmanager": {
         "version": "3.2.1"
-    },
-    "zircote/swagger-php": {
-        "version": "3.0.1"
     }
 }
