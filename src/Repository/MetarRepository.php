@@ -21,7 +21,7 @@ class MetarRepository extends ServiceEntityRepository
     /**
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function latest(string $icao): Metar
+    public function latest(string $icao): ?Metar
     {
         return $this->createQueryBuilder('m')
             ->where('m.icao = :icao')

@@ -79,6 +79,9 @@ class ImportTleCommand extends Command
     /** @var TleRepository */
     private $repository;
 
+    /** @var OutputInterface */
+    private $output;
+
     public function __construct(
         EntityManagerInterface $em,
         TleRepository $repository
@@ -95,7 +98,11 @@ class ImportTleCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): void
     {
+        $this->output = $output;
         $this->satellites = $this->repository->fetchAllIndexed();
+
+        $totalInsert = 0;
+        $totalUpdate = 0;
 
         foreach (self::SOURCES as $source) {
             $data = file_get_contents($source);
@@ -118,9 +125,15 @@ class ImportTleCommand extends Command
                 }
             }
 
+            $totalInsert += \count($this->insertQueue);
+            $totalUpdate += \count($this->updateQueue);
+
             $this->flushInsert();
             $this->flushUpdate();
         }
+
+        $this->output->writeln(\sprintf('<info>Inserted %d TLE records to database</info>', $totalInsert));
+        $this->output->writeln(\sprintf('<info>Updated %d TLE records in database</info>', $totalUpdate));
     }
 
     protected function flushInsert(): void
@@ -134,6 +147,7 @@ class ImportTleCommand extends Command
             $tle->setName($model->getName());
 
             $this->em->persist($tle);
+            $this->output->writeln(\sprintf('<info>TLE record queued for insert: %d</info>', $model->getId()));
 
             if (($counter % self::BATCH_SIZE) === 0) {
                 $this->em->flush();
@@ -153,6 +167,7 @@ class ImportTleCommand extends Command
             $tle->setLine1($model->getLine1());
             $tle->setLine2($model->getLine2());
             $tle->setName($model->getName());
+            $this->output->writeln(\sprintf('<info>TLE record queued for update: %d</info>', $model->getId()));
 
             if (($counter % self::BATCH_SIZE) === 0) {
                 $this->em->flush();

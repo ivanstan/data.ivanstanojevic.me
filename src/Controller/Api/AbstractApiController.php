@@ -73,7 +73,13 @@ abstract class AbstractApiController extends Controller
 
     public function getPage(Request $request): int
     {
-        return $request->get(self::PAGE_PARAM, 1);
+        $page = $request->get(self::PAGE_PARAM, 1);
+
+        if ($page < 1) {
+            throw new \LogicException('Page parameter must be greater than zero.');
+        }
+
+        return $page;
     }
 
     public function getPageOffset(int $page, int $pageSize): int
@@ -91,7 +97,7 @@ abstract class AbstractApiController extends Controller
         $params = $request->query->all();
 
         $page = $this->getPage($request);
-        $pages = ceil($total / $pageSize);
+        $pages = max(1, ceil($total / $pageSize));
 
         $nextPage = $page;
         if ($page < $pages) {

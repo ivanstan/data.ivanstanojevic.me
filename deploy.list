@@ -1,0 +1,7 @@
+bin
+config
+src
+templates
+vendor
+composer.json
+index.php

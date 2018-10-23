@@ -31,6 +31,9 @@ class ImportMetarCommand extends Command
     /** @var MetarDecoder */
     private $decoder;
 
+    /** @var OutputInterface */
+    private $output;
+
     public function __construct(EntityManagerInterface $em)
     {
         parent::__construct();
@@ -46,6 +49,8 @@ class ImportMetarCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): void
     {
+        $this->output = $output;
+
         $data = $this->download();
         $data = $this->parse($data);
         $data = $this->prepare($data);
@@ -58,6 +63,7 @@ class ImportMetarCommand extends Command
             $metar->setMetar($item->getRawMetar());
 
             $this->em->persist($metar);
+            $this->output->writeln(\sprintf('<info>METAR record queued for insert: %s</info>', $item->getRawMetar()));
 
             if (($counter % self::BATCH_SIZE) === 0) {
                 $this->em->flush();
@@ -65,6 +71,7 @@ class ImportMetarCommand extends Command
             ++$counter;
         }
         $this->em->flush();
+        $this->output->writeln(\sprintf('<info>Finished: Inserted %d METAR records to database</info>', $counter));
     }
 
     private function download(): array
@@ -109,7 +116,12 @@ class ImportMetarCommand extends Command
         foreach (self::IMPORT_AIRPORT_ICAO as $icao) {
             $latest[$icao] = $this->getDateTimeEpochStart();
 
-            $metar = $this->repository->latest($icao);
+            try {
+                $metar = $this->repository->latest($icao);
+            } catch (\Exception $exception) {
+                $this->output->writeln('<error>'.$exception->getMessage().'</error>');
+                $metar = null;
+            }
 
             if ($metar) {
                 $latest[$icao] = $metar->getDate();

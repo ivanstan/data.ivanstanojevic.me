@@ -1,6 +1,5 @@
-
-###> symfony/framework-bundle ###
 /.env
 /var/
 /vendor/
-###< symfony/framework-bundle ###
+
+deploy.tar.gz

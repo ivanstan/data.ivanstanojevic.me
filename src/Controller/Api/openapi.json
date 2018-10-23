@@ -44,6 +44,9 @@
           }
         ],
         "responses": {
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
           "200": {
             "description": "Metar collection",
             "content": {
@@ -88,6 +91,12 @@
           }
         ],
         "responses": {
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
           "200": {
             "description": "Record found",
             "content": {
@@ -136,6 +145,9 @@
           }
         ],
         "responses": {
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
           "200": {
             "description": "Tle collection",
             "content": {
