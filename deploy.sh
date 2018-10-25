@@ -7,10 +7,13 @@ export PORT=2233
 export ARTIFACT_NAME=artifact.tar.gz;
 
 composer install
+yarn build
 
-tar -zxvf ${ARTIFACT_NAME} -T deploy.list
+tar -czvf ${ARTIFACT_NAME} -T deploy.list
 scp -r -P ${PORT} ${ARTIFACT_NAME} ${USER}@${HOST}:/${DEPLOY_PATH}/
 rm ${ARTIFACT_NAME}
+
+ssh ${USER}@${HOST} -p${PORT} "cd $DEPLOY_PATH && rm -rf ./assets ./bin ./config ./src ./templates ./vendor"
 ssh ${USER}@${HOST} -p${PORT} "cd $DEPLOY_PATH && tar -xvf $ARTIFACT_NAME && rm $ARTIFACT_NAME"
 
 ssh ${USER}@${HOST} -p${PORT} "$DEPLOY_PATH/bin/console cache:clear --env=prod"

@@ -1,0 +1,64 @@
+{
+  "/api/metar": {
+    "get": {
+      "tags": [
+        "METAR"
+      ],
+      "summary": "Collection",
+      "operationId": "metar-collection",
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/search"
+        },
+        {
+          "name": "sort",
+          "in": "query",
+          "description": "Sort field",
+          "schema": {
+            "type": "string",
+            "default": "date",
+            "enum": [
+              "date"
+            ]
+          }
+        },
+        {
+          "$ref": "#/components/parameters/sortDirection"
+        },
+        {
+          "$ref": "#/components/parameters/pageNumber"
+        },
+        {
+          "$ref": "#/components/parameters/pageSize"
+        }
+      ],
+      "responses": {
+        "500": {
+          "$ref": "#/components/responses/500"
+        },
+        "200": {
+          "description": "Metar collection",
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "member": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/METAR"
+                    }
+                  },
+                  "view": {
+                    "type": "object",
+                    "$ref": "#/components/schemas/Pagination"
+                  }
+                },
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block featured %}
+    <header class="featured mb-5" style="background: url({{ asset('assets/images/data.png') }})">
+        <div class="content">
+            <h1 class="mb-3">OpenData</h1>
+            <p>Browse catalog</p>
+        </div>
+        <div class="overlay"></div>
+    </header>
+{% endblock %}
+
+{% block content %}
+    <main class="container">
+        {% for api in apis %}
+            <div class="row mb-5">
+                <div class="col-8 offset-2">
+                    <div class="media">
+                        <div class="media-body">
+                            <h5 class="mt-0 mb-1">
+                                <a href="{{ api.path }}">{{ api.name }}</a>
+                            </h5>
+                            {{ api.description }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </main>
+{% endblock %}

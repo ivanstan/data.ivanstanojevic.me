@@ -37,7 +37,7 @@ class Tle
      */
     public function update(): void
     {
-        $this->setUpdatedAt(new \DateTime());
+        $this->setUpdatedAt(new \DateTime('now', new \DateTimeZone('UTC')));
     }
 
     public function getUpdatedAt(): \DateTime

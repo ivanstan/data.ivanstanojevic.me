@@ -3,14 +3,24 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>{% block title %}Two line element set API{% endblock %}</title>
-    {% block meta %}{% endblock %}
+    <title>{% block title %}OpenData{% endblock %}</title>
+    {% block head %}
+        <link rel="stylesheet" href="{{ asset('assets/build/app.css') }}">
+    {% endblock %}
 </head>
 <body>
-{% block body %}
-    {% block content %}{% endblock %}
-{% endblock %}
+{% block header %}{% endblock %}
+{% block featured %}{% endblock %}
+{% block content %}{% endblock %}
+
+<footer class="mt-5 bg-primary">
+    <div class="footer-copyright text-center py-3">Copyright © {{ "now"|date('Y') }}
+        <a href="https://ivanstanojevic.me/"> Ivan Stanojević</a>.
+    </div>
+</footer>
+
 {% block javascripts %}
+    <script src="{{ asset('assets/build/app.js') }}"></script>
 {% endblock %}
 </body>
 </html>

@@ -1,0 +1,121 @@
+{
+  "/api/tle/{id}": {
+    "get": {
+      "tags": [
+        "Two line element"
+      ],
+      "summary": "Record",
+      "operationId": "tle-record",
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "id",
+          "required": true,
+          "schema": {
+            "type": "integer"
+          }
+        }
+      ],
+      "responses": {
+        "404": {
+          "$ref": "#/components/responses/404"
+        },
+        "500": {
+          "$ref": "#/components/responses/500"
+        },
+        "200": {
+          "description": "Record found",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TLE"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "/api/tle": {
+    "get": {
+      "tags": [
+        "Two line element"
+      ],
+      "summary": "Collection",
+      "operationId": "tle-collection",
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/search"
+        },
+        {
+          "name": "sort",
+          "in": "query",
+          "description": "Sort field",
+          "schema": {
+            "type": "string",
+            "default": "name",
+            "enum": [
+              "id",
+              "name"
+            ]
+          }
+        },
+        {
+          "$ref": "#/components/parameters/sortDirection"
+        },
+        {
+          "$ref": "#/components/parameters/pageNumber"
+        },
+        {
+          "$ref": "#/components/parameters/pageSize"
+        }
+      ],
+      "responses": {
+        "500": {
+          "$ref": "#/components/responses/500"
+        },
+        "200": {
+          "description": "Tle collection",
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "@context": {
+                    "type": "string",
+                    "example": "http://www.w3.org/ns/hydra/context.jsonld"
+                  },
+                  "@id": {
+                    "type": "string",
+                    "example": "http://example.com/api/tle"
+                  },
+                  "@type": {
+                    "type": "string",
+                    "example": "Collection"
+                  },
+                  "totalItems": {
+                    "type": "string",
+                    "example": "50"
+                  },
+                  "member": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/TLE"
+                    }
+                  },
+                  "view": {
+                    "type": "object",
+                    "items": {
+                      "$ref": "#/components/schemas/Pagination"
+                    }
+                  }
+                },
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

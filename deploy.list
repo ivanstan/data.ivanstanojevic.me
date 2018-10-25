@@ -1,7 +1,9 @@
+assets/build
+assets/images
 bin
+composer.json
 config
+index.php
 src
 templates
 vendor
-composer.json
-index.php

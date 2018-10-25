@@ -4,6 +4,8 @@ namespace App\Converter;
 
 use App\Entity\Metar;
 use App\Model\MetarModel;
+use App\Model\ValueUnit;
+use MetarDecoder\Entity\Value;
 use MetarDecoder\MetarDecoder;
 
 class MetarModelConverter
@@ -21,7 +23,19 @@ class MetarModelConverter
         $decoded = $this->decoder->parse($metar->getMetar());
 
         $model = new MetarModel();
+        $model->setIcao($metar->getIcao());
+        $model->setDate($metar->getDate()->format('c'));
         $model->setRaw($metar->getMetar());
+
+        /** @var Value $temperature */
+        $temperature = $decoded->getAirTemperature();
+
+        if ($temperature) {
+            $temperatureModel = new ValueUnit();
+            $temperatureModel->setValue($temperature->getValue());
+            $temperatureModel->setUnit($temperature->getUnit());
+            $model->setTemperature($temperatureModel);
+        }
 
         return $model;
     }

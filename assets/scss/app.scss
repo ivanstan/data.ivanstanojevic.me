@@ -1,0 +1,50 @@
+$primary: #2C3E4E;
+
+@import "~bootstrap/scss/bootstrap";
+
+footer {
+  color: #D8D9DA;
+
+  a {
+    color: #D8D9DA;
+  }
+
+  a:hover {
+    color: #fff;
+    text-decoration: underline;
+  }
+}
+
+main {
+  min-height: calc(100vh - 452px);
+}
+
+.media h5 a {
+  text-decoration: underline;
+}
+
+header.featured {
+  height: 300px;
+
+  .content {
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    color: #D8D9DA;
+    margin-top: 6rem;
+
+    h1 {
+      font-size: 3rem;
+    }
+
+    p {
+      font-size: 1.5rem;
+    }
+  }
+
+  .overlay {
+    background: rgba(44, 62, 80, 0.75);
+    height: 300px;
+  }
+}
+

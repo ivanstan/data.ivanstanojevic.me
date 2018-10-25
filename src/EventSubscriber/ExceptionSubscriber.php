@@ -19,7 +19,7 @@ class ExceptionSubscriber implements EventSubscriberInterface
         ];
     }
 
-    public function onException(GetResponseForExceptionEvent $event)
+    public function onException(GetResponseForExceptionEvent $event): void
     {
         $exception = $event->getException();
 

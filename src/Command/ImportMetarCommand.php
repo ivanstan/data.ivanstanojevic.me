@@ -146,7 +146,7 @@ class ImportMetarCommand extends Command
 
     private function getMeterDateTime(DecodedMetar $metar): \DateTime
     {
-        $date = new \DateTime($metar->getTime());
+        $date = new \DateTime($metar->getTime(), new \DateTimeZone('UTC'));
         $date->setDate($date->format('Y'), $date->format('m'), $metar->getDay());
 
         return $date;
@@ -160,7 +160,6 @@ class ImportMetarCommand extends Command
 
         return $date;
     }
-
 
     private function getUrl(): string
     {
