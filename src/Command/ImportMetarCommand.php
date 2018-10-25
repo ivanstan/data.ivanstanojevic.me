@@ -1,4 +1,6 @@
 <?php
+/** @noinspection UnknownInspectionInspection */
+/** @noinspection HtmlUnknownTag */
 
 namespace App\Command;
 
