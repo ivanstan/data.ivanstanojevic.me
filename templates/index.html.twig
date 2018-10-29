@@ -1,5 +1,13 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Browse Catalog | {{ parent() }}{% endblock %}
+
+{% block head %}
+    <meta name="description"
+          content="OpenData collection of free to use APIs and data sources. Weather and satellite information.">
+    {{ parent() }}
+{% endblock %}
+
 {% block featured %}
     <header class="featured mb-5" style="background: url({{ asset('assets/images/data.png') }})">
         <div class="content">
@@ -14,7 +22,7 @@
     <main class="container">
         {% for api in apis %}
             <div class="row mb-5">
-                <div class="col-8 offset-2">
+                <div class="col-md-8 offset-md-2">
                     <div class="media">
                         <div class="media-body">
                             <h5 class="mt-0 mb-1">
@@ -26,5 +34,22 @@
                 </div>
             </div>
         {% endfor %}
+
+        <div class="row mb-5">
+            <div class="col-md-8 offset-md-2">
+                <h2 class="mb-5">Examples</h2>
+                <div class="media">
+                    <img class="d-flex mr-3" width="60" src="{{ asset('assets/images/plane.svg') }}" alt="Airplane">
+                    <div class="media-body">
+                        <h5 class="mt-0 mb-1">
+                            <a href="{{ path('airport_show', {icao: 'lybe'}) }}">Belgrade Airport</a>
+                        </h5>
+                        METAR information for Belgrade, Serbia "Nikola Tesla" airport, ICAO code LYBE. Example of
+                        near real time information provided by <a
+                                href="{{ path('app_api_docs', {name: "metar"}) }}">METAR API</a>.
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 {% endblock %}

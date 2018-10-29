@@ -4,6 +4,8 @@ namespace App\Model;
 
 class MetarModel
 {
+    public const DEGREES_CELSIUS = 'deg C';
+
     /** @var string */
     private $icao;
 
@@ -13,8 +15,22 @@ class MetarModel
     /** @var ValueUnit */
     private $temperature;
 
+    /** @var ValueUnit */
+    private $dewPoint;
+
+    /** @var ValueUnit */
+    private $pressure;
+
     /** @var string */
     private $raw;
+
+    /**
+     * MetarModel constructor.
+     */
+    public function __construct()
+    {
+        $this->temperature = new ValueUnit(null, self::DEGREES_CELSIUS);
+    }
 
     public function getIcao(): string
     {
@@ -44,6 +60,26 @@ class MetarModel
     public function setTemperature(ValueUnit $temperature): void
     {
         $this->temperature = $temperature;
+    }
+
+    public function getDewPoint(): ?ValueUnit
+    {
+        return $this->dewPoint;
+    }
+
+    public function setDewPoint(ValueUnit $dewPoint): void
+    {
+        $this->dewPoint = $dewPoint;
+    }
+
+    public function getPressure(): ?ValueUnit
+    {
+        return $this->pressure;
+    }
+
+    public function setPressure(ValueUnit $pressure): void
+    {
+        $this->pressure = $pressure;
     }
 
     public function getRaw(): string

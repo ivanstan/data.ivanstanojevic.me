@@ -10,15 +10,15 @@ class IndexController extends Controller
 {
     public const API = [
         [
-            'name' => 'TLE (Two line element set) API',
-            'description' => 'Orbital perturbation data sets periodically refined so as to maintain a reasonable prediction capability on all space objects.',
+            'name' => 'NORAD TLE',
+            'description' => 'Two line element set - orbital perturbation data sets published by North American Aerospace Defense Command and periodically refined so as to maintain a reasonable prediction capability on all space objects.',
             'path' => [
                 'route' => 'app_api_docs',
                 'params' => ['name' => 'tle']
             ],
         ],
         [
-            'name' => 'METAR API',
+            'name' => 'METAR',
             'description' => 'Meteorological Terminal Air Report METAR - Aviation weather report updated every 15 minutes currently available for LYBE airport.',
             'path' => [
                 'route' => 'app_api_docs',

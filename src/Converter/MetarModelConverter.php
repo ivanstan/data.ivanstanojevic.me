@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection PhpAssignmentInConditionInspection */
 
 namespace App\Converter;
 
@@ -28,13 +28,18 @@ class MetarModelConverter
         $model->setRaw($metar->getMetar());
 
         /** @var Value $temperature */
-        $temperature = $decoded->getAirTemperature();
+        if ($temperature = $decoded->getAirTemperature()) {
+            $model->setTemperature(new ValueUnit($temperature->getValue(), $temperature->getUnit()));
+        }
 
-        if ($temperature) {
-            $temperatureModel = new ValueUnit();
-            $temperatureModel->setValue($temperature->getValue());
-            $temperatureModel->setUnit($temperature->getUnit());
-            $model->setTemperature($temperatureModel);
+        /** @var Value $dew */
+        if ($dew = $decoded->getDewPointTemperature()) {
+            $model->setDewPoint(new ValueUnit($dew->getValue(), $dew->getUnit()));
+        }
+
+        /** @var Value $pressure */
+        if ($pressure = $decoded->getPressure()) {
+            $model->setPressure(new ValueUnit($pressure->getValue(), $pressure->getUnit()));
         }
 
         return $model;

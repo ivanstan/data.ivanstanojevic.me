@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Airport information {{ icao|upper }} | {{ parent() }}{% endblock %}
+
+{% block head %}
+    <meta name="description"
+          content="Airport information for {{ icao|upper }} ICAO code. Latest weather reports from {{ icao|upper }}">
+    {{ parent() }}
+{% endblock %}
+
+{% block featured %}
+    <header class="featured mb-5" style="background: url({{ asset('assets/images/terminal.png') }})">
+        <div class="content">
+            <h1 class="mb-3">Airport Information</h1>
+            <p>{{ icao|upper }} ICAO code</p>
+        </div>
+        <div class="overlay"></div>
+    </header>
+{% endblock %}
+
+{% block content %}
+    <main class="container">
+        <div class="row">
+            <div class="col-12">
+                <canvas class="meter-temperature" data-url="{{ path('metar_collection', {'search': icao}) }}"></canvas>
+            </div>
+        </div>
+    </main>
+{% endblock %}

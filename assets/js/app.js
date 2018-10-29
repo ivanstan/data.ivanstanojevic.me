@@ -7,6 +7,13 @@
 
 // any CSS you require will output into a single scss file (app.scss in this case)
 require('../scss/app.scss');
+let meter = require('./airport');
 
 // Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
-// var $ = require('jquery');
+let $ = require('jquery');
+
+let temperature = $('.meter-temperature');
+
+if (temperature.length > 0) {
+  meter.createMeterTemperatureChart(temperature);
+}

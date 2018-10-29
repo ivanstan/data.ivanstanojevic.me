@@ -10,7 +10,13 @@ class ValueUnit
     /** @var string */
     private $unit;
 
-    public function getValue(): float
+    public function __construct(?float $value, ?string $unit)
+    {
+        $this->value = $value;
+        $this->unit = $unit;
+    }
+
+    public function getValue(): ?float
     {
         return $this->value;
     }
@@ -20,7 +26,7 @@ class ValueUnit
         $this->value = $value;
     }
 
-    public function getUnit(): string
+    public function getUnit(): ?string
     {
         return $this->unit;
     }
