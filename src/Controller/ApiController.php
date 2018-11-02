@@ -2,19 +2,19 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class ApiController extends Controller
+class ApiController extends AbstractController
 {
     /** @var string */
     private $dir;
 
-    public function __construct()
+    public function __construct($projectDir)
     {
-        $this->dir = __DIR__.'/Api/Documentation/';
+        $this->dir = $projectDir.'/config/custom/';
     }
 
     /**

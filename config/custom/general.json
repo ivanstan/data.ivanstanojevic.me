@@ -12,6 +12,16 @@
   "paths": {},
   "components": {
     "schemas": {
+      "ValueUnit": {
+        "properties": {
+          "value": {
+            "type": "float"
+          },
+          "unit": {
+            "type": "string"
+          }
+        }
+      },
       "Pagination": {
         "properties": {
           "@id": {
@@ -64,8 +74,13 @@
                 "example": "2018-10-23T19:00:00+00:00"
               },
               "temperature": {
-                "type": "object",
-                "example": "{\"value\": 11,\"unit\": \"deg C\"}"
+                "$ref": "#/components/schemas/ValueUnit"
+              },
+              "dewPoint": {
+                "$ref": "#/components/schemas/ValueUnit"
+              },
+              "pressure": {
+                "$ref": "#/components/schemas/ValueUnit"
               },
               "raw": {
                 "type": "string",

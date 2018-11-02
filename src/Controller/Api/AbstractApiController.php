@@ -2,7 +2,7 @@
 
 namespace App\Controller\Api;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -10,7 +10,7 @@ use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\SerializerInterface;
 
-abstract class AbstractApiController extends Controller
+abstract class AbstractApiController extends AbstractController
 {
     protected const SORT_ASC = 'asc';
     protected const SORT_DESC = 'desc';
@@ -24,6 +24,10 @@ abstract class AbstractApiController extends Controller
     protected const PAGE_PARAM = 'page';
     protected const PAGE_SIZE = 50;
     protected const SEARCH_PARAM = 'search';
+
+    protected const DATE_FROM_PARAM = 'date-from';
+    protected const DATE_TO_PARAM = 'date-to';
+    protected const DATE_INTERVAL_PARAM = 'interval';
 
     /** @var SerializerInterface */
     protected $serializer;

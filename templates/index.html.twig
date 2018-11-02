@@ -10,9 +10,8 @@
 
 {% block featured %}
     <header class="featured mb-5" style="background: url({{ asset('assets/images/data.png') }})">
-        <div class="content">
-            <h1 class="mb-3">OpenData</h1>
-            <p>Browse catalog</p>
+        <div class="content" style="margin-top: 8em">
+            <h2 class="mb-3">Browse catalog</h2>
         </div>
         <div class="overlay"></div>
     </header>
@@ -20,15 +19,15 @@
 
 {% block content %}
     <main class="container">
-        {% for api in apis %}
+        {% for item in catalog %}
             <div class="row mb-5">
                 <div class="col-md-8 offset-md-2">
                     <div class="media">
                         <div class="media-body">
                             <h5 class="mt-0 mb-1">
-                                <a href="{{ api.path }}">{{ api.name }}</a>
+                                <a href="{{ item.path }}">{{ item.name }}</a>
                             </h5>
-                            {{ api.description }}
+                            {{ item.description }}
                         </div>
                     </div>
                 </div>

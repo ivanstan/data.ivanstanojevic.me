@@ -2,7 +2,7 @@
 
 {% block title %}API Documentation | {{ parent() }}{% endblock %}
 
-{% block body %}
+{% block content %}
     <!--suppress HtmlUnknownTag, HtmlUnknownTag -->
     <redoc spec-url="{{ path('app_api_docs_json', {name: name}) }}"></redoc>
 {% endblock %}

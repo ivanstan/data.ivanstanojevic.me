@@ -21,4 +21,46 @@ class TleModel
     {
         return (int)substr($this->line1, 2, 6);
     }
+
+    public function getDate(): string
+    {
+        $year = (int)trim(substr($this->line1, 18, 2));
+
+        if ($year < 57) {
+            $year += 2000;
+        } else {
+            $year += 1900;
+        }
+
+        $date = new \DateTime();
+        $timezone = new \DateTimeZone('UTC');
+
+        $epoch = (float)trim(substr($this->line1, 20, 12));
+        $days = (int)$epoch;
+
+        $date
+            ->setTimezone($timezone)
+            ->setDate($year, 1, $days);
+
+        $faction = round($epoch - $days, 8);
+
+        $faction *= 24; // hours
+        $hours = (int)$faction;
+        $faction -= $hours;
+
+        $faction *= 60; // minutes
+        $minutes = (int)$faction;
+        $faction -= $minutes;
+
+        $faction *= 60; // seconds
+        $seconds = (int)$faction;
+        $faction -= $seconds;
+
+        $faction *= 1000; // milliseconds
+        $milliseconds = (int)$faction;
+
+        $date->setTime($hours, $minutes, $seconds, $milliseconds);
+
+        return $date->format('c');
+    }
 }

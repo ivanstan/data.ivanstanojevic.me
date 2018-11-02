@@ -2,42 +2,34 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Yaml\Yaml;
 
-class IndexController extends Controller
+class IndexController extends AbstractController
 {
-    public const API = [
-        [
-            'name' => 'NORAD TLE',
-            'description' => 'Two line element set - orbital perturbation data sets published by North American Aerospace Defense Command and periodically refined so as to maintain a reasonable prediction capability on all space objects.',
-            'path' => [
-                'route' => 'app_api_docs',
-                'params' => ['name' => 'tle']
-            ],
-        ],
-        [
-            'name' => 'METAR',
-            'description' => 'Meteorological Terminal Air Report METAR - Aviation weather report updated every 15 minutes currently available for LYBE airport.',
-            'path' => [
-                'route' => 'app_api_docs',
-                'params' => ['name' => 'metar']
-            ],
-        ],
-    ];
+    /** @var string */
+    private $projectDir;
+
+    public function __construct(string $projectDir)
+    {
+        $this->projectDir = $projectDir;
+    }
 
     /**
      * @Route("/", name="app_index")
      */
     public function index(): Response
     {
-        $apis = [];
-        foreach (self::API as $key => $api) {
-            $apis[$key] = $api;
-            $apis[$key]['path'] = $this->generateUrl($api['path']['route'], $api['path']['params']);
+        $catalog = Yaml::parseFile($this->projectDir.'/config/custom/catalog.yaml');
+
+        foreach ($catalog as $key => $item) {
+            if (\is_array($item['path'])) {
+                $catalog[$key]['path'] = $this->generateUrl($item['path']['route'], $item['path']['params']);
+            }
         }
 
-        return $this->render('index.html.twig', ['apis' => $apis]);
+        return $this->render('index.html.twig', ['catalog' => $catalog]);
     }
 }

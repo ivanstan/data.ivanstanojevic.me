@@ -7,24 +7,12 @@ use App\Field\LatLng;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="App\Repository\FirmsRepository")
  */
 class Firms
 {
     use IdField;
-
-    public const CONFIDENCE_LOW = 'l';
-    public const CONFIDENCE_NOMINAL = 'f';
-    public const CONFIDENCE_HIGH = 'h';
-
-    public const SATELLITE_AQUA = 'AQUA';
-    public const SATELLITE_TERRA = 'TERRA';
-
-    /**
-     * @var LatLng
-     * @ORM\Column(name="point", type="latlng", nullable=false)
-     */
-    private $point;
+    use LatLng;
 
     /**
      * @var float
@@ -33,10 +21,10 @@ class Firms
      *     type="decimal",
      *     scale=2,
      *     nullable=true,
-     *     options={"comment": "Channel 21/22 brightness temperature of the fire pixel measured in Kelvin."}
-     *     )
+     *     options={"comment": "Channel I-4 for VIIRS and Channel 21/22 for MODIS."}
+     * )
      */
-    private $brightness;
+    private $brightness1;
 
     /**
      * @var float
@@ -45,10 +33,10 @@ class Firms
      *     type="decimal",
      *     scale=2,
      *     nullable=true,
-     *     options={"comment": "Channel 31 brightness temperature of the fire pixel measured in Kelvin."}
-     *     )
+     *     options={"comment": "Channel I-5 for VIIRS and Channel 31 for MODIS"}
+     * )
      */
-    private $brightness31;
+    private $brightness2;
 
     /**
      * @var float
@@ -125,34 +113,24 @@ class Firms
      */
     private $version;
 
-    public function getPoint(): LatLng
+    public function getBrightness1(): float
     {
-        return $this->point;
+        return $this->brightness1;
     }
 
-    public function setPoint(LatLng $point): void
+    public function setBrightness1(float $brightness): void
     {
-        $this->point = $point;
+        $this->brightness1 = $brightness;
     }
 
-    public function getBrightness(): float
+    public function getBrightness2(): float
     {
-        return $this->brightness;
+        return $this->brightness2;
     }
 
-    public function setBrightness(float $brightness): void
+    public function setBrightness2(float $brightness): void
     {
-        $this->brightness = $brightness;
-    }
-
-    public function getBrightness31(): float
-    {
-        return $this->brightness31;
-    }
-
-    public function setBrightness31(float $brightness31): void
-    {
-        $this->brightness31 = $brightness31;
+        $this->brightness2 = $brightness;
     }
 
     public function getPower(): float
@@ -165,7 +143,7 @@ class Firms
         $this->power = $power;
     }
 
-    public function isDaytime(): bool
+    public function isDaytime(): ?bool
     {
         return $this->daytime;
     }
@@ -175,7 +153,7 @@ class Firms
         $this->daytime = $daytime;
     }
 
-    public function getSatellite(): string
+    public function getSatellite(): ?string
     {
         return $this->satellite;
     }

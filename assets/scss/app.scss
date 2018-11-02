@@ -10,6 +10,13 @@ a {
   text-decoration: underline;
 }
 
+a.navbar-brand {
+  color: #fff;
+  text-decoration: none;
+  display: inline-block;
+  margin: auto;
+}
+
 main {
   min-height: calc(100vh - 452px);
 }

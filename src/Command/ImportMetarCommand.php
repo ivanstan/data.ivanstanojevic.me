@@ -21,7 +21,15 @@ class ImportMetarCommand extends Command
     private const URL = 'https://www.aviationweather.gov/metar/data';
 
     private const IMPORT_AIRPORT_ICAO = [
-        'LYBE',
+        'LYBE', // Belgrade Nikola Tesla Airport
+        'LYNI', // Niš Constantine the Great Airport
+        'LYVR', // Vršac
+        'LYBJ', // Lisičiji Jarak
+        'LYUZ', // Ponikve
+        'LYSO', // Sombor
+        'LYKT', // Kostolac
+        'LYNS', // Novi Sad
+        'LYKV', // Lađevci
     ];
 
     /** @var EntityManagerInterface */

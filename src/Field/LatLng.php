@@ -2,19 +2,19 @@
 
 namespace App\Field;
 
-class LatLng
+trait LatLng
 {
-    /** @var float */
+    /**
+     * @var float
+     * @ORM\Column(name="latitude", type="decimal", scale=8, nullable=false)
+     */
     private $latitude;
 
-    /** @var float */
+    /**
+     * @var float
+     * @ORM\Column(name="longitude", type="decimal", scale=8, nullable=false)
+     */
     private $longitude;
-
-    public function __construct($latitude, $longitude)
-    {
-        $this->latitude = $latitude;
-        $this->longitude = $longitude;
-    }
 
     public function getLatitude(): float
     {
