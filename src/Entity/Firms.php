@@ -203,7 +203,7 @@ class Firms
         $this->confidence = $confidence;
     }
 
-    public function getInstrument(): string
+    public function getInstrument(): ?string
     {
         return $this->instrument;
     }

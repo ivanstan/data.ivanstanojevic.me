@@ -24,14 +24,14 @@ export default class Firms
         this.map,
         {
           // radius should be small ONLY if scaleRadius is true (or small radius is intended)
-          'radius': 2,
+          'radius': 10,
           'maxOpacity': 0.5,
           // scales the radius based on map zoom
-          'scaleRadius': true,
+          'scaleRadius': false,
           // if set to false the heatmap uses the global maximum for colorization
           // if activated: uses the data maximum within the current map boundaries
           //   (there will always be a red spot with useLocalExtremas true)
-          'useLocalExtrema': false,
+          'useLocalExtrema': true,
           // which field name in your data represents the latitude - default "lat"
           latField: 'latitude',
           // which field name in your data represents the longitude - default "lng"
@@ -43,16 +43,16 @@ export default class Firms
 
     let data = response.map(item => {
       return {
-        latitude: item.point.latitude,
-        longitude: item.point.longitude,
-        brightness: item.brightness,
+        latitude: item.latitude,
+        longitude: item.longitude,
+        brightness: item.brightness1,
       };
     });
 
     console.log(data);
 
     var testData = {
-      max: 300,
+      max: 600,
       data: data
     };
 

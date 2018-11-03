@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Yaml\Yaml;
 
 class ApiController extends AbstractController
 {
@@ -22,7 +23,17 @@ class ApiController extends AbstractController
      */
     public function getDocs(string $name): Response
     {
-        return $this->render('api/docs.html.twig', ['name' => $name]);
+        $catalog = Yaml::parseFile($this->dir.'/catalog.yaml');
+        $page = $catalog[$name] ?? [];
+
+        return $this->render(
+            'api/docs.html.twig',
+            [
+                'name' => $name,
+                'description' => $page['description'] ?? null,
+                'title' => $page['name'] ?? null,
+            ]
+        );
     }
 
     /**

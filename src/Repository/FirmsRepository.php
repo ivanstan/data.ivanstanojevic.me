@@ -20,11 +20,15 @@ class FirmsRepository extends ServiceEntityRepository
      */
     public function collection(\DateTime $from, \DateTime $to): array
     {
+        if ($from > $to) {
+            [$to, $from] = [$from, $to];
+        }
+
         $builder = $this->createQueryBuilder('f');
 
         $builder->where('f.date >= :from')
             ->setParameter('from', $from)
-            ->andWhere('f.date < :to')
+            ->andWhere('f.date <= :to')
             ->setParameter('to', $to);
 
         $builder->setMaxResults(1000);

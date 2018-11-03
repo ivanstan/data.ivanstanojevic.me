@@ -32,9 +32,9 @@ class FirmsController extends AbstractApiController
         }
 
         /** @var \DateTime $to */
-        $from = new \DateTime($from);
+        $from = new \DateTime($from, $timezone);
         $to = clone $from;
-        $to->sub(new \DateInterval('P1D'));
+        $to->sub(new \DateInterval('P3D'));
 
         $collection = $repository->collection($from, $to);
 

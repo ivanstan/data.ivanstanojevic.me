@@ -37,6 +37,7 @@ let config = {
       },
     },
     responsive: true,
+    maintainAspectRatio: false,
     title: {
       display: true,
       text: 'METAR',
@@ -62,6 +63,7 @@ let config = {
       yAxes: [
         {
           ID: 'temperature',
+          position: 'right',
           display: true,
           scaleLabel: {
             display: true,
@@ -74,7 +76,6 @@ let config = {
         {
           id: 'pressure',
           type: 'linear',
-          position: 'right',
           scaleLabel: {
             display: true,
             labelString: 'hPa',
