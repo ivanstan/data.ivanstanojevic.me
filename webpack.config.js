@@ -18,7 +18,6 @@ Encore
      * and one CSS file (e.g. app.scss) if you JavaScript imports CSS.
      */
     .addEntry('app', './assets/js/app.js')
-    .addEntry('heatmap', './assets/js/heatmap.js')
 
     /*
      * FEATURE CONFIG

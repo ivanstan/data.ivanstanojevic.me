@@ -9,11 +9,11 @@
   // Supports UMD. AMD, CommonJS/Node.js and browser context
   if (typeof module !== "undefined" && module.exports) {
     module.exports = factory(
-        require('heatmap.js'),
+        require('../../../node_modules/heatmap.js/build/heatmap'),
         require('google-maps')
     );
   } else if (typeof define === "function" && define.amd) {
-    define(['heatmap.js', 'google-maps'], factory);
+    define(['../../../node_modules/heatmap.js/build/heatmap', 'google-maps'], factory);
   } else {
     // browser globals
     if (typeof window.h337 === 'undefined') {

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Field\IdField;
+use App\Field\TypeField;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -11,6 +12,10 @@ use Doctrine\ORM\Mapping as ORM;
 class Metar
 {
     use IdField;
+    use TypeField;
+
+    public const TYPE_METAR = 'METAR';
+    public const TYPE_TAF = 'TAF';
 
     /**
      * @var string

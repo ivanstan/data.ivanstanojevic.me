@@ -19,7 +19,6 @@ class FirmsController extends AbstractApiController
         $to = $request->get(self::DATE_TO_PARAM);
         $inverval = $request->get(self::DATE_INTERVAL_PARAM);
         $timezone = new \DateTimeZone('UTC');
-        $interval = \DateInterval::createFromDateString('-1 day');
 
         if ($to !== null && $inverval !== null) {
             throw new \RuntimeException(
@@ -34,7 +33,7 @@ class FirmsController extends AbstractApiController
         /** @var \DateTime $to */
         $from = new \DateTime($from, $timezone);
         $to = clone $from;
-        $to->sub(new \DateInterval('P3D'));
+        $to->sub(new \DateInterval('P1D'));
 
         $collection = $repository->collection($from, $to);
 

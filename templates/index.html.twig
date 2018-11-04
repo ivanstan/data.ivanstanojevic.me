@@ -18,7 +18,7 @@
 {% endblock %}
 
 {% block content %}
-    <main class="container">
+    <main class="container mb-5">
         {% for item in catalog %}
             <div class="row mb-5">
                 <div class="col-md-8 offset-md-2">
@@ -43,9 +43,14 @@
                         <h5 class="mt-0 mb-1">
                             <a href="{{ path('airport_show', {icao: 'lybe'}) }}">Belgrade Airport</a>
                         </h5>
-                        METAR information for Belgrade, Serbia "Nikola Tesla" airport, ICAO code LYBE. Example of
-                        near real time information provided by <a
-                                href="{{ path('app_api_docs', {name: "metar"}) }}">METAR API</a>.
+                        METAR information is currently available for following airports in near real time.
+                        <div class="row mt-2">
+                            {% for airport in airports %}
+                                <div class="col-6">
+                                    • <a href="{{ path('airport_show', {icao: airport.icao}) }}">{{ airport.name }}</a>
+                                </div>
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
             </div>

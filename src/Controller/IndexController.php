@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Repository\AirportRepository;
+use App\Repository\MetarRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -20,7 +22,7 @@ class IndexController extends AbstractController
     /**
      * @Route("/", name="app_index")
      */
-    public function index(): Response
+    public function index(MetarRepository $metarRepository, AirportRepository $airportRepository): Response
     {
         $catalog = Yaml::parseFile($this->projectDir.'/config/custom/catalog.yaml');
 
@@ -30,6 +32,11 @@ class IndexController extends AbstractController
             }
         }
 
-        return $this->render('index.html.twig', ['catalog' => $catalog]);
+        $airports = $airportRepository->getCollection($metarRepository->getAirportsWithMetarData());
+
+        return $this->render('index.html.twig', [
+            'catalog' => $catalog,
+            'airports' => $airports,
+        ]);
     }
 }

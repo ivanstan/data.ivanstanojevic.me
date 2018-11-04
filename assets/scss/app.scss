@@ -2,8 +2,13 @@ $primary: #2C3E4E;
 
 @import "~bootstrap/scss/bootstrap";
 
+html {
+  height: 100%;
+}
+
 body {
   color: #000;
+  height: 100%;
 }
 
 a {

@@ -18,6 +18,28 @@ class MetarRepository extends ServiceEntityRepository
         parent::__construct($registry, Metar::class);
     }
 
+    public function getAirportsWithMetarData(): array
+    {
+        $result = $this->createQueryBuilder('m', 'm.icao')
+            ->select('m.icao')
+            ->distinct(true)
+            ->getQuery()
+            ->getArrayResult();
+
+        return array_keys($result);
+    }
+
+    public function getTaf(string $icao)
+    {
+        return $this->createQueryBuilder('m')
+            ->where('m.type = \'TAF\'')
+            ->andWhere('m.icao = :icao')
+            ->setParameter('icao', $icao)
+            ->addOrderBy('m.date', 'desc')
+            ->getQuery()
+            ->getResult();
+    }
+
     /**
      * @throws \Doctrine\ORM\NonUniqueResultException
      */

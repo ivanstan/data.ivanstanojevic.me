@@ -72,6 +72,9 @@ class ImportMetarCommand extends Command
             $metar->setDate($this->getMeterDateTime($item));
             $metar->setMetar($item->getRawMetar());
 
+            $type = strpos($item->getRawMetar(), Metar::TYPE_TAF) !== false ? Metar::TYPE_TAF : Metar::TYPE_METAR;
+            $metar->setType($type);
+
             $this->em->persist($metar);
             $this->output->writeln(\sprintf('<info>METAR record queued for insert: %s</info>', $item->getRawMetar()));
 
@@ -96,7 +99,7 @@ class ImportMetarCommand extends Command
             if (strpos($node->textContent, 'TAF') === 0) {
                 $result[] = $node->textContent;
             } else {
-                $result[] = 'METAR '.$node->textContent;
+                $result[] = Metar::TYPE_METAR.' '.$node->textContent;
             }
         }
 

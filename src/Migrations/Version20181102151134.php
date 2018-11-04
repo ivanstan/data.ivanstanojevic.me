@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+/** @noinspection PhpIllegalPsrClassPathInspection */
+declare(strict_types=1);
 
 namespace DoctrineMigrations;
 
@@ -10,6 +12,10 @@ use Doctrine\Migrations\AbstractMigration;
  */
 final class Version20181102151134 extends AbstractMigration
 {
+    /**
+     * @throws \Doctrine\DBAL\DBALException
+     * @throws \Doctrine\DBAL\Migrations\AbortMigrationException
+     */
     public function up(Schema $schema) : void
     {
         // this up() migration is auto-generated, please modify it to your needs
@@ -22,6 +28,10 @@ final class Version20181102151134 extends AbstractMigration
              *                          pixels get bigger toward the edge of scan. Scan and track reflect actual pixel size.\', date DATETIME NOT NULL, confidence VARCHAR(255) DEFAULT NULL, instrument VARCHAR(255) DEFAULT NULL, version VARCHAR(255) DEFAULT NULL, latitude NUMERIC(10, 8) NOT NULL, longitude NUMERIC(10, 8) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
     }
 
+    /**
+     * @throws \Doctrine\DBAL\DBALException
+     * @throws \Doctrine\DBAL\Migrations\AbortMigrationException
+     */
     public function down(Schema $schema) : void
     {
         // this down() migration is auto-generated, please modify it to your needs

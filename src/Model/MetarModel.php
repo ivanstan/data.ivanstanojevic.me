@@ -2,12 +2,13 @@
 
 namespace App\Model;
 
+use App\Field\IcaoField;
+
 class MetarModel
 {
     public const DEGREES_CELSIUS = 'deg C';
 
-    /** @var string */
-    private $icao;
+    use IcaoField;
 
     /** @var string */
     private $date;
@@ -30,16 +31,6 @@ class MetarModel
     public function __construct()
     {
         $this->temperature = new ValueUnit(null, self::DEGREES_CELSIUS);
-    }
-
-    public function getIcao(): string
-    {
-        return $this->icao;
-    }
-
-    public function setIcao(string $icao): void
-    {
-        $this->icao = $icao;
     }
 
     public function getDate(): string

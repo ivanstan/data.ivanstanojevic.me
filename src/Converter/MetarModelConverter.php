@@ -48,7 +48,7 @@ class MetarModelConverter
     /**
      * @param Metar[] $collection
      *
-     * @return Metar[]
+     * @return MetarModel[]
      */
     public function collection($collection): array
     {

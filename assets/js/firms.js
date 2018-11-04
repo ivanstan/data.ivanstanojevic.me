@@ -1,8 +1,10 @@
-export default class Firms
-{
+import AbstractMap from './abstract-map';
 
+export default class Firms extends AbstractMap
+{
   constructor()
   {
+    super();
     window.renderFirms = this.renderFirms.bind(this);
   }
 
@@ -10,52 +12,54 @@ export default class Firms
   {
     this.map = new google.maps.Map(document.getElementById('firms'), {
       center: {lat: 44.787197, lng: 20.457273},
+      styles: this.style,
       zoom: 6,
     });
 
     fetch('api/firms').
         then(response => response.json()).
-        then(response => this.renderHeatMap(response));
+        then(response => this.renderMarkers(response));
   }
 
-  renderHeatMap(response)
+  renderMarkers(response)
   {
-    this.heatmap = new HeatmapOverlay(
-        this.map,
-        {
-          // radius should be small ONLY if scaleRadius is true (or small radius is intended)
-          'radius': 10,
-          'maxOpacity': 0.5,
-          // scales the radius based on map zoom
-          'scaleRadius': false,
-          // if set to false the heatmap uses the global maximum for colorization
-          // if activated: uses the data maximum within the current map boundaries
-          //   (there will always be a red spot with useLocalExtremas true)
-          'useLocalExtrema': true,
-          // which field name in your data represents the latitude - default "lat"
-          latField: 'latitude',
-          // which field name in your data represents the longitude - default "lng"
-          lngField: 'longitude',
-          // which field name in your data represents the data value - default "value"
-          valueField: 'brightness',
+    let self = this;
+
+    for (let i in response) {
+      let data = response[i];
+
+      let marker = new google.maps.Marker({
+        map: this.map,
+        position: {lat: data.latitude, lng: data.longitude},
+        data: data,
+      });
+      marker.addListener('mouseover', function(e) {
+        self.markerClick(this, self);
+      });
+
+      this.infoBox = new InfoBox({
+        disableAutoPan: false,
+        pixelOffset: new google.maps.Size(-140, 0),
+        zIndex: null,
+        boxStyle: {
+          padding: '0px 0px 0px 0px',
+          width: '252px',
+          height: '40px',
         },
-    );
+        closeBoxURL: '',
+        infoBoxClearance: new google.maps.Size(1, 1),
+        isHidden: false,
+        pane: 'floatPane',
+        enableEventPropagation: false,
+      });
+    }
+  }
 
-    let data = response.map(item => {
-      return {
-        latitude: item.latitude,
-        longitude: item.longitude,
-        brightness: item.brightness1,
-      };
-    });
+  markerClick(marker, self)
+  {
+    let data = marker.data;
 
-    console.log(data);
-
-    var testData = {
-      max: 600,
-      data: data
-    };
-
-    this.heatmap.setData(testData);
+    this.infoBox.setContent(data.latitude);
+    this.infoBox.open(self.map, marker);
   }
 }
