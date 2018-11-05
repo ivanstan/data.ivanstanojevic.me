@@ -16,8 +16,8 @@ trait CountryField
         return $this->country;
     }
 
-    public function setCountry(string $name): void
+    public function setCountry(string $country): void
     {
-        $this->country = $name;
+        $this->country = $country;
     }
 }

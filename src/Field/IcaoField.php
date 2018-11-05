@@ -18,8 +18,8 @@ trait IcaoField
         return $this->icao;
     }
 
-    public function setIcao(string $name): void
+    public function setIcao(string $icao): void
     {
-        $this->icao = $name;
+        $this->icao = $icao;
     }
 }

@@ -7,13 +7,15 @@ use App\Field\CountryField;
 use App\Field\IataField;
 use App\Field\IcaoField;
 use App\Field\IdField;
-use App\Field\LatLng;
+use App\Field\LatLngField;
 use App\Field\NameField;
 use App\Field\TypeField;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity()
+ * @ORM\Table(indexes={@ORM\Index(name="designator", columns={"icao", "iata"})})
+ * @see https://openflights.org/data.html
  */
 class Airport
 {
@@ -21,7 +23,7 @@ class Airport
     use NameField;
     use CityField;
     use CountryField;
-    use LatLng;
+    use LatLngField;
     use TypeField;
     use IataField;
     use IcaoField;

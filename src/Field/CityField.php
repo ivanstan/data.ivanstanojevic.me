@@ -18,8 +18,8 @@ trait CityField
         return $this->city;
     }
 
-    public function setCity(string $name): void
+    public function setCity(string $city): void
     {
-        $this->city = $name;
+        $this->city = $city;
     }
 }

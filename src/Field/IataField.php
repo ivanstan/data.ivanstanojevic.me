@@ -18,8 +18,8 @@ trait IataField
         return $this->iata;
     }
 
-    public function setIata(string $name): void
+    public function setIata(string $iata): void
     {
-        $this->iata = $name;
+        $this->iata = $iata;
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Field;
 
-trait LatLng
+trait LatLngField
 {
     /**
      * @var float

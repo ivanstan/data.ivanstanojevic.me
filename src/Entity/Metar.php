@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Field\DateField;
 use App\Field\IdField;
 use App\Field\TypeField;
 use Doctrine\ORM\Mapping as ORM;
@@ -13,6 +14,7 @@ class Metar
 {
     use IdField;
     use TypeField;
+    use DateField;
 
     public const TYPE_METAR = 'METAR';
     public const TYPE_TAF = 'TAF';
@@ -23,12 +25,6 @@ class Metar
      * @ORM\Column(name="icao", type="string")
      */
     private $icao;
-
-    /**
-     * @var \DateTime $date
-     * @ORM\Column(name="date", type="datetime", nullable=false)
-     */
-    private $date;
 
     /**
      * @var string
@@ -45,16 +41,6 @@ class Metar
     public function setIcao(string $icao): void
     {
         $this->icao = $icao;
-    }
-
-    public function getDate(): \DateTime
-    {
-        return $this->date;
-    }
-
-    public function setDate(\DateTime $date): void
-    {
-        $this->date = $date;
     }
 
     public function getMetar(): string

@@ -2,8 +2,9 @@
 
 namespace App\Entity;
 
+use App\Field\DateField;
 use App\Field\IdField;
-use App\Field\LatLng;
+use App\Field\LatLngField;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -12,7 +13,8 @@ use Doctrine\ORM\Mapping as ORM;
 class Firms
 {
     use IdField;
-    use LatLng;
+    use LatLngField;
+    use DateField;
 
     /**
      * @var float
@@ -69,9 +71,6 @@ class Firms
      *     type="decimal",
      *     scale=2,
      *     nullable=true,
-     *     options={"comment": "The algorithm produces 1km fire pixels but MODIS
-     *                          pixels get bigger toward the edge of scan. Scan and track reflect actual pixel
-     *                          size."}
      *     )
      */
     private $track;
@@ -83,17 +82,9 @@ class Firms
      *     type="decimal",
      *     scale=2,
      *     nullable=true,
-     *     options={"comment": "The algorithm produces 1km fire pixels but MODIS
-     *                          pixels get bigger toward the edge of scan. Scan and track reflect actual pixel size."}
      * )
      */
     private $scan;
-
-    /**
-     * @var \DateTime $date
-     * @ORM\Column(name="date", type="datetime", nullable=false)
-     */
-    private $date;
 
     /**
      * @var string
@@ -181,16 +172,6 @@ class Firms
     public function setScan(float $scan): void
     {
         $this->scan = $scan;
-    }
-
-    public function getDate(): \DateTime
-    {
-        return $this->date;
-    }
-
-    public function setDate(\DateTime $date): void
-    {
-        $this->date = $date;
     }
 
     public function getConfidence(): string

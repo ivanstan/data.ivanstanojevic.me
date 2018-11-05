@@ -21,10 +21,6 @@ final class Version20181103190224 extends AbstractMigration
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('CREATE TABLE airport (id INT AUTO_INCREMENT NOT NULL, altitude NUMERIC(10, 2) NOT NULL, utc_offset NUMERIC(10, 2) NOT NULL, source VARCHAR(255) NOT NULL, timezone VARCHAR(255) NOT NULL, dst VARCHAR(255) NOT NULL, name VARCHAR(255) NOT NULL, city VARCHAR(255) NOT NULL, country VARCHAR(255) NOT NULL, latitude NUMERIC(10, 8) NOT NULL, longitude NUMERIC(10, 8) NOT NULL, type VARCHAR(255) NOT NULL, iata VARCHAR(3) NOT NULL, icao VARCHAR(4) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
-        $this->addSql('ALTER TABLE firms CHANGE track track NUMERIC(10, 2) DEFAULT NULL COMMENT \'The algorithm produces 1km fire pixels but MODIS
-             *                          pixels get bigger toward the edge of scan. Scan and track reflect actual pixel
-             *                          size.\', CHANGE scan scan NUMERIC(10, 2) DEFAULT NULL COMMENT \'The algorithm produces 1km fire pixels but MODIS
-             *                          pixels get bigger toward the edge of scan. Scan and track reflect actual pixel size.\'');
     }
 
     /**
@@ -37,9 +33,5 @@ final class Version20181103190224 extends AbstractMigration
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('DROP TABLE airport');
-        $this->addSql('ALTER TABLE firms CHANGE track track NUMERIC(10, 2) DEFAULT NULL COMMENT \'The algorithm produces 1km fire pixels but MODIS
-                     *                          pixels get bigger toward the edge of scan. Scan and track reflect actual pixel
-                     *                          size.\', CHANGE scan scan NUMERIC(10, 2) DEFAULT NULL COMMENT \'The algorithm produces 1km fire pixels but MODIS
-                     *                          pixels get bigger toward the edge of scan. Scan and track reflect actual pixel size.\'');
     }
 }
