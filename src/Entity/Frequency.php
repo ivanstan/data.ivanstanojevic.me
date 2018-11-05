@@ -22,5 +22,10 @@ class Frequency
      * @ORM\ManyToOne(targetEntity="App\Entity\Airport")
      * @ORM\JoinColumn(name="icao", referencedColumnName="icao")
      */
-    private $icao;
+    private $airport;
+
+    public function getAirport(): Airport
+    {
+        return $this->airport;
+    }
 }
