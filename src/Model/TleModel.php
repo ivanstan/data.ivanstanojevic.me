@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection SummerTimeUnsafeTimeManipulationInspection */
 
 namespace App\Model;
 
@@ -45,19 +45,19 @@ class TleModel
         $faction = round($epoch - $days, 8);
 
         $faction *= 24; // hours
-        $hours = (int)$faction;
+        $hours = round($faction);
         $faction -= $hours;
 
         $faction *= 60; // minutes
-        $minutes = (int)$faction;
+        $minutes = round($faction);
         $faction -= $minutes;
 
         $faction *= 60; // seconds
-        $seconds = (int)$faction;
+        $seconds = round($faction);
         $faction -= $seconds;
 
         $faction *= 1000; // milliseconds
-        $milliseconds = (int)$faction;
+        $milliseconds = round($faction);
 
         $date->setTime($hours, $minutes, $seconds, $milliseconds);
 

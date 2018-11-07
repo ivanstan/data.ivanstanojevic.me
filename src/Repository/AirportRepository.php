@@ -13,13 +13,14 @@ class AirportRepository extends ServiceEntityRepository
         parent::__construct($registry, Airport::class);
     }
 
-    public function getCollection(array $icao)
+    public function getCollection(?array $icao)
     {
-        return $this->createQueryBuilder('a', 'a.icao')
-            ->where('a.icao IN (:icao)')
-            ->setParameter('icao', $icao)
-            ->orderBy('a.name')
-            ->getQuery()
-            ->getResult();
+        $builder = $this->createQueryBuilder('a', 'a.icao')->orderBy('a.name');
+
+        if ($icao !== null) {
+            $builder->where('a.icao IN (:icao)')->setParameter('icao', $icao);
+        }
+
+        return $builder->getQuery()->getResult();
     }
 }

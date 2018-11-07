@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Field\CountryField;
 use App\Field\DescriptionField;
 use App\Field\IdField;
 use App\Field\LatLngField;
@@ -21,4 +22,5 @@ class Location
     use TypeField;
     use LatLngField;
     use DescriptionField;
+    use CountryField;
 }

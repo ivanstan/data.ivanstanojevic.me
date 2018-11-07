@@ -1,5 +1,6 @@
 assets/build
 assets/images
+assets/js/libs
 bin
 composer.json
 config

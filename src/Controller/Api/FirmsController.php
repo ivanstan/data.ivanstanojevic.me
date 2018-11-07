@@ -17,10 +17,10 @@ class FirmsController extends AbstractApiController
     {
         $from = $request->get(self::DATE_FROM_PARAM, 'now');
         $to = $request->get(self::DATE_TO_PARAM);
-        $inverval = $request->get(self::DATE_INTERVAL_PARAM);
+        $interval = $request->get(self::DATE_INTERVAL_PARAM);
         $timezone = new \DateTimeZone('UTC');
 
-        if ($to !== null && $inverval !== null) {
+        if ($to !== null && $interval !== null) {
             throw new \RuntimeException(
                 \sprintf(
                     'Parameters %s and %s can\'t be used in conjunction.',

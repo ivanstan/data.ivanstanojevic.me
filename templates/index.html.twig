@@ -18,7 +18,7 @@
 {% endblock %}
 
 {% block content %}
-    <main class="container mb-5">
+    <main class="container">
         {% for item in catalog %}
             <div class="row mb-5">
                 <div class="col-md-8 offset-md-2">
@@ -37,7 +37,7 @@
         <div class="row mb-5">
             <div class="col-md-8 offset-md-2">
                 <h2 class="mb-5">Examples</h2>
-                <div class="media">
+                <div class="media mb-5">
                     <img class="d-flex mr-3" width="60" src="{{ asset('assets/images/plane.svg') }}" alt="Airplane">
                     <div class="media-body">
                         <h5 class="mt-0 mb-1">
@@ -51,6 +51,18 @@
                                 </div>
                             {% endfor %}
                         </div>
+                    </div>
+                </div>
+
+                <div class="media">
+                    <img class="d-flex mr-3" width="60" src="{{ asset('assets/images/flame.svg') }}" alt="Airplane">
+                    <div class="media-body">
+                        <h5 class="mt-0 mb-1">
+                            <a href="{{ path('firms_main') }}">Active Fire Data - Europe</a>
+                        </h5>
+                        Near real time updates of detected active fires over Europe. Active fire products are obtained
+                        from NASA's Moderate Resolution Imaging Spectroradiometer (MODIS) and NASA's Visible
+                        Infrared Imaging Radiometer Suite (VIIRS)
                     </div>
                 </div>
             </div>
