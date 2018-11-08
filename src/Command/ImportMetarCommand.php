@@ -89,6 +89,7 @@ class ImportMetarCommand extends Command
 
     private function download(): array
     {
+        $this->output->writeln(\sprintf('Downloading METAR information from %s', $this->getUrl()));
         $html = file_get_contents($this->getUrl());
         $crawler = new Crawler($html);
         $nodes = $crawler->filter('#awc_main_content_wrap code');
@@ -149,7 +150,7 @@ class ImportMetarCommand extends Command
 
             $date = $latest[$item->getIcao()];
 
-            if ($date > $this->getMeterDateTime($item)) {
+            if ($date >= $this->getMeterDateTime($item)) {
                 unset($data[$key]);
             }
         }

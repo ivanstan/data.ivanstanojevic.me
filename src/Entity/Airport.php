@@ -16,6 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity()
  * @ORM\Table(indexes={@ORM\Index(name="designator", columns={"icao", "iata"})})
  * @see https://openflights.org/data.html
+ * @see http://ourairports.com/data/
  */
 class Airport
 {

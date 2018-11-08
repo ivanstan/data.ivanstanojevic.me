@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Airport;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AirportController extends AbstractController
@@ -13,6 +15,12 @@ class AirportController extends AbstractController
      */
     public function show(string $icao): Response
     {
-        return $this->render('airport/show.html.twig', ['icao' => $icao]);
+        $airport = $this->getDoctrine()->getRepository(Airport::class)->findOneBy(['icao' => $icao]);
+
+        if ($airport === null) {
+            throw new NotFoundHttpException(sprintf('Unable to find airport with ICAO code %s', $icao));
+        }
+
+        return $this->render('airport/show.html.twig', ['airport' => $airport]);
     }
 }
