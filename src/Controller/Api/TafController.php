@@ -18,7 +18,6 @@ class TafController extends AbstractApiController
     public function collection(string $icao, MetarRepository $repository, TafModelConverter $converter): Response
     {
         $taf = $repository->getTaf($icao);
-        $taf = $converter->collection($taf);
 
         return $this->response($converter->collection($taf));
     }

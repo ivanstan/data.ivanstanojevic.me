@@ -36,6 +36,7 @@ class MetarRepository extends ServiceEntityRepository
             ->andWhere('m.icao = :icao')
             ->setParameter('icao', $icao)
             ->addOrderBy('m.date', 'desc')
+            ->setMaxResults(1)
             ->getQuery()
             ->getResult();
     }

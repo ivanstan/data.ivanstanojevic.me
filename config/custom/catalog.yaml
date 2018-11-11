@@ -8,7 +8,7 @@ tle:
       name: "tle"
 metar:
   name: "METAR"
-  description: "Meteorological Terminal Air Report METAR - Aviation weather report updated every 15 minutes currently
+  description: "Meteorological Terminal Air Report METAR - Aviation weather report updated every 30 minutes currently
     available for limited number of airports."
   path:
     route: "app_api_docs"

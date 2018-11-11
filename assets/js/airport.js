@@ -89,36 +89,43 @@ let config = {
   },
 };
 
+let renderChart = function(canvas, response, taf) {
+  let labels = response.member.map(function(element) {
+    return moment(element.date).format('HH:mm DD-MM-YYYY');
+  });
+
+  let temperature = response.member.map(function(element) {
+    return element.temperature !== null
+        ? element.temperature.value
+        : null;
+  });
+
+  let dew = response.member.map(function(element) {
+    return element.dewPoint !== null ? element.dewPoint.value : null;
+  });
+
+  let pressure = response.member.map(function(element) {
+    return element.pressure !== null ? element.pressure.value : null;
+  });
+
+  config.data.labels = labels.reverse();
+  config.data.datasets[0].data = temperature.reverse();
+  config.data.datasets[1].data = dew.reverse();
+  config.data.datasets[2].data = pressure.reverse();
+
+  let ctx = canvas[0].getContext('2d');
+  new Chart(ctx, config);
+};
+
 let createMeterTemperatureChart = function(canvas) {
-  fetch(canvas.data('url')).
-      then((response) => response.json()).
-      then(function(response) {
-
-        let labels = response.member.map(function(element) {
-          return moment(element.date).format('HH:mm DD-MM-YYYY');
-        });
-
-        let temperature = response.member.map(function(element) {
-          return element.temperature !== null
-              ? element.temperature.value
-              : null;
-        });
-
-        let dew = response.member.map(function(element) {
-          return element.dewPoint !== null ? element.dewPoint.value : null;
-        });
-
-        let pressure = response.member.map(function(element) {
-          return element.pressure !== null ? element.pressure.value : null;
-        });
-
-        config.data.labels = labels.reverse();
-        config.data.datasets[0].data = temperature.reverse();
-        config.data.datasets[1].data = dew.reverse();
-        config.data.datasets[2].data = pressure.reverse();
-
-        let ctx = canvas[0].getContext('2d');
-        new Chart(ctx, config);
+  fetch(canvas.data('metar-url')).
+      then((metar) => metar.json()).
+      then((metar) => {
+        fetch(canvas.data('taf-url')).
+            then((taf) => taf.json()).
+            then((taf) => {
+              renderChart(canvas, metar, taf);
+            });
       });
 };
 

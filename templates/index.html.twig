@@ -41,9 +41,9 @@
                     <img class="d-flex mr-3" width="60" src="{{ asset('assets/images/plane.svg') }}" alt="Airplane">
                     <div class="media-body">
                         <h5 class="mt-0 mb-1">
-                            <a href="{{ path('airport_show', {icao: 'lybe'}) }}">Belgrade Airport</a>
+                            <a href="{{ path('airport_show', {icao: 'lybe'}) }}">Airport Information</a>
                         </h5>
-                        METAR information is currently available for following airports in near real time.
+                        Information including METAR which is currently available for following airports in near real time.
                         <div class="row mt-2">
                             {% for airport in airports %}
                                 <div class="col-6">

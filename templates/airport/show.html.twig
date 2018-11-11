@@ -20,11 +20,39 @@
 
 {% block content %}
     <main class="container mb-5">
-        <div class="row">
+        <div class="row mb-5">
             <div class="col-12">
-                <canvas class="meter-temperature" data-url="{{ path('metar_collection', {'search': airport.icao}) }}"
+                <canvas class="meter-temperature"
+                        data-metar-url="{{ path('metar_collection', {'search': airport.icao}) }}"
+                        data-taf-url="{{ path('taf_record', {'icao': airport.icao}) }}"
                         style="height: 500px;"></canvas>
             </div>
         </div>
+
+        {% if airport.frequencies|length > 0 %}
+            <div class="row">
+                <div class="col-12">
+                    <h2>Comm</h2>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Description</th>
+                            <th>Frequency</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for frequency in airport.frequencies %}
+                            <tr>
+                                <td>{{ frequency.type }}</td>
+                                <td>{{ frequency.description|default('-') }}</td>
+                                <td>{{ frequency.frequency }} MHz</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        {% endif %}
     </main>
 {% endblock %}

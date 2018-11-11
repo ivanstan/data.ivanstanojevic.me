@@ -16,8 +16,10 @@ Encore
      *
      * Each entry will result in one JavaScript file (e.g. app.js)
      * and one CSS file (e.g. app.scss) if you JavaScript imports CSS.
-     */
-    .addEntry('app', './assets/js/app.js')
+     */.
+    addEntry('app', './assets/js/app.js').
+    addEntry('orbit', './assets/js/orbit.js').
+    addEntry('presentation', './assets/js/presentation.js')
 
     /*
      * FEATURE CONFIG
@@ -40,6 +42,8 @@ Encore
 
     // uncomment if you use TypeScript
 //    .enableTypeScriptLoader()
+
+    .enableReactPreset()
 
     // uncomment if you're having problems with a jQuery plugin
     .autoProvidejQuery()

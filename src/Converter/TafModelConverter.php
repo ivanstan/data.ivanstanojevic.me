@@ -1,9 +1,13 @@
-<?php
+<?php /** @noinspection PhpAssignmentInConditionInspection */
 
 namespace App\Converter;
 
 use App\Entity\Metar;
 use App\Model\TafModel;
+use App\Model\ValueUnit;
+use TafDecoder\Entity\ForecastPeriod;
+use TafDecoder\Entity\Temperature;
+use TafDecoder\Entity\Value;
 use TafDecoder\TafDecoder;
 
 class TafModelConverter
@@ -20,10 +24,29 @@ class TafModelConverter
     {
         $decoded = $this->decoder->parse($metar->getMetar());
 
-        $taf = new TafModel();
-        $taf->setIcao($decoded->getIcao());
+        $model = new TafModel();
+        $model->setIcao($decoded->getIcao());
 
-        return $taf;
+        /** @var ForecastPeriod $period */
+        $period = $decoded->getForecastPeriod();
+
+        $date = $metar->getDate() or new \DateTime();
+        $date->setDate($date->format('Y'), $date->format('m'), $period->getToDay());
+        $date->setTime($period->getToHour(), $date->format('i'));
+
+        $model->setDate($date->format('c'));
+
+        /** @var Value $temperature */
+        if ($temperature = $decoded->getMinTemperature()->getTemperature()) {
+            $model->setMinTemperature(new ValueUnit($temperature->getValue(), $temperature->getUnit()));
+        }
+
+        /** @var Value $temperature */
+        if ($temperature = $decoded->getMaxTemperature()->getTemperature()) {
+            $model->setMaxTemperature(new ValueUnit($temperature->getValue(), $temperature->getUnit()));
+        }
+
+        return $model;
     }
 
     /**

@@ -56,6 +56,11 @@ class Airport
     private $timezone;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Frequency", mappedBy="airport")
+     */
+    private $frequencies;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="dst", type="string")
@@ -110,5 +115,21 @@ class Airport
     public function setDst(string $dst): void
     {
         $this->dst = $dst;
+    }
+
+    /**
+     * @return Frequency[]
+     */
+    public function getFrequencies()
+    {
+        return $this->frequencies;
+    }
+
+    /**
+     * @param Frequency[]
+     */
+    public function setFrequencies($frequencies): void
+    {
+        $this->frequencies = $frequencies;
     }
 }

@@ -19,7 +19,7 @@ class Frequency
     use FrequencyField;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Airport")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Airport", inversedBy="frequencies")
      * @ORM\JoinColumn(name="airport_id", referencedColumnName="id")
      */
     private $airport;
