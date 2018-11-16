@@ -12,6 +12,8 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 class ExceptionSubscriber implements EventSubscriberInterface
 {
+    public const PATH = '/api';
+
     public static function getSubscribedEvents(): array
     {
         return [
@@ -22,6 +24,12 @@ class ExceptionSubscriber implements EventSubscriberInterface
     public function onException(GetResponseForExceptionEvent $event): void
     {
         $exception = $event->getException();
+
+        $path = $event->getRequest()->getPathInfo();
+
+        if (strpos($path, self::PATH) === false) {
+            return;
+        }
 
         if ($exception instanceof NotFoundHttpException) {
             $this->setResponse($event, Response::HTTP_NOT_FOUND, $exception->getMessage());

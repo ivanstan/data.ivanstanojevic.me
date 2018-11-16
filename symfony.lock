@@ -107,6 +107,9 @@
     "symfony/asset": {
         "version": "v4.1.6"
     },
+    "symfony/browser-kit": {
+        "version": "v4.1.7"
+    },
     "symfony/cache": {
         "version": "v4.1.6"
     },
@@ -188,6 +191,15 @@
     "symfony/orm-pack": {
         "version": "v1.0.5"
     },
+    "symfony/phpunit-bridge": {
+        "version": "4.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.1",
+            "ref": "f427a3ef197d370364c33123873a1e14f9b51c7f"
+        }
+    },
     "symfony/polyfill-mbstring": {
         "version": "v1.9.0"
     },
@@ -214,6 +226,15 @@
     },
     "symfony/templating": {
         "version": "v4.1.6"
+    },
+    "symfony/translation": {
+        "version": "3.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.3",
+            "ref": "1fb02a6e1c8f3d4232cce485c9afa868d63b115a"
+        }
     },
     "symfony/twig-bridge": {
         "version": "v4.1.6"

@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}{% endblock %}</title>
+    {% block head %}
+        <link rel="stylesheet" href="{{ asset('assets/build/app.css') }}">
+    {% endblock %}
+</head>
+<body>
+<nav class="navbar bg-primary">
+    <div class="container">
+        <div class="row" style="width: 100%;">
+            <div class="col-md-8 offset-md-2">
+                <ul class="nav nav-pills">
+                    <li class="nav-item">
+                        <a class="nav-item nav-link active" href="#intro">Intro</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="page-scroll nav-item nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="page-scroll nav-item nav-link" href="#projects">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="page-scroll nav-item nav-link" href="#other">Other</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="page-scroll nav-item nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+{% block header %}{% endblock %}
+{% block featured %}{% endblock %}
+{% block content %}{% endblock %}
+
+<footer class="bg-primary">
+    <div class="footer-copyright text-center py-3">Copyright © {{ "now"|date('Y') }}
+        <a href="https://ivanstanojevic.me/"> Ivan Stanojević</a>.
+    </div>
+</footer>
+
+{% block javascripts %}
+    <script src="{{ asset('assets/build/app.js') }}"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-37623519-7"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+
+      function gtag() {dataLayer.push(arguments);}
+
+      gtag('js', new Date());
+
+      gtag('config', 'UA-37623519-7');
+    </script>
+
+{% endblock %}
+</body>
+</html>

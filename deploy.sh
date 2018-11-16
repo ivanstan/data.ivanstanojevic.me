@@ -9,6 +9,8 @@ export ARTIFACT_NAME=artifact.tar.gz;
 composer install
 yarn build
 
+bin/phpunit
+
 tar -czvf ${ARTIFACT_NAME} -T deploy.list
 scp -r -P ${PORT} ${ARTIFACT_NAME} ${USER}@${HOST}:/${DEPLOY_PATH}/
 rm ${ARTIFACT_NAME}

@@ -20,6 +20,7 @@ class DataController extends AbstractController
     }
 
     /**
+     * @Route("/data", name="app_data_canonical")
      * @Route("/", name="app_data_index", host="data.ivanstanojevic.me")
      */
     public function index(MetarRepository $metarRepository, AirportRepository $airportRepository): Response

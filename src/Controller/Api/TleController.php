@@ -43,7 +43,7 @@ class TleController extends AbstractApiController
     }
 
     /**
-     * @Route("/", name="tle_collection")
+     * @Route(name="tle_collection")
      */
     public function collection(Request $request, TleRepository $repository): Response
     {

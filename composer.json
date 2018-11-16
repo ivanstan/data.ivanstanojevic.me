@@ -18,12 +18,15 @@
         "symfony/orm-pack": "^1.0",
         "symfony/serializer": "*",
         "symfony/templating": "*",
+        "symfony/translation": "4.1.*",
         "symfony/twig-bundle": "*",
         "symfony/webpack-encore-pack": "^1.0",
         "symfony/yaml": "*"
     },
     "require-dev": {
+        "symfony/browser-kit": "4.1.*",
         "symfony/dotenv": "*",
+        "symfony/phpunit-bridge": "4.1.*",
         "symfony/profiler-pack": "^1.0"
     },
     "config": {

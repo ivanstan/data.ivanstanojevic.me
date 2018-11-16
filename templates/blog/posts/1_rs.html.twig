@@ -1,0 +1,146 @@
+{% extends 'blog/article.html.twig' %}
+
+{% block title %}Mesec Apola 13 | Ivan Stanojević{% endblock %}
+
+{% block article %}
+    <article>
+        <h1 class="mt-5 mb-3">Mesec Apola 13</h1>
+
+        <p>
+            <i>Koliko (ne)realno scene u filmu prikazuju nebeska tela možemo utvrditi na osnovu jedne scene filma Apollo
+                13.</i>
+        </p>
+
+        <figure>
+            <img width="100%"
+                 src="{{ asset('assets/images/blog/apollo-moon-thumb.jpg') }}"
+                 alt="Apollo 13 movie scene">
+            <figcaption>Scena iz filma Apollo 13</figcaption>
+        </figure>
+
+        <p>Gledajući film <a target="_blank" href="https://www.imdb.com/title/tt0112384/">Apollo 13</a> zapala mi je za
+            oko
+            scena u kojoj Jim Lowell (Tom Hanks) upoređuje veličinu Meseca sa svojim palcem, u ovoj sceni Mesec je pun i
+            čini se nesrazmerno velikim. U daljem tekstu pokušavamo da utvrdimo da li prikaz jedinog Zemljinog prirodnog
+            satelita u filmu Apollo 13 odgovara realnim uslovima u datom trenutku.</p>
+
+        <p>Prilikom bilo kog astronomskog posmatranja neophodno znati epohu u kojoj je obzervacija načinjena. Scena
+            sa Mesecom u filmu dešava se neposredno nakon proslave u kući Lowellovih na kojoj su se ostale porodice
+            astronauta okupile da bi posmatrali prvu lunarnu ekskurziju Nila Armstronga i Baza Oldrina.</p>
+
+        <p>Imajući u vidu ovaj podatak i istorijske podatke o vremenu poletanja Apola 11, July 16, 1969 9:32 a.m. EDT[],
+            i
+            islaska Armstronga iz kokpita lunarnog modula nakon 109 sati, 42 minuta MET[], možemo zaključiti da je vreme
+            posmatranja ponedeljak, 21 Jul 1969, zanemarljiv broj sati i minuta nakon 03:14:00 po
+            koordinisanom univerzalnom vremenu[].</p>
+
+        <p>Precizna lokacija sa koje se vrši posmatranje nije presudan parametar u našem slučaju ali na osnovu
+            istorijskih
+            podataka zakljucujemo da je u pitanju blizina Hjustona: Timber Cove, Taylor Lake Village, Texas 77586,
+            United
+            States.</p>
+
+        <p>U našoj sceni prikazan je pun Mesec što ne odgovara jednom od zahteva Apolo misija, a to je da su se sve
+            lunarne ekskurzije uvek odvijale tokom perioda lunarne zore na željenom nestu sletanja.</p>
+
+        <figure>
+            <img width="100%" src="{{ asset('assets/images/blog/apollo13.jpg') }}"
+                 alt="Scena iz filma Apolo 13">
+        </figure>
+
+        <p>
+            Ovakav zahtev postavljen je iz razloga što pri oštrom uglu koji
+            sunčevi
+            zraci zaklapaju sa površinom Meseca, senke neravnina i kamenja su izdužene,
+            što omogucava pilotu lunarnog modula da ih lakše uoči i da sa sigurnošću nadje ravno mesto za sletanje.
+            Druga pogodnost je što se na ovaj način smanjuje izloženost astronauta sunčevim zracima i olakšava hlađenje
+            EVA[] odela.</p>
+
+        <figure>
+            <img width="100%" src="{{ asset('assets/images/blog/virtual-moon-atlas.jpg') }}"
+                 alt="Virtual Moon Atlas">
+            <figcaption>Mesečeva mena na dan sletanja Apola 11. <i>Virtual Moon Atlas</i></figcaption>
+        </figure>
+
+        <p>Želeći da proverim zapažanje koristio sam se programom Virtual Moon Atlas koji je potvrdio da je terminator
+            lunarne noći u tom
+            trenutku prolazio kroz Mare Serenitatis dok je u Mare Tranquilitati što je mesto sletanja Apola 11,
+            već bilo svanulo mirno Lunarno jutro.</p>
+
+        <p>Pored ovoga ostaje nam još i pitanje veličina meseca.</p>
+
+        <p>Znajući razdaljinu Zemlja-Mesec na dan sletanja Apola 11 (385,535 km) koju možemo saznati takođe iz Virtual
+            Moon
+            Atlas-a i poluprečnik Meseca koji iznosi 1737,1 km, saznajemo da je ugaona veličina meseca gledanog sa
+            Zemlje na
+            dan Apola 11 iznosila 0°30'59"[].
+        </p>
+
+        <p>Koristeći duzinu svoje ruke (72,5 cm) i debljinu svog palca (2 cm) izdračunao sam da ugaona veličina mog
+            palca
+            pri potpuno ispruženoj ruci iznosi 1°34'50". Konverzijom stepena, minuta i sekundi dobijamo decimalne
+            stepene:</p>
+
+        <p class="text-center">
+            <math>
+                <mi>0°30'59"</mi>
+                <mo>=></mo>
+                <mn>0.5163889°</mn>
+            </math>
+            ;
+            <math>
+                <mi>1°34'50"</mi>
+                <mo>=></mo>
+                <mn>1.580556°</mn>
+            </math>
+        </p>
+
+        <p>Dalje proporcijom možemo ustanoviti da bi debljina palca Toma Henksa koja odgovara prečniku Meseca u filmu
+            trebala da iznosi 6,1 cm.</p>
+
+        <p class="text-center">
+            <math>
+                <mi>x</mi>
+                <mo>:</mo>
+                <mn>0.5163889</mn>
+                <mo>=</mo>
+                <mi>1.580556</mi>
+                <mo>:</mo>
+                <mn>2</mn>
+            </math>
+        </p>
+
+        <p class="text-center">
+            <math>
+                <mi>x</mi>
+                <mo>=</mo>
+                <mn>6.12 cm</mn>
+            </math>
+        </p>
+
+        <p>Ovo baš i nije u skladu sa zahtevima o kilaži astronauta koji propisuje NASA, ali ako zanemarimo
+            propust režisera ili umetničku slobodu koju je dao sebi, složićemo se da je ovo jedna odlična
+            scena.</p>
+
+        <div id="references">
+            <h4>Reference</h4>
+
+            <ol type="1">
+                <li>UTC, <i>Universal coordinated time</i></li>
+                <li>MET <i>Mission elapsed time</i></li>
+                <li>https://www.nasa.gov/multimedia/imagegallery/image_feature_359a.html</li>
+                <li>https://www.nasa.gov/mission_pages/apollo/missions/apollo11.html</li>
+                <li>
+                    https://www.houstonchronicle.com/local/gray-matters/article/John-Glenn-s-neighborhood-10784236.php
+                </li>
+                <li>https://planetcalc.com/1897/</li>
+
+            </ol>
+        </div>
+    </article>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+{% endblock %}

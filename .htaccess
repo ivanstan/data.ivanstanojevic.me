@@ -6,7 +6,6 @@
 DirectoryIndex index.php
 
 <IfModule mod_authz_core.c>
-
     <Files ~ "\.(env|log|yaml|map|xml|meta|json|lock|gitignore|twig)">
         Order allow,deny
         Deny from all

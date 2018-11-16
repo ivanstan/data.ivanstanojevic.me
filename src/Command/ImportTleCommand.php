@@ -147,7 +147,7 @@ class ImportTleCommand extends Command
             $tle->setName($model->getName());
 
             $this->em->persist($tle);
-            $this->output->writeln(\sprintf('<info>TLE record queued for insert: %d</info>', $model->getId()));
+            $this->output->writeln(\sprintf('<info>TLE record queued for insert: %d</info>', $model->getName()));
 
             if (($counter % self::BATCH_SIZE) === 0) {
                 $this->em->flush();
@@ -167,7 +167,7 @@ class ImportTleCommand extends Command
             $tle->setLine1($model->getLine1());
             $tle->setLine2($model->getLine2());
             $tle->setName($model->getName());
-            $this->output->writeln(\sprintf('<info>TLE record queued for update: %d</info>', $model->getId()));
+            $this->output->writeln(\sprintf('<info>TLE record queued for update: %d</info>', $model->getName()));
 
             if (($counter % self::BATCH_SIZE) === 0) {
                 $this->em->flush();

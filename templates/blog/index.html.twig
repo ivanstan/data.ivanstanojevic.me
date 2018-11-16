@@ -1,0 +1,31 @@
+{% extends 'blog/base.html.twig' %}
+
+{% block title %}Blog | Ivan Stanojević{% endblock %}
+
+{% block head %}
+    <meta name="description"
+          content="OpenData collection of free to use APIs and data sources. Weather and satellite information.">
+    {{ parent() }}
+{% endblock %}
+
+{% block featured %}
+    <header class="featured mb-5" style="background: url({{ asset('assets/images/data.png') }})">
+        <div class="overlay"></div>
+    </header>
+{% endblock %}
+
+{% block content %}
+    <main class="container mb-5">
+        <div class="row">
+            <div class="col-md-8 offset-md-2 mb-5">
+                {% for article in articles %}
+                    <article>
+                        <a href="{{ article.url }}"><h1>{{ article.title }}</h1></a>
+                        <a href="{{ article.url }}"><img width="100%" src="{{ asset(article.image) }}" alt="{{ article.title }}"></a>
+                        <p>{{ article.teaser }}</p>
+                    </article>
+                {% endfor %}
+            </div>
+        </div>
+    </main>
+{% endblock %}

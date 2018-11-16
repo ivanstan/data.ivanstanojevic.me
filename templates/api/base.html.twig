@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>{% block title %}Open Data{% endblock %}</title>
+    <title>{% block title_head %}Open Data{% endblock %}</title>
     {% block meta %}{% endblock %}
     <style>
         a.navbar-brand {
@@ -16,11 +16,13 @@
 <body style="margin: 0">
 <nav style="height: 40px; padding: 8px; background: rgb(38, 50, 56); border-bottom: 1px solid #fff;">
     <h1 style="text-align: center; margin: 5px;">
-        <a class="navbar-brand" href="{{ path('app_data_index') }}">OpenData</a>
+        <a class="navbar-brand" href="{{ path('app_data_index') }}">{% block title %}Open Data{% endblock %}</a>
     </h1>
 </nav>
 {% block content %}{% endblock %}
 {% block javascripts %}
+    <script src="//cdn.jsdelivr.net/npm/redoc@2.0.0-alpha.38/bundles/redoc.standalone.js"></script>
 {% endblock %}
+{% include 'components/google-analytics.html.twig' %}
 </body>
 </html>

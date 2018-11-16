@@ -99,6 +99,10 @@
                 "type": "integer",
                 "example": "43630"
               },
+              "date": {
+                "type": "string",
+                "example": "2018-10-21T11:40:23+00:00"
+              },
               "name": {
                 "type": "string",
                 "example": "HTV-7 (KOUNOTORI 7)"
