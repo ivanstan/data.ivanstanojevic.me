@@ -119,9 +119,9 @@ class ImportTleCommand extends Command
                 $tle = new TleModel($this->trim($item[1]), $this->trim($item[2]), $this->trim($item[0]));
 
                 if (array_key_exists($tle->getId(), $this->satellites)) {
-                    $this->updateQueue[] = $tle;
+                    $this->updateQueue[$tle->getId()] = $tle;
                 } else {
-                    $this->insertQueue[] = $tle;
+                    $this->insertQueue[$tle->getId()] = $tle;
                 }
             }
 
@@ -146,14 +146,16 @@ class ImportTleCommand extends Command
             $tle->setLine2($model->getLine2());
             $tle->setName($model->getName());
 
+            $this->satellites[$model->getId()] = $tle;
             $this->em->persist($tle);
-            $this->output->writeln(\sprintf('<info>TLE record queued for insert: %d</info>', $model->getName()));
+            $this->output->writeln(\sprintf('<info>TLE record queued for insert: %d</info>', $model->getId()));
 
             if (($counter % self::BATCH_SIZE) === 0) {
                 $this->em->flush();
             }
             ++$counter;
         }
+
         $this->em->flush();
 
         $this->insertQueue = [];
@@ -167,7 +169,7 @@ class ImportTleCommand extends Command
             $tle->setLine1($model->getLine1());
             $tle->setLine2($model->getLine2());
             $tle->setName($model->getName());
-            $this->output->writeln(\sprintf('<info>TLE record queued for update: %d</info>', $model->getName()));
+            $this->output->writeln(\sprintf('<info>TLE record queued for update: %d</info>', $model->getId()));
 
             if (($counter % self::BATCH_SIZE) === 0) {
                 $this->em->flush();

@@ -18,29 +18,27 @@ class BlogController extends AbstractController
     /** @var Json */
     private $json;
 
-    public function __construct(string $projectDir, Json $json)
+    /** @var RouterInterface */
+    private $router;
+
+    public function __construct(string $projectDir, Json $json, RouterInterface $router)
     {
         $this->dir = $projectDir.'/config/custom/blog';
         $this->json = $json;
+        $this->router = $router;
     }
 
     /**
      * @Route("/blog", name="app_blog_canonical")
      * @Route("/", name="app_blog_index", host="blog.ivanstanojevic.me")
      */
-    public function index(Request $request, RouterInterface $router): Response
+    public function index(Request $request): Response
     {
         $list = $this->json->decode($this->dir.'/list.json');
-        $locale = $request->getLocale();
 
         $articles = [];
         foreach ($list as $item) {
-            $articles[] = [
-                'image' => $item['image'],
-                'title' => $item['title_'.$locale],
-                'teaser' => $item['teaser_'.$locale],
-                'url' => $router->generate('app_article_canonical', ['slug' => $item['slug_'.$locale]]),
-            ];
+            $articles[] = $this->localize($item, $request->getLocale());
         }
 
         return $this->render('blog/index.html.twig', ['articles' => $articles]);
@@ -53,17 +51,27 @@ class BlogController extends AbstractController
     public function read(Request $request, string $slug): Response
     {
         $list = $this->json->decode($this->dir.'/list.json');
+        $locale = $request->getLocale();
 
         foreach ($list as $key => $item) {
-            if ($slug === ($item['slug_en'] ?? null)) {
-                return $this->render("blog/posts/{$key}_en.html.twig");
-            }
-
-            if ($slug === ($item['slug_rs'] ?? null)) {
-                return $this->render("blog/posts/{$key}_rs.html.twig");
+            if ($slug === ($item['slug_en'] ?? null) || $slug === ($item['slug_rs'] ?? null)) {
+                return $this->render(
+                    "blog/posts/{$key}_{$locale}.html.twig",
+                    ['article' => $this->localize($item, $request->getLocale())]
+                );
             }
         }
 
         throw new NotFoundHttpException('Article not found.');
+    }
+
+    private function localize(array $item, string $locale): array
+    {
+        return [
+            'image' => $item['image'],
+            'title' => $item['title_'.$locale],
+            'teaser' => $item['teaser_'.$locale],
+            'url' => $this->router->generate('app_article_canonical', ['slug' => $item['slug_'.$locale]]),
+        ];
     }
 }

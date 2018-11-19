@@ -6,6 +6,7 @@
     <title>{% block title %}OpenData{% endblock %}</title>
     {% block head %}
         <link rel="stylesheet" href="{{ asset('assets/build/app.css') }}">
+        <link rel="stylesheet" href="//fonts.googleapis.com/css?family=PT+Sans+Narrow">
     {% endblock %}
 </head>
 <body>
@@ -23,7 +24,8 @@
 </footer>
 
 {% block javascripts %}
-    {% include 'components/google-analytics.html.twig' %}
+    <script src="{{ asset('assets/build/app.js') }}"></script>
 {% endblock %}
+{% include 'components/google-analytics.html.twig' %}
 </body>
 </html>

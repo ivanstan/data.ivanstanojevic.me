@@ -4,9 +4,11 @@ assets/docs
 assets/js/libs
 assets/js/presentation.js
 bin
-composer.json
 config
-index.php
 src
 templates
 vendor
+.htaccess
+favicon.ico
+composer.json
+index.php

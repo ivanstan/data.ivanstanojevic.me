@@ -27,7 +27,7 @@ class Tle
     /**
      * @var int
      *
-     * @ORM\Column(name="satellite_id", type="integer")
+     * @ORM\Column(name="satellite_id", type="integer", unique=true)
      */
     private $satelliteId;
 

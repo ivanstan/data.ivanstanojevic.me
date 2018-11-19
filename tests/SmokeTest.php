@@ -25,7 +25,6 @@ class SmokeTest extends WebTestCase
 
         $this->visit('/api/tle/docs');
         $this->visit('/api/tle');
-        $this->visit('/api/tle/43630');
     }
 
     private function visit(string $path): void
