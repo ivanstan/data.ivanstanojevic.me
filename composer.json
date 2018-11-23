@@ -21,7 +21,8 @@
         "symfony/translation": "4.1.*",
         "symfony/twig-bundle": "*",
         "symfony/webpack-encore-pack": "^1.0",
-        "symfony/yaml": "*"
+        "symfony/yaml": "*",
+        "ext-pdo": "*"
     },
     "require-dev": {
         "symfony/browser-kit": "4.1.*",

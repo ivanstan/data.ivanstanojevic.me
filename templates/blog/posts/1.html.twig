@@ -1,14 +1,15 @@
 {% extends 'blog/article.html.twig' %}
 
-{% block title %}Mesec Apola 13 | Ivan Stanojević{% endblock %}
+{% block title %}Apolo 13 - Pogled u Mesec | Ivan Stanojević{% endblock %}
 
 {% block head %}
 <meta name="description" content="{{ article.teaser|default('') }}">
+    {{ parent() }}
 {% endblock %}
 
 {% block article %}
     <article>
-        <h1 class="mt-5 mb-3">Mesec Apola 13</h1>
+        <h1 class="mb-3 d-inline-block">Apolo 13 - Pogled u Mesec</h1>
 
         <p>
             <i>Koliko (ne)realno scene u filmu prikazuju nebeska tela možemo utvrditi na osnovu jedne scene filma Apollo
@@ -17,7 +18,7 @@
 
         <figure>
             <img width="100%"
-                 src="{{ asset('assets/images/blog/apollo-moon-thumb.jpg') }}"
+                 src="https://res.cloudinary.com/dn9s7hvks/image/upload/v1542983520/blog.ivanstanojevic.me/apollo-moon-thumb.jpg"
                  alt="Apollo 13 movie scene">
             <figcaption>Scena iz filma Apollo 13</figcaption>
         </figure>
@@ -52,7 +53,7 @@
             lunarne ekskurzije uvek odvijaju tokom perioda lunarne zore na željenom nestu sletanja.</p>
 
         <figure>
-            <img width="100%" src="{{ asset('assets/images/blog/apollo13.jpg') }}"
+            <img width="100%" src="https://res.cloudinary.com/dn9s7hvks/image/upload/v1542983519/blog.ivanstanojevic.me/apollo13.jpg"
                  alt="Scena iz filma Apolo 13">
         </figure>
 
@@ -64,7 +65,7 @@
             EVA<sup><a href="#references">5</a></sup> odela.</p>
 
         <figure>
-            <img width="100%" src="{{ asset('assets/images/blog/virtual-moon-atlas.jpg') }}"
+            <img width="100%" src="https://res.cloudinary.com/dn9s7hvks/image/upload/v1542983519/blog.ivanstanojevic.me/virtual-moon-atlas.jpg"
                  alt="Virtual Moon Atlas">
             <figcaption>Mesečeva mena na dan sletanja Apola 11. <i>Virtual Moon Atlas</i></figcaption>
         </figure>

@@ -4,6 +4,7 @@ $primary: #2C3E4E;
 @import "navigation";
 @import "blog";
 @import "general";
+@import "menu";
 
 a {
   text-decoration: underline;
@@ -23,6 +24,8 @@ main {
 header.featured {
   height: 300px;
   background-position:center;
+  background-repeat:no-repeat;
+  background-size:contain;
 
   .content {
     position: absolute;

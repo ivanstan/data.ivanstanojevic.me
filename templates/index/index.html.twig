@@ -33,7 +33,8 @@
     <link rel="stylesheet"
           href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=PT+Sans+Narrow">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+          integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
     <link rel="stylesheet" href="{{ asset('assets/build/presentation.css') }}">
     <link rel="icon" href="favicon.ico" type="image/x-icon"/>
@@ -46,34 +47,34 @@
 
 </head>
 
-<body data-spy="scroll" data-target=".navbar" data-offset="50">
+<body data-spy="scroll" data-target=".navbar" data-offset="50" class="fixed-nav">
 
 <div class="loading">
     <div class="spinner"></div>
 </div>
 
 <!-- Navigation -->
-<nav class="navbar fixed-top" role="navigation">
+<nav class="navbar fixed-top" id="nav-main">
     <div class="container">
-        <ul class="nav nav-pills">
-            <li class="nav-item">
-                <a class="page-scroll nav-item nav-link" href="#intro">Intro</a>
-            </li>
-            <li class="nav-item">
-                <a class="page-scroll nav-item nav-link" href="#about">About</a>
-            </li>
-            <li class="nav-item">
-                <a class="page-scroll nav-item nav-link" href="#projects">Projects</a>
-            </li>
-            <li class="nav-item">
-                <a class="page-scroll nav-item nav-link" href="#other">Other</a>
-            </li>
-            <li class="nav-item">
-                <a class="page-scroll nav-item nav-link" href="#contact">Contact</a>
-            </li>
-        </ul>
+        <div class="row" style="width: 100%;">
+            <div class="col-xl-5 offset-xl-2 col-md-9 col-8 col-0">
+                {% include 'components/menu/menu.html.twig' with {renderOpenSide: false} %}
+            </div>
+
+            {#<div class="col-xl-3 col-md-3 col-4">#}
+                {#<ul class="nav nav-pills float-right">#}
+                    {#<li class="nav-item">#}
+                        {#<a class="nav-link active" href="https://ivanstanojevic.me/#intro">Blog</a>#}
+                    {#</li>#}
+                    {#<li class="nav-item">#}
+                        {#<a class="nav-link" href="https://ivanstanojevic.me/#about">Data</a>#}
+                    {#</li>#}
+                {#</ul>#}
+            {#</div>#}
+        </div>
     </div>
 </nav>
+
 
 <!-- Intro Section -->
 <section id="intro" class="intro-section"
@@ -160,8 +161,7 @@
             <div class="media mt-1">
                 <div class="media-body">
                     <h3 class="media-heading">
-                        <a href="https://data.ivanstanojevic.me/" target="_blank" rel="nofollow"><i
-                                    class="fa fa-external-link-square" aria-hidden="true"></i> OpenData</a>
+                        <a href="https://data.ivanstanojevic.me/" target="_blank" rel="nofollow"> OpenData</a>
                     </h3>
                     In October 2018 I started this open data initiative with goal to make bulky scientific data
                     available for web developers.
@@ -171,8 +171,8 @@
             <div class="media mt-1">
                 <div class="media-body">
                     <h3 class="media-heading">
-                        <a href="https://2015.spaceappschallenge.org/project/around-earth/" target="_blank" rel="nofollow"><i
-                                    class="fa fa-external-link-square" aria-hidden="true"></i> Around Earth</a>
+                        <a href="https://2015.spaceappschallenge.org/project/around-earth/" target="_blank"
+                           rel="nofollow"> Around Earth</a>
                     </h3>
                     People's award winning project presented on NASA's SpaceApps 2015 at ESA center in
                     Noordwijk, which main goal is
@@ -183,8 +183,8 @@
             <div class="media mt-1">
                 <div class="media-body">
                     <h3 class="media-heading">
-                        <a href="https://packagist.org/packages/yswery/dns" target="_blank" rel="nofollow"><i
-                                    class="fa fa-external-link-square" aria-hidden="true"></i> Contributor of PHP DNS
+                        <a href="https://packagist.org/packages/yswery/dns" target="_blank" rel="nofollow"> Contributor
+                            of PHP DNS
                             server project.</a>
                     </h3>
                     Implementation of Authoritative DNS Server written in pure PHP.
@@ -194,8 +194,7 @@
             <div class="media mt-1">
                 <div class="media-body">
                     <h3 class="media-heading">
-                        <a href="http://cafemusic.rs" target="_blank" rel="nofollow"><i
-                                    class="fa fa-external-link-square" aria-hidden="true"></i> Caffe Music</a>
+                        <a href="http://cafemusic.rs" target="_blank" rel="nofollow"> Caffe Music</a>
                     </h3>
                     Coffee Shop web site with eCommerce created with Drupal.
                 </div>
@@ -204,8 +203,8 @@
             <div class="media mt-1">
                 <div class="media-body">
                     <h3 class="media-heading">
-                        <a href="https://play.google.com/store/apps/details?id=com.ivanstan.glutenfree" target="_blank" rel="nofollow"><i
-                                    class="fa fa-external-link-square" aria-hidden="true"></i> GlutenFree</a>
+                        <a href="https://play.google.com/store/apps/details?id=com.ivanstan.glutenfree" target="_blank"
+                           rel="nofollow"> GlutenFree</a>
                     </h3>
                     GlutenFree contains a list of gluten-free products, their details and descriptions, making life
                     easier
@@ -227,10 +226,8 @@
             <div class="media">
                 <div class="media-body">
                     <h3 class="media-heading">
-                        <a href="{{ asset('assets/docs/Ivan Stanojević - Space Apps 2018 Lead Letter.pdf') }}"
-                           target="_blank" rel="nofollow" rel="nofollow"><i
-                                    class="fa fa-file-pdf-o" aria-hidden="true"></i> SpaceApps 2018 local lead
-                            recognition</a>
+                        <a href="https://www.dropbox.com/s/t84db32ap20nspe/SpaceApps2018.pdf?dl=0"
+                           target="_blank" rel="nofollow" rel="nofollow">SpaceApps 2018 local lead recognition</a>
                     </h3>
                     Acknowledgement letter as local lead for NASA Space Apps Challenge 2018 in Belgrade, Serbia.
                 </div>
@@ -239,8 +236,8 @@
             <div class="media">
                 <div class="media-body">
                     <h3 class="media-heading">
-                        <a href="{{ asset('assets/docs/654286_1569494.pdf') }}" target="_blank" rel="nofollow" rel="nofollow"><i
-                                    class="fa fa-file-pdf-o" aria-hidden="true"></i> Basic Life Support - BLS</a>
+                        <a href="https://www.dropbox.com/s/dpoc8ib5u70amg0/654286_1569494.pdf?dl=0" target="_blank" rel="nofollow"
+                           rel="nofollow">Basic Life Support - BLS</a>
                     </h3>
                     CPR (Adult / Child / Infant / Choking) AED / First-Aid / Bloodborne Pathogens
                 </div>
@@ -249,10 +246,8 @@
             <div class="media mb-1">
                 <div class="media-body">
                     <h3 class="media-heading">
-                        <a href="{{ asset('assets/docs/EPFLxEE585xCertificate_edX.pdf') }}" target="_blank" rel="nofollow"
-                           rel="nofollow"><i
-                                    class="fa fa-file-pdf-o" aria-hidden="true"></i> Space Mission Design and
-                            Operations</a>
+                        <a href="https://www.dropbox.com/s/h2aem5ghay9chby/EPFLxEE585xCertificate_edX.pdf?dl=0" target="_blank" rel="nofollow"
+                           rel="nofollow">Space Mission Design and Operations</a>
                     </h3>
                     This course builds on university-level mechanics to introduce and illustrate orbital
                     dynamics as
@@ -263,35 +258,14 @@
                 </div>
             </div>
 
-            <!--<div class="media mb-1">-->
-            <!--<div class="media-body">-->
-            <!--<h3 class="media-heading">-->
-            <!--<a href="docs/UC3MxBIA.pdf" target="_blank" rel="nofollow" rel="nofollow"><i class="fa fa-file-pdf-o"-->
-            <!--aria-hidden="true"></i> The-->
-            <!--Conquest of-->
-            <!--Space: Space Exploration and-->
-            <!--Rocket Science</a>-->
-            <!--</h3>-->
-            <!--This course on aerospace engineering is a first step for those interested in learning more-->
-            <!--about-->
-            <!--the history of the space and the impact of space exploration on our daily lives. This course-->
-            <!--will provide you with technical and critical tools to continue your own research on the-->
-            <!--topic-->
-            <!--and navigate through the information that is available for the general public.-->
-            <!--</div>-->
-            <!--</div>-->
-
             <h2 class="mt-2 mb-2">Publications</h2>
 
             <div class="media">
                 <div class="media-body">
                     <h3 class="media-heading">
-                        <a href="{{ asset('assets/docs/SpaceMissionPreliminaryAnalisys.pdf') }}"
+                        <a href="https://www.dropbox.com/s/nni364cor5lesg5/SpaceMissionPreliminaryAnalisys.pdf?dl=0"
                            target="_blank" rel="nofollow"
-                           rel="nofollow"><i
-                                    class="fa fa-file-pdf-o" aria-hidden="true"></i> Space Mission
-                            Preliminary
-                            Analysis - Lunar Far Side Radio Communications</a>
+                           rel="nofollow">Space Mission Preliminary Analysis - Lunar Far Side Radio Communications</a>
                     </h3>
                     Publication written as a final assignment of course "Space Exploration and Rocket Science",
                     discusses the possibility of communicating with lunar far side using relay satellite
@@ -320,17 +294,17 @@
                         <li>
                             <a class="contact-item" target="_blank" rel="nofollow"
                                href="//www.linkedin.com/in/ivan-stanojevic-1405988">
-                                <i class="fa fa-linkedin-square" aria-hidden="true"></i> LinkedIn
+                                <i class="fab fa-linkedin" aria-hidden="true"></i> LinkedIn
                             </a>
                         </li>
                         <li>
                             <a class="contact-item" target="_blank" rel="nofollow" href="//github.com/ivanstan">
-                                <i class="fa fa-github" aria-hidden="true"></i> GitHub
+                                <i class="fab fa-github"></i> GitHub
                             </a>
                         </li>
                         <li>
                             <a class="contact-item" target="_blank" rel="nofollow" href="skype:ivanstan88?call">
-                                <i class="fa fa-skype" aria-hidden="true"></i> ivanstan88
+                                <i class="fab fa-skype" aria-hidden="true"></i> ivanstan88
                             </a>
                         </li>
                     </ul>

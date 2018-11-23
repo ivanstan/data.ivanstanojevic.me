@@ -2,6 +2,7 @@ import Firms from './firms';
 
 // any CSS you require will output into a single scss file (app.scss in this case)
 require('../scss/app.scss');
+require('./menu');
 
 let meter = require('./airport');
 

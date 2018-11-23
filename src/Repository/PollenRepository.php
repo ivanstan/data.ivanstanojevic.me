@@ -5,7 +5,6 @@ namespace App\Repository;
 use App\Entity\Pollen;
 use App\Service\MySqlNative;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\QueryBuilder;
 use PDO;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 

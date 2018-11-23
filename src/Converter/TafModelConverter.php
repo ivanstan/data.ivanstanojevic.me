@@ -6,7 +6,6 @@ use App\Entity\Metar;
 use App\Model\TafModel;
 use App\Model\ValueUnit;
 use TafDecoder\Entity\ForecastPeriod;
-use TafDecoder\Entity\Temperature;
 use TafDecoder\Entity\Value;
 use TafDecoder\TafDecoder;
 
