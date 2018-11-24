@@ -9,19 +9,21 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Routing\RouterInterface;
 
 /**
  * @Route("/api/tle")
  */
 class TleController extends AbstractApiController
 {
+    protected const MAX_PAGE_SIZE = 100;
+
+    protected const PAGE_SIZE = 20;
+
     /** @var TleModelConverter */
     private $converter;
 
-    public function __construct(TleModelConverter $converter, RouterInterface $router)
+    public function __construct(TleModelConverter $converter)
     {
-        parent::__construct($router);
         $this->converter = $converter;
     }
 
@@ -50,7 +52,7 @@ class TleController extends AbstractApiController
         $search = $request->get(self::SEARCH_PARAM);
         $sort = $this->getSort($request, TleRepository::SORT_NAME, TleRepository::$sort);
         $sortDir = $this->getSortDirection($request, self::SORT_ASC);
-        $pageSize = $this->getPageSize($request, self::PAGE_SIZE);
+        $pageSize = min($this->getPageSize($request, self::PAGE_SIZE), self::MAX_PAGE_SIZE);
 
         $collection = $repository->collection(
             $search,
@@ -67,10 +69,12 @@ class TleController extends AbstractApiController
                 '@type' => 'Collection',
                 'totalItems' => $collection->getTotal(),
                 'member' => $this->converter->collection($collection->getCollection()),
-                'search' => $search ?? '*',
-                'collection' => [
+                'parameters' => [
+                    self::SEARCH_PARAM => $search ?? '*',
                     self::SORT_PARAM => $sort,
                     self::SORT_DIR_PARAM => $sortDir,
+                    self::PAGE_PARAM => $this->getPage($request),
+                    self::PAGE_SIZE_PARAM => $pageSize,
                 ],
                 'view' => $this->getPagination($request, $collection->getTotal(), $pageSize),
             ]

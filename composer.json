@@ -5,6 +5,7 @@
         "php": "^7.1.3",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "ext-pdo": "*",
         "safran-cassiopee/php-metar-decoder": "^0.7.0",
         "safran-cassiopee/php-taf-decoder": "^0.1.0",
         "symfony/apache-pack": "^1.0",
@@ -16,13 +17,13 @@
         "symfony/framework-bundle": "*",
         "symfony/monolog-bundle": "^3.3",
         "symfony/orm-pack": "^1.0",
+        "symfony/property-access": "4.1.*",
         "symfony/serializer": "*",
         "symfony/templating": "*",
         "symfony/translation": "4.1.*",
         "symfony/twig-bundle": "*",
         "symfony/webpack-encore-pack": "^1.0",
-        "symfony/yaml": "*",
-        "ext-pdo": "*"
+        "symfony/yaml": "*"
     },
     "require-dev": {
         "symfony/browser-kit": "4.1.*",

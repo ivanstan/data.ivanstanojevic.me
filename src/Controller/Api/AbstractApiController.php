@@ -7,7 +7,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\SerializerInterface;
 
 abstract class AbstractApiController extends AbstractController
@@ -35,12 +34,23 @@ abstract class AbstractApiController extends AbstractController
     /** @var RouterInterface */
     protected $router;
 
-    public function __construct(RouterInterface $router)
+    /**
+     * @required
+     *
+     * @param SerializerInterface $serializer
+     */
+    public function setSerializer(SerializerInterface $serializer): void
     {
-        $this->serializer = new Serializer(
-            [new \Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer()],
-            [new \Symfony\Component\Serializer\Encoder\JsonEncoder()]
-        );
+        $this->serializer = $serializer;
+    }
+
+    /**
+     * @required
+     *
+     * @param RouterInterface $router
+     */
+    public function setRouter(RouterInterface $router): void
+    {
         $this->router = $router;
     }
 

@@ -17,7 +17,10 @@ class TleModel
         $this->name = $name;
     }
 
-    public function getId(): int
+    /**
+     * @return int|string
+     */
+    public function getId()
     {
         return (int)substr($this->line1, 2, 6);
     }

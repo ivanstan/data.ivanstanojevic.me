@@ -4,6 +4,7 @@ namespace App\Converter;
 
 use App\Entity\Tle;
 use App\Model\TleModel;
+use Symfony\Component\Routing\RequestContext;
 
 class TleModelConverter
 {
@@ -13,7 +14,8 @@ class TleModelConverter
     }
 
     /**
-     * @param Tle[] $collection
+     * @param Tle[]          $collection
+     * @param RequestContext $context
      *
      * @return TleModel[]
      */

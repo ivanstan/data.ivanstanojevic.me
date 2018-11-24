@@ -95,7 +95,11 @@
         "allOf": [
           {
             "properties": {
-              "id": {
+              "@id": {
+                "type": "string",
+                "example": "https://ivanstanojevic.me/api/tle/43630"
+              },
+              "catalogId": {
                 "type": "integer",
                 "example": "43630"
               },
