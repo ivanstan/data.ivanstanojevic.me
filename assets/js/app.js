@@ -13,6 +13,6 @@ if (temperature.length > 0) {
 
 let firmsEl = $('#firms');
 if (firmsEl.length > 0) {
-  let firms = require('./firms');
-  new firms(firmsEl);
+  let Firms = require('./firms');
+  new Firms(firmsEl);
 }

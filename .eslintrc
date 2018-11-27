@@ -5,7 +5,9 @@
   },
   "parser": "babel-eslint",
   "rules": {
-    "linebreak-style": "off"
+    "linebreak-style": "off",
+    "object-curly-spacing": "off",
+    "no-new": "off"
   },
   "settings": {
     "import/resolver": {
@@ -13,5 +15,11 @@
         "config": "webpack.config.js"
       }
     }
+  },
+  "globals": {
+    "fetch": true,
+    "google": true,
+    "InfoBox": true,
+    "Image": true
   }
 }

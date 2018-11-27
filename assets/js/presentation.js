@@ -2,8 +2,8 @@ if (typeof require !== 'undefined') {
   require('../scss/presentation.scss');
 }
 
-$(document).ready(function() {
-  $('img').each(function(index, element) {
+$(document).ready(function () {
+  $('img').each(function (index, element) {
     let image = new Image();
     image.src = $(element).attr('src');
   });
@@ -15,7 +15,7 @@ let navBar = $('.navbar');
 let navBarFixed = $('.navbar-fixed-top');
 
 if (navBar.length > 0 && navBarFixed.length > 0) {
-  $(window).scroll(function() {
+  $(window).scroll(function () {
     if (navBar.offset().top > 50) {
       navBarFixed.addClass('top-nav-collapse');
     } else {
@@ -24,11 +24,10 @@ if (navBar.length > 0 && navBarFixed.length > 0) {
   });
 }
 
-$('a.page-scroll').bind('click', function(event) {
+$('a.page-scroll').bind('click', function (event) {
   let $anchor = $(this);
   $('html, body').stop().animate({
-    scrollTop: $($anchor.attr('href')).offset().top,
+    scrollTop: $($anchor.attr('href')).offset().top
   }, 1500, 'easeInOutExpo');
   event.preventDefault();
 });
-

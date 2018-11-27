@@ -25,6 +25,7 @@
 </footer>
 
 {% block javascripts %}
+    <script src="{{ asset('assets/build/runtime.js') }}"></script>
     <script src="{{ asset('assets/build/app.js') }}"></script>
 {% endblock %}
 {% include 'components/google-analytics.html.twig' %}

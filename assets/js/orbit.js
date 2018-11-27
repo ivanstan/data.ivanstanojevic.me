@@ -1,8 +1,8 @@
-import React from "react"
-import ReactDOM from "react-dom"
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-//class Orbit extends React.Component
-//{
+// class Orbit extends React.Component
+// {
 //  componentDidMount()
 //  {
 //
@@ -12,9 +12,9 @@ import ReactDOM from "react-dom"
 //  {
 //    return ('');
 //  };
-//}
+// }
 //
-//ReactDOM.render(
-//<Orbit/>,
-//document.getElementById('dns-file-editor')
-//);
+// ReactDOM.render(
+// <Orbit/>,
+// document.getElementById('dns-file-editor')
+// );

@@ -11,14 +11,14 @@ let config = {
         backgroundColor: '#5DA5DA',
         borderColor: '#5DA5DA',
         data: [],
-        fill: false,
+        fill: false
       },
       {
         label: 'Dew Point Temperature',
         backgroundColor: '#60BD68',
         borderColor: '#60BD68',
         data: [],
-        fill: false,
+        fill: false
       },
       {
         label: 'Pressure',
@@ -26,29 +26,29 @@ let config = {
         backgroundColor: '#F15854',
         borderColor: '#F15854',
         data: [],
-        fill: false,
-      },
-    ],
+        fill: false
+      }
+    ]
   },
   options: {
     elements: {
       line: {
-        tension: 0,
-      },
+        tension: 0
+      }
     },
     responsive: true,
     maintainAspectRatio: false,
     title: {
       display: true,
-      text: 'METAR',
+      text: 'METAR'
     },
     tooltips: {
       mode: 'index',
-      intersect: false,
+      intersect: false
     },
     hover: {
       mode: 'nearest',
-      intersect: true,
+      intersect: true
     },
     scales: {
       xAxes: [
@@ -56,9 +56,9 @@ let config = {
           display: true,
           scaleLabel: {
             display: true,
-            labelString: 'UTC',
-          },
-        },
+            labelString: 'UTC'
+          }
+        }
       ],
       yAxes: [
         {
@@ -67,44 +67,44 @@ let config = {
           display: true,
           scaleLabel: {
             display: true,
-            labelString: '°C',
+            labelString: '°C'
           },
           ticks: {
-            beginAtZero: true,
-          },
+            beginAtZero: true
+          }
         },
         {
           id: 'pressure',
           type: 'linear',
           scaleLabel: {
             display: true,
-            labelString: 'hPa',
+            labelString: 'hPa'
           },
           gridLines: {
             display: false
-          },
-        },
-      ],
-    },
-  },
+          }
+        }
+      ]
+    }
+  }
 };
 
-let renderChart = function(canvas, response, taf) {
-  let labels = response.member.map(function(element) {
+let renderChart = function (canvas, response, taf) {
+  let labels = response.member.map(function (element) {
     return moment(element.date).format('HH:mm DD-MM-YYYY');
   });
 
-  let temperature = response.member.map(function(element) {
+  let temperature = response.member.map(function (element) {
     return element.temperature !== null
-        ? element.temperature.value
-        : null;
+      ? element.temperature.value
+      : null;
   });
 
-  let dew = response.member.map(function(element) {
+  let dew = response.member.map(function (element) {
     return element.dewPoint !== null ? element.dewPoint.value : null;
   });
 
-  let pressure = response.member.map(function(element) {
+  let pressure = response.member.map(function (element) {
     return element.pressure !== null ? element.pressure.value : null;
   });
 
@@ -117,16 +117,16 @@ let renderChart = function(canvas, response, taf) {
   new Chart(ctx, config);
 };
 
-let createMeterTemperatureChart = function(canvas) {
-  fetch(canvas.data('metar-url')).
-      then((metar) => metar.json()).
-      then((metar) => {
-        fetch(canvas.data('taf-url')).
-            then((taf) => taf.json()).
-            then((taf) => {
-              renderChart(canvas, metar, taf);
-            });
-      });
+let createMeterTemperatureChart = function (canvas) {
+  fetch(canvas.data('metar-url'))
+    .then((metar) => metar.json())
+    .then((metar) => {
+      fetch(canvas.data('taf-url'))
+        .then((taf) => taf.json())
+        .then((taf) => {
+          renderChart(canvas, metar, taf);
+        });
+    });
 };
 
 export {createMeterTemperatureChart};
