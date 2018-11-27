@@ -6,7 +6,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Yaml\Yaml;
 
 class ApiController extends AbstractController
 {
@@ -23,26 +22,23 @@ class ApiController extends AbstractController
      */
     public function html(string $name): Response
     {
-        $catalog = Yaml::parseFile($this->dir.'/catalog.yaml');
-        $page = $catalog[$name] ?? [];
-
-        return $this->render(
-            'pages/api/docs.html.twig',
-            [
-                'name' => $name,
-                'description' => $page['description'] ?? null,
-                'title' => $page['name'] ?? null,
-            ]
-        );
+        return $this->render('pages/api/docs.html.twig', ['name' => $name]);
     }
 
     /**
      * @Route("/api/{name}/json", name="app_api_docs_json")
      */
-    public function json(string $name): Response
+    public function getJson(string $name): JsonResponse
     {
         $file = json_decode(file_get_contents($this->dir.'general.json'), true);
         $file['paths'] = json_decode(file_get_contents($this->dir.'/'.$name.'.json'), true);
+
+        switch ($name) {
+            case 'tle':
+                $file['info']['title'] = 'TLE API';
+                $file['info']['version'] = '1.2.0';
+                break;
+        }
 
         return new JsonResponse($file);
     }

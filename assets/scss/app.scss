@@ -2,69 +2,9 @@ $primary: #2C3E4E;
 
 @import "~bootstrap/scss/bootstrap";
 
+@import "typography";
 @import "navigation";
 @import "blog";
 @import "general";
 @import "menu";
 @import "tle";
-
-a {
-  text-decoration: underline;
-}
-
-a.navbar-brand {
-  color: #fff;
-  text-decoration: none;
-  display: inline-block;
-  margin: auto;
-}
-
-main {
-  min-height: calc(100vh - 452px);
-}
-
-header.featured {
-  height: 300px;
-  background-position:center;
-  background-repeat:no-repeat;
-  background-size:contain;
-
-  .content {
-    position: absolute;
-    text-align: center;
-    width: 100%;
-    color: #D8D9DA;
-    margin-top: 6rem;
-
-    h1 {
-      font-size: 3rem;
-    }
-
-    p {
-      font-size: 1.5rem;
-    }
-  }
-
-  .overlay {
-    background: rgba(44, 62, 80, 0.75);
-    height: 300px;
-  }
-}
-
-.jumbotron a {
-  text-decoration: none;
-}
-
-footer {
-  color: #D8D9DA;
-
-  a {
-    color: #D8D9DA;
-  }
-
-  a:hover {
-    color: #fff;
-    text-decoration: underline;
-  }
-}
-

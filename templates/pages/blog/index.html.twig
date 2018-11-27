@@ -1,4 +1,4 @@
-{% extends 'blog/base.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block title %}Blog | Ivan Stanojević{% endblock %}
 
@@ -6,7 +6,11 @@
     <meta name="description"
           content="OpenData collection of free to use APIs and data sources. Weather and satellite information.">
     {{ parent() }}
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
+{% endblock %}
+
+{% block nav %}
+    {% include 'components/menu/nav-main.html.twig' with {fixed: false} %}
+    {% include 'components/menu/nav-aside.html.twig' %}
 {% endblock %}
 
 {% block featured %}

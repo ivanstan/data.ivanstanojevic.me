@@ -1,3 +1,5 @@
+import Firms from './firms';
+
 let $ = require('jquery');
 
 require('bootstrap');
@@ -13,6 +15,5 @@ if (temperature.length > 0) {
 
 let firmsEl = $('#firms');
 if (firmsEl.length > 0) {
-  let Firms = require('./firms');
   new Firms(firmsEl);
 }

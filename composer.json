@@ -6,6 +6,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-pdo": "*",
+        "ext-json": "*",
         "safran-cassiopee/php-metar-decoder": "^0.7.0",
         "safran-cassiopee/php-taf-decoder": "^0.1.0",
         "symfony/apache-pack": "^1.0",

@@ -2,6 +2,8 @@
 
 namespace App\Field;
 
+use Doctrine\ORM\Mapping as ORM;
+
 trait CountryField
 {
     /**

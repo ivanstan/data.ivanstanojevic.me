@@ -1,14 +1,16 @@
-{% extends 'pages/api/base.html.twig' %}
+{% extends 'base.html.twig' %}
 
-{% block title %}{{ title }} API Documentation | {{ parent() }}{% endblock %}
+{% block title %} API Documentation | {{ parent() }}{% endblock %}
 
-{% block meta %}
-    {% if description is not null %}
-        <meta name="description" content="{{ description }}">
-    {% endif %}
-{% endblock %}
+{% block nav %}{% endblock %}
 
 {% block content %}
-    <!--suppress HtmlUnknownTag, HtmlUnknownTag -->
     <redoc spec-url="{{ path('app_api_docs_json', {name: name}) }}"></redoc>
+{% endblock %}
+
+{% block footer %}{% endblock %}
+
+{% block javascripts %}
+    <script src="//cdn.jsdelivr.net/npm/redoc@2.0.0-alpha.38/bundles/redoc.standalone.js"></script>
+    {% include 'components/google-analytics.html.twig' %}
 {% endblock %}

@@ -1,4 +1,9 @@
-{% extends 'blog/base.html.twig' %}
+{% extends 'base.html.twig' %}
+
+{% block nav %}
+    {% include 'components/menu/nav-main.html.twig' with {fixed: false} %}
+    {% include 'components/menu/nav-aside.html.twig' %}
+{% endblock %}
 
 {% block content %}
 

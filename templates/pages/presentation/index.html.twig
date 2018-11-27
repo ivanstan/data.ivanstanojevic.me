@@ -5,10 +5,7 @@
     <title>Ivan Stanojević | Web Developer, NASA Space Apps Local Lead</title>
     <meta name="keywords" content="ivan,stanojevic,web,developer,nasa,local,lead">
     <meta name="description"
-          content="Ivan Stanojević,
-          software developer and NASA SpaceApps local lead
-           with passion for space exploration, technology surfer, riding the first wave
-">
+          content="Ivan Stanojević, software developer and NASA SpaceApps local lead with passion for space exploration, technology surfer, riding the first wave">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,32 +16,19 @@
     <meta property="og:title" content="Ivan Stanojević"/>
     <meta property="og:type" content="website"/>
     <meta property="og:image" content="{{ asset('assets/images/me.png') }}"/>
-    <meta property="og:url" content="http://ivan-stanojevic.me"/>
+    <meta property="og:url" content="http://ivanstanojevic.me"/>
     <meta property="og:description"
           content="Ivan Stanojević, software developer with passion for space exploration, technology surfer, riding the first wave"/>
-
     <meta name="twitter:card" content="summary"/>
     <meta name="twitter:title" content="Ivan Stanojević"/>
     <meta name="twitter:description"
           content="Ivan Stanojević, software developer with passion for space exploration, technology surfer, riding the first wave"/>
     <meta name="twitter:image" content="{{ asset('assets/images/me.png') }}"/>
-    <meta name="twitter:url" content="http://ivan-stanojevic.me">
-
-    <link rel="stylesheet"
-          href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=PT+Sans+Narrow">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
-          integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <meta name="twitter:url" content="http://ivanstanojevic.me">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
     <link rel="stylesheet" href="{{ asset('assets/build/presentation.css') }}">
     <link rel="icon" href="favicon.ico" type="image/x-icon"/>
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
 </head>
 
 <body data-spy="scroll" data-target=".navbar" data-offset="50" class="fixed-nav">
@@ -330,39 +314,9 @@
     </div>
 </section>
 
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-<script src="//cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 <script src="{{ asset('assets/build/runtime.js') }}"></script>
-<script src="{{ asset('assets/js/presentation.js') }}"></script>
-<script>
-  $(document).ready(function() {
-    $('.slider').bxSlider({
-      controls: false,
-      auto: true,
-      stopAutoOnClick: true,
-      autoHover: true,
-    });
-  });
-</script>
-<script async>
-  (function(i, s, o, g, r, a, m) {
-    i['GoogleAnalyticsObject'] = r;
-    i[r] = i[r] || function() {
-      (i[r].q = i[r].q || []).push(arguments);
-    }, i[r].l = 1 * new Date();
-    a = s.createElement(o),
-        m = s.getElementsByTagName(o)[0];
-    a.async = 1;
-    a.src = g;
-    m.parentNode.insertBefore(a, m);
-  })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-  ga('create', 'UA-37623519-3', 'auto');
-  ga('send', 'pageview');
-</script>
+<script src="{{ asset('assets/build/presentation.js') }}"></script>
+{% include 'components/google-analytics.html.twig' %}
 
 </body>
 

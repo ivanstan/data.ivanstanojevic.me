@@ -1,15 +1,15 @@
-if (typeof require !== 'undefined') {
-  require('../scss/presentation.scss');
-}
+let $ = require('jquery');
+require('jquery.easing');
+require('bootstrap');
+require('@tehnoskarb/jquery-bxslider');
+require('../scss/presentation.scss');
 
-$(document).ready(function () {
-  $('img').each(function (index, element) {
-    let image = new Image();
-    image.src = $(element).attr('src');
-  });
-
-  $('.loading').remove();
+$('img').each(function (index, element) {
+  let image = new Image();
+  image.src = $(element).attr('src');
 });
+
+$('.loading').remove();
 
 let navBar = $('.navbar');
 let navBarFixed = $('.navbar-fixed-top');
@@ -30,4 +30,13 @@ $('a.page-scroll').bind('click', function (event) {
     scrollTop: $($anchor.attr('href')).offset().top
   }, 1500, 'easeInOutExpo');
   event.preventDefault();
+});
+
+$(document).ready(function () {
+  $('.slider').bxSlider({
+    controls: false,
+    auto: true,
+    stopAutoOnClick: true,
+    autoHover: true
+  });
 });

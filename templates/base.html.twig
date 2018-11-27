@@ -1,33 +1,37 @@
 <!doctype html>
-<html lang="en" dir="ltr">
+<html lang="{{ app.request.locale }}" dir="ltr">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{% block title %}OpenData{% endblock %}</title>
     {% block head %}
         <link rel="stylesheet" href="{{ asset('assets/build/app.css') }}">
-        <link rel="stylesheet" href="//fonts.googleapis.com/css?family=PT+Sans+Narrow">
-        <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.5.0/css/all.css">
     {% endblock %}
 </head>
 <body>
+
+{% block nav %}
 <nav class="navbar bg-primary">
     <a class="navbar-brand" href="{{ path('app_data_index') }}">OpenData</a>
 </nav>
+{% endblock %}
+
 {% block header %}{% endblock %}
 {% block featured %}{% endblock %}
 {% block content %}{% endblock %}
 
-<footer class="bg-primary">
-    <div class="footer-copyright text-center py-3">Copyright © {{ "now"|date('Y') }}
-        <a href="https://ivanstanojevic.me/"> Ivan Stanojević</a>.
-    </div>
-</footer>
+{% block footer %}
+    <footer class="bg-primary">
+        <div class="footer-copyright text-center py-3">Copyright © {{ "now"|date('Y') }}
+            <a href="https://ivanstanojevic.me/"> Ivan Stanojević</a>.
+        </div>
+    </footer>
+{% endblock %}
 
 {% block javascripts %}
     <script src="{{ asset('assets/build/runtime.js') }}"></script>
     <script src="{{ asset('assets/build/app.js') }}"></script>
+    {% include 'components/google-analytics.html.twig' %}
 {% endblock %}
-{% include 'components/google-analytics.html.twig' %}
 </body>
 </html>

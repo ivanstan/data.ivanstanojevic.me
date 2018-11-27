@@ -1,9 +1,6 @@
 {
   "/api/tle/{id}": {
     "get": {
-      "tags": [
-        "Two line element"
-      ],
       "summary": "Record",
       "operationId": "tle-record",
       "parameters": [
@@ -39,9 +36,6 @@
   },
   "/api/tle": {
     "get": {
-      "tags": [
-        "Two line element"
-      ],
       "summary": "Collection",
       "operationId": "tle-collection",
       "parameters": [
@@ -87,7 +81,7 @@
                   },
                   "@id": {
                     "type": "string",
-                    "example": "http://example.com/api/tle"
+                    "example": "https://ivanstanojevic.me/api/tle"
                   },
                   "@type": {
                     "type": "string",
@@ -105,8 +99,25 @@
                   },
                   "view": {
                     "type": "object",
-                    "items": {
-                      "$ref": "#/components/schemas/Pagination"
+                    "properties": {
+                      "@id": {
+                        "type": "string"
+                      },
+                      "@type": {
+                        "type": "string"
+                      },
+                      "first": {
+                        "type": "string"
+                      },
+                      "previous": {
+                        "type": "string"
+                      },
+                      "next": {
+                        "type": "string"
+                      },
+                      "last": {
+                        "type": "string"
+                      }
                     }
                   }
                 },
