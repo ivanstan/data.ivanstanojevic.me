@@ -1,0 +1,84 @@
+{% extends 'blog/base.html.twig' %}
+
+{% block title %}{{ model.name }} | Latest two line elements{% endblock %}
+
+{% block content %}
+    <main class="container mb-5">
+        <div class="row">
+            <div class="col-12 py-5 px-2">
+                <h1>{{ model.name }}</h1>
+                <h5 class="text-muted">Latest two line element for {{ model.name }}</h5>
+
+                <div class="row">
+
+                    {#<label for="tle-select">Select</label>#}
+                    {#<select type="hidden" name="tle-select" id="tle-select" data-url="{{ path('tle_collection') }}"></select>#}
+
+                    {#<input class=".js-typeahead-country_v1" type="text" id="tle-select" placeholder="States of USA">#}
+
+                    <select id="ajax-select" class="selectpicker" data-live-search="true" data-url="{{ path('tle_collection') }}"></select>
+
+                </div>
+
+
+                {#<div class="tle-preview mt-5">#}
+                    {#<pre class="mb-0">{{ model.line1 }}</pre>#}
+                    {#<pre class="mb-0">{{ model.line2 }}</pre>#}
+
+                    {#<span class="line1 line-number"></span>#}
+                    {#<span class="line2 line-number"></span>#}
+
+                    {#<span class="line1 catalog-number"></span>#}
+                    {#<span class="line2 catalog-number"></span>#}
+
+                    {#<span class="line1 checksum"></span>#}
+                    {#<span class="line2 checksum"></span>#}
+
+                    {#<span class="line1 classification"></span>#}
+
+                    {#<span class="line1 launch-year"></span>#}
+                    {#<span class="line1 launch-number"></span>#}
+                    {#<span class="line1 launch-piece"></span>#}
+                    {#<span class="line1 epoch"></span>#}
+                    {#<span class="line1 first-derivative"></span>#}
+                    {#<span class="line1 second-derivative"></span>#}
+                    {#<span class="line1 bstar"></span>#}
+                    {#<span class="line1 ephemeris-type"></span>#}
+                    {#<span class="line1 element-number"></span>#}
+
+                    {#<span class="line2 inclination"></span>#}
+                    {#<span class="line2 raan"></span>#}
+                    {#<span class="line2 mean-motion"></span>#}
+                    {#<span class="line2 mean-anomaly"></span>#}
+                    {#<span class="line2 eccentricity"></span>#}
+                    {#<span class="line2 argument-of-perigee"></span>#}
+                    {#<span class="line2 revolution"></span>#}
+                {#</div>#}
+
+                {#<code>#}
+                {#<span>1</span>#}
+                {#<span>{{ model.id }}</span>#}
+                {#<span>{{ model.classification }}</span>#}
+                {#<span>{{ model.launchYear }}</span>#}
+                {#<span>{{ model.launchNumberOfYear }}</span>#}
+                {#<span>{{ model.launchPiece }}</span>#}
+
+                {#<span>{{ model.bstar }}</span>#}
+                {#<span>{{ model.elementNumber }}</span>#}
+                {#<span>{{ model.getChecksum(constant('App\\Model\\TleModel::LINE1')) }}</span>#}
+                {#</code>#}
+
+                {#<br>#}
+
+                {#<code>#}
+                {#<span>2</span>#}
+                {#<span>{{ model.id }}</span>#}
+                {#<span>{{ model.getChecksum(constant('App\\Model\\TleModel::LINE2')) }}</span>#}
+                {#</code>#}
+
+                {#API call#}
+
+            </div>
+        </div>
+    </main>
+{% endblock %}

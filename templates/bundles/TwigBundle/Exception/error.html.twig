@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="{{ _charset }}"/>
+    <title>An Error Occurred: {{ status_text }}</title>
+    <link rel="stylesheet" href="{{ asset('assets/build/app.css') }}">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=PT+Sans+Narrow">
+</head>
+<body>
+
+<main class="container">
+    <div class="row">
+        <div class="col-12 mt-5">
+            <div class="jumbotron">
+                <h1 class="display-3">Oops! An Error Occurred</h1>
+                <p class="lead">The server returned a "{{ status_code }} {{ status_text }}".</p>
+                <hr class="my-2">
+                <p> Something is broken. Please let us know what you were doing when this error occurred.
+                    We will fix it as soon as possible. Sorry for any inconvenience caused.</p>
+                <p class="lead">
+                    <a class="btn btn-primary btn-lg" href="/"
+                       role="button">Home</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

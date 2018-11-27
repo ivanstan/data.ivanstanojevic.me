@@ -21,13 +21,13 @@ class ApiController extends AbstractController
     /**
      * @Route("/api/{name}/docs", name="app_api_docs")
      */
-    public function getDocs(string $name): Response
+    public function html(string $name): Response
     {
         $catalog = Yaml::parseFile($this->dir.'/catalog.yaml');
         $page = $catalog[$name] ?? [];
 
         return $this->render(
-            'api/docs.html.twig',
+            'pages/api/docs.html.twig',
             [
                 'name' => $name,
                 'description' => $page['description'] ?? null,
@@ -39,7 +39,7 @@ class ApiController extends AbstractController
     /**
      * @Route("/api/{name}/json", name="app_api_docs_json")
      */
-    public function getJson(string $name): Response
+    public function json(string $name): Response
     {
         $file = json_decode(file_get_contents($this->dir.'general.json'), true);
         $file['paths'] = json_decode(file_get_contents($this->dir.'/'.$name.'.json'), true);

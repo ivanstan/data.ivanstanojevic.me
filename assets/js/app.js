@@ -1,20 +1,18 @@
-import Firms from './firms';
+let $ = require('jquery');
 
-// any CSS you require will output into a single scss file (app.scss in this case)
-require('../scss/app.scss');
+require('bootstrap');
 require('./menu');
 
-let meter = require('./airport');
-
-// Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
-let $ = require('jquery');
+require('../scss/app.scss');
 
 let temperature = $('.meter-temperature');
 if (temperature.length > 0) {
+  let meter = require('./airport');
   meter.createMeterTemperatureChart(temperature);
 }
 
 let firmsEl = $('#firms');
 if (firmsEl.length > 0) {
-  let firms = new Firms(firmsEl);
+  let firms = require('./firms');
+  new firms(firmsEl);
 }

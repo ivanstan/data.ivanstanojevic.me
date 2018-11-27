@@ -1,10 +1,12 @@
 $primary: #2C3E4E;
 
 @import "~bootstrap/scss/bootstrap";
+
 @import "navigation";
 @import "blog";
 @import "general";
 @import "menu";
+@import "tle";
 
 a {
   text-decoration: underline;
@@ -47,6 +49,10 @@ header.featured {
     background: rgba(44, 62, 80, 0.75);
     height: 300px;
   }
+}
+
+.jumbotron a {
+  text-decoration: none;
 }
 
 footer {

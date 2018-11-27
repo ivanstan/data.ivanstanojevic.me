@@ -13,7 +13,7 @@ class AirportController extends AbstractController
     /**
      * @Route("/airport/{icao}", name="airport_show")
      */
-    public function show(string $icao): Response
+    public function view(string $icao): Response
     {
         $airport = $this->getDoctrine()->getRepository(Airport::class)->findOneBy(['icao' => $icao]);
 
@@ -21,6 +21,6 @@ class AirportController extends AbstractController
             throw new NotFoundHttpException(sprintf('Unable to find airport with ICAO code %s', $icao));
         }
 
-        return $this->render('airport/show.html.twig', ['airport' => $airport]);
+        return $this->render('pages/airport/view.html.twig', ['airport' => $airport]);
     }
 }

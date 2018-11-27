@@ -46,7 +46,7 @@ class BlogController extends AbstractController
             }
         }
 
-        return $this->render('blog/index.html.twig', ['articles' => $articles]);
+        return $this->render('pages/blog/index.html.twig', ['articles' => $articles]);
     }
 
     /**
@@ -61,7 +61,7 @@ class BlogController extends AbstractController
         foreach ($list as $key => $item) {
             if ($slug === ($item['slug'] ?? null) && $locale === ($item['locale'] ?? null)) {
                 return $this->render(
-                    "blog/posts/{$key}.html.twig",
+                    "pages/blog/posts/{$key}.html.twig",
                     ['article' => $item]
                 );
             }

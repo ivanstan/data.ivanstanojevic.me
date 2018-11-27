@@ -21,7 +21,7 @@ class FirmsController extends AbstractController
      */
     public function main(): Response
     {
-        return $this->render('firms/index.html.twig', [
+        return $this->render('pages/firms/index.html.twig', [
             'api_key' => $this->apiKey,
         ]);
     }

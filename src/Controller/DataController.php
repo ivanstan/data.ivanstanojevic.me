@@ -25,18 +25,9 @@ class DataController extends AbstractController
      */
     public function index(MetarRepository $metarRepository, AirportRepository $airportRepository): Response
     {
-        $catalog = Yaml::parseFile($this->projectDir.'/config/custom/catalog.yaml');
-
-        foreach ($catalog as $key => $item) {
-            if (\is_array($item['path'])) {
-                $catalog[$key]['path'] = $this->generateUrl($item['path']['route'], $item['path']['params']);
-            }
-        }
-
         $airports = $airportRepository->getCollection($metarRepository->getAirportsWithMetarData());
 
         return $this->render('index.html.twig', [
-            'catalog' => $catalog,
             'airports' => $airports,
         ]);
     }

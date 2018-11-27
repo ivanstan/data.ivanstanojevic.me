@@ -1,0 +1,134 @@
+.tle-preview {
+  display: inline-block;
+  margin: 0 auto;
+  left: 50%;
+  transform: translateX(-50%);
+  position: relative;
+
+  @include media-breakpoint-up(xs) {
+    font-size: 10px;
+  }
+  @include media-breakpoint-up(sm) {
+    font-size: 16px;
+  }
+  @include media-breakpoint-up(md) {
+    font-size: 18px;
+  }
+  @include media-breakpoint-up(lg) {
+    font-size: 20px;
+  }
+  @include media-breakpoint-up(xl) {
+    font-size: 22px;
+  }
+
+  span {
+    display: block;
+    height: 1.5rem;
+    position: absolute;
+    width: calc(1em / 2);
+    cursor: pointer;
+    background: $primary;
+    opacity: .5;
+  }
+
+  span.line1 {
+    top: 0;
+  }
+
+  span.line2 {
+    top: 1.8rem;
+  }
+
+  span.catalog-number {
+    width: calc((1em / 2) * 5.4);
+    left: calc((1em / 2) * 2);
+  }
+
+  span.checksum {
+    right: 0;
+  }
+
+  span.classification {
+    left: calc((1em / 2) * 7.4);
+  }
+
+  span.launch-year {
+    left: calc((1em / 2) * 9.5);
+    width: calc((1em / 2) * 2);
+  }
+
+  span.launch-number {
+    left: calc((1em / 2) * 11.5);
+    width: calc((1em / 2) * 3);
+  }
+
+  span.launch-piece {
+    left: calc((1em / 2) * 14.5);
+    width: calc((1em / 2) * 2.4);
+  }
+
+  span.epoch {
+    left: calc((1em / 2) * 18.8);
+    width: calc((1em / 2) * 15);
+  }
+
+  span.first-derivative {
+    left: calc((1em / 2) * 35.8);
+    width: calc((1em / 2) * 10);
+  }
+
+  span.second-derivative {
+    left: calc((1em / 2) * 47);
+    width: calc((1em / 2) * 8);
+  }
+
+  span.bstar {
+    right: calc((1em / 2) * 8);
+    width: calc((1em / 2) * 8);
+  }
+
+  span.ephemeris-type {
+    right: calc((1em / 2) * 6.4);
+    width: calc((1em / 2));
+  }
+
+  span.element-number {
+    right: calc((1em / 2) * 1);
+    width: calc((1em / 2) * 4);
+  }
+
+  span.inclination {
+    left: calc((1em / 2) * 8.5);
+    width: calc((1em / 2) * 8.4);
+  }
+
+  span.raan {
+    left: calc((1em / 2) * 17.9);
+    width: calc((1em / 2) * 8.4);
+  }
+
+  span.eccentricity {
+    left: calc((1em / 2) * 27.5);
+    width: calc((1em / 2) * 7.2);
+  }
+
+  span.argument-of-perigee {
+    left: calc((1em / 2) * 35);
+    width: calc((1em / 2) * 9.2);
+  }
+
+  span.mean-anomaly {
+    left: calc((1em / 2) * 45);
+    width: calc((1em / 2) * 9);
+  }
+
+  span.mean-motion {
+    left: calc((1em / 2) * 54.8);
+    width: calc((1em / 2) * 11.5);
+  }
+
+  span.revolution {
+    left: calc((1em / 2) * 67.4);
+    width: calc((1em / 2) * 4.3);
+  }
+}

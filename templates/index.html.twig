@@ -19,20 +19,44 @@
 
 {% block content %}
     <main class="container">
-        {% for item in catalog %}
-            <div class="row mb-5">
-                <div class="col-md-8 offset-md-2">
-                    <div class="media">
-                        <div class="media-body">
-                            <h5 class="mt-0 mb-1">
-                                <a href="{{ item.path }}">{{ item.name }}</a>
-                            </h5>
-                            {{ item.description }}
-                        </div>
+        <div class="row mb-5">
+            <div class="col-md-8 offset-md-2">
+                <div class="media">
+                    <div class="media-body">
+                        <h5 class="mt-0 mb-1">
+                            <a href="{{ path('app_api_docs', {name: 'tle'}) }}">NORAD TLE</a>
+                        </h5>
+                        Two line element set - orbital perturbation data sets published by North American Aerospace Defense Command and periodically refined so as to maintain a reasonable prediction capability on all space objects.
                     </div>
                 </div>
             </div>
-        {% endfor %}
+        </div>
+
+        <div class="row mb-5">
+            <div class="col-md-8 offset-md-2">
+                <div class="media">
+                    <div class="media-body">
+                        <h5 class="mt-0 mb-1">
+                            <a href="{{ path('app_api_docs', {name: 'metar'}) }}">METAR</a>
+                        </h5>
+                        Meteorological Terminal Air Report METAR - Aviation weather report updated every 30 minutes currently available for limited number of airports.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-5">
+            <div class="col-md-8 offset-md-2">
+                <div class="media">
+                    <div class="media-body">
+                        <h5 class="mt-0 mb-1">
+                            <a href="https://github.com/ivanstan/apollo-data/">Apollo JSON</a>
+                        </h5>
+                        Data repository contains JSON documents of data from NASA Apollo missions. Data ranges from orbital parameters to food and medicine carried to each mission. Every dataset is obtained from Apollo By Numbers and structured in JSON format.
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="row mb-5">
             <div class="col-md-8 offset-md-2">

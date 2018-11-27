@@ -4,7 +4,7 @@ namespace App\Tests;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class SmokeTest extends WebTestCase
+class PingTest extends WebTestCase
 {
     /**
      * @var \Symfony\Bundle\FrameworkBundle\Client
@@ -22,9 +22,14 @@ class SmokeTest extends WebTestCase
         $this->visit('/');
         $this->visit('/data');
         $this->visit('/blog');
+        $this->visit('/blog/rs');
 
         $this->visit('/api/tle/docs');
+        $this->visit('/api/tle/43550');
         $this->visit('/api/tle');
+
+        $this->visit('/firms');
+        $this->visit('/airport/lybe');
     }
 
     private function visit(string $path): void

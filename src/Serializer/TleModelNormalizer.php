@@ -30,6 +30,7 @@ class TleModelNormalizer implements NormalizerInterface
         return [
             '@id' => $id,
             'catalogId' => $model->getId(),
+            'name' => $model->getName(),
             'date' => $model->getDate(),
             'line1' => $model->getLine1(),
             'line2' => $model->getLine2(),
