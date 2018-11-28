@@ -105,11 +105,6 @@ class TleModel
         return (float)trim(substr($this->line2, 52, 11));
     }
 
-    public function revolution(): int
-    {
-
-    }
-
     public function getDate(): string
     {
         $year = (int)trim(substr($this->line1, 18, 2));

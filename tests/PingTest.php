@@ -22,7 +22,7 @@ class PingTest extends WebTestCase
         $this->visit('/');
         $this->visit('/data');
         $this->visit('/blog');
-        $this->visit('/blog/rs');
+        $this->visit('/rs/blog');
 
         $this->visit('/api/tle/docs');
         $this->visit('/api/tle/43550');

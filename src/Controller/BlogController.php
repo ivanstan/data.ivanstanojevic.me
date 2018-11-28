@@ -2,14 +2,12 @@
 
 namespace App\Controller;
 
-use App\Service\Ip2Country;
 use App\Service\Json;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Routing\RouterInterface;
 
 class BlogController extends AbstractController
 {
@@ -19,14 +17,10 @@ class BlogController extends AbstractController
     /** @var Json */
     private $json;
 
-    /** @var RouterInterface */
-    private $router;
-
-    public function __construct(string $projectDir, Json $json, RouterInterface $router)
+    public function __construct(string $projectDir, Json $json)
     {
         $this->dir = $projectDir.'/config/custom';
         $this->json = $json;
-        $this->router = $router;
     }
 
     /**

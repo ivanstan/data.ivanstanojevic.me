@@ -31,7 +31,8 @@
     <link rel="icon" href="favicon.ico" type="image/x-icon"/>
 </head>
 
-<body data-spy="scroll" data-target=".navbar" data-offset="50" class="fixed-nav">
+<body data-spy="scroll" data-target=".navbar" data-offset="50" class="fixed-nav" itemscope
+      itemtype="http://schema.org/Person">
 
 <div class="loading">
     <div class="spinner"></div>
@@ -59,16 +60,31 @@
     </div>
 </nav>
 
-
 <!-- Intro Section -->
 <section id="intro" class="intro-section"
          style="background: url({{ asset('assets/images/desk.png') }}) no-repeat 0 0; background-size: cover;">
+    <meta itemprop="jobTitle" content="Software Developer">
+    <meta itemprop="givenName" content="Ivan">
+    <meta itemprop="familyName" content="Stanojević">
+    <meta itemprop="email" content="ivanstan@gmail.com">
+    <meta itemprop="gender" content="male">
+
+    <div itemprop="worksFor" itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="url" content="https://byteout.com">
+        <meta itemprop="name" content="Byteout Software">
+    </div>
+
+    <div itemprop="performerIn" itemscope itemtype="http://schema.org/Event">
+        <meta itemprop="name" content="NASA Space Apps Challenge Serbia">
+    </div>
+
     <div class="container">
         <div class="vertical-align">
             <div class="logo">
-                <img src="{{ asset('assets/images/me.png') }}" class="mb-2" width="100%" alt="Ivan Stanojević">
+                <img src="{{ asset('assets/images/me.png') }}" class="mb-2 img-fluid" alt="Photo of Ivan Stanojević"
+                     itemprop="image">
             </div>
-            <h1 class="text-xs-center name mb-4">Ivan Stanojević</h1>
+            <h1 class="text-xs-center name mb-4" itemprop="name">Ivan Stanojević</h1>
             <div class="slider">
                 <div>
                     <blockquote>
@@ -111,7 +127,7 @@
 <!-- About Section -->
 <section id="about" class="odd">
     <div class="container">
-        <div class="vertical-align">
+        <div class="vertical-align" itemprop="description">
             <h2>About me</h2>
             <p>I'm a software developer stretched between web technologies and space exploration.</p>
             <p>
@@ -211,7 +227,7 @@
                 <div class="media-body">
                     <h3 class="media-heading">
                         <a href="https://www.dropbox.com/s/t84db32ap20nspe/SpaceApps2018.pdf?dl=0"
-                           target="_blank" rel="nofollow" rel="nofollow">SpaceApps 2018 local lead recognition</a>
+                           target="_blank" rel="nofollow">SpaceApps 2018 local lead recognition</a>
                     </h3>
                     Acknowledgement letter as local lead for NASA Space Apps Challenge 2018 in Belgrade, Serbia.
                 </div>
@@ -220,7 +236,7 @@
             <div class="media">
                 <div class="media-body">
                     <h3 class="media-heading">
-                        <a href="https://www.dropbox.com/s/dpoc8ib5u70amg0/654286_1569494.pdf?dl=0" target="_blank" rel="nofollow"
+                        <a href="https://www.dropbox.com/s/dpoc8ib5u70amg0/654286_1569494.pdf?dl=0" target="_blank"
                            rel="nofollow">Basic Life Support - BLS</a>
                     </h3>
                     CPR (Adult / Child / Infant / Choking) AED / First-Aid / Bloodborne Pathogens
@@ -230,7 +246,8 @@
             <div class="media mb-1">
                 <div class="media-body">
                     <h3 class="media-heading">
-                        <a href="https://www.dropbox.com/s/h2aem5ghay9chby/EPFLxEE585xCertificate_edX.pdf?dl=0" target="_blank" rel="nofollow"
+                        <a href="https://www.dropbox.com/s/h2aem5ghay9chby/EPFLxEE585xCertificate_edX.pdf?dl=0"
+                           target="_blank"
                            rel="nofollow">Space Mission Design and Operations</a>
                     </h3>
                     This course builds on university-level mechanics to introduce and illustrate orbital
@@ -248,7 +265,7 @@
                 <div class="media-body">
                     <h3 class="media-heading">
                         <a href="https://www.dropbox.com/s/nni364cor5lesg5/SpaceMissionPreliminaryAnalisys.pdf?dl=0"
-                           target="_blank" rel="nofollow"
+                           target="_blank"
                            rel="nofollow">Space Mission Preliminary Analysis - Lunar Far Side Radio Communications</a>
                     </h3>
                     Publication written as a final assignment of course "Space Exploration and Rocket Science",

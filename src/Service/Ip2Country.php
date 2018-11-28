@@ -14,10 +14,10 @@ class Ip2Country
 
     public function find(string $ip): ?string
     {
-        $query = "
+        $query = '
             SELECT country FROM ip_country WHERE         
             (INET_ATON(:ip) BETWEEN INET_ATON(start) AND INET_ATON(end));
-        ";
+        ';
         $query = $this->native->prepare($query);
         $query->bindParam('ip', $ip);
         $query->execute();
