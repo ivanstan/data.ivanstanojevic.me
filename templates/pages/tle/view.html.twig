@@ -1,4 +1,4 @@
-{% extends 'blog/base.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block title %}{{ model.name }} | Latest two line elements{% endblock %}
 
@@ -15,6 +15,8 @@
                     {#<select type="hidden" name="tle-select" id="tle-select" data-url="{{ path('tle_collection') }}"></select>#}
 
                     {#<input class=".js-typeahead-country_v1" type="text" id="tle-select" placeholder="States of USA">#}
+
+                    <div id="tle-browser"></div>
 
                     <select id="ajax-select" class="selectpicker" data-live-search="true" data-url="{{ path('tle_collection') }}"></select>
 

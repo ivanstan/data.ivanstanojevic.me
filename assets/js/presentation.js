@@ -3,6 +3,7 @@ require('jquery.easing');
 require('bootstrap');
 require('@tehnoskarb/jquery-bxslider');
 require('../scss/presentation.scss');
+require('./menu');
 
 $('img').each(function (index, element) {
   let image = new Image();

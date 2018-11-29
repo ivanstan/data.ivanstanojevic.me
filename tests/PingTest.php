@@ -3,9 +3,22 @@
 namespace App\Tests;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\HttpFoundation\Response;
 
 class PingTest extends WebTestCase
 {
+    protected static $pages = [
+        '/',
+        '/data',
+        '/blog',
+        '/rs/blog',
+        '/api/tle/docs',
+        '/api/tle/43550',
+        '/api/tle',
+        '/firms',
+        '/airport/lybe',
+    ];
+
     /**
      * @var \Symfony\Bundle\FrameworkBundle\Client
      */
@@ -19,20 +32,12 @@ class PingTest extends WebTestCase
 
     public function testPages(): void
     {
-        $this->visit('/');
-        $this->visit('/data');
-        $this->visit('/blog');
-        $this->visit('/rs/blog');
-
-        $this->visit('/api/tle/docs');
-        $this->visit('/api/tle/43550');
-        $this->visit('/api/tle');
-
-        $this->visit('/firms');
-        $this->visit('/airport/lybe');
+        foreach (self::$pages as $page) {
+            $this->visit($page);
+        }
     }
 
-    private function visit(string $path): void
+    protected function visit(string $path): Response
     {
         $this->client->request('GET', $path);
         static::assertEquals(
@@ -40,5 +45,7 @@ class PingTest extends WebTestCase
             $this->client->getResponse()->getStatusCode(),
             \sprintf('Endpoint %s returned HTTP code different to 200', $path)
         );
+
+        return $this->client->getResponse();
     }
 }

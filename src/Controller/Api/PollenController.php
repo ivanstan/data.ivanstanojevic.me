@@ -11,9 +11,6 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class PollenController extends AbstractApiController
 {
-    /**
-     * @Route("/", name="pollen_chart")
-     */
     public function chart(PollenRepository $repository): Response
     {
         return $this->response($repository->getAggregated());

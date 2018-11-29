@@ -11,7 +11,7 @@ composer install
 yarn build
 
 npm audit
-bin/phpunit --coverage-text
+bin/phpunit --coverage-text --testsuite Test
 
 tar -czf ${ARTIFACT_NAME} -T deploy.list
 scp -r -P ${PORT} ${ARTIFACT_NAME} ${USER}@${HOST}:/${DEPLOY_PATH}/

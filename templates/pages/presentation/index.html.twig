@@ -41,21 +41,22 @@
 <!-- Navigation -->
 <nav class="navbar fixed-top" id="nav-main">
     <div class="container">
-        <div class="row" style="width: 100%;">
-            <div class="col-xl-5 offset-xl-2 col-md-9 col-8 col-0">
-                {% include 'components/menu/menu.html.twig' with {renderOpenSide: false} %}
+        <div class="row" style="flex-grow: 1;">
+            <div class="col-xl-5 offset-xl-2 col-md-9 col-8">
+                {% include 'components/menu/menu.html.twig' with {renderOpenSide: true} %}
+                {% include 'components/menu/nav-aside.html.twig' %}
             </div>
 
-            {#<div class="col-xl-3 col-md-3 col-4">#}
-                {#<ul class="nav nav-pills float-right">#}
+            <div class="col-xl-3 col-md-3 col-4">
+                <ul class="nav nav-pills float-right">
                     {#<li class="nav-item">#}
-                        {#<a class="nav-link active" href="https://ivanstanojevic.me/#intro">Blog</a>#}
+                        {#<a class="nav-link active" href="https://blog.ivanstanojevic.me/">Blog</a>#}
                     {#</li>#}
-                    {#<li class="nav-item">#}
-                        {#<a class="nav-link" href="https://ivanstanojevic.me/#about">Data</a>#}
-                    {#</li>#}
-                {#</ul>#}
-            {#</div>#}
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://data.ivanstanojevic.me/">OpenData</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </nav>
@@ -279,6 +280,7 @@
 <!-- Contact Section -->
 <section id="contact">
     <div class="vertical-align">
+        <h2 class="d-none">Contact</h2>
         <div class="container">
             <div class="row">
                 <div class="col-md-6">

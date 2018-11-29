@@ -55,7 +55,7 @@ Encore
 // uncomment if you use TypeScript
 //    .enableTypeScriptLoader()
 
-//    .enableReactPreset()
+  .enableReactPreset()
 
 // uncomment if you're having problems with a jQuery plugin
   .autoProvidejQuery()

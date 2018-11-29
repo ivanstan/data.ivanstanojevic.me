@@ -1,5 +1,3 @@
-@import "~bootstrap/scss/variables";
-
 .navbar {
   background-color: #3B4858;
 
@@ -44,26 +42,27 @@ body.fixed-nav {
   }
 }
 
-@media (min-width: 767px) {
+nav.navbar .main-menu .nav-item {
+  display: none;
+}
 
-  .navbar {
-    padding: 20px 0;
-    -webkit-transition: background .5s ease-in-out, padding .5s ease-in-out;
-    -moz-transition: background .5s ease-in-out, padding .5s ease-in-out;
-    transition: background .5s ease-in-out, padding .5s ease-in-out;
-  }
-  .top-nav-collapse {
-    padding: 10px 0;
-  }
+nav.navbar .main-menu .nav-item.aside-toggle {
+  display: block;
+}
+
+aside#nav-aside .nav-item {
+  display: block;
 }
 
 #nav-aside {
+  display: block;
   z-index: 1000;
   left: calc(-100%);
-  background: $primary;
+  background: #2c3e50;
   position: fixed;
   width: 100%;
   height: 100%;
+  top: 45px;
 
   .nav-pills {
     display: block;
@@ -77,4 +76,44 @@ body.fixed-nav {
       }
     }
   }
+}
+
+@include media-breakpoint-up(xs) {
+
+}
+
+@include media-breakpoint-up(sm) {
+  #nav-aside {
+    top: 55px;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  nav.navbar .main-menu .nav-item {
+    display: block;
+  }
+
+  nav.navbar .main-menu .nav-item.aside-toggle {
+    display: none;
+  }
+
+  .navbar {
+    padding: 20px 0;
+    -webkit-transition: background .5s ease-in-out, padding .5s ease-in-out;
+    -moz-transition: background .5s ease-in-out, padding .5s ease-in-out;
+    transition: background .5s ease-in-out, padding .5s ease-in-out;
+  }
+  .top-nav-collapse {
+    padding: 10px 0;
+  }
+
+  #nav-aside {
+    display: none;
+  }
+}
+@include media-breakpoint-up(lg) {
+
+}
+@include media-breakpoint-up(xl) {
+
 }
