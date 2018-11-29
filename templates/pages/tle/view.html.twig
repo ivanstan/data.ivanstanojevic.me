@@ -11,14 +11,8 @@
 
                 <div class="row">
 
-                    <label for="tle-select">Select</label>
-                    {#<select type="hidden" name="tle-select" id="tle-select" data-url="{{ path('tle_collection') }}"></select>#}
 
-                    {#<input class=".js-typeahead-country_v1" type="text" id="tle-select" placeholder="States of USA">#}
-
-                    <div id="tle-browser"></div>
-
-                    <select id="ajax-select" class="selectpicker" data-live-search="true" data-url="{{ path('tle_collection') }}"></select>
+                    <div id="tle-browser" data-url="{{ path('tle_collection') }}"></div>
 
                 </div>
 

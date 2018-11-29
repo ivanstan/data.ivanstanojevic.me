@@ -2,41 +2,64 @@ import React from 'react';
 import Select from 'react-select';
 import ReactDOM from 'react-dom';
 
-const options = [
-  {value: 'chocolate', label: 'Chocolate'},
-  {value: 'strawberry', label: 'Strawberry'},
-  {value: 'vanilla', label: 'Vanilla'},
-];
-
-class TleBrowser extends React.Component
+export default class TleBrowser extends React.Component
 {
-  constructor() {
+  constructor()
+  {
     super();
+
     this.state = {
-      selectedOption: null
+      selected: null,
+      options: []
     };
   }
 
-  handleChange(selectedOption) {
+  handleChange(selectedOption)
+  {
     this.setState({selectedOption});
     console.log(`Option selected:`, selectedOption);
   }
 
+  inputChange(input)
+  {
+    fetch(`${this.props.url}?search=${input}`)
+    .then(response => response.json())
+    .then((response) => {
+
+      let options = response.member.map((item) => {
+        item.label = item.name;
+        item.value = item.catalogId;
+
+        return item;
+      });
+
+      this.setState({
+        options: options,
+      });
+    });
+  }
+
   render()
   {
-    const {selectedOption} = this.state;
-
     return (
-        <Select width="100%"
-            value={selectedOption}
-            onChange={this.handleChange.bind(this)}
-            options={options}
+        <div>
+        <Select value={this.state.selected}
+                onChange={this.handleChange.bind(this)}
+                onInputChange={this.inputChange.bind(this)}
+                options={this.state.options}
+                isSearchable={true}
+                placeholder=""
+                autosize={false}
+                style={{width: '100%'}}
         />
+        </div>
     );
   }
 }
 
 let element = document.getElementById('tle-browser');
+let url = element.getAttribute('data-url');
+
 if (element) {
-  ReactDOM.render(<TleBrowser/>, element);
+  ReactDOM.render(<TleBrowser url={url}/>, element);
 }
