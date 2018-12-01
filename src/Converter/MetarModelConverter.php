@@ -18,8 +18,12 @@ class MetarModelConverter
         $this->decoder = new MetarDecoder();
     }
 
-    public function convert(Metar $metar): MetarModel
+    public function convert(?Metar $metar): MetarModel
     {
+        if ($metar === null) {
+            return null;
+        }
+
         $decoded = $this->decoder->parse($metar->getMetar());
 
         $model = new MetarModel();

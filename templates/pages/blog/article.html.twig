@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'content.html.twig' %}
 
 {% block nav %}
     {% include 'components/menu/nav-main.html.twig' with {fixed: false} %}
@@ -6,16 +6,8 @@
 {% endblock %}
 
 {% block content %}
-
-    <main class="container mt-4">
-        <div class="row">
-            <div class="col-xl-8 offset-xl-2 col-lg-12 mb-4">
-                {% block article %}{% endblock %}
-                <div id="disqus_thread"></div>
-            </div>
-        </div>
-    </main>
-
+    {% block article %}{% endblock %}
+    <div id="disqus_thread"></div>
 {% endblock %}
 
 {% block javascripts %}

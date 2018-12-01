@@ -1,0 +1,23 @@
+.metar {
+  .value-box {
+    border: 3px solid $primary;
+    padding: 10px;
+
+    span {
+      font-size: 22px;
+    }
+
+    img {
+      margin-right: 7vh;
+    }
+
+    p {
+      margin-bottom: 5px;
+    }
+  }
+}
+
+.metar.loader {
+  background-repeat: no-repeat;
+  background-position: center center;
+}

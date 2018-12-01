@@ -1,7 +1,5 @@
 import Firms from './firms';
 
-let $ = require('jquery');
-
 require('bootstrap');
 require('./menu');
 

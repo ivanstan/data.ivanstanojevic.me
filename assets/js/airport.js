@@ -1,5 +1,6 @@
 import Chart from 'chart.js';
 import moment from 'moment';
+import $ from 'jquery';
 
 let config = {
   type: 'line',
@@ -39,8 +40,7 @@ let config = {
     responsive: true,
     maintainAspectRatio: false,
     title: {
-      display: true,
-      text: 'METAR'
+      display: false
     },
     tooltips: {
       mode: 'index',
@@ -124,6 +124,7 @@ let createMeterTemperatureChart = function (canvas) {
       fetch(canvas.data('taf-url'))
         .then((taf) => taf.json())
         .then((taf) => {
+          $('.metar.loader').removeAttr('style');
           renderChart(canvas, metar, taf);
         });
     });

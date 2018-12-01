@@ -56,8 +56,7 @@ export default class TleBrowser extends React.Component {
 }
 
 let element = document.getElementById('tle-browser');
-let url = element.getAttribute('data-url');
-
 if (element) {
+  let url = element.getAttribute('data-url');
   ReactDOM.render(<TleBrowser url={url}/>, element);
 }

@@ -19,7 +19,7 @@ class TafModelConverter
         $this->decoder = new TafDecoder();
     }
 
-    public function convert(Metar $metar): TafModel
+    public function convert(Metar $metar): ?TafModel
     {
         $decoded = $this->decoder->parse($metar->getMetar());
 
@@ -28,6 +28,10 @@ class TafModelConverter
 
         /** @var ForecastPeriod $period */
         $period = $decoded->getForecastPeriod();
+
+        if ($period === null) {
+            return null;
+        }
 
         $date = $metar->getDate() or new \DateTime();
         $date->setDate($date->format('Y'), $date->format('m'), $period->getToDay());
@@ -57,7 +61,11 @@ class TafModelConverter
     {
         $result = [];
         foreach ($collection as $item) {
-            $result[] = $this->convert($item);
+            $taf = $this->convert($item);
+
+            if ($taf !== null) {
+                $result[] = $taf;
+            }
         }
 
         return $result;

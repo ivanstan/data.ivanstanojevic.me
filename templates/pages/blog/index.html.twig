@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'content.html.twig' %}
 
 {% block title %}Blog | Ivan Stanojević{% endblock %}
 
@@ -21,32 +21,26 @@
 {% endblock %}
 
 {% block content %}
-    <main class="container mb-4 mt-4" style="min-height: 600px">
-        <div class="row">
-            <div class="col-xl-8 offset-xl-2">
-                {% for article in articles %}
-                    <article>
-                        <div class="row">
-                            <div class="col-12">
-                                <a href="{{ path('app_article_canonical', {'slug': article.slug}) }}">
-                                    <h3>{{ article.title }}</h3>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <a href="{{ path('app_article_canonical', {'slug': article.slug}) }}"><img
-                                            class="mb-3 mr-3 img-fluid"
-                                            src="{{ asset(article.image) }}"
-                                            alt="{{ article.title }}"></a>
-                            </div>
-                            <div class="col-md-8">
-                                <p>{{ article.teaser }}</p>
-                            </div>
-                        </div>
-                    </article>
-                {% endfor %}
+    {% for article in articles %}
+        <article>
+            <div class="row">
+                <div class="col-12">
+                    <a href="{{ path('app_article_canonical', {'slug': article.slug}) }}">
+                        <h3>{{ article.title }}</h3>
+                    </a>
+                </div>
             </div>
-        </div>
-    </main>
+            <div class="row">
+                <div class="col-md-4">
+                    <a href="{{ path('app_article_canonical', {'slug': article.slug}) }}"><img
+                                class="mb-3 mr-3 img-fluid"
+                                src="{{ asset(article.image) }}"
+                                alt="{{ article.title }}"></a>
+                </div>
+                <div class="col-md-8">
+                    <p>{{ article.teaser }}</p>
+                </div>
+            </div>
+        </article>
+    {% endfor %}
 {% endblock %}
