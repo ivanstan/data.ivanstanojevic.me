@@ -55,9 +55,8 @@ class PollenRepository extends ServiceEntityRepository
             $item['location'] = (int)$item['location'];
             $item['type'] = (int)$item['type'];
             $item['concentration'] = (float)$item['concentration'];
-            unset($item['tendencyFalling']);
-            unset($item['tendencyConstant']);
-            unset($item['tendencyRising']);
+
+            unset($item['tendencyFalling'], $item['tendencyConstant'], $item['tendencyRising']);
         }
 
         return $data;

@@ -6,13 +6,11 @@
     <main class="container mb-5">
         <div class="row">
             <div class="col-12 py-5 px-2">
-                <h1>{{ model.name }}</h1>
                 <h5 class="text-muted">Latest two line element for {{ model.name }}</h5>
 
                 <div class="row">
 
-
-                    <div id="tle-browser" data-url="{{ path('tle_collection') }}"></div>
+                    <div class="w-100" id="tle-browser" data-url="{{ path('tle_collection') }}"></div>
 
                 </div>
 

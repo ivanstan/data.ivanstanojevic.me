@@ -99,7 +99,11 @@
                 "type": "string",
                 "example": "https://ivanstanojevic.me/api/tle/43630"
               },
-              "catalogId": {
+              "@type": {
+                "type": "string",
+                "example": "TleModel"
+              },
+              "satelliteId": {
                 "type": "integer",
                 "example": "43630"
               },

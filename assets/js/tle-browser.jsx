@@ -2,10 +2,8 @@ import React from 'react';
 import Select from 'react-select';
 import ReactDOM from 'react-dom';
 
-export default class TleBrowser extends React.Component
-{
-  constructor()
-  {
+export default class TleBrowser extends React.Component {
+  constructor () {
     super();
 
     this.state = {
@@ -14,45 +12,45 @@ export default class TleBrowser extends React.Component
     };
   }
 
-  handleChange(selectedOption)
-  {
-    this.setState({selectedOption});
-    console.log(`Option selected:`, selectedOption);
+  handleChange (selected) {
+    this.setState({selected: selected});
+    console.log(`Option selected:`, selected);
   }
 
-  inputChange(input)
-  {
+  inputChange (input) {
     fetch(`${this.props.url}?search=${input}`)
-    .then(response => response.json())
-    .then((response) => {
+      .then(response => response.json())
+      .then((response) => {
+        let options = response.member.map((item) => {
+          item.label = item.name;
+          item.value = item.satelliteId;
 
-      let options = response.member.map((item) => {
-        item.label = item.name;
-        item.value = item.catalogId;
+          return item;
+        });
 
-        return item;
+        this.setState({
+          options: options
+        });
       });
-
-      this.setState({
-        options: options,
-      });
-    });
   }
 
-  render()
-  {
+  render () {
+    var title = 'TLE Browser';
+    if (this.state.selected !== null) {
+      title = this.state.selected.name;
+    }
+
     return (
-        <div>
+      <div>
+        <h1>{title}</h1>
         <Select value={this.state.selected}
-                onChange={this.handleChange.bind(this)}
-                onInputChange={this.inputChange.bind(this)}
-                options={this.state.options}
-                isSearchable={true}
-                placeholder=""
-                autosize={false}
-                style={{width: '100%'}}
-        />
-        </div>
+          onChange={this.handleChange.bind(this)}
+          onInputChange={this.inputChange.bind(this)}
+          options={this.state.options}
+          isSearchable={true}
+          placeholder="Search satellites"
+          autosize={false}/>
+      </div>
     );
   }
 }

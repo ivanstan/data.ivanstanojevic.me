@@ -9,7 +9,8 @@
 {% endblock %}
 
 {% block featured %}
-    <header class="featured mb-5" style="background: url(https://res.cloudinary.com/dn9s7hvks/image/upload/v1542983565/data.webp)">
+    <header class="featured mb-5"
+            style="background: url(https://res.cloudinary.com/dn9s7hvks/image/upload/v1542983565/data.webp)">
         <div class="content" style="margin-top: 8em">
             <h2 class="mb-3">Browse catalog</h2>
         </div>
@@ -21,53 +22,48 @@
     <main class="container">
         <div class="row mb-5">
             <div class="col-md-8 offset-md-2">
-                <div class="media">
+                <div class="media mb-5">
                     <div class="media-body">
                         <h5 class="mt-0 mb-1">
                             <a href="{{ path('app_api_docs', {name: 'tle'}) }}">NORAD TLE</a>
                         </h5>
-                        Two line element set - orbital perturbation data sets published by North American Aerospace Defense Command and periodically refined so as to maintain a reasonable prediction capability on all space objects.
+                        Two line element set - orbital perturbation data sets published by North American Aerospace
+                        Defense Command and periodically refined so as to maintain a reasonable prediction capability on
+                        all space objects.
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <div class="row mb-5">
-            <div class="col-md-8 offset-md-2">
-                <div class="media">
+                <div class="media mb-5">
                     <div class="media-body">
                         <h5 class="mt-0 mb-1">
                             <a href="{{ path('app_api_docs', {name: 'metar'}) }}">METAR</a>
                         </h5>
-                        Meteorological Terminal Air Report METAR - Aviation weather report updated every 30 minutes currently available for limited number of airports.
+                        Meteorological Terminal Air Report METAR - Aviation weather report updated every 30 minutes
+                        currently available for limited number of airports.
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <div class="row mb-5">
-            <div class="col-md-8 offset-md-2">
-                <div class="media">
+                <div class="media mb-5">
                     <div class="media-body">
                         <h5 class="mt-0 mb-1">
                             <a href="https://github.com/ivanstan/apollo-data/">Apollo JSON</a>
                         </h5>
-                        Data repository contains JSON documents of data from NASA Apollo missions. Data ranges from orbital parameters to food and medicine carried to each mission. Every dataset is obtained from Apollo By Numbers and structured in JSON format.
+                        Data repository contains JSON documents of data from NASA Apollo missions. Data ranges from
+                        orbital parameters to food and medicine carried to each mission. Every dataset is obtained from
+                        Apollo By Numbers and structured in JSON format.
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <div class="row mb-5">
-            <div class="col-md-8 offset-md-2">
                 <h2 class="mb-5">Examples</h2>
+
                 <div class="media mb-5">
                     <img class="d-flex mr-3" width="60" src="{{ asset('assets/images/plane.svg') }}" alt="Airplane">
                     <div class="media-body">
                         <h5 class="mt-0 mb-1">
                             <a href="{{ path('airport_show', {icao: 'lybe'}) }}">Airport Information</a>
                         </h5>
-                        Information including METAR which is currently available for following airports in near real time.
+                        Information including METAR which is currently available for following airports in near real
+                        time.
                         <div class="row mt-2">
                             {% for airport in airports %}
                                 <div class="col-6">

@@ -18,7 +18,7 @@ class DataController extends AbstractController
     {
         $airports = $airportRepository->getCollection($metarRepository->getAirportsWithMetarData());
 
-        return $this->render('index.html.twig', [
+        return $this->render('pages/data/index.html.twig', [
             'airports' => $airports,
         ]);
     }

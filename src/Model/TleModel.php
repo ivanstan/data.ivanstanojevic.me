@@ -158,11 +158,7 @@ class TleModel
 
     public function verify(): bool
     {
-        if (self::LINE1 !== (int)$this->line1[0]) {
-            return false;
-        }
-
-        if (self::LINE2 !== (int)$this->line2[0]) {
+        if (self::LINE1 !== (int)$this->line1[0] || self::LINE2 !== (int)$this->line2[0]) {
             return false;
         }
 
