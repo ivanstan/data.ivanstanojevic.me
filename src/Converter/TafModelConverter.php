@@ -61,10 +61,8 @@ class TafModelConverter
     {
         $result = [];
         foreach ($collection as $item) {
-            $taf = $this->convert($item);
-
-            if ($taf !== null) {
-                $result[] = $taf;
+            if ($item = $this->convert($item)) {
+                $result[] = $item;
             }
         }
 

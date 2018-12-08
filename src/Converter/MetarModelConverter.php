@@ -18,7 +18,7 @@ class MetarModelConverter
         $this->decoder = new MetarDecoder();
     }
 
-    public function convert(?Metar $metar): MetarModel
+    public function convert(?Metar $metar): ?MetarModel
     {
         if ($metar === null) {
             return null;
@@ -58,7 +58,9 @@ class MetarModelConverter
     {
         $result = [];
         foreach ($collection as $item) {
-            $result[] = $this->convert($item);
+            if ($item = $this->convert($item)) {
+                $result[] = $item;
+            }
         }
 
         return $result;

@@ -13,6 +13,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DomCrawler\Crawler;
+use TafDecoder\TafDecoder;
 
 class ImportMetarCommand extends Command
 {
@@ -39,7 +40,10 @@ class ImportMetarCommand extends Command
     private $repository;
 
     /** @var MetarDecoder */
-    private $decoder;
+    private $metarDecoder;
+
+    /** @var TafDecoder */
+    private $tafDecoder;
 
     /** @var OutputInterface */
     private $output;
@@ -49,7 +53,8 @@ class ImportMetarCommand extends Command
         parent::__construct();
         $this->em = $em;
         $this->repository = $this->em->getRepository(Metar::class);
-        $this->decoder = new MetarDecoder();
+        $this->metarDecoder = new MetarDecoder();
+        $this->tafDecoder = new TafDecoder();
     }
 
     protected function configure(): void
@@ -97,11 +102,18 @@ class ImportMetarCommand extends Command
         $result = [];
 
         foreach ($nodes as $node) {
-            if (strpos($node->textContent, 'TAF') === 0) {
-                $result[] = $node->textContent;
-            } else {
-                $result[] = Metar::TYPE_METAR.' '.$node->textContent;
+            $raw = $node->textContent;
+            $type = Metar::TYPE_METAR;
+
+            if (strpos($raw, 'TAF') === 0) {
+                $raw = trim(substr($raw, 2));
+                $type = Metar::TYPE_TAF;
             }
+
+            $result[] = [
+                'raw' => $raw,
+                'type' => $type,
+            ];
         }
 
         return $result;
@@ -111,9 +123,15 @@ class ImportMetarCommand extends Command
     {
         $results = [];
         foreach ($data as $item) {
-            $metar = $this->decoder->parseNotStrict($item);
+            $object = null;
 
-            $results[] = $metar;
+            if ($item['type'] === Metar::TYPE_METAR) {
+                $object = $this->metarDecoder->parseNotStrict($item['raw']);
+            }
+
+            if ($object) {
+                $results[] = $object;
+            }
         }
 
         return $results;

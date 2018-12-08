@@ -7,20 +7,80 @@
   transform: translateX(-50%);
   position: relative;
 
+  span.line1 {
+    top: 0;
+  }
+
   @include media-breakpoint-up(xs) {
     font-size: 10px;
+
+    span {
+      height: 10px !important;
+    }
+
+    span.line2 {
+      top: 14px;
+    }
   }
   @include media-breakpoint-up(sm) {
-    font-size: 16px;
+    font-size: 14px;
+
+    span {
+      height: 14px !important;
+    }
+
+    span.line1 {
+      top: 1px;
+    }
+
+    span.line2 {
+      top: 20px;
+    }
   }
   @include media-breakpoint-up(md) {
-    font-size: 18px;
+    font-size: 16px;
+
+    span {
+      height: 16px !important;
+    }
+
+    span.line1 {
+      top: 1px;
+    }
+
+    span.line2 {
+      top: 23px;
+    }
   }
   @include media-breakpoint-up(lg) {
-    font-size: 20px;
+    font-size: 18px;
+
+    span {
+      height: 18px !important;
+    }
+
+    span.line2 {
+      top: 2px;
+    }
+
+    span.line2 {
+      top: 24px;
+    }
   }
   @include media-breakpoint-up(xl) {
-    font-size: 22px;
+    font-size: 20px;
+
+    span {
+      height: 20px;
+    }
+
+    span.line1 {
+      top: 4px;
+    }
+
+    span.line2 {
+      top: 30px;
+    }
   }
 
   span {
@@ -31,14 +91,6 @@
     cursor: pointer;
     background: $primary;
     opacity: .5;
-  }
-
-  span.line1 {
-    top: 0;
-  }
-
-  span.line2 {
-    top: 1.8rem;
   }
 
   span.catalog-number {

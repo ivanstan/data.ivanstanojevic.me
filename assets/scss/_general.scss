@@ -20,8 +20,8 @@ a.navbar-brand {
   margin: auto;
 }
 
-main {
-  min-height: calc(100vh - 452px);
+main.container {
+  min-height: calc(100vh - (2 * 3rem) - 40px);
 }
 
 header.featured {
