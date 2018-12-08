@@ -10,28 +10,28 @@
         "safran-cassiopee/php-metar-decoder": "^0.7.0",
         "safran-cassiopee/php-taf-decoder": "^0.1.0",
         "symfony/apache-pack": "^1.0",
-        "symfony/console": "*",
-        "symfony/css-selector": "*",
-        "symfony/dom-crawler": "*",
-        "symfony/finder": "*",
+        "symfony/console": "^4.2.0",
+        "symfony/css-selector": "^4.2.0",
+        "symfony/dom-crawler": "^4.2.0",
+        "symfony/finder": "^4.2.0",
         "symfony/flex": "^1.1",
-        "symfony/framework-bundle": "*",
+        "symfony/framework-bundle": "4.1.8",
         "symfony/monolog-bundle": "^3.3",
         "symfony/orm-pack": "^1.0",
-        "symfony/property-access": "4.1.*",
-        "symfony/security-bundle": "4.1.*",
-        "symfony/serializer": "*",
-        "symfony/templating": "*",
-        "symfony/translation": "4.1.*",
-        "symfony/twig-bundle": "*",
+        "symfony/property-access": "^4.1",
+        "symfony/security-bundle": "^4.1",
+        "symfony/serializer": "^4.2.0",
+        "symfony/templating": "^4.2.0",
+        "symfony/translation": "^4.1",
+        "symfony/twig-bundle": "^4.1",
         "symfony/webpack-encore-pack": "^1.0",
-        "symfony/yaml": "*"
+        "symfony/yaml": "^4.2.0"
     },
     "require-dev": {
         "rexxars/html-validator": "^2.1",
         "roave/security-advisories": "dev-master",
-        "symfony/browser-kit": "4.1.*",
-        "symfony/dotenv": "*",
+        "symfony/browser-kit": "^4.1",
+        "symfony/dotenv": "^4.2.0",
         "symfony/maker-bundle": "^1.9",
         "symfony/phpunit-bridge": "4.1.*",
         "symfony/profiler-pack": "^1.0"
@@ -87,7 +87,7 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "4.1.*"
+            "require": "4.2.*"
         }
     }
 }
