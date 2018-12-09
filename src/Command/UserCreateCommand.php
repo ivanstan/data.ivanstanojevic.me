@@ -49,6 +49,7 @@ class UserCreateCommand extends Command
         $pass = $this->encoder->encodePassword($user, $password);
         $user->setEmail($email);
         $user->setPassword($pass);
+        $user->setRoles([User::ROLE_USER]);
 
         $this->em->persist($user);
         $this->em->flush();
