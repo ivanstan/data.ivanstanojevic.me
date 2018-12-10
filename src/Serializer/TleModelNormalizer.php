@@ -25,7 +25,7 @@ class TleModelNormalizer implements NormalizerInterface
      */
     public function normalize($model, $format = null, array $context = [])
     {
-        $id = $this->router->generate('tle_record', ['id' => $model->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
+        $id = $this->router->generate('tle_record', ['id' => $model->getId()], UrlGeneratorInterface::ABSOLUTE_PATH);
 
         return [
             '@id' => $id,

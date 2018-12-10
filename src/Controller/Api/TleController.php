@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
  * @Route("/api/tle")
@@ -65,7 +66,7 @@ class TleController extends AbstractApiController
         return $this->response(
             [
                 '@context' => 'http://www.w3.org/ns/hydra/context.jsonld',
-                '@id' => $this->getCurrentUrl($request),
+                '@id' => $this->router->generate('tle_collection', [], UrlGeneratorInterface::ABSOLUTE_PATH),
                 '@type' => 'Collection',
                 'totalItems' => $collection->getTotal(),
                 'member' => $this->converter->collection($collection->getCollection()),

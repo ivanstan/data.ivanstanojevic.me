@@ -127,28 +127,28 @@ abstract class AbstractApiController extends AbstractController
             '@id' => $this->router->generate(
                 $request->attributes->get('_route'),
                 array_merge($params, ['page' => $page]),
-                UrlGeneratorInterface::ABSOLUTE_URL
+                UrlGeneratorInterface::ABSOLUTE_PATH
             ),
             '@type' => 'PartialCollectionView',
             'first' => $this->router->generate(
                 $request->attributes->get('_route'),
                 array_merge($params, ['page' => 1]),
-                UrlGeneratorInterface::ABSOLUTE_URL
+                UrlGeneratorInterface::ABSOLUTE_PATH
             ),
             'previous' => $this->router->generate(
                 $request->attributes->get('_route'),
                 array_merge($params, ['page' => $previousPage]),
-                UrlGeneratorInterface::ABSOLUTE_URL
+                UrlGeneratorInterface::ABSOLUTE_PATH
             ),
             'next' => $this->router->generate(
                 $request->attributes->get('_route'),
                 array_merge($params, ['page' => $nextPage]),
-                UrlGeneratorInterface::ABSOLUTE_URL
+                UrlGeneratorInterface::ABSOLUTE_PATH
             ),
             'last' => $this->router->generate(
                 $request->attributes->get('_route'),
                 array_merge($params, ['page' => $pages]),
-                UrlGeneratorInterface::ABSOLUTE_URL
+                UrlGeneratorInterface::ABSOLUTE_PATH
             ),
         ];
 
