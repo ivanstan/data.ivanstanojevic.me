@@ -1,6 +1,6 @@
 {% extends 'content.html.twig' %}
 
-{% block title %}Video Gallery | Ivan Stanojević{% endblock %}
+{% block title %}Video | Ivan Stanojević{% endblock %}
 {% block footer %}{% endblock %}
 {% block head %}
     {{ parent() }}
@@ -12,21 +12,8 @@
     </style>
 {% endblock %}
 {% block nav %}
-    <nav class="navbar bg-primary" id="nav-main">
-        <div class="container">
-            <div class="row" style="flex-grow: 1;">
-                <div class="col-xl-5 offset-xl-2 col-md-9 col-8">
-                    <ul class="nav nav-pills">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('video_gallery') }}">Video</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </nav>
+    {% include 'pages/archive/menu.html.twig' %}
 {% endblock %}
-
 
 {% block content %}
     <iframe width="560" height="315" src="https://www.youtube.com/embed/-fyVQaE_WdA" frameborder="0"
@@ -60,5 +47,29 @@
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
     <iframe width="560" height="315" src="https://www.youtube.com/embed/CqhzsVLQLyU" frameborder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/pEZb8YGlWv0" frameborder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/VVpH0pFVac4" frameborder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/X8_cAKW6lGI" frameborder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/brKuzRCqFS4" frameborder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/brKuzRCqFS4" frameborder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/g00ruJ0Agko" frameborder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/AFQZ3aK0Ub8" frameborder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/cf_QJQu6fuU" frameborder="0"
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 {% endblock %}

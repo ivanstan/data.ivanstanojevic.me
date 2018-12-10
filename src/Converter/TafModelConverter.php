@@ -33,7 +33,12 @@ class TafModelConverter
             return null;
         }
 
-        $date = $metar->getDate() or new \DateTime();
+        $date = $metar->getDate() || new \DateTime();
+
+        if (!$date instanceof \DateTime) {
+            return null;
+        }
+
         $date->setDate($date->format('Y'), $date->format('m'), $period->getToDay());
         $date->setTime($period->getToHour(), $date->format('i'));
 
