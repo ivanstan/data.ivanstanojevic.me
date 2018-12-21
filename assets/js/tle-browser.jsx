@@ -1,24 +1,25 @@
 import React from 'react';
 import Select from 'react-select';
 import ReactDOM from 'react-dom';
+import Tle from './tle/tle';
 
 export default class TleBrowser extends React.Component {
-  constructor () {
-    super();
+
+  constructor (props) {
+    super(props);
 
     this.state = {
       selected: null,
-      options: []
+      options: [],
+      tle: null
     };
   }
 
   handleChange (selected) {
     this.setState({selected: selected});
-    console.log(`Option selected:`, selected);
   }
 
-  componentDidMount ()
-  {
+  componentDidMount () {
     let match = window.location.pathname.match(/\/view\/([0-9]+)/);
     if (match !== null && typeof match[1] !== 'undefined') {
       let satelliteId = match[1];
@@ -27,8 +28,7 @@ export default class TleBrowser extends React.Component {
     }
   }
 
-  inputChange (input, selected = null)
-  {
+  inputChange (input, selected = null) {
     fetch(`${this.props.url}?search=${input}`)
       .then(response => response.json())
       .then((response) => {
@@ -52,7 +52,8 @@ export default class TleBrowser extends React.Component {
 
       if (newSelected !== null) {
         this.setState({
-          selected: newSelected
+          selected: newSelected,
+          tle: new Tle(newSelected)
         });
       }
       });
@@ -60,6 +61,10 @@ export default class TleBrowser extends React.Component {
 
   handleChangeText(event) {
     this.setState({value: event.target.value});
+  }
+
+  copyApiLink () {
+    navigator.clipboard.writeText(this.state.selected['@id']);
   }
 
   render () {
@@ -97,29 +102,35 @@ export default class TleBrowser extends React.Component {
         {/*<span className="line2 argument-of-perigee"></span>*/}
         {/*<span className="line2 revolution"></span>*/}
       </div>;
-//      api = <div>
-//        <label>This data is available over API</label>
-//        <input className="form-control" type="text" defaultValue={this.state.selected['@id']} onChange={this.handleChangeText}/>
-//      </div>;
+      api = <div className="alert alert-primary">
+        <label>This data is available over HTTP API</label>
+        <div className="input-group">
+          <input className="form-control" readOnly type="text" value={this.state.selected['@id']}
+                 onChange={this.handleChangeText}/>
+          {/*<div className="input-group-append">*/}
+          {/*<button className="input-group-text btn" onClick={this.copyApiLink}>Copy</button>*/}
+          {/*</div>*/}
+        </div>
+      </div>;
     }
 
     return (
       <div>
         <div className="mb-5">
-        <h1>{title}</h1>
+          <h1>{title}</h1>
           {subtitle}
         </div>
         <div className="form-group mb-5">
-        <label htmlFor="tle-select">Search Satellites</label>
-        <Select value={this.state.selected}
-          onChange={this.handleChange.bind(this)}
-          onInputChange={this.inputChange.bind(this)}
-          options={this.state.options}
-          isSearchable={true}
-          placeholder="Search satellites"
-          id="tle-select"
-          autosize={false}/>
-        {preview}
+          <label htmlFor="tle-select">Search Satellites</label>
+          <Select value={this.state.selected}
+                  onChange={this.handleChange.bind(this)}
+                  onInputChange={this.inputChange.bind(this)}
+                  options={this.state.options}
+                  isSearchable={true}
+                  placeholder="Search satellites"
+                  id="tle-select"
+                  autosize={false}/>
+          {preview}
         </div>
         {api}
       </div>

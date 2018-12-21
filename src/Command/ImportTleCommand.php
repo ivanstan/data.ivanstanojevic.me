@@ -132,6 +132,8 @@ class ImportTleCommand extends Command
             $this->flushUpdate();
         }
 
+        $this->updatePRN();
+
         $this->output->writeln(\sprintf('<info>Inserted %d TLE records to database</info>', $totalInsert));
         $this->output->writeln(\sprintf('<info>Updated %d TLE records in database</info>', $totalUpdate));
     }
@@ -184,8 +186,33 @@ class ImportTleCommand extends Command
     protected function trim(string $string): string
     {
         $string = str_replace(["/\r\n/", "/\r/", "/\n/"], '', $string);
-        $string = trim($string);
 
-        return $string;
+        return trim($string);
+    }
+
+    protected function updatePRN(): void
+    {
+        $query = $this->em->createQuery('SELECT tle FROM App\Entity\Tle tle WHERE tle.name LIKE \'%PRN%\'');
+        $result = $query->getResult();
+
+        /** @var Tle $tle */
+        foreach ($result as $tle) {
+            $tle->setPRN($this->extractPRN($tle->getName()));
+        }
+
+        $this->em->flush();
+    }
+
+    protected function extractPRN(string $name): ?int
+    {
+        preg_match_all('/PRN\s(.\d+)/i', $name, $matches);
+
+        $prn = (int)$matches[1][0] ?? 0;
+
+        if ($prn === 0) {
+            $prn = null;
+        }
+
+        return $prn;
     }
 }

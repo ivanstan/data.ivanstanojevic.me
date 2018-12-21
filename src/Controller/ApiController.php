@@ -36,7 +36,7 @@ class ApiController extends AbstractController
         switch ($name) {
             case 'tle':
                 $file['info']['title'] = 'TLE API';
-                $file['info']['version'] = '1.2.0';
+                $file['info']['version'] = '1.3.0';
                 break;
         }
 

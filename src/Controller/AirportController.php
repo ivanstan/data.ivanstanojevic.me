@@ -13,6 +13,14 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class AirportController extends AbstractController
 {
+    /** @var string */
+    private $apiKey;
+
+    public function __construct($mapsApiKey)
+    {
+        $this->apiKey = $mapsApiKey;
+    }
+
     /**
      * @Route("/airport/{icao}", name="airport_show")
      */
@@ -31,6 +39,10 @@ class AirportController extends AbstractController
             $metar = null;
         }
 
-        return $this->render('pages/airport/view.html.twig', ['airport' => $airport, 'metar' => $metar]);
+        return $this->render('pages/airport/view.html.twig', [
+            'airport' => $airport,
+            'metar' => $metar,
+            'api_key' => $this->apiKey,
+        ]);
     }
 }

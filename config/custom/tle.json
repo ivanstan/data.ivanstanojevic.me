@@ -43,6 +43,15 @@
           "$ref": "#/components/parameters/search"
         },
         {
+          "name": "prn",
+          "in": "query",
+          "description": "Filter by pseudo-random noise.",
+          "schema": {
+            "type": "number",
+            "default": "null"
+          }
+        },
+        {
           "name": "sort",
           "in": "query",
           "description": "Sort field",

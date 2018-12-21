@@ -20,6 +20,8 @@ class TleController extends AbstractApiController
 
     protected const PAGE_SIZE = 20;
 
+    protected const PRN_FILTER = 'prn';
+
     /** @var TleModelConverter */
     private $converter;
 
@@ -51,6 +53,7 @@ class TleController extends AbstractApiController
     public function collection(Request $request, TleRepository $repository): Response
     {
         $search = $request->get(self::SEARCH_PARAM);
+        $PRN = $request->get(self::PRN_FILTER);
         $sort = $this->getSort($request, TleRepository::SORT_NAME, TleRepository::$sort);
         $sortDir = $this->getSortDirection($request, self::SORT_ASC);
         $pageSize = min($this->getPageSize($request, self::PAGE_SIZE), self::MAX_PAGE_SIZE);
@@ -62,6 +65,10 @@ class TleController extends AbstractApiController
             $pageSize,
             $this->getPageOffset($this->getPage($request), $pageSize)
         );
+
+        if ($PRN !== null) {
+            $collection = $repository->getByPRN($PRN);
+        }
 
         return $this->response(
             [

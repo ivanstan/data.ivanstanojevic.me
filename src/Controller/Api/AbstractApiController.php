@@ -168,7 +168,10 @@ abstract class AbstractApiController extends AbstractController
         return new Response(
             $this->serializer->serialize($response, 'json'),
             Response::HTTP_OK,
-            ['Content-type' => 'application/json']
+            [
+                'Content-type' => 'application/json',
+                'Access-Control-Allow-Origin' => '*',
+            ]
         );
     }
 

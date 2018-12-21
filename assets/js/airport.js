@@ -1,6 +1,7 @@
 import Chart from 'chart.js';
 import moment from 'moment';
 import $ from 'jquery';
+import AbstractMap from './abstract-map';
 
 let config = {
   type: 'line',
@@ -128,6 +129,28 @@ let createMeterTemperatureChart = function (canvas) {
           renderChart(canvas, metar, taf);
         });
     });
+
+  let map = new Map();
+  map.render($('#airport-map'));
 };
+
+class Map extends AbstractMap
+{
+  render (element) {
+    let latitude = element.data('latitude');
+    let longitude = element.data('longitude');
+
+    this.map = new google.maps.Map(document.getElementById('airport-map'), {
+      center: {lat: latitude, lng: longitude},
+      styles: this.style,
+      zoom: 10
+    });
+
+    new google.maps.Marker({
+      map: this.map,
+      position: {lat: latitude, lng: longitude}
+    });
+  }
+}
 
 export {createMeterTemperatureChart};

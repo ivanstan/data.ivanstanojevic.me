@@ -28,6 +28,14 @@ class ArchiveController extends AbstractController
     }
 
     /**
+     * @Route("/photos", name="archive_photo")
+     */
+    public function photo(): Response
+    {
+        return $this->render('pages/archive/photo.html.twig');
+    }
+
+    /**
      * @Route("/documents", name="archive_document")
      */
     public function document(): Response

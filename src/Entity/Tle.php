@@ -32,6 +32,13 @@ class Tle
     private $satelliteId;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="PRN", type="integer", nullable=true)
+     */
+    private $prn;
+
+    /**
      * @ORM\PrePersist()
      * @ORM\PreUpdate()
      */
@@ -58,5 +65,15 @@ class Tle
     public function setSatelliteId(int $satelliteId): void
     {
         $this->satelliteId = $satelliteId;
+    }
+
+    public function getPRN(): ?int
+    {
+        return $this->prn;
+    }
+
+    public function setPRN(?int $prn): void
+    {
+        $this->prn = $prn;
     }
 }

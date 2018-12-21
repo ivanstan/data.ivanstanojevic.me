@@ -69,4 +69,26 @@ class TleRepository extends ServiceEntityRepository
 
         return $collection;
     }
+
+    /**
+     * @return Tle[]|Collection
+     */
+    public function getByPRN(int $prn)
+    {
+        $builder = $this->createQueryBuilder('tle');
+
+        $builder
+            ->where('tle.prn = :prn')
+            ->setParameter('prn', $prn);
+
+        // get total
+        $total = \count($builder->getQuery()->getResult());
+
+        $collection = new PaginationCollection();
+
+        $collection->setCollection($builder->getQuery()->getResult());
+        $collection->setTotal($total);
+
+        return $collection;
+    }
 }
