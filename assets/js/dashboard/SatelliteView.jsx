@@ -31,8 +31,6 @@ export default class SatelliteView extends React.Component {
 
       console.log(satRec);
 
-      let orbitalPerios = 1440.0/Number(orbital_elements["mean_motion"])
-
       satellites[tle.satelliteId] = {
         tle: tle,
         satRec: satRec
