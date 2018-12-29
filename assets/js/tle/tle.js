@@ -1,5 +1,4 @@
-export default class Tle
-{
+export default class Tle {
   constructor (tleModel) {
     this.name = tleModel.name;
     this.line1 = tleModel.line1;

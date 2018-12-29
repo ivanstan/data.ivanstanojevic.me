@@ -20,6 +20,7 @@ Encore
 
   .addEntry('app', './assets/js/app.js')
   .addEntry('presentation', './assets/js/presentation.js')
+  .addEntry('dashboard', './assets/js/dashboard/main.js')
 
 /*
      * FEATURE CONFIG

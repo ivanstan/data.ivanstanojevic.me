@@ -134,8 +134,7 @@ let createMeterTemperatureChart = function (canvas) {
   map.render($('#airport-map'));
 };
 
-class Map extends AbstractMap
-{
+class Map extends AbstractMap {
   render (element) {
     let latitude = element.data('latitude');
     let longitude = element.data('longitude');

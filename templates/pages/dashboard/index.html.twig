@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Satellite view{% endblock %}
+
+{% block nav %}{% endblock %}
+
+{% block main %}
+    <div data-tle-api="{{ path('tle_collection') }}" id="satellite-view"></div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="//maps.googleapis.com/maps/api/js?key={{ api_key }}"></script>
+    <script src="{{ asset('assets/build/dashboard.js') }}"></script>
+{% endblock %}
+
+{% block footer %}{% endblock %}
