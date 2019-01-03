@@ -32,7 +32,8 @@
     "regenerator-runtime": "^0.13.1",
     "sass-loader": "^7.1.0",
     "satellite.js": "^3.0.0",
-    "webpack-notifier": "^1.6.0"
+    "webpack-notifier": "^1.6.0",
+    "tle.js": "./assets/js/tle"
   },
   "private": true,
   "scripts": {

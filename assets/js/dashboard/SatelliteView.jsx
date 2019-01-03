@@ -1,7 +1,9 @@
 import React from 'react';
 import SatelliteSelect from './SatelliteSelect';
 import MapView from './MapView';
-import {eciToGeodetic, propagate, twoline2satrec, gstime} from 'satellite.js';
+import {Tle} from 'tle.js';
+import Color from './Color';
+import Propagator from './Propagator';
 
 const interval = 1000;
 
@@ -11,38 +13,45 @@ export default class SatelliteView extends React.Component {
     super(props);
 
     let satellites = JSON.parse(localStorage.getItem('satellites')) || [];
+    satellites.map(satellite => {
+      satellite.tle = new Tle(satellite.tle);
+    });
 
-    this.state = {
-      selected: satellites,
-      satellites: this.setupSatellites(satellites),
-      date: new Date(),
-      increase: 1000,
-      orbits: 2
-    };
+    this.color = new Color();
+
+    this.state = {};
+    this.date = new Date();
+    this.state.selected = satellites;
+    this.state.orbits = 2;
+    this.state.satellites = this.setupSatellites(satellites);
+    this.state.increase = 1000;
 
     this.interval = setInterval(this.onInterval.bind(this), interval);
   }
 
-  setupSatellites (value) {
-    let satellites = [];
-
-    value.map((tle) => {
-      let satRec = twoline2satrec(tle.line1, tle.line2);
-
-      console.log(satRec);
-
-      satellites[tle.satelliteId] = {
-        tle: tle,
-        satRec: satRec
-      };
+  setupSatellites (satellites) {
+    return satellites.map(satellite => {
+      return this.setupSatellite(satellite);
     });
+  }
 
-    return satellites;
+  setupSatellite (satellite) {
+    satellite.sgp4 = Propagator.getSGP4(satellite);
+    satellite.tracks = Propagator.precalculate(satellite.sgp4, satellite, this.date, this.state.orbits);
+    satellite.color = this.color.new();
+
+    return satellite;
   }
 
   onSatelliteChange (value) {
+    let satellites = [];
+
+    value.map((satellite) => {
+      satellites[satellite.tle.satelliteId] = this.setupSatellite(satellite);
+    });
+
     this.setState({
-      satellites: this.setupSatellites(value),
+      satellites: satellites,
       selected: value
     });
 
@@ -50,21 +59,12 @@ export default class SatelliteView extends React.Component {
   }
 
   onInterval () {
-    this.setState({
-      date: new Date(this.state.date.getUTCMilliseconds() + this.state.increase)
-    });
+    this.date = new Date(this.date.getUTCMilliseconds() + this.state.increase);
 
     Object.keys(this.state.satellites).map((id) => {
       let satellite = this.state.satellites[id];
 
-      let eci = propagate(satellite.satRec, this.state.date);
-
-      let gmst = gstime(new Date());
-      let geodetic = eciToGeodetic(eci.position, gmst);
-
-//      console.log(geodetic, gmst);
-
-//      this.mapUpdate(satellite.tle, geodetic);
+      this.mapUpdate(satellite.tle, satellite.sgp4.latlng(this.date));
     });
   }
 
@@ -76,6 +76,12 @@ export default class SatelliteView extends React.Component {
     clearInterval(this.interval);
   }
 
+  eachSatellite (func) {
+    return this.state.satellites.map(satellite => {
+      return func(satellite);
+    });
+  }
+
   render () {
     return <React.Fragment>
       <nav className="navbar bg-primary" id="nav-main">
@@ -85,7 +91,8 @@ export default class SatelliteView extends React.Component {
           </div>
         </div>
       </nav>
-      <MapView setUpdate={update => this.mapUpdate = update}/>
+      <MapView setUpdate={update => this.mapUpdate = update}
+               satellites={this.state.satellites}/>
     </React.Fragment>;
   }
 }

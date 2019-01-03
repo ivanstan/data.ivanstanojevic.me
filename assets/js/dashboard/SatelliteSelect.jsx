@@ -1,10 +1,13 @@
 import React from 'react';
 import Select from 'react-select';
+import TleService from 'tle.js';
 
 export default class SatelliteSelect extends React.Component {
 
   constructor (props) {
     super(props);
+
+    this.tle = new TleService();
 
     this.state = {
       selected: props.value,
@@ -25,18 +28,20 @@ export default class SatelliteSelect extends React.Component {
   }
 
   inputChange (input) {
-    fetch(`${this.props.url}?search=${input}`).then(response => response.json()).then((response) => {
-      let options = response.member.map((item) => {
-        item.label = item.name;
-        item.value = item.satelliteId;
+    this.tle.search(input).then((data) => {
 
-        return item;
+      let options = data.map((tle) => {
+        return {
+          tle: tle,
+          label: tle.name,
+          value: tle.satelliteId
+        };
       });
 
       this.setState({
-        options: this.state.options.concat(options)
-      })
-    })
+        options: options
+      });
+    });
   }
 
   render () {

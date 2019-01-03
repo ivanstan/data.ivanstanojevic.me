@@ -1,3 +1,5 @@
+export const primary = '#2C3E4E';
+
 export const style = [
   {
     'featureType': 'all',
@@ -7,7 +9,7 @@ export const style = [
         'saturation': 36
       },
       {
-        'color': '#2C3E4E'
+        'color': primary
       },
       {
         'lightness': 38
@@ -22,7 +24,7 @@ export const style = [
         'visibility': 'on'
       },
       {
-        'color': '#2C3E4E'
+        'color': primary
       },
       {
         'lightness': 13
@@ -43,7 +45,7 @@ export const style = [
     'elementType': 'geometry.fill',
     'stylers': [
       {
-        'color': '#2C3E4E'
+        'color': primary
       },
       {
         'lightness': 17
@@ -55,7 +57,7 @@ export const style = [
     'elementType': 'geometry.stroke',
     'stylers': [
       {
-        'color': '#2C3E4E'
+        'color': primary
       },
       {
         'lightness': 14
@@ -70,7 +72,7 @@ export const style = [
     'elementType': 'geometry',
     'stylers': [
       {
-        'color': '#2C3E4E'
+        'color': primary
       },
       {
         'lightness': 18
@@ -82,7 +84,7 @@ export const style = [
     'elementType': 'geometry',
     'stylers': [
       {
-        'color': '#2C3E4E'
+        'color': primary
       },
       {
         'lightness': 15
@@ -94,7 +96,7 @@ export const style = [
     'elementType': 'geometry.fill',
     'stylers': [
       {
-        'color': '#2C3E4E'
+        'color': primary
       },
       {
         'lightness': 14
@@ -106,7 +108,7 @@ export const style = [
     'elementType': 'geometry.stroke',
     'stylers': [
       {
-        'color': '#2C3E4E'
+        'color': primary
       },
       {
         'lightness': 26
@@ -121,7 +123,7 @@ export const style = [
     'elementType': 'geometry',
     'stylers': [
       {
-        'color': '#2C3E4E'
+        'color': primary
       },
       {
         'lightness': 14
@@ -133,7 +135,7 @@ export const style = [
     'elementType': 'geometry',
     'stylers': [
       {
-        'color': '#2C3E4E'
+        'color': primary
       },
       {
         'lightness': 13
@@ -145,7 +147,7 @@ export const style = [
     'elementType': 'geometry',
     'stylers': [
       {
-        'color': '#2C3E4E'
+        'color': primary
       },
       {
         'lightness': 16
@@ -157,7 +159,7 @@ export const style = [
     'elementType': 'geometry',
     'stylers': [
       {
-        'color': '#2C3E4E'
+        'color': primary
       },
       {
         'lightness': 12

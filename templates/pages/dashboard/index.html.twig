@@ -10,6 +10,7 @@
 
 {% block javascripts %}
     {{ parent() }}
+    <script src="{{ asset('assets/js/libs/orb.js/build/orb.v2.js') }}"></script>
     <script src="//maps.googleapis.com/maps/api/js?key={{ api_key }}"></script>
     <script src="{{ asset('assets/build/dashboard.js') }}"></script>
 {% endblock %}
