@@ -10,7 +10,7 @@ export default class SatelliteSelect extends React.Component {
     this.tle = new TleService();
 
     this.state = {
-      selected: props.value,
+      value: props.value,
       options: []
     }
   }
@@ -18,13 +18,19 @@ export default class SatelliteSelect extends React.Component {
   componentDidMount () {
     this.inputChange('');
     this.setState({
-      selected: this.props.selected
+      value: this.props.value
     });
   }
 
-  handleChange (selected) {
-    this.setState({selected: selected});
-    this.props.onChange(selected);
+  componentWillReceiveProps (nextProps, nextContext) {
+    this.setState({
+      value: nextProps.value
+    });
+  }
+
+  handleChange (value) {
+    this.setState({value: value});
+    this.props.onChange(value);
   }
 
   inputChange (input) {
@@ -45,7 +51,7 @@ export default class SatelliteSelect extends React.Component {
   }
 
   render () {
-    return <Select value={this.state.selected}
+    return <Select value={this.state.value}
                    onChange={this.handleChange.bind(this)}
                    onInputChange={this.inputChange.bind(this)}
                    options={this.state.options}

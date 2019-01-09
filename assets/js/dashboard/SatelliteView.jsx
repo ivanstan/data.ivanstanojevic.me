@@ -1,32 +1,38 @@
 import React from 'react';
 import SatelliteSelect from './SatelliteSelect';
 import MapView from './MapView';
-import {Tle} from 'tle.js';
+import TleService, {Tle} from 'tle.js';
 import Color from './Color';
 import Propagator from './Propagator';
 
 const interval = 1000;
+const ISS_SATELLITE_ID = 25544;
 
 export default class SatelliteView extends React.Component {
 
   constructor (props) {
     super(props);
 
-    let satellites = JSON.parse(localStorage.getItem('satellites')) || [];
-    satellites.map(satellite => {
-      satellite.tle = new Tle(satellite.tle);
-    });
+    let satellites = this.getTrackedSatellites();
 
     this.color = new Color();
+    this.date = new Date();
 
     this.state = {};
-    this.date = new Date();
     this.state.selected = satellites;
     this.state.orbits = 2;
     this.state.satellites = this.setupSatellites(satellites);
     this.state.increase = 1000;
 
     this.interval = setInterval(this.onInterval.bind(this), interval);
+  }
+
+  componentDidMount () {
+    this.onInterval();
+  }
+
+  componentWillUnmount () {
+    clearInterval(this.interval);
   }
 
   setupSatellites (satellites) {
@@ -46,6 +52,8 @@ export default class SatelliteView extends React.Component {
   onSatelliteChange (value) {
     let satellites = [];
 
+//    localStorage.setItem('satellites', JSON.stringify(this.state.selected));
+
     value.map((satellite) => {
       satellites[satellite.tle.satelliteId] = this.setupSatellite(satellite);
     });
@@ -54,32 +62,45 @@ export default class SatelliteView extends React.Component {
       satellites: satellites,
       selected: value
     });
-
-    localStorage.setItem('satellites', JSON.stringify(value));
   }
 
   onInterval () {
-    this.date = new Date(this.date.getUTCMilliseconds() + this.state.increase);
+//    this.date = new Date(this.date.getMilliseconds() + this.state.increase);
 
     Object.keys(this.state.satellites).map((id) => {
       let satellite = this.state.satellites[id];
 
-      this.mapUpdate(satellite.tle, satellite.sgp4.latlng(this.date));
+      this.mapUpdate(satellite.tle, satellite.sgp4.latlng(new Date()));
     });
   }
 
-  componentDidMount () {
-    this.onInterval();
-  }
 
-  componentWillUnmount () {
-    clearInterval(this.interval);
-  }
+  getTrackedSatellites () {
+    let satellites = JSON.parse(localStorage.getItem('satellites')) || [];
 
-  eachSatellite (func) {
-    return this.state.satellites.map(satellite => {
-      return func(satellite);
+    if (satellites.length === 0) {
+      let service = new TleService();
+
+      service.get(ISS_SATELLITE_ID).then(satellite => {
+        let selected = {
+          tle: satellite,
+          label: satellite.name,
+          value: satellite.satelliteId
+        };
+
+        this.setState({
+          selected: [selected]
+        });
+
+        this.onSatelliteChange([selected]);
+      });
+    }
+
+    satellites.map((satellite, index) => {
+      satellites[index].tle = new Tle(satellites[index].tle);
     });
+
+    return satellites;
   }
 
   render () {

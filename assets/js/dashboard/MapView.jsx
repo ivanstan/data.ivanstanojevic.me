@@ -99,20 +99,23 @@ export default class MapView extends React.Component {
     }
 
     // setup tracks
-    let tracks = [];
-    Object.keys(satellite.tracks).map(time => {
-      tracks.push(new google.maps.LatLng(satellite.tracks[time].latitude, satellite.tracks[time].longitude));
-    });
 
-    this.satellites[satelliteId].tracks = new google.maps.Polyline({
-      path: tracks,
-      geodesic: true,
-      strokeColor: satellite.color,
-      strokeOpacity: 0.5,
-      strokeWeight: 2
-    });
+    if (satellite.hasOwnProperty('tracks')) {
+      let tracks = [];
+      Object.keys(satellite.tracks).map(time => {
+        tracks.push(new google.maps.LatLng(satellite.tracks[time].latitude, satellite.tracks[time].longitude));
+      });
 
-    this.satellites[satelliteId].tracks.setMap(this.map);
+      this.satellites[satelliteId].tracks = new google.maps.Polyline({
+        path: tracks,
+        geodesic: true,
+        strokeColor: satellite.color,
+        strokeOpacity: 0.5,
+        strokeWeight: 2
+      });
+
+      this.satellites[satelliteId].tracks.setMap(this.map);
+    }
   }
 
   removeSatellite (satellite) {

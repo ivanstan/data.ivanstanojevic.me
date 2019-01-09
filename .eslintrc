@@ -20,6 +20,9 @@
     "fetch": true,
     "google": true,
     "InfoBox": true,
-    "Image": true
+    "Image": true,
+    "React": true,
+    "SatelliteView": true,
+    "Orb": true
   }
 }
