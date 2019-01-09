@@ -21,8 +21,6 @@
     "google": true,
     "InfoBox": true,
     "Image": true,
-    "React": true,
-    "SatelliteView": true,
     "Orb": true
   }
 }

@@ -1,5 +1,4 @@
 export default class Propagator {
-
   static getSGP4 (satellite) {
     return new Orb.SGP4({
       first_line: satellite.tle.line1,
@@ -8,14 +7,14 @@ export default class Propagator {
   }
 
   static precalculate (sgp4, satellite, date, orbits) {
-    let period = satellite.tle.orbitalPeriod * 1000, // ms
-      timestamp = date.getTime(),
-      ΔT = 3000,
-      TO = Math.floor(period),
-      half = Math.floor(TO / 2 * orbits),
-      T1 = timestamp - half,
-      T2 = timestamp + half,
-      result = {};
+    let period = satellite.tle.orbitalPeriod * 1000; // ms
+    let timestamp = date.getTime();
+    let ΔT = 3000;
+    let TO = Math.floor(period);
+    let half = Math.floor(TO / 2 * orbits);
+    let T1 = timestamp - half;
+    let T2 = timestamp + half;
+    let result = {};
 
     while (T1 < T2) {
       let time = new Date(T1);

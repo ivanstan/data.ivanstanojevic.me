@@ -1,5 +1,4 @@
 export default class Color {
-
   // http://paletton.com/
   // http://www.hexcolortool.com/
   // http://www.color-hex.com/
