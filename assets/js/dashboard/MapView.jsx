@@ -86,9 +86,25 @@ export default class MapView extends React.Component {
         map: this.map,
         position: position,
         title: tle.name,
-        draggable: false
+        draggable: false,
+        icon: this.getMarkerImage(this.satellites[tle.satelliteId])
+      });
+
+      google.maps.event.addListener(this.satellites[tle.satelliteId].marker, 'click', () => {
+//        this._propagator.setContext(marker);
       });
     }
+  }
+
+  getMarkerImage (satellite) {
+    let color = satellite.color.substring(1, satellite.color.length);
+
+    return new google.maps.MarkerImage(
+        'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|' + color,
+        new google.maps.Size(21, 34),
+        new google.maps.Point(0, 0),
+        new google.maps.Point(10, 34)
+    );
   }
 
   addSatellite (satellite) {
@@ -115,6 +131,8 @@ export default class MapView extends React.Component {
       });
 
       this.satellites[satelliteId].tracks.setMap(this.map);
+
+      this.satellites[satelliteId].color = satellite.color;
     }
   }
 
