@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit User | {{ parent() }}{% endblock %}
+
+{% block body %}
+    {% include 'components/navigation.html.twig' %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h3 class="mt-3">Create user</h3>
+                {{ include('user/_form.html.twig') }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

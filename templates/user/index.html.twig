@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Users | {{ parent() }}{% endblock %}
+
+{% block body %}
+    {% include 'components/navigation.html.twig' %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <a class="btn btn-primary my-3" href="{{ path('user_new') }}">
+                    <i class="fa fa-plus" aria-hidden="true"></i> Create user
+                </a>
+
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Email</th>
+                        <th>Roles</th>
+                        <th>Active</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for user in users %}
+                        <tr>
+                            <td>{{ user.email }}</td>
+                            <td>
+                                {% for role in user.roles %}
+                                    <span class="badge badge-secondary">{{ role|replace({'ROLE_': '' }) }}</span>
+                                {% endfor %}
+                            </td>
+                            <td>{% if user.active %}
+                                    <span class="badge badge-success">Yes</span>
+                                {% else %}
+                                    <span class="badge badge-danger">No</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <a class="btn btn-primary" href="{{ path('user_edit', {'id': user.id}) }}">
+                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                </a>
+                                {{ include('user/_delete_form.html.twig', {'user': user}) }}
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="5">no records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
