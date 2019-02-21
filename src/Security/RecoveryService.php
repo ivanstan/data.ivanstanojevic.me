@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Service\MailerService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class RecoveryService
 {
@@ -17,14 +18,18 @@ class RecoveryService
 
     private $securityService;
 
+    private $translator;
+
     public function __construct(
         MailerService $mailer,
         EntityManagerInterface $em,
-        SecurityService $securityService
+        SecurityService $securityService,
+        TranslatorInterface $translator
     ) {
         $this->em = $em;
         $this->mailer = $mailer;
         $this->securityService = $securityService;
+        $this->translator = $translator;
     }
 
     /**
@@ -32,7 +37,7 @@ class RecoveryService
      */
     public function invite(User $user): int
     {
-        $subject = 'Account Created';
+        $subject = $this->translator->trans('Account Created');
         $body = $this->mailer->getTwig()->render('email/invite.html.twig', [
             'url' => $this->generateLoginUrl($user),
             'subject' => $subject
@@ -46,7 +51,7 @@ class RecoveryService
      */
     public function request(User $user): int
     {
-        $subject = 'Password Recovery';
+        $subject = $this->translator->trans('Password Recovery');
         $body = $this->mailer->getTwig()->render('email/recovery.html.twig', [
             'url' => $this->generateLoginUrl($user),
             'subject' => $subject

@@ -1,16 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Recover password | {{ parent() }}{% endblock %}
+{% block title %}{% trans %}Recover password{% endtrans %} | {{ parent() }}{% endblock %}
 
 {% block body %}
     <div class="container">
         <div class="row">
             <div class="col-lg-6 mx-auto">
-                <h3>Recover password</h3>
+                <h3>{% trans %}Recover password{% endtrans %}</h3>
                 {{ include('components/messages.html.twig') }}
                 {{ form_start(form) }}
                 {{ form_widget(form) }}
-                <button class="btn btn-primary">Submit</button>
+                <button class="btn btn-primary">{% trans %}Submit{% endtrans %}</button>
                 {{ form_end(form) }}
             </div>
         </div>

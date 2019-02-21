@@ -80,7 +80,7 @@
     </tr>
     <tr class="footer">
         <td>
-            <p>Copyright © {{ 'now'|date('Y') }} {{ app_name }}. All right reserved.</p>
+            <p>{{ "Copyright © %app_name% %now%. All right reserved."|trans({'%app_name%': app_name, "%now%": 'now'|date('Y')}) }}</p>
         </td>
     </tr>
 </table>

@@ -18,6 +18,7 @@ use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 {
@@ -27,17 +28,21 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     private $router;
     private $csrfTokenManager;
     private $passwordEncoder;
+    /** @var TranslatorInterface */
+    private $translator;
 
     public function __construct(
         EntityManagerInterface $entityManager,
         RouterInterface $router,
         CsrfTokenManagerInterface $csrfTokenManager,
-        UserPasswordEncoderInterface $passwordEncoder
+        UserPasswordEncoderInterface $passwordEncoder,
+        TranslatorInterface $translator
     ) {
         $this->entityManager = $entityManager;
         $this->router = $router;
         $this->csrfTokenManager = $csrfTokenManager;
         $this->passwordEncoder = $passwordEncoder;
+        $this->translator = $translator;
     }
 
     public function supports(Request $request): bool
@@ -64,14 +69,14 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     {
         $token = new CsrfToken('authenticate', $credentials['csrf_token']);
         if (!$this->csrfTokenManager->isTokenValid($token)) {
-            throw new InvalidCsrfTokenException('Invalid CSRF token.');
+            throw new InvalidCsrfTokenException($this->translator->trans('Invalid CSRF token.'));
         }
 
         $user = $this->entityManager->getRepository(User::class)->findByEmail($credentials['email']);
 
         if (!$user) {
             // fail authentication with a custom error
-            throw new CustomUserMessageAuthenticationException('Invalid credentials.');
+            throw new CustomUserMessageAuthenticationException($this->translator->trans('Invalid credentials.'));
         }
 
         return $user;

@@ -2,10 +2,16 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Page error</h1>
-
-    <p>
-        The requested page couldn't be located. Checkout for any URL
-        misspelling or <a href="{{ path('app_index') }}">return to the homepage</a>.
-    </p>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                {% block content %}
+                    <h1 class="my-3">{% trans %}Page error{% endtrans %}</h1>
+                    <p>
+                        {{ 'The requested page couldn\'t be located. Checkout for any URL misspelling or <a href="%path%">return to the homepage</a>.'|trans({'%path%': path('app_index')})|raw }}
+                    </p>
+                {% endblock %}
+            </div>
+        </div>
+    </div>
 {% endblock %}

@@ -4,13 +4,13 @@
     <a class="navbar-brand" href="#">{{ app_name }}</a>
     <ul class="navbar-nav mr-auto">
         <li class="nav-item {% if route == 'app_index' %}active{% endif %}">
-            <a class="nav-link" href="{{ path('app_index') }}">Index
+            <a class="nav-link" href="{{ path('app_index') }}">{{ 'Index'|trans }}
                 {% if route == 'app_index' %}<span class="sr-only">(current)</span>{% endif %}
             </a>
         </li>
         {% if is_granted('ROLE_ADMIN') %}
             <li class="nav-item {% if route == 'user_index' %}active{% endif %}">
-                <a class="nav-link" href="{{ path('user_index') }}">Users
+                <a class="nav-link" href="{{ path('user_index') }}">{% trans %}Users{% endtrans %}
                     {% if route == 'user_index' %}<span class="sr-only">(current)</span>{% endif %}
                 </a>
             </li>
@@ -26,15 +26,17 @@
                     <i class="fa fa-user"></i> {{ app.user.email }}
                 </button>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{ path('security_settings') }}">Settings</a>
+                    <a class="dropdown-item" href="{{ path('security_settings') }}">{% trans %}Settings{% endtrans %}</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{{ path('app_logout') }}">Logout</a>
+                    <a class="dropdown-item" href="{{ path('app_logout') }}">{% trans %}Logout{% endtrans %}</a>
                 </div>
             </li>
         {% endif %}
 
         {% if not app.user %}
-            <li class="nav-item dropdown"><a class="nav-link" href="{{ path('security_login') }}">Login</a></li>
+            <li class="nav-item dropdown">
+                <a class="nav-link" href="{{ path('security_login') }}">{% trans %}Login{% endtrans %}</a>
+            </li>
         {% endif %}
     </ul>
 </nav>

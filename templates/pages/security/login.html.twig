@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Login | {{ parent() }}{% endblock %}
+{% block title %}{% trans %}Login{% endtrans %} | {{ parent() }}{% endblock %}
 
 {% block body %}
     <div class="container">
         <div class="row">
             <div class="col-lg-6 mx-auto">
-                <h3>Login</h3>
+                <h3>{% trans %}Login{% endtrans %}</h3>
                 {% include 'pages/security/_login_form.html.twig' %}
             </div>
         </div>

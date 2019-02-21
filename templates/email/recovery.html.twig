@@ -7,13 +7,12 @@
 {% block content %}
     <tr>
         <td>
-            <p>A request to reset the password for your account has been made at {{ app_name }}.</p>
-            <p>You may now log in by clicking the button bellow.</p>
+            <p>{{ "A request to reset the password for your account has been made at %app_name%."|trans({'%app_name%': app_name}) }}</p>
+            <p>{{ "You may now log in by clicking the button bellow."|trans }}</p>
 
-            <a class="btn btn-primary" href="{{ url }}">Recover my account</a>
+            <a class="btn btn-primary" href="{{ url }}">{% trans %}Recover my account{% endtrans %}</a>
 
-            <p>This link can only be used once to log in and will lead you to a page where you can set your password. It
-                expires after one day and nothing will happen if it's not used.</p>
+            <p>{{ "This link can only be used once to log in and will lead you to a page where you can set your password. It expires after one day and nothing will happen if it's not used."|trans }}</p>
         </td>
     </tr>
 {% endblock %}

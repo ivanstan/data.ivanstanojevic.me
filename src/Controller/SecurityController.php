@@ -13,9 +13,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Contracts\Translation\TranslatorTrait;
 
 class SecurityController extends AbstractController
 {
+    use TranslatorTrait;
+
     /**
      * @Route("/login", name="security_login")
      */
@@ -41,7 +44,7 @@ class SecurityController extends AbstractController
             $user->setPassword($encoder->encodePassword($user, $user->getPassword()));
             $entityManager->flush();
 
-            $this->addFlash('success', 'You have successfully changed your password.');
+            $this->addFlash('success', $this->trans('You have successfully changed your password.'));
 
             return $this->redirectToRoute('security_settings');
         }
@@ -67,11 +70,11 @@ class SecurityController extends AbstractController
                 try {
                     $recovery->request($user);
                 } catch (\Exception $e) {
-                    $this->addFlash('danger', 'Unable to send message.');
+                    $this->addFlash('danger', $this->trans('Unable to send message.'));
                 }
             }
 
-            $this->addFlash('success', 'Recovery instructions are sent to email.');
+            $this->addFlash('success', $this->trans('Recovery instructions are sent to email.'));
 
             return $this->redirectToRoute('security_recovery');
         }
@@ -88,12 +91,12 @@ class SecurityController extends AbstractController
     public function recoverToken(string $token, RecoveryService $recovery): RedirectResponse
     {
         if ($recovery->recover($token)) {
-            $this->addFlash('success', 'Authenticated successfully. You may now change your password.');
+            $this->addFlash('success', $this->trans('Authenticated successfully. You may now change your password.'));
 
             return $this->redirectToRoute('security_settings');
         }
 
-        $this->addFlash('danger', 'Invalid access token. Please try again.');
+        $this->addFlash('danger', $this->trans('Invalid access token. Please try again.'));
 
         return $this->redirectToRoute('security_recovery');
     }

@@ -11,9 +11,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Contracts\Translation\TranslatorTrait;
 
 class UserController extends AbstractController
 {
+    use TranslatorTrait;
+
     /**
      * @Route("/users", name="user_index", methods={"GET"})
      */
@@ -43,7 +46,7 @@ class UserController extends AbstractController
                 try {
                     $recovery->invite($user);
                 } catch (\Exception $e) {
-                    $this->addFlash('danger', 'Unable to send message.');
+                    $this->addFlash('danger', $this->trans('Unable to send message.'));
                 }
             }
 

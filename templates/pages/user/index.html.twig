@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Users | {{ parent() }}{% endblock %}
+{% block title %}{% trans %}Users{% endtrans %} | {{ parent() }}{% endblock %}
 
 {% block body %}
     {% include 'components/navigation.html.twig' %}
@@ -8,16 +8,16 @@
         <div class="row">
             <div class="col-12">
                 <a class="btn btn-primary my-3" href="{{ path('user_new') }}">
-                    <i class="fa fa-plus" aria-hidden="true"></i> Create user
+                    <i class="fa fa-plus" aria-hidden="true"></i> {% trans %}Create{% endtrans %}
                 </a>
 
                 <table class="table">
                     <thead>
                     <tr>
-                        <th>Email</th>
-                        <th>Roles</th>
-                        <th>Active</th>
-                        <th>Actions</th>
+                        <th>{% trans %}Email{% endtrans %}</th>
+                        <th>{% trans %}Roles{% endtrans %}</th>
+                        <th>{% trans %}Active{% endtrans %}</th>
+                        <th>{% trans %}Actions{% endtrans %}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -26,13 +26,13 @@
                             <td>{{ user.email }}</td>
                             <td>
                                 {% for role in user.roles %}
-                                    <span class="badge badge-secondary">{{ role|replace({'ROLE_': '' }) }}</span>
+                                    <span class="badge badge-secondary">{{ role|replace({'ROLE_': '' })|capitalize|trans }}</span>
                                 {% endfor %}
                             </td>
                             <td>{% if user.active %}
-                                    <span class="badge badge-success">Yes</span>
+                                    <span class="badge badge-success">{% trans %}Yes{% endtrans %}</span>
                                 {% else %}
-                                    <span class="badge badge-danger">No</span>
+                                    <span class="badge badge-danger">{% trans %}No{% endtrans %}</span>
                                 {% endif %}
                             </td>
                             <td>
@@ -44,7 +44,7 @@
                         </tr>
                     {% else %}
                         <tr>
-                            <td colspan="5">no records found</td>
+                            <td colspan="5">{% trans %}no records found{% endtrans %}</td>
                         </tr>
                     {% endfor %}
                     </tbody>
