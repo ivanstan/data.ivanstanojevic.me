@@ -59,6 +59,10 @@ class UserType extends AbstractType
             'required' => false,
             'data' => true,
         ]);
+        $builder->add('verified', CheckboxType::class, [
+            'required' => false,
+            'data' => true,
+        ]);
 
         if (!$options['edit']) {
             $builder->add('invite', CheckboxType::class, [

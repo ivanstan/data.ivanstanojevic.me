@@ -1,0 +1,18 @@
+{% extends 'email/base.html.twig' %}
+
+{% set url = url|default('#') %}
+
+{% block title %}{{ subject|default('Email') }} | {{ parent() }}{% endblock %}
+
+{% block content %}
+    <tr>
+        <td>
+            <p>{{ "Account was created for this email at %app_name%."|trans({'%app_name%': app_name}) }}</p>
+            <p>{{ "You may now verify your account by clicking the button bellow."|trans }}</p>
+
+            <a class="btn btn-primary" href="{{ url }}">{% trans %}Verify my account{% endtrans %}</a>
+
+            <p>{{ "This link can only be used once, it expires after one day and nothing will happen if it's not used."|trans }}</p>
+        </td>
+    </tr>
+{% endblock %}

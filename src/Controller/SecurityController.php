@@ -5,7 +5,8 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\PasswordChangeType;
 use App\Form\PasswordRecoveryType;
-use App\Security\RecoveryService;
+use App\Form\RegisterType;
+use App\Security\SecurityMailerService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -55,9 +56,35 @@ class SecurityController extends AbstractController
     }
 
     /**
+     * @Route("/register", name="security_register")
+     */
+    public function register(Request $request, UserPasswordEncoderInterface $encoder, SecurityMailerService $recovery): Response
+    {
+        $user = new User();
+        $form = $this->createForm(RegisterType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $user->setPassword($encoder->encodePassword($user, $user->getPassword()));
+            $user->setActive(false);
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            $recovery->requestVerification($user);
+            $this->addFlash('success', $this->trans('Account verification email has been sent.'));
+            $this->redirectToRoute('security_login');
+        }
+
+        return $this->render('pages/security/register.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
      * @Route("/recovery", name="security_recovery")
      */
-    public function recovery(Request $request, RecoveryService $recovery): Response
+    public function recovery(Request $request, SecurityMailerService $recovery): Response
     {
         $form = $this->createForm(PasswordRecoveryType::class);
         $form->handleRequest($request);
@@ -65,13 +92,11 @@ class SecurityController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
             $user = $this->getDoctrine()->getRepository(User::class)->findOneBy(['email' => $data['email']]);
+            $user->setActive(true);
+            $user->setVerified(false);
 
             if ($user) {
-                try {
-                    $recovery->request($user);
-                } catch (\Exception $e) {
-                    $this->addFlash('danger', $this->trans('Unable to send message.'));
-                }
+                $recovery->requestRecovery($user);
             }
 
             $this->addFlash('success', $this->trans('Recovery instructions are sent to email.'));
@@ -85,10 +110,26 @@ class SecurityController extends AbstractController
     }
 
     /**
+     * @Route("/verify/{token}", name="security_verification_token")
+     */
+    public function verifyToken(string $token, SecurityMailerService $recovery): RedirectResponse
+    {
+        if ($recovery->verify($token)) {
+            $this->addFlash('success', $this->trans('Account verified successfully.'));
+
+            return $this->redirectToRoute('app_index');
+        }
+
+        $this->addFlash('danger', $this->trans('Invalid access token. Please try again.'));
+
+        return $this->redirectToRoute('security_recovery');
+    }
+
+    /**
      * @Route("/invitation/{token}", name="security_invitation_token")
      * @Route("/recover-password/{token}", name="security_recovery_token")
      */
-    public function recoverToken(string $token, RecoveryService $recovery): RedirectResponse
+    public function recoverToken(string $token, SecurityMailerService $recovery): RedirectResponse
     {
         if ($recovery->recover($token)) {
             $this->addFlash('success', $this->trans('Authenticated successfully. You may now change your password.'));

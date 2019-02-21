@@ -69,6 +69,12 @@ class User implements UserInterface
      */
     private $active = false;
 
+    /**
+     * @var bool
+     * @ORM\Column(type="boolean", options={"default" : 0})
+     */
+    private $verified = false;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -150,6 +156,16 @@ class User implements UserInterface
     public function setActive(bool $active): void
     {
         $this->active = $active;
+    }
+
+    public function isVerified(): bool
+    {
+        return $this->verified;
+    }
+
+    public function setVerified(bool $verified): void
+    {
+        $this->verified = $verified;
     }
 
     public function getSalt()

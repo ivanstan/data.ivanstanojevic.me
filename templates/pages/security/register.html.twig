@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% trans %}Register{% endtrans %} | {{ parent() }}{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 mx-auto">
+                <h3>{% trans %}Register{% endtrans %}</h3>
+                {{ include('components/messages.html.twig') }}
+                {{ form_start(form) }}
+                {{ form_widget(form) }}
+                <button class="btn btn-primary">{% trans %}Submit{% endtrans %}</button>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

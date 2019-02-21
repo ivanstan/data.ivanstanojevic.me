@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\PasswordChangeType;
 use App\Form\UserType;
-use App\Security\RecoveryService;
+use App\Security\SecurityMailerService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,7 +30,7 @@ class UserController extends AbstractController
     /**
      * @Route("/user/new", name="user_new", methods={"GET","POST"})
      */
-    public function new(Request $request, UserPasswordEncoderInterface $encoder, RecoveryService $recovery): Response
+    public function new(Request $request, UserPasswordEncoderInterface $encoder, SecurityMailerService $recovery): Response
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);

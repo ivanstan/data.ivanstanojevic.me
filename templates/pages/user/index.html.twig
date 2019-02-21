@@ -17,6 +17,7 @@
                         <th>{% trans %}Email{% endtrans %}</th>
                         <th>{% trans %}Roles{% endtrans %}</th>
                         <th>{% trans %}Active{% endtrans %}</th>
+                        <th>{% trans %}Verified{% endtrans %}</th>
                         <th>{% trans %}Last login{% endtrans %}</th>
                         <th>{% trans %}IP{% endtrans %}</th>
                         <th>{% trans %}Actions{% endtrans %}</th>
@@ -32,6 +33,12 @@
                                 {% endfor %}
                             </td>
                             <td>{% if user.active %}
+                                    <span class="badge badge-success">{% trans %}Yes{% endtrans %}</span>
+                                {% else %}
+                                    <span class="badge badge-danger">{% trans %}No{% endtrans %}</span>
+                                {% endif %}
+                            </td>
+                            <td>{% if user.verified %}
                                     <span class="badge badge-success">{% trans %}Yes{% endtrans %}</span>
                                 {% else %}
                                     <span class="badge badge-danger">{% trans %}No{% endtrans %}</span>

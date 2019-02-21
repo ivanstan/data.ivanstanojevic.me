@@ -79,6 +79,14 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
             throw new CustomUserMessageAuthenticationException($this->translator->trans('Invalid credentials.'));
         }
 
+        if (!$user->isActive()) {
+            throw new CustomUserMessageAuthenticationException($this->translator->trans('User account is blocked.'));
+        }
+
+        if (!$user->isVerified()) {
+            throw new CustomUserMessageAuthenticationException($this->translator->trans('You need to verify your account before logging in. Did you receive account verification email? Contact our customer support if you believe error occurred during your account processing.'));
+        }
+
         return $user;
     }
 

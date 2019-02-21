@@ -8,7 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-class RecoveryService
+class SecurityMailerService
 {
     private const TOKEN_LENGTH = 24;
 
@@ -49,7 +49,38 @@ class RecoveryService
     /**
      * @throws \Exception
      */
-    public function request(User $user): int
+    public function requestVerification(User $user): int
+    {
+        $subject = $this->translator->trans('Account Verification');
+        $body = $this->mailer->getTwig()->render('email/verify.html.twig', [
+            'url' => $this->generateVerificationUrl($user),
+            'subject' => $subject
+        ]);
+
+        return $this->mailer->send($subject, $body, $user->getEmail());
+    }
+
+    public function verify(string $token): bool
+    {
+        $user = $this->em->getRepository(User::class)->findOneBy(['token' => $token]);
+
+        if (!$user) {
+            return false;
+        }
+
+        $this->securityService->login($user);
+
+        $user->setToken(null);
+        $user->setVerified(true);
+        $this->em->flush();
+
+        return true;
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function requestRecovery(User $user): int
     {
         $subject = $this->translator->trans('Password Recovery');
         $body = $this->mailer->getTwig()->render('email/recovery.html.twig', [
@@ -71,9 +102,24 @@ class RecoveryService
         $this->securityService->login($user);
 
         $user->setToken(null);
+        $user->setVerified(true);
         $this->em->flush();
 
         return true;
+    }
+
+    /**
+     * @throws \Exception
+     */
+    private function generateVerificationUrl(User $user): string
+    {
+        $token = $this->generateToken();
+        $user->setToken($token);
+        $this->em->flush();
+
+        return $this->mailer->getGenerator()->generate('security_verification_token', ['token' => $token],
+            UrlGeneratorInterface::ABSOLUTE_URL
+        );
     }
 
     /**

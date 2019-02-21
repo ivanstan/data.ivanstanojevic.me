@@ -19,8 +19,7 @@ class UserRepository extends ServiceEntityRepository
     {
         $builder = $this->createQueryBuilder('u');
 
-        $builder->where('u.email = :email')->setParameter('email', $email)
-            ->andWhere('u.active = 1');
+        $builder->where('u.email = :email')->setParameter('email', $email);
 
         try {
             return $builder->getQuery()->getSingleResult();
