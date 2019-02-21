@@ -7,7 +7,7 @@ use App\Service\MailerService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-class AccountRecoveryService
+class RecoveryService
 {
     private const TOKEN_LENGTH = 24;
 
@@ -30,12 +30,15 @@ class AccountRecoveryService
     /**
      * @throws \Exception
      */
-    public function invite(User $user): int {
+    public function invite(User $user): int
+    {
+        $subject = 'Account Created';
         $body = $this->mailer->getTwig()->render('email/invite.html.twig', [
             'url' => $this->generateLoginUrl($user),
+            'subject' => $subject
         ]);
 
-        return $this->mailer->send('Account Created', $body, $user->getEmail());
+        return $this->mailer->send($subject, $body, $user->getEmail());
     }
 
     /**
@@ -43,11 +46,13 @@ class AccountRecoveryService
      */
     public function request(User $user): int
     {
+        $subject = 'Password Recovery';
         $body = $this->mailer->getTwig()->render('email/recovery.html.twig', [
             'url' => $this->generateLoginUrl($user),
+            'subject' => $subject
         ]);
 
-        return $this->mailer->send('Password Recovery', $body, $user->getEmail());
+        return $this->mailer->send($subject, $body, $user->getEmail());
     }
 
     public function recover(string $token): bool
@@ -75,7 +80,7 @@ class AccountRecoveryService
         $user->setToken($token);
         $this->em->flush();
 
-        return $this->mailer->getGenerator()->generate('security_recovery_token', ['token' => $token],
+        return $this->mailer->getGenerator()->generate('security_invitation_token', ['token' => $token],
             UrlGeneratorInterface::ABSOLUTE_URL
         );
     }

@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\PasswordChangeType;
 use App\Form\PasswordRecoveryType;
-use App\Security\AccountRecoveryService;
+use App\Security\RecoveryService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,7 +24,7 @@ class SecurityController extends AbstractController
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
+        return $this->render('pages/security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
 
     /**
@@ -46,7 +46,7 @@ class SecurityController extends AbstractController
             return $this->redirectToRoute('security_settings');
         }
 
-        return $this->render('security/settings.html.twig', [
+        return $this->render('pages/security/settings.html.twig', [
             'form' => $form->createView(),
         ]);
     }
@@ -54,7 +54,7 @@ class SecurityController extends AbstractController
     /**
      * @Route("/recovery", name="security_recovery")
      */
-    public function recovery(Request $request, AccountRecoveryService $recovery): Response
+    public function recovery(Request $request, RecoveryService $recovery): Response
     {
         $form = $this->createForm(PasswordRecoveryType::class);
         $form->handleRequest($request);
@@ -76,15 +76,16 @@ class SecurityController extends AbstractController
             return $this->redirectToRoute('security_recovery');
         }
 
-        return $this->render('security/recovery.html.twig', [
+        return $this->render('pages/security/recovery.html.twig', [
             'form' => $form->createView(),
         ]);
     }
 
     /**
+     * @Route("/invitation/{token}", name="security_invitation_token")
      * @Route("/recover-password/{token}", name="security_recovery_token")
      */
-    public function recoverToken(string $token, AccountRecoveryService $recovery): RedirectResponse
+    public function recoverToken(string $token, RecoveryService $recovery): RedirectResponse
     {
         if ($recovery->recover($token)) {
             $this->addFlash('success', 'Authenticated successfully. You may now change your password.');

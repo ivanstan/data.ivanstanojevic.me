@@ -39,7 +39,7 @@
                                 <a class="btn btn-primary" href="{{ path('user_edit', {'id': user.id}) }}">
                                     <i class="fa fa-pencil" aria-hidden="true"></i>
                                 </a>
-                                {{ include('user/_delete_form.html.twig', {'user': user}) }}
+                                {{ include('pages/user/_delete_form.html.twig', {'user': user}) }}
                             </td>
                         </tr>
                     {% else %}

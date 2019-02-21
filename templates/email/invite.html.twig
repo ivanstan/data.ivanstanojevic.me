@@ -1,1 +1,19 @@
-Your password recovery url is: <a href="{{ url }}">{{ url }}</a>
+{% extends 'email/base.html.twig' %}
+
+{% set url = url|default('#') %}
+
+{% block title %}{{ subject|default('Email') }} | {{ parent() }}{% endblock %}
+
+{% block content %}
+    <tr>
+        <td>
+            <p>A account is created at {{ app_name }}.</p>
+            <p>You may now log in by clicking the button bellow.</p>
+
+            <a class="btn btn-primary" href="{{ url }}">Accept invitation</a>
+
+            <p>This link can only be used once to log in and will lead you to a page where you can set your password. It
+                expires after one day and nothing will happen if it's not used.</p>
+        </td>
+    </tr>
+{% endblock %}

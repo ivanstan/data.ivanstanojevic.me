@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\PasswordChangeType;
 use App\Form\UserType;
-use App\Security\AccountRecoveryService;
+use App\Security\RecoveryService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,7 +19,7 @@ class UserController extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('user/index.html.twig', [
+        return $this->render('pages/user/index.html.twig', [
             'users' => $this->getDoctrine()->getRepository(User::class)->findAll(),
         ]);
     }
@@ -27,7 +27,7 @@ class UserController extends AbstractController
     /**
      * @Route("/user/new", name="user_new", methods={"GET","POST"})
      */
-    public function new(Request $request, UserPasswordEncoderInterface $encoder, AccountRecoveryService $recovery): Response
+    public function new(Request $request, UserPasswordEncoderInterface $encoder, RecoveryService $recovery): Response
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
@@ -50,7 +50,7 @@ class UserController extends AbstractController
             return $this->redirectToRoute('user_index');
         }
 
-        return $this->render('user/new.html.twig', [
+        return $this->render('pages/user/new.html.twig', [
             'user' => $user,
             'form' => $form->createView(),
         ]);
@@ -80,7 +80,7 @@ class UserController extends AbstractController
             return $this->redirectToRoute('user_index', ['id' => $user->getId(),]);
         }
 
-        return $this->render('user/edit.html.twig', [
+        return $this->render('pages/user/edit.html.twig', [
             'user' => $user,
             'form' => $form->createView(),
             'password_form' => $passwordForm->createView(),
