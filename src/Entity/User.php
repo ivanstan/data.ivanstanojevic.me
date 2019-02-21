@@ -40,6 +40,18 @@ class User implements UserInterface
     private $roles = [];
 
     /**
+     * @var \DateTime
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    protected $lastLogin;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $ip;
+
+    /**
      * @var string The hashed password
      * @ORM\Column(type="string")
      */
@@ -88,6 +100,26 @@ class User implements UserInterface
     public function setRoles(array $roles): void
     {
         $this->roles = $roles;
+    }
+
+    public function getLastLogin(): ?\DateTime
+    {
+        return $this->lastLogin;
+    }
+
+    public function setLastLogin(?\DateTime $lastLogin): void
+    {
+        $this->lastLogin = $lastLogin;
+    }
+
+    public function getIp(): ?string
+    {
+        return $this->ip;
+    }
+
+    public function setIp(?string $ip): void
+    {
+        $this->ip = $ip;
     }
 
     public function getPassword(): ?string
