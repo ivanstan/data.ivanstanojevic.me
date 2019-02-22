@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Watchdog;
 use App\Form\PasswordChangeType;
 use App\Form\UserType;
 use App\Security\SecurityMailerService;
+use App\Service\WatchdogAwareTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,6 +18,7 @@ use Symfony\Contracts\Translation\TranslatorTrait;
 class UserController extends AbstractController
 {
     use TranslatorTrait;
+    use WatchdogAwareTrait;
 
     private $encoder;
 
@@ -51,6 +54,8 @@ class UserController extends AbstractController
             $user->setPassword($this->encoder->encodePassword($user, $user->getPassword()));
             $entityManager->persist($user);
             $entityManager->flush();
+
+            $this->watchdog->log('user.create', sprintf('New user %s created', $user->getEmail()), Watchdog::INFO);
 
             if ($form['invite']->getData()) {
                 try {
@@ -109,6 +114,8 @@ class UserController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($user);
             $entityManager->flush();
+
+            $this->watchdog->log('user.delete', sprintf('User %s deleted', $user->getEmail()), Watchdog::INFO);
         }
 
         return $this->redirectToRoute('user_index');

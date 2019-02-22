@@ -60,12 +60,12 @@ class SecurityMailerService
         return $this->mailer->send($subject, $body, $user->getEmail());
     }
 
-    public function verify(string $token): bool
+    public function verify(string $token): ?User
     {
         $user = $this->em->getRepository(User::class)->findOneBy(['token' => $token]);
 
         if (!$user) {
-            return false;
+            return null;
         }
 
         $this->securityService->login($user);
@@ -74,7 +74,7 @@ class SecurityMailerService
         $user->setVerified(true);
         $this->em->flush();
 
-        return true;
+        return $user;
     }
 
     /**
@@ -91,12 +91,12 @@ class SecurityMailerService
         return $this->mailer->send($subject, $body, $user->getEmail());
     }
 
-    public function recover(string $token): bool
+    public function recover(string $token): ?User
     {
         $user = $this->em->getRepository(User::class)->findOneBy(['token' => $token]);
 
         if (!$user) {
-            return false;
+            return null;
         }
 
         $this->securityService->login($user);
@@ -105,7 +105,7 @@ class SecurityMailerService
         $user->setVerified(true);
         $this->em->flush();
 
-        return true;
+        return $user;
     }
 
     /**

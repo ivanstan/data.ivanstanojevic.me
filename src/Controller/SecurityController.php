@@ -3,10 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Watchdog;
 use App\Form\PasswordChangeType;
 use App\Form\PasswordRecoveryType;
 use App\Form\RegisterType;
 use App\Security\SecurityMailerService;
+use App\Service\WatchdogAwareTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,6 +21,7 @@ use Symfony\Contracts\Translation\TranslatorTrait;
 class SecurityController extends AbstractController
 {
     use TranslatorTrait;
+    use WatchdogAwareTrait;
 
     private $securityMailer;
 
@@ -84,6 +87,9 @@ class SecurityController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
+            $this->watchdog->log('user.register', sprintf('New user %s has registered', $user->getEmail()),
+                Watchdog::INFO);
+
             $this->securityMailer->requestVerification($user);
             $this->addFlash('success', $this->trans('Account verification email has been sent.'));
             $this->redirectToRoute('security_login');
@@ -112,6 +118,9 @@ class SecurityController extends AbstractController
                 $this->securityMailer->requestRecovery($user);
             }
 
+            $this->watchdog->log('user.recovery', sprintf('User %s has requested password recovery', $user->getEmail()),
+                Watchdog::INFO);
+
             $this->addFlash('success', $this->trans('Recovery instructions are sent to email.'));
 
             return $this->redirectToRoute('security_recovery');
@@ -127,15 +136,19 @@ class SecurityController extends AbstractController
      */
     public function verifyToken(string $token): RedirectResponse
     {
-        if ($this->securityMailer->verify($token)) {
-            $this->addFlash('success', $this->trans('Account verified successfully.'));
+        $user = $this->securityMailer->verify($token);
 
-            return $this->redirectToRoute('app_index');
+        if ($user === null) {
+            $this->addFlash('danger', $this->trans('Invalid access token. Please try again.'));
+
+            return $this->redirectToRoute('security_recovery');
         }
 
-        $this->addFlash('danger', $this->trans('Invalid access token. Please try again.'));
+        $this->watchdog->log('user.verify', sprintf('User %s has verified', $user->getEmail()), Watchdog::INFO);
 
-        return $this->redirectToRoute('security_recovery');
+        $this->addFlash('success', $this->trans('Account verified successfully.'));
+
+        return $this->redirectToRoute('app_index');
     }
 
     /**
@@ -144,14 +157,19 @@ class SecurityController extends AbstractController
      */
     public function recoverToken(string $token): RedirectResponse
     {
-        if ($this->securityMailer->recover($token)) {
-            $this->addFlash('success', $this->trans('Authenticated successfully. You may now change your password.'));
+        $user = $this->securityMailer->recover($token);
 
-            return $this->redirectToRoute('security_settings');
+        if ($user === null) {
+            $this->addFlash('danger', $this->trans('Invalid access token. Please try again.'));
+
+            return $this->redirectToRoute('security_recovery');
         }
 
-        $this->addFlash('danger', $this->trans('Invalid access token. Please try again.'));
+        $this->watchdog->log('user.recover.token', sprintf('User %s has used login token', $user->getEmail()),
+            Watchdog::INFO);
 
-        return $this->redirectToRoute('security_recovery');
+        $this->addFlash('success', $this->trans('Authenticated successfully. You may now change your password.'));
+
+        return $this->redirectToRoute('security_settings');
     }
 }
