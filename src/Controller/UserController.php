@@ -3,11 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Entity\Watchdog;
 use App\Form\PasswordChangeType;
 use App\Form\UserType;
 use App\Security\SecurityMailerService;
-use App\Service\WatchdogAwareTrait;
+use Psr\Log\LoggerAwareInterface;
+use Psr\Log\LoggerAwareTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,10 +15,10 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Contracts\Translation\TranslatorTrait;
 
-class UserController extends AbstractController
+class UserController extends AbstractController implements LoggerAwareInterface
 {
     use TranslatorTrait;
-    use WatchdogAwareTrait;
+    use LoggerAwareTrait;
 
     private $encoder;
 
@@ -55,7 +55,7 @@ class UserController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            $this->watchdog->log('user.create', sprintf('New user %s created', $user->getEmail()), Watchdog::INFO);
+            $this->logger->info(sprintf('New user %s created', $user->getEmail()));
 
             if ($form['invite']->getData()) {
                 try {
@@ -115,7 +115,7 @@ class UserController extends AbstractController
             $entityManager->remove($user);
             $entityManager->flush();
 
-            $this->watchdog->log('user.delete', sprintf('User %s deleted', $user->getEmail()), Watchdog::INFO);
+            $this->logger->info(sprintf('User %s deleted', $user->getEmail()));
         }
 
         return $this->redirectToRoute('user_index');

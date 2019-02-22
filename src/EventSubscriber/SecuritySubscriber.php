@@ -3,10 +3,9 @@
 namespace App\EventSubscriber;
 
 use App\Entity\User;
-use App\Entity\Watchdog;
-use App\Service\WatchdogAwareTrait;
-use App\Service\WatchdogService;
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\Log\LoggerAwareInterface;
+use Psr\Log\LoggerAwareTrait;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -16,9 +15,9 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Symfony\Component\Security\Http\SecurityEvents;
 
-class SecuritySubscriber implements EventSubscriberInterface
+class SecuritySubscriber implements EventSubscriberInterface, LoggerAwareInterface
 {
-    use WatchdogAwareTrait;
+    use LoggerAwareTrait;
 
     private $em;
 
@@ -54,12 +53,7 @@ class SecuritySubscriber implements EventSubscriberInterface
         $username = $this->authenticationUtils->getLastUsername();
         $ip = $this->requestStack->getCurrentRequest()->getClientIp();
 
-        $this->watchdog->log(
-            AuthenticationEvents::AUTHENTICATION_FAILURE,
-            sprintf('Login attempt failure with email %s from remote address %s', $username, $ip),
-            $ip,
-            Watchdog::WARNING
-        );
+        $this->logger->warning(sprintf('Login attempt failure with email %s from remote address %s', $username, $ip));
     }
 
     public function onSecurityInteractiveLogin(InteractiveLoginEvent $event): void
@@ -72,10 +66,6 @@ class SecuritySubscriber implements EventSubscriberInterface
 
         $this->em->flush();
 
-        $this->watchdog->log(
-            SecurityEvents::INTERACTIVE_LOGIN,
-            sprintf('Open session for user %s', $user->getEmail()),
-            Watchdog::WARNING
-        );
+        $this->logger->warning(sprintf('Open session for user %s', $user->getEmail()));
     }
 }

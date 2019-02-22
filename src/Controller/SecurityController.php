@@ -3,12 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Entity\Watchdog;
 use App\Form\PasswordChangeType;
 use App\Form\PasswordRecoveryType;
 use App\Form\RegisterType;
 use App\Security\SecurityMailerService;
-use App\Service\WatchdogAwareTrait;
+use Psr\Log\LoggerAwareInterface;
+use Psr\Log\LoggerAwareTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,10 +18,10 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Contracts\Translation\TranslatorTrait;
 
-class SecurityController extends AbstractController
+class SecurityController extends AbstractController implements LoggerAwareInterface
 {
     use TranslatorTrait;
-    use WatchdogAwareTrait;
+    use LoggerAwareTrait;
 
     private $securityMailer;
 
@@ -87,8 +87,7 @@ class SecurityController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            $this->watchdog->log('user.register', sprintf('New user %s has registered', $user->getEmail()),
-                Watchdog::INFO);
+            $this->logger->info(sprintf('New user %s has registered', $user->getEmail()));
 
             $this->securityMailer->requestVerification($user);
             $this->addFlash('success', $this->trans('Account verification email has been sent.'));
@@ -118,8 +117,7 @@ class SecurityController extends AbstractController
                 $this->securityMailer->requestRecovery($user);
             }
 
-            $this->watchdog->log('user.recovery', sprintf('User %s has requested password recovery', $user->getEmail()),
-                Watchdog::INFO);
+            $this->logger->info(sprintf('User %s has requested password recovery', $user->getEmail()));
 
             $this->addFlash('success', $this->trans('Recovery instructions are sent to email.'));
 
@@ -144,7 +142,7 @@ class SecurityController extends AbstractController
             return $this->redirectToRoute('security_recovery');
         }
 
-        $this->watchdog->log('user.verify', sprintf('User %s has verified', $user->getEmail()), Watchdog::INFO);
+        $this->logger->info(sprintf('User %s has verified', $user->getEmail()));
 
         $this->addFlash('success', $this->trans('Account verified successfully.'));
 
@@ -165,8 +163,7 @@ class SecurityController extends AbstractController
             return $this->redirectToRoute('security_recovery');
         }
 
-        $this->watchdog->log('user.recover.token', sprintf('User %s has used login token', $user->getEmail()),
-            Watchdog::INFO);
+        $this->logger->info(sprintf('User %s has used login token', $user->getEmail()));
 
         $this->addFlash('success', $this->trans('Authenticated successfully. You may now change your password.'));
 
