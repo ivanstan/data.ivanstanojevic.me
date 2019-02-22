@@ -22,7 +22,7 @@
                                 {% if event.severity == 6 %}class="table-info"{% endif %}
                                 {% if event.severity == 5 %}class="table-success"{% endif %}
                         >
-                            <td>{{ event.dateTime|date('H:i d-m-Y') }}</td>
+                            <td>{{ event.dateTime|date }}</td>
                             <td>{{ event.message }}</td>
                             <td>{{ event.severityString }}</td>
                         </tr>

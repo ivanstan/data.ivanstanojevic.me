@@ -4,6 +4,7 @@ namespace App\EventSubscriber;
 
 use App\Entity\User;
 use App\Entity\Watchdog;
+use App\Service\WatchdogAwareTrait;
 use App\Service\WatchdogService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -17,6 +18,8 @@ use Symfony\Component\Security\Http\SecurityEvents;
 
 class SecuritySubscriber implements EventSubscriberInterface
 {
+    use WatchdogAwareTrait;
+
     private $em;
 
     private $tokenStorage;
@@ -25,21 +28,17 @@ class SecuritySubscriber implements EventSubscriberInterface
 
     private $authenticationUtils;
 
-    private $watchdog;
-
     public function __construct(
         EntityManagerInterface $em,
         TokenStorageInterface $tokenStorage,
         RequestStack $requestStack,
-        AuthenticationUtils $authenticationUtils,
-        WatchdogService $watchdog
+        AuthenticationUtils $authenticationUtils
     ) {
 
         $this->em = $em;
         $this->tokenStorage = $tokenStorage;
         $this->requestStack = $requestStack;
         $this->authenticationUtils = $authenticationUtils;
-        $this->watchdog = $watchdog;
     }
 
     public static function getSubscribedEvents(): array

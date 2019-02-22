@@ -44,7 +44,7 @@
                                     <span class="badge badge-danger">{% trans %}No{% endtrans %}</span>
                                 {% endif %}
                             </td>
-                            <td>{{ user.lastLogin ? user.lastLogin|date('H:i d-m-Y') : '-' }}</td>
+                            <td>{{ user.lastLogin ? user.lastLogin|date : '-' }}</td>
                             <td>{{ user.ip ? user.ip : '-' }}</td>
                             <td>
                                 <a class="btn btn-primary" href="{{ path('user_edit', {'id': user.id}) }}">
