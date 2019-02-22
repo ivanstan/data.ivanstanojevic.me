@@ -57,11 +57,9 @@ class UserType extends AbstractType
         ]);
         $builder->add('active', CheckboxType::class, [
             'required' => false,
-            'data' => true,
         ]);
         $builder->add('verified', CheckboxType::class, [
             'required' => false,
-            'data' => true,
         ]);
 
         if (!$options['edit']) {

@@ -10,6 +10,11 @@
                 {{ include('components/messages.html.twig') }}
                 {{ form_start(form) }}
                 {{ form_widget(form) }}
+
+                <div class="text-center mb-3">
+                    <a href="{{ path('security_login') }}">{% trans %}Already have account? Login.{% endtrans %}</a>
+                </div>
+
                 <button class="btn btn-primary">{% trans %}Submit{% endtrans %}</button>
                 {{ form_end(form) }}
             </div>
