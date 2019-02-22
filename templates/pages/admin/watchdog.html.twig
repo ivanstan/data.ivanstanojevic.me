@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% trans %}Watchdog{% endtrans %} | {{ parent() }}{% endblock %}
+
+{% block body %}
+    {% include 'components/navigation.html.twig' %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>{% trans %}Date{% endtrans %}</th>
+                        <th>{% trans %}Message{% endtrans %}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for event in log %}
+                        <tr>
+                            <td>{{ event.dateTime|date('H:i d-m-Y') }}</td>
+                            <td>{{ event.message }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
