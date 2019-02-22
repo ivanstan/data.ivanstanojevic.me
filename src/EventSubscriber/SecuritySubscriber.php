@@ -72,5 +72,11 @@ class SecuritySubscriber implements EventSubscriberInterface
         $user->setIp($this->requestStack->getCurrentRequest()->getClientIp());
 
         $this->em->flush();
+
+        $this->watchdog->log(
+            SecurityEvents::INTERACTIVE_LOGIN,
+            sprintf('Open session for user %s', $user->getEmail()),
+            Watchdog::WARNING
+        );
     }
 }

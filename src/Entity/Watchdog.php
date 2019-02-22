@@ -5,8 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity()
- * @ORM\HasLifecycleCallbacks()
+ * @ORM\Entity(repositoryClass="App\Repository\WatchdogRepository")
  */
 class Watchdog
 {
@@ -18,6 +17,17 @@ class Watchdog
     public const NOTICE = 5;
     public const INFO = 6;
     public const DEBUG = 7;
+
+    private static $severityMap = [
+        self::EMERGENCY => 'Emergency',
+        self::ALERT => 'Alert',
+        self::CRITICAL => 'Critical',
+        self::ERROR => 'Error',
+        self::WARNING => 'Warning',
+        self::NOTICE => 'Notice',
+        self::INFO => 'Info',
+        self::DEBUG => 'Debug',
+    ];
 
     /**
      * @ORM\Id()
@@ -95,6 +105,11 @@ class Watchdog
     public function getSeverity(): int
     {
         return $this->severity;
+    }
+
+    public function getSeverityString(): string
+    {
+        return self::$severityMap[$this->severity] ?? self::$severityMap[self::NOTICE];
     }
 
     public function setSeverity(int $severity): void

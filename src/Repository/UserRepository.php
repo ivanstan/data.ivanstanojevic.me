@@ -28,4 +28,12 @@ class UserRepository extends ServiceEntityRepository
         }
     }
 
+    public function findAll(): array
+    {
+        $builder = $this->createQueryBuilder('u');
+
+        $builder->orderBy('u.email', 'ASC');
+
+        return $builder->getQuery()->getResult();
+    }
 }
