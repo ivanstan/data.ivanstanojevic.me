@@ -17,6 +17,16 @@ class UserController extends AbstractController
 {
     use TranslatorTrait;
 
+    private $encoder;
+
+    /**
+     */
+    public function __construct(UserPasswordEncoderInterface $encoder)
+    {
+        $this->encoder = $encoder;
+    }
+
+
     /**
      * @Route("/users", name="user_index", methods={"GET"})
      */
@@ -30,7 +40,7 @@ class UserController extends AbstractController
     /**
      * @Route("/user/new", name="user_new", methods={"GET","POST"})
      */
-    public function new(Request $request, UserPasswordEncoderInterface $encoder, SecurityMailerService $recovery): Response
+    public function new(Request $request, SecurityMailerService $recovery): Response
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
@@ -38,7 +48,7 @@ class UserController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-            $user->setPassword($encoder->encodePassword($user, $user->getPassword()));
+            $user->setPassword($this->encoder->encodePassword($user, $user->getPassword()));
             $entityManager->persist($user);
             $entityManager->flush();
 
@@ -62,7 +72,7 @@ class UserController extends AbstractController
     /**
      * @Route("/user/{id}/edit", name="user_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, User $user, UserPasswordEncoderInterface $encoder): Response
+    public function edit(Request $request, User $user): Response
     {
         $form = $this->createForm(UserType::class, $user, ['edit' => true]);
         $form->handleRequest($request);
@@ -77,7 +87,7 @@ class UserController extends AbstractController
         $passwordForm->handleRequest($request);
 
         if ($passwordForm->isSubmitted() && $passwordForm->isValid()) {
-            $user->setPassword($encoder->encodePassword($user, $user->getPassword()));
+            $user->setPassword($this->encoder->encodePassword($user, $user->getPassword()));
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('user_index', ['id' => $user->getId(),]);

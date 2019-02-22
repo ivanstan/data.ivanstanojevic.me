@@ -20,6 +20,19 @@ class SecurityController extends AbstractController
 {
     use TranslatorTrait;
 
+    private $securityMailer;
+
+    private $encoder;
+
+    /**
+     */
+    public function __construct(SecurityMailerService $securityMailer, UserPasswordEncoderInterface $encoder)
+    {
+        $this->securityMailer = $securityMailer;
+        $this->encoder = $encoder;
+    }
+
+
     /**
      * @Route("/login", name="security_login")
      */
@@ -34,7 +47,7 @@ class SecurityController extends AbstractController
     /**
      * @Route("/settings", name="security_settings")
      */
-    public function settings(Request $request, UserPasswordEncoderInterface $encoder): Response
+    public function settings(Request $request): Response
     {
         $user = $this->getUser();
         $form = $this->createForm(PasswordChangeType::class, $user);
@@ -42,7 +55,7 @@ class SecurityController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-            $user->setPassword($encoder->encodePassword($user, $user->getPassword()));
+            $user->setPassword($this->encoder->encodePassword($user, $user->getPassword()));
             $entityManager->flush();
 
             $this->addFlash('success', $this->trans('You have successfully changed your password.'));
@@ -58,7 +71,7 @@ class SecurityController extends AbstractController
     /**
      * @Route("/register", name="security_register")
      */
-    public function register(Request $request, UserPasswordEncoderInterface $encoder, SecurityMailerService $recovery): Response
+    public function register(Request $request): Response
     {
         $user = new User();
         $form = $this->createForm(RegisterType::class, $user);
@@ -66,12 +79,12 @@ class SecurityController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-            $user->setPassword($encoder->encodePassword($user, $user->getPassword()));
+            $user->setPassword($this->encoder->encodePassword($user, $user->getPassword()));
             $user->setActive(false);
             $entityManager->persist($user);
             $entityManager->flush();
 
-            $recovery->requestVerification($user);
+            $this->securityMailer->requestVerification($user);
             $this->addFlash('success', $this->trans('Account verification email has been sent.'));
             $this->redirectToRoute('security_login');
         }
@@ -84,7 +97,7 @@ class SecurityController extends AbstractController
     /**
      * @Route("/recovery", name="security_recovery")
      */
-    public function recovery(Request $request, SecurityMailerService $recovery): Response
+    public function recovery(Request $request): Response
     {
         $form = $this->createForm(PasswordRecoveryType::class);
         $form->handleRequest($request);
@@ -96,7 +109,7 @@ class SecurityController extends AbstractController
             $user->setVerified(false);
 
             if ($user) {
-                $recovery->requestRecovery($user);
+                $this->securityMailer->requestRecovery($user);
             }
 
             $this->addFlash('success', $this->trans('Recovery instructions are sent to email.'));
@@ -112,9 +125,9 @@ class SecurityController extends AbstractController
     /**
      * @Route("/verify/{token}", name="security_verification_token")
      */
-    public function verifyToken(string $token, SecurityMailerService $recovery): RedirectResponse
+    public function verifyToken(string $token): RedirectResponse
     {
-        if ($recovery->verify($token)) {
+        if ($this->securityMailer->verify($token)) {
             $this->addFlash('success', $this->trans('Account verified successfully.'));
 
             return $this->redirectToRoute('app_index');
@@ -129,9 +142,9 @@ class SecurityController extends AbstractController
      * @Route("/invitation/{token}", name="security_invitation_token")
      * @Route("/recover-password/{token}", name="security_recovery_token")
      */
-    public function recoverToken(string $token, SecurityMailerService $recovery): RedirectResponse
+    public function recoverToken(string $token): RedirectResponse
     {
-        if ($recovery->recover($token)) {
+        if ($this->securityMailer->recover($token)) {
             $this->addFlash('success', $this->trans('Authenticated successfully. You may now change your password.'));
 
             return $this->redirectToRoute('security_settings');
