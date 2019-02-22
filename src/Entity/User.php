@@ -43,13 +43,13 @@ class User implements UserInterface
      * @var \DateTime
      * @ORM\Column(type="datetime", nullable=true)
      */
-    protected $lastLogin;
+    private $lastLogin;
 
     /**
      * @var string
      * @ORM\Column(type="string", nullable=true)
      */
-    protected $ip;
+    private $ip;
 
     /**
      * @var string The hashed password
