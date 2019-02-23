@@ -6,6 +6,6 @@
     <form class="d-inline-block" method="post" action="{{ path('user_verify') }}">
         <input type="hidden" name="_method" value="POST">
         <input type="hidden" name="_token" value="{{ csrf_token('verify' ~ app.user.id) }}">
-        <button class="btn">Resend.</button>
+        <button class="bg-transparent border-0 px-0"><u>Resend</u>.</button>
     </form>
 </div>

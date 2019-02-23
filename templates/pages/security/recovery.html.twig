@@ -1,18 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{% trans %}Recover password{% endtrans %} | {{ parent() }}{% endblock %}
+{% block title %}{% trans %}recovery.title{% endtrans %} | {{ parent() }}{% endblock %}
 
 {% block body %}
     <div class="container">
         <div class="row">
             <div class="col-lg-6 mx-auto">
-                <h3>{% trans %}Recover password{% endtrans %}</h3>
+                <h3>{% trans %}recovery.title{% endtrans %}</h3>
                 {{ include('components/messages.html.twig') }}
                 {{ form_start(form) }}
                 {{ form_widget(form) }}
 
                 <div class="text-center mb-3">
-                    <a href="{{ path('security_login') }}">{% trans %}Already have account? Login.{% endtrans %}</a>
+                    <a href="{{ path('security_login') }}">{% trans %}register.goto_login{% endtrans %}</a>
                 </div>
 
                 <button class="btn btn-primary">{% trans %}Submit{% endtrans %}</button>

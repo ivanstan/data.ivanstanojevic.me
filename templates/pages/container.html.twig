@@ -11,10 +11,13 @@
         {% include 'components/navigation.html.twig' %}
     {% endblock %}
 
+    {% block messages %}
+        <div class="container">
+            {% include 'components/messages.html.twig' %}
+        </div>
+    {% endblock %}
+
     {% block content %}
     {% endblock %}
 
-    {% block messages %}
-        {% include 'components/messages.html.twig' %}
-    {% endblock %}
 {% endblock %}

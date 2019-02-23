@@ -133,7 +133,7 @@ class SecurityController extends AbstractController implements LoggerAwareInterf
         /** @var User $user */
         $user = $this->getUser();
 
-        if ($this->isCsrfTokenValid('verify'.$user->getId(), $request->request->get('_token'))) {
+        if (!$this->isCsrfTokenValid('verify'.$user->getId(), $request->request->get('_token'))) {
             return $this->redirectToRoute('app_index');
         }
 

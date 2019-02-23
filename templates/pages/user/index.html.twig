@@ -1,25 +1,25 @@
-{% extends 'pages/content.html.twig' %}
+{% extends 'pages/container-fluid.html.twig' %}
 
-{% block title %}{% trans %}Users{% endtrans %} | {{ parent() }}{% endblock %}
+{% block title %}{% trans %}user.index.title{% endtrans %} | {{ parent() }}{% endblock %}
 
 {% block content %}
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
                 <a class="btn btn-primary my-3" href="{{ path('user_new') }}">
-                    <i class="fa fa-plus" aria-hidden="true"></i> {% trans %}Create{% endtrans %}
+                    <i class="fa fa-plus" aria-hidden="true"></i> {% trans %}user.actions.create{% endtrans %}
                 </a>
 
                 <table class="table">
                     <thead>
                     <tr>
-                        <th>{% trans %}Email{% endtrans %}</th>
-                        <th>{% trans %}Roles{% endtrans %}</th>
-                        <th>{% trans %}Active{% endtrans %}</th>
-                        <th>{% trans %}Verified{% endtrans %}</th>
-                        <th>{% trans %}Last login{% endtrans %}</th>
-                        <th>{% trans %}IP{% endtrans %}</th>
-                        <th>{% trans %}Actions{% endtrans %}</th>
+                        <th>{% trans %}user.property.email.title{% endtrans %}</th>
+                        <th>{% trans %}user.property.roles.title{% endtrans %}</th>
+                        <th>{% trans %}user.property.active.title{% endtrans %}</th>
+                        <th>{% trans %}user.property.verified.title{% endtrans %}</th>
+                        <th>{% trans %}user.property.last_login.title{% endtrans %}</th>
+                        <th>{% trans %}user.property.ip.title{% endtrans %}</th>
+                        <th>{% trans %}user.index.table.actions{% endtrans %}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -32,15 +32,15 @@
                                 {% endfor %}
                             </td>
                             <td>{% if user.active %}
-                                    <span class="badge badge-success">{% trans %}Yes{% endtrans %}</span>
+                                    <span class="badge badge-success">{% trans %}user.active.value_true{% endtrans %}</span>
                                 {% else %}
-                                    <span class="badge badge-danger">{% trans %}No{% endtrans %}</span>
+                                    <span class="badge badge-danger">{% trans %}user.active.value_false{% endtrans %}</span>
                                 {% endif %}
                             </td>
                             <td>{% if user.verified %}
-                                    <span class="badge badge-success">{% trans %}Yes{% endtrans %}</span>
+                                    <span class="badge badge-success">{% trans %}user.verified.value_true{% endtrans %}</span>
                                 {% else %}
-                                    <span class="badge badge-danger">{% trans %}No{% endtrans %}</span>
+                                    <span class="badge badge-danger">{% trans %}user.verified.value_false{% endtrans %}</span>
                                 {% endif %}
                             </td>
                             <td>{{ user.lastLogin ? user.lastLogin|date : '-' }}</td>
@@ -54,7 +54,7 @@
                         </tr>
                     {% else %}
                         <tr>
-                            <td colspan="5">{% trans %}no records found{% endtrans %}</td>
+                            <td colspan="7" class="text-center">{% trans %}user.table.empty{% endtrans %}</td>
                         </tr>
                     {% endfor %}
                     </tbody>

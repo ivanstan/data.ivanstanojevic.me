@@ -7,12 +7,10 @@
 {% block content %}
     <tr>
         <td>
-            <p>{{ "Your account is created at %app_name%."|trans({'%app_name%': app_name}) }}</p>
-            <p>{{ "You may now log in by clicking the button bellow."|trans }}</p>
-
-            <a class="btn btn-primary" href="{{ url }}">{% trans %}Accept invitation{% endtrans %}</a>
-
-            <p>{{ "This link can only be used once to log in and will lead you to a page where you can set your password. It expires after one day and nothing will happen if it's not used."|trans }}</p>
+            <p>{{ "email.invite.heading"|trans({'%app_name%': app_name}) }}</p>
+            <p>{{ "email.invite.explanation"|trans }}</p>
+            <a class="btn btn-primary" href="{{ url }}">{% trans %}email.invite.cta{% endtrans %}</a>
+            <p>{{ "email.invite.footer"|trans }}</p>
         </td>
     </tr>
 {% endblock %}

@@ -1,61 +1,84 @@
-A request to reset the password for your account has been made at %app_name%.: A request to reset the password for your account has been made at %app_name%.
-Accept invitation: Accept invitation
-Actions: Actions
-Active: Active
-Admin: Admin
-Are you sure you want to delete this item?: Are you sure you want to delete this item?
-Authenticated successfully. You may now change your password.: Authenticated successfully. You may now change your password.
-Change password: Change password
-Copyright © %app_name% %now%. All right reserved.: Copyright © %app_name% %now%. All right reserved.
-Create: Create
-Create User: Create User
-Edit User: Edit User
-Edit user: Edit user
-Email: Email
-Forbidden: Forbidden
-Forgot password?: Forgot password?
-Index: Index
-Keep me logged in: Keep me logged in
-Login: Login
-Logout: Logout
-No: No
-Page error: Page error
-Page not found: Page not found
-Password: Password
-Recover my account: Recover my account
-Recover password: Recover password
-Recovery instructions are sent to email.: Recovery instructions are sent to email.
-Repeat Password: Repeat Password
-Roles: Roles
-Save: Save
-Send invitation email: Send invitation email
-Settings: Settings
-Submit: Submit
-The requested page couldn't be located. Checkout for any URL misspelling or <a href="%path%">return to the homepage</a>.: >-
-  The requested page couldn't be located. Checkout for any URL misspelling or <a
-  href="%path%">return to the homepage</a>.
-This link can only be used once to log in and will lead you to a page where you can set your password. It expires after one day and nothing will happen if it's not used.: >-
-  This link can only be used once to log in and will lead you to a page where
-  you can set your password. It expires after one day and nothing will happen if
-  it's not used.
-Unable to send message.: Unable to send message.
-User: User
-Users: Users
-Yes: Yes
-You may now log in by clicking the button bellow.: You may now log in by clicking the button bellow.
-Your account is created at %app_name%.: Your account is created at %app_name%.
-no records found: no records found
-Account Created: Account Created
-Password Recovery: Password Recovery
-Account Verification: Account Verification
-This link can only be used once, it expires after one day and nothing will happen if it's not used: This link can only be used once, it expires after one day and nothing will happen if it's not used
-You may now verify your account by clicking the button bellow: You may now verify your account by clicking the button bellow
-Account was created for this email at %app_name%: Account was created for this email at %app_name%
-account.created: Account Created
-Invalid access token:
-  Please try again: 'messages'
-You have successfully verified your account: 'messages'
-We sent you a verification email to confirm you are the owner of address <strong>%email%</strong>:
-  Didn't recive any email?: 'messages'
-Hey <strong>%email%</strong> email account owner:
-  You will shortly receive verification email: 'messages'
+user:
+  actions:
+    create: Create
+  property:
+    email:
+      title: Email
+    password:
+      title: Password
+      repeat: Repeat Password
+      validation:
+        min_length: 'Your password should be at least 6 characters'
+        not_blank: 'Password should not be blank'
+        must_match: 'The password fields must match.'
+    roles:
+      title: Roles
+    active:
+      title: Active
+    verified:
+      title: Verified
+    last_login:
+      title: 'Last Login'
+    ip:
+      title: IP
+  verified:
+    value_true: Yes
+    value_false: No
+  active:
+    value_true: Yes
+    value_false: No
+  index:
+    title: Users
+    table:
+      actions: Actions
+      empty: 'No users have been created so far.'
+  form:
+    invite:
+      title: 'Send invitation email'
+
+settings:
+  title: Settings
+  change_password: Change Password
+
+register:
+  title: Register
+  goto_login: Already have account? Login.
+  submit: Register
+
+recovery:
+  title: Recover password
+  submit: Submit
+
+login:
+  title: Login
+  remember_me: Keep me logged in
+  links:
+      goto_recovery: Forgot password?
+      goto_register: New here? Register.
+
+logout:
+  title: Logout
+
+navigation:
+  index: Index
+  users: Users
+
+email:
+  invite:
+    subject:
+    heading: Account was created for this email at %app_name%.
+    explanation: You may now log in by clicking the button bellow.
+    footer: This link can only be used once to log in and will lead you to a page where you can set your password. It expires after one day and nothing will happen if it's not used.
+    cta: Accept invitation
+  recovery:
+    subject:
+    heading: A request to reset the password for your account has been made at %app_name%.
+    explanation: You may now log in by clicking the button bellow.
+    footer: This link can only be used once to log in and will lead you to a page where you can set your password. It expires after one day and nothing will happen if it's not used.
+    cta: Recover my account
+  verify:
+    subject:
+    heading: Account was created for this email at %app_name%.
+    explanation: You may now log in by clicking the button bellow.
+    footer: This link can only be used once to log in and will lead you to a page where you can set your password. It expires after one day and nothing will happen if it's not used.
+    cta: Verify my account
