@@ -4,12 +4,14 @@ namespace App\Security;
 
 use App\Entity\User;
 use App\Service\MailerService;
+use App\Service\Traits\TranslatorAwareTrait;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 class SecurityMailerService
 {
+    use TranslatorAwareTrait;
+
     private const TOKEN_LENGTH = 24;
 
     private $em;
@@ -18,18 +20,14 @@ class SecurityMailerService
 
     private $securityService;
 
-    private $translator;
-
     public function __construct(
         MailerService $mailer,
         EntityManagerInterface $em,
-        SecurityService $securityService,
-        TranslatorInterface $translator
+        SecurityService $securityService
     ) {
         $this->em = $em;
         $this->mailer = $mailer;
         $this->securityService = $securityService;
-        $this->translator = $translator;
     }
 
     /**
@@ -37,7 +35,7 @@ class SecurityMailerService
      */
     public function invite(User $user): int
     {
-        $subject = $this->translator->trans('Account Created');
+        $subject = $this->translator->trans('account.created');
         $body = $this->mailer->getTwig()->render('email/invite.html.twig', [
             'url' => $this->generateLoginUrl($user),
             'subject' => $subject

@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Form\PasswordChangeType;
 use App\Form\UserType;
 use App\Security\SecurityMailerService;
+use App\Service\Traits\TranslatorAwareTrait;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -13,11 +14,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Contracts\Translation\TranslatorTrait;
 
 class UserController extends AbstractController implements LoggerAwareInterface
 {
-    use TranslatorTrait;
+    use TranslatorAwareTrait;
     use LoggerAwareTrait;
 
     private $encoder;
@@ -61,7 +61,7 @@ class UserController extends AbstractController implements LoggerAwareInterface
                 try {
                     $recovery->invite($user);
                 } catch (\Exception $e) {
-                    $this->addFlash('danger', $this->trans('Unable to send message.'));
+                    $this->addFlash('danger', $this->translator->trans('Unable to send message.'));
                 }
             }
 

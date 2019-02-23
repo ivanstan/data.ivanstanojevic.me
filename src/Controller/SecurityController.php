@@ -7,6 +7,7 @@ use App\Form\PasswordChangeType;
 use App\Form\PasswordRecoveryType;
 use App\Form\RegisterType;
 use App\Security\SecurityMailerService;
+use App\Service\Traits\TranslatorAwareTrait;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,11 +17,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-use Symfony\Contracts\Translation\TranslatorTrait;
 
 class SecurityController extends AbstractController implements LoggerAwareInterface
 {
-    use TranslatorTrait;
+    use TranslatorAwareTrait;
     use LoggerAwareTrait;
 
     private $securityMailer;
@@ -60,7 +60,7 @@ class SecurityController extends AbstractController implements LoggerAwareInterf
             $user->setPassword($this->encoder->encodePassword($user, $user->getPassword()));
             $entityManager->flush();
 
-            $this->addFlash('success', $this->trans('You have successfully changed your password.'));
+            $this->addFlash('success', $this->translator->trans('You have successfully changed your password.'));
 
             return $this->redirectToRoute('security_settings');
         }
@@ -89,7 +89,7 @@ class SecurityController extends AbstractController implements LoggerAwareInterf
             $this->logger->info(sprintf('New user %s has registered', $user->getEmail()));
 
             $this->securityMailer->requestVerification($user);
-            $this->addFlash('success', $this->trans('Account verification email has been sent.'));
+            $this->addFlash('success', $this->translator->trans('Account verification email has been sent.'));
             $this->redirectToRoute('security_login');
         }
 
@@ -118,7 +118,7 @@ class SecurityController extends AbstractController implements LoggerAwareInterf
 
             $this->logger->info(sprintf('User %s has requested password recovery', $user->getEmail()));
 
-            $this->addFlash('success', $this->trans('Recovery instructions are sent to email.'));
+            $this->addFlash('success', $this->translator->trans('Recovery instructions are sent to email.'));
 
             return $this->redirectToRoute('security_recovery');
         }
@@ -136,14 +136,14 @@ class SecurityController extends AbstractController implements LoggerAwareInterf
         $user = $this->securityMailer->verify($token);
 
         if ($user === null) {
-            $this->addFlash('danger', $this->trans('Invalid access token. Please try again.'));
+            $this->addFlash('danger', $this->translator->trans('Invalid access token. Please try again.'));
 
             return $this->redirectToRoute('security_recovery');
         }
 
         $this->logger->info(sprintf('User %s has verified', $user->getEmail()));
 
-        $this->addFlash('success', $this->trans('Account verified successfully.'));
+        $this->addFlash('success', $this->translator->trans('Account verified successfully.'));
 
         return $this->redirectToRoute('app_index');
     }
@@ -157,14 +157,14 @@ class SecurityController extends AbstractController implements LoggerAwareInterf
         $user = $this->securityMailer->recover($token);
 
         if ($user === null) {
-            $this->addFlash('danger', $this->trans('Invalid access token. Please try again.'));
+            $this->addFlash('danger', $this->translator->trans('Invalid access token. Please try again.'));
 
             return $this->redirectToRoute('security_recovery');
         }
 
         $this->logger->info(sprintf('User %s has used login token', $user->getEmail()));
 
-        $this->addFlash('success', $this->trans('Authenticated successfully. You may now change your password.'));
+        $this->addFlash('success', $this->translator->trans('Authenticated successfully. You may now change your password.'));
 
         return $this->redirectToRoute('security_settings');
     }

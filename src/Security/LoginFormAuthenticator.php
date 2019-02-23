@@ -3,6 +3,7 @@
 namespace App\Security;
 
 use App\Entity\User;
+use App\Service\Traits\TranslatorAwareTrait;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,26 +24,23 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 {
     use TargetPathTrait;
+    use TranslatorAwareTrait;
 
     private $entityManager;
     private $router;
     private $csrfTokenManager;
     private $passwordEncoder;
-    /** @var TranslatorInterface */
-    private $translator;
 
     public function __construct(
         EntityManagerInterface $entityManager,
         RouterInterface $router,
         CsrfTokenManagerInterface $csrfTokenManager,
-        UserPasswordEncoderInterface $passwordEncoder,
-        TranslatorInterface $translator
+        UserPasswordEncoderInterface $passwordEncoder
     ) {
         $this->entityManager = $entityManager;
         $this->router = $router;
         $this->csrfTokenManager = $csrfTokenManager;
         $this->passwordEncoder = $passwordEncoder;
-        $this->translator = $translator;
     }
 
     public function supports(Request $request): bool

@@ -51,3 +51,4 @@ Account Verification: Account Verification
 This link can only be used once, it expires after one day and nothing will happen if it's not used: This link can only be used once, it expires after one day and nothing will happen if it's not used
 You may now verify your account by clicking the button bellow: You may now verify your account by clicking the button bellow
 Account was created for this email at %app_name%: Account was created for this email at %app_name%
+account.created: Account Created
