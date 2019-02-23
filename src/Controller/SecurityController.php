@@ -35,7 +35,6 @@ class SecurityController extends AbstractController implements LoggerAwareInterf
         $this->encoder = $encoder;
     }
 
-
     /**
      * @Route("/login", name="security_login")
      */
