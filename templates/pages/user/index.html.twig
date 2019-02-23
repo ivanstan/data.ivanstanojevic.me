@@ -10,55 +10,59 @@
                     <i class="fa fa-plus" aria-hidden="true"></i> {% trans %}user.actions.create{% endtrans %}
                 </a>
 
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>{% trans %}user.property.email.title{% endtrans %}</th>
-                        <th>{% trans %}user.property.roles.title{% endtrans %}</th>
-                        <th>{% trans %}user.property.active.title{% endtrans %}</th>
-                        <th>{% trans %}user.property.verified.title{% endtrans %}</th>
-                        <th>{% trans %}user.property.last_login.title{% endtrans %}</th>
-                        <th>{% trans %}user.property.ip.title{% endtrans %}</th>
-                        <th>{% trans %}user.index.table.actions{% endtrans %}</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for user in users %}
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
                         <tr>
-                            <td>{{ user.email }}</td>
-                            <td>
-                                {% for role in user.roles %}
-                                    <span class="badge badge-secondary">{{ role|replace({'ROLE_': '' })|capitalize|trans }}</span>
-                                {% endfor %}
-                            </td>
-                            <td>{% if user.active %}
-                                    <span class="badge badge-success">{% trans %}user.active.value_true{% endtrans %}</span>
-                                {% else %}
-                                    <span class="badge badge-danger">{% trans %}user.active.value_false{% endtrans %}</span>
-                                {% endif %}
-                            </td>
-                            <td>{% if user.verified %}
-                                    <span class="badge badge-success">{% trans %}user.verified.value_true{% endtrans %}</span>
-                                {% else %}
-                                    <span class="badge badge-danger">{% trans %}user.verified.value_false{% endtrans %}</span>
-                                {% endif %}
-                            </td>
-                            <td>{{ user.lastLogin ? user.lastLogin|date : '-' }}</td>
-                            <td>{{ user.ip ? user.ip : '-' }}</td>
-                            <td>
-                                <a class="btn btn-primary" href="{{ path('user_edit', {'id': user.id}) }}">
-                                    <i class="fa fa-pencil" aria-hidden="true"></i>
-                                </a>
-                                {{ include('pages/user/_delete_form.html.twig', {'user': user}) }}
-                            </td>
+                            <th>{% trans %}user.property.email.title{% endtrans %}</th>
+                            <th class="d-none d-sm-table-cell">{% trans %}user.property.roles.title{% endtrans %}</th>
+                            <th class="d-none d-sm-table-cell">{% trans %}user.property.active.title{% endtrans %}</th>
+                            <th class="d-none d-md-table-cell">{% trans %}user.property.verified.title{% endtrans %}</th>
+                            <th class="d-none d-lg-table-cell">{% trans %}user.property.last_login.title{% endtrans %}</th>
+                            <th class="d-none d-md-table-cell">{% trans %}user.property.ip.title{% endtrans %}</th>
+                            <th>{% trans %}user.index.table.actions{% endtrans %}</th>
                         </tr>
-                    {% else %}
-                        <tr>
-                            <td colspan="7" class="text-center">{% trans %}user.table.empty{% endtrans %}</td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                        {% for user in users %}
+                            <tr>
+                                <td>{{ user.email }}</td>
+                                <td class="d-none d-sm-table-cell">
+                                    {% for role in user.roles %}
+                                        <span class="badge badge-secondary">{{ role|replace({'ROLE_': '' })|capitalize|trans }}</span>
+                                    {% endfor %}
+                                </td>
+                                <td class="d-none d-sm-table-cell">
+                                    {% if user.active %}
+                                        <span class="badge badge-success">{% trans %}user.active.value_true{% endtrans %}</span>
+                                    {% else %}
+                                        <span class="badge badge-danger">{% trans %}user.active.value_false{% endtrans %}</span>
+                                    {% endif %}
+                                </td>
+                                <td class="d-none d-md-table-cell">
+                                    {% if user.verified %}
+                                        <span class="badge badge-success">{% trans %}user.verified.value_true{% endtrans %}</span>
+                                    {% else %}
+                                        <span class="badge badge-danger">{% trans %}user.verified.value_false{% endtrans %}</span>
+                                    {% endif %}
+                                </td>
+                                <td class="d-none d-lg-table-cell">{{ user.lastLogin ? user.lastLogin|date : '-' }}</td>
+                                <td class="d-none d-md-table-cell">{{ user.ip ? user.ip : '-' }}</td>
+                                <td>
+                                    <a class="btn btn-primary" href="{{ path('user_edit', {'id': user.id}) }}">
+                                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                                    </a>
+                                    {{ include('pages/user/_delete_form.html.twig', {'user': user}) }}
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="7" class="text-center">{% trans %}user.table.empty{% endtrans %}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
