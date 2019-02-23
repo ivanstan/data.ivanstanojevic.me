@@ -67,18 +67,18 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     {
         $token = new CsrfToken('authenticate', $credentials['csrf_token']);
         if (!$this->csrfTokenManager->isTokenValid($token)) {
-            throw new InvalidCsrfTokenException($this->translator->trans('Invalid CSRF token.'));
+            throw new InvalidCsrfTokenException($this->translator->trans('misc.messages.invalid_csrf'));
         }
 
         $user = $this->entityManager->getRepository(User::class)->findByEmail($credentials['email']);
 
         if (!$user) {
             // fail authentication with a custom error
-            throw new CustomUserMessageAuthenticationException($this->translator->trans('Invalid credentials.'));
+            throw new CustomUserMessageAuthenticationException($this->translator->trans('login.messages.bad_credentials'));
         }
 
         if (!$user->isActive()) {
-            throw new CustomUserMessageAuthenticationException($this->translator->trans('User account is blocked.'));
+            throw new CustomUserMessageAuthenticationException($this->translator->trans('login.messages.user_blocked'));
         }
 
         return $user;

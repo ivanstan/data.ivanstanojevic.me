@@ -35,7 +35,7 @@ class SecurityMailerService
      */
     public function requestVerification(User $user): int
     {
-        $subject = $this->translator->trans('Account Verification');
+        $subject = $this->translator->trans('email.verify.subject');
         $body = $this->mailer->getTwig()->render('email/verify.html.twig', [
             'url' => $this->generateVerificationUrl($user),
             'subject' => $subject
@@ -66,7 +66,7 @@ class SecurityMailerService
      */
     public function requestRecovery(User $user): int
     {
-        $subject = $this->translator->trans('Password Recovery');
+        $subject = $this->translator->trans('email.recovery.subject');
         $body = $this->mailer->getTwig()->render('email/recovery.html.twig', [
             'url' => $this->generateLoginUrl($user),
             'subject' => $subject
@@ -97,7 +97,7 @@ class SecurityMailerService
      */
     public function invite(User $user): int
     {
-        $subject = $this->translator->trans('account.created');
+        $subject = $this->translator->trans('email.invite.subject');
         $body = $this->mailer->getTwig()->render('email/invite.html.twig', [
             'url' => $this->generateLoginUrl($user),
             'subject' => $subject

@@ -58,7 +58,7 @@ class UserController extends AbstractController implements LoggerAwareInterface
                 try {
                     $recovery->invite($user);
                 } catch (\Exception $e) {
-                    $this->addFlash('danger', $this->translator->trans('Unable to send message.'));
+                    $this->addFlash('danger', $this->translator->trans('misc.messages.email_fail'));
                 }
             }
 
