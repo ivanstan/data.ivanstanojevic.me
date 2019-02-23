@@ -22,13 +22,10 @@ class UserController extends AbstractController implements LoggerAwareInterface
 
     private $encoder;
 
-    /**
-     */
     public function __construct(UserPasswordEncoderInterface $encoder)
     {
         $this->encoder = $encoder;
     }
-
 
     /**
      * @Route("/users", name="user_index", methods={"GET"})

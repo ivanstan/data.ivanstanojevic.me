@@ -27,8 +27,6 @@ class SecurityController extends AbstractController implements LoggerAwareInterf
 
     private $encoder;
 
-    /**
-     */
     public function __construct(SecurityMailerService $securityMailer, UserPasswordEncoderInterface $encoder)
     {
         $this->securityMailer = $securityMailer;
@@ -82,7 +80,8 @@ class SecurityController extends AbstractController implements LoggerAwareInterf
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $user->setPassword($this->encoder->encodePassword($user, $user->getPassword()));
-            $user->setActive(false);
+            $user->setActive(true);
+            $user->setVerified(false);
             $entityManager->persist($user);
             $entityManager->flush();
 
@@ -109,8 +108,6 @@ class SecurityController extends AbstractController implements LoggerAwareInterf
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
             $user = $this->getDoctrine()->getRepository(User::class)->findOneBy(['email' => $data['email']]);
-            $user->setActive(true);
-            $user->setVerified(false);
 
             if ($user) {
                 $this->securityMailer->requestRecovery($user);
@@ -126,6 +123,33 @@ class SecurityController extends AbstractController implements LoggerAwareInterf
         return $this->render('pages/security/recovery.html.twig', [
             'form' => $form->createView(),
         ]);
+    }
+
+    /**
+     * @Route("/verify", name="user_verify", methods={"POST"})
+     */
+    public function verify(Request $request): RedirectResponse
+    {
+        /** @var User $user */
+        $user = $this->getUser();
+
+        if ($this->isCsrfTokenValid('verify'.$user->getId(), $request->request->get('_token'))) {
+            return $this->redirectToRoute('app_index');
+        }
+
+        if (!$user->isVerified()) {
+            $this->logger->info(sprintf('User %s requested verification', $user->getEmail()));
+
+            $this->addFlash('info',
+                $this->translator->trans('Hey <strong>%email%</strong> email account owner. You will shortly receive verification email.',
+                    [
+                        '%email%' => $user->getEmail(),
+                    ]));
+
+            $this->securityMailer->requestVerification($user);
+        }
+
+        return $this->redirectToRoute('app_index');
     }
 
     /**
@@ -149,7 +173,6 @@ class SecurityController extends AbstractController implements LoggerAwareInterf
     }
 
     /**
-     * @Route("/invitation/{token}", name="security_invitation_token")
      * @Route("/recover-password/{token}", name="security_recovery_token")
      */
     public function recoverToken(string $token): RedirectResponse
@@ -167,5 +190,25 @@ class SecurityController extends AbstractController implements LoggerAwareInterf
         $this->addFlash('success', $this->translator->trans('Authenticated successfully. You may now change your password.'));
 
         return $this->redirectToRoute('security_settings');
+    }
+
+    /**
+     * @Route("/invitation/{token}", name="security_invitation_token")
+     */
+    public function invitation(string $token)
+    {
+        $user = $this->securityMailer->recover($token);
+
+        if ($user === null) {
+            $this->addFlash('danger', $this->translator->trans('Invalid access token. Please try again.'));
+
+            return $this->redirectToRoute('security_recovery');
+        }
+
+        $this->logger->info(sprintf('User %s has verified account', $user->getEmail()));
+
+        $this->addFlash('success', $this->translator->trans('You have successfully verified your account.'));
+
+        return $this->redirectToRoute('app_index');
     }
 }

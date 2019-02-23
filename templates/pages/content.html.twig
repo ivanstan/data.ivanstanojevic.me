@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% block notification %}
+        {% if app.user and not app.user.verified %}
+            {% include 'components/verify-notification.html.twig' %}
+        {% endif %}
+    {% endblock %}
+
+    {% block nav %}
+        {% include 'components/navigation.html.twig' %}
+    {% endblock %}
+
+    {% block content %}
+    {% endblock %}
+
+    {% block messages %}
+        {% include 'components/messages.html.twig' %}
+    {% endblock %}
+{% endblock %}

@@ -33,20 +33,6 @@ class SecurityMailerService
     /**
      * @throws \Exception
      */
-    public function invite(User $user): int
-    {
-        $subject = $this->translator->trans('account.created');
-        $body = $this->mailer->getTwig()->render('email/invite.html.twig', [
-            'url' => $this->generateLoginUrl($user),
-            'subject' => $subject
-        ]);
-
-        return $this->mailer->send($subject, $body, $user->getEmail());
-    }
-
-    /**
-     * @throws \Exception
-     */
     public function requestVerification(User $user): int
     {
         $subject = $this->translator->trans('Account Verification');
@@ -104,6 +90,20 @@ class SecurityMailerService
         $this->em->flush();
 
         return $user;
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function invite(User $user): int
+    {
+        $subject = $this->translator->trans('account.created');
+        $body = $this->mailer->getTwig()->render('email/invite.html.twig', [
+            'url' => $this->generateLoginUrl($user),
+            'subject' => $subject
+        ]);
+
+        return $this->mailer->send($subject, $body, $user->getEmail());
     }
 
     /**

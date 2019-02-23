@@ -52,3 +52,10 @@ This link can only be used once, it expires after one day and nothing will happe
 You may now verify your account by clicking the button bellow: You may now verify your account by clicking the button bellow
 Account was created for this email at %app_name%: Account was created for this email at %app_name%
 account.created: Account Created
+Invalid access token:
+  Please try again: 'messages'
+You have successfully verified your account: 'messages'
+We sent you a verification email to confirm you are the owner of address <strong>%email%</strong>:
+  Didn't recive any email?: 'messages'
+Hey <strong>%email%</strong> email account owner:
+  You will shortly receive verification email: 'messages'
