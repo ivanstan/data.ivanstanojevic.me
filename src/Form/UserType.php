@@ -7,15 +7,11 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Email;
-use Symfony\Component\Validator\Constraints\Length;
-use Symfony\Component\Validator\Constraints\NotBlank;
 
 class UserType extends AbstractType
 {
@@ -27,24 +23,7 @@ class UserType extends AbstractType
         ]);
 
         if (!$options['edit']) {
-            $builder->add('password', RepeatedType::class, [
-                'type' => PasswordType::class,
-                'invalid_message' => 'user.property.password.validation.must_match',
-                'required' => true,
-                'first_options' => ['label' => 'user.property.password.title'],
-                'second_options' => ['label' => 'user.property.password.repeat'],
-                'constraints' => [
-                    new NotBlank([
-                        'groups' => 'profile_password',
-                        'message' => 'user.property.password.validation.not_blank',
-                    ]),
-                    new Length([
-                        'min' => 6,
-                        'minMessage' => 'user.property.password.validation.min_length',
-                        'max' => 4096,
-                    ]),
-                ],
-            ]);
+            $builder->add('password', PasswordChangeType::class, ['label' => false]);
         }
 
         $builder->add('roles', ChoiceType::class, [

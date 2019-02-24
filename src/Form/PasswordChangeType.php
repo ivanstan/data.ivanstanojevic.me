@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -30,6 +32,19 @@ class PasswordChangeType extends AbstractType
                     'max' => 4096,
                 ]),
             ],
-        ]);
+
+        ])->addModelTransformer(new CallbackTransformer(
+            function ($tagsAsArray) {
+                return $tagsAsArray;
+            },
+            function ($tagsAsString) {
+
+                if ($tagsAsString instanceof User) {
+                    return $tagsAsString->getPassword();
+                }
+
+                return $tagsAsString['password'];
+            }
+        ));
     }
 }

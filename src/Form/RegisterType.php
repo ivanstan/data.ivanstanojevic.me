@@ -21,24 +21,7 @@ class RegisterType extends AbstractType
             'constraints' => [new Email()],
             'required' => true,
         ]);
-        $builder->add('password', RepeatedType::class, [
-            'type' => PasswordType::class,
-            'invalid_message' => 'The password fields must match.',
-            'required' => true,
-            'first_options' => ['label' => 'Password'],
-            'second_options' => ['label' => 'Repeat Password'],
-            'constraints' => [
-                new NotBlank([
-                    'groups' => 'profile_password',
-                    'message' => 'Password should not be blank',
-                ]),
-                new Length([
-                    'min' => 6,
-                    'minMessage' => 'Your password should be at least 6 characters',
-                    'max' => 4096,
-                ]),
-            ],
-        ]);
+        $builder->add('password', PasswordChangeType::class, ['label' => false]);
 
     }
 
