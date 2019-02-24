@@ -39,12 +39,14 @@ class UserType extends AbstractType
                     return $key === User::ROLE_USER ? ['disabled' => 'disabled'] : [];
                 },
             ]);
-            $form->add('active', CheckboxType::class, [
-                'required' => false,
-            ]);
-            $form->add('verified', CheckboxType::class, [
-                'required' => false,
-            ]);
+
+            $options = ['required' => false];
+            if ($isNew) {
+                $options['data'] = true;
+            }
+
+            $form->add('active', CheckboxType::class, $options);
+            $form->add('verified', CheckboxType::class, $options);
 
             if ($isNew) {
                 $form->add('invite', CheckboxType::class, [
