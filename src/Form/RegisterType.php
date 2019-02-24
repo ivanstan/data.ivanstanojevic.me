@@ -5,13 +5,9 @@ namespace App\Form;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Email;
-use Symfony\Component\Validator\Constraints\Length;
-use Symfony\Component\Validator\Constraints\NotBlank;
 
 class RegisterType extends AbstractType
 {
@@ -21,7 +17,7 @@ class RegisterType extends AbstractType
             'constraints' => [new Email()],
             'required' => true,
         ]);
-        $builder->add('password', PasswordChangeType::class, ['label' => false]);
+        $builder->add('password', PasswordRepeatType::class, ['label' => false]);
 
     }
 

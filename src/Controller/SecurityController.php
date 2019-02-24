@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Form\PasswordChangeType;
+use App\Form\PasswordRepeatType;
 use App\Form\PasswordRecoveryType;
 use App\Form\RegisterType;
 use App\Security\SecurityMailerService;
@@ -50,7 +50,7 @@ class SecurityController extends AbstractController implements LoggerAwareInterf
     public function settings(Request $request): Response
     {
         $user = $this->getUser();
-        $form = $this->createForm(PasswordChangeType::class, $user);
+        $form = $this->createForm(PasswordRepeatType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

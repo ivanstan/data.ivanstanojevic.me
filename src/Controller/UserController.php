@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Form\PasswordChangeType;
+use App\Form\PasswordRepeatType;
 use App\Form\UserType;
 use App\Security\SecurityMailerService;
 use App\Service\Traits\TranslatorAwareTrait;
@@ -76,7 +76,7 @@ class UserController extends AbstractController implements LoggerAwareInterface
      */
     public function edit(Request $request, User $user): Response
     {
-        $form = $this->createForm(UserType::class, $user, ['edit' => true]);
+        $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -85,7 +85,7 @@ class UserController extends AbstractController implements LoggerAwareInterface
             return $this->redirectToRoute('user_index', ['id' => $user->getId(),]);
         }
 
-        $passwordForm = $this->createForm(PasswordChangeType::class, $user);
+        $passwordForm = $this->createForm(PasswordRepeatType::class, $user);
         $passwordForm->handleRequest($request);
 
         if ($passwordForm->isSubmitted() && $passwordForm->isValid()) {

@@ -8,10 +8,11 @@ use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
-class PasswordChangeType extends AbstractType
+class PasswordRepeatType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -34,16 +35,16 @@ class PasswordChangeType extends AbstractType
             ],
 
         ])->addModelTransformer(new CallbackTransformer(
-            function ($tagsAsArray) {
-                return $tagsAsArray;
+            function ($passwordAsArray) {
+                return $passwordAsArray;
             },
-            function ($tagsAsString) {
+            function ($passwordAsString) {
 
-                if ($tagsAsString instanceof User) {
-                    return $tagsAsString->getPassword();
+                if ($passwordAsString instanceof User) {
+                    return $passwordAsString->getPassword();
                 }
 
-                return $tagsAsString['password'];
+                return $passwordAsString['password'];
             }
         ));
     }
