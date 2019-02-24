@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Token;
 use App\Entity\User;
 use App\Form\PasswordRecoveryType;
 use App\Form\PasswordRepeatType;
@@ -113,9 +114,8 @@ class SecurityController extends AbstractController implements LoggerAwareInterf
 
             if ($user) {
                 $this->securityMailer->requestRecovery($user);
+                $this->logger->info(sprintf('User %s has requested password recovery', $user->getEmail()));
             }
-
-            $this->logger->info(sprintf('User %s has requested password recovery', $user->getEmail()));
 
             $this->addFlash('success', $this->translator->trans('user.messages.recovery.request'));
 

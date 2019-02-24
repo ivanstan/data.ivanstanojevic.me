@@ -58,12 +58,6 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @var string
-     * @ORM\Column(type="string", nullable=true)
-     */
-    private $token;
-
-    /**
      * @var bool
      * @ORM\Column(type="boolean", options={"default" : 0})
      */
@@ -136,16 +130,6 @@ class User implements UserInterface
     public function setPassword(string $password): void
     {
         $this->password = $password;
-    }
-
-    public function getToken(): string
-    {
-        return $this->token;
-    }
-
-    public function setToken(?string $token): void
-    {
-        $this->token = $token;
     }
 
     public function isActive(): bool

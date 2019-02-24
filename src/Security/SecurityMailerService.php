@@ -2,6 +2,7 @@
 
 namespace App\Security;
 
+use App\Entity\Token;
 use App\Entity\User;
 use App\Service\MailerService;
 use App\Service\Traits\TranslatorAwareTrait;
@@ -46,16 +47,18 @@ class SecurityMailerService
 
     public function verify(string $token): ?User
     {
-        $user = $this->em->getRepository(User::class)->findOneBy(['token' => $token]);
+        $token = $this->em->getRepository(Token::class)->findOneBy(['token' => $token, 'type' => Token::TYPE_VERIFY]);
 
-        if (!$user) {
+        if (!$token || !$token->getUser()) {
             return null;
         }
 
+        $user = $token->getUser();
+
         $this->securityService->login($user);
 
-        $user->setToken(null);
         $user->setVerified(true);
+        $this->em->remove($token);
         $this->em->flush();
 
         return $user;
@@ -77,16 +80,18 @@ class SecurityMailerService
 
     public function recover(string $token): ?User
     {
-        $user = $this->em->getRepository(User::class)->findOneBy(['token' => $token]);
+        $token = $this->em->getRepository(Token::class)->findOneBy(['token' => $token, 'type' => Token::TYPE_RECOVER]);
 
-        if (!$user) {
+        if (!$token || !$token->getUser()) {
             return null;
         }
 
+        $user = $token->getUser();
+
         $this->securityService->login($user);
 
-        $user->setToken(null);
         $user->setVerified(true);
+        $this->em->remove($token);
         $this->em->flush();
 
         return $user;
@@ -111,11 +116,13 @@ class SecurityMailerService
      */
     private function generateVerificationUrl(User $user): string
     {
-        $token = $this->generateToken();
-        $user->setToken($token);
+        $token = new Token($user, Token::TYPE_VERIFY);
+        $this->em->persist($token);
         $this->em->flush();
 
-        return $this->mailer->getGenerator()->generate('security_verification_token', ['token' => $token],
+        $this->em->flush();
+
+        return $this->mailer->getGenerator()->generate('security_verification_token', ['token' => $token->getToken()],
             UrlGeneratorInterface::ABSOLUTE_URL
         );
     }
@@ -125,20 +132,12 @@ class SecurityMailerService
      */
     private function generateLoginUrl(User $user): string
     {
-        $token = $this->generateToken();
-        $user->setToken($token);
+        $token = new Token($user);
+        $this->em->persist($token);
         $this->em->flush();
 
-        return $this->mailer->getGenerator()->generate('security_invitation_token', ['token' => $token],
+        return $this->mailer->getGenerator()->generate('security_invitation_token', ['token' => $token->getToken()],
             UrlGeneratorInterface::ABSOLUTE_URL
         );
-    }
-
-    /**
-     * @throws \Exception
-     */
-    private function generateToken(): string
-    {
-        return bin2hex(random_bytes(self::TOKEN_LENGTH));
     }
 }
