@@ -50,7 +50,7 @@ user:
     password:
       change: 'You have successfully changed your password.'
     register:
-      success: Account verification email has been sent.
+      success: Your account is created. Account verification email has been sent.
 
 settings:
   title: Settings

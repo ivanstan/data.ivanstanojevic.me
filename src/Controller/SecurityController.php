@@ -3,8 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Form\PasswordRepeatType;
 use App\Form\PasswordRecoveryType;
+use App\Form\PasswordRepeatType;
 use App\Form\RegisterType;
 use App\Security\SecurityMailerService;
 use App\Service\Traits\TranslatorAwareTrait;
@@ -82,6 +82,7 @@ class SecurityController extends AbstractController implements LoggerAwareInterf
             $user->setPassword($this->encoder->encodePassword($user, $user->getPassword()));
             $user->setActive(true);
             $user->setVerified(false);
+            $user->setRoles([User::ROLE_USER]);
             $entityManager->persist($user);
             $entityManager->flush();
 
@@ -89,7 +90,8 @@ class SecurityController extends AbstractController implements LoggerAwareInterf
 
             $this->securityMailer->requestVerification($user);
             $this->addFlash('success', $this->translator->trans('user.messages.register.success'));
-            $this->redirectToRoute('security_login');
+
+            return $this->redirectToRoute('security_login');
         }
 
         return $this->render('pages/security/register.html.twig', [
