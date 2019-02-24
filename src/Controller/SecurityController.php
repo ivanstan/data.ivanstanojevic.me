@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Token;
 use App\Entity\User;
 use App\Form\PasswordRecoveryType;
 use App\Form\PasswordRepeatType;

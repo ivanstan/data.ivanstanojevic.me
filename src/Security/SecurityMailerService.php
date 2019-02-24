@@ -53,6 +53,7 @@ class SecurityMailerService
             return null;
         }
 
+        /** @var User $user */
         $user = $token->getUser();
 
         $this->securityService->login($user);
@@ -86,6 +87,7 @@ class SecurityMailerService
             return null;
         }
 
+        /** @var User $user */
         $user = $token->getUser();
 
         $this->securityService->login($user);
