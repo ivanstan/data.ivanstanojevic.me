@@ -5,13 +5,19 @@
         {{ form_row(form.password) }}
     {% endif %}
 
+<div class="card pt-0 pl-3 mb-3">
     {{ form_row(form.roles) }}
+</div>
+
+<div class="card pt-3 pl-3 mb-3">
     {{ form_row(form.active) }}
     {{ form_row(form.verified) }}
-
     {% if form.invite is defined %}
         {{ form_row(form.invite) }}
     {% endif %}
+</div>
+
+
 
 <button class="btn btn-primary">{% trans %}Save{% endtrans %}</button>
 {{ form_end(form) }}
