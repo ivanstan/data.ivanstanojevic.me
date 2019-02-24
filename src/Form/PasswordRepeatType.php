@@ -17,18 +17,18 @@ class PasswordRepeatType extends AbstractType
     {
         $builder->add('password', RepeatedType::class, [
             'type' => PasswordType::class,
-            'invalid_message' => 'The password fields must match.',
+            'invalid_message' => 'user.property.password.validation.must_match',
             'required' => true,
-            'first_options' => ['label' => 'Password'],
-            'second_options' => ['label' => 'Repeat Password'],
+            'first_options' => ['label' => 'user.property.password.title'],
+            'second_options' => ['label' => 'user.property.password.repeat'],
             'constraints' => [
                 new NotBlank([
                     'groups' => 'profile_password',
-                    'message' => 'Password should not be blank',
+                    'message' => 'user.property.password.validation.not_blank',
                 ]),
                 new Length([
                     'min' => 6,
-                    'minMessage' => 'Your password should be at least 6 characters',
+                    'minMessage' => 'user.property.password.validation.min_length',
                     'max' => 4096,
                 ]),
             ],
