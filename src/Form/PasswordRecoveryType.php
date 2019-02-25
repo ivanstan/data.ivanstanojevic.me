@@ -13,6 +13,7 @@ class PasswordRecoveryType extends AbstractType
     {
         $builder->add('email', EmailType::class, [
             'constraints' => [new Email()],
+            'label' => 'user.property.email.title',
             'required' => true,
         ]);
     }

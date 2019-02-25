@@ -24,6 +24,7 @@ class UserType extends AbstractType
 
             $form->add('email', EmailType::class, [
                 'constraints' => [new Email()],
+                'label' => 'user.property.email.title',
                 'disabled' => !$isNew,
             ]);
 

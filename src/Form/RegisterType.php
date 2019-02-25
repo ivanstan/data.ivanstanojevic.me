@@ -16,6 +16,7 @@ class RegisterType extends AbstractType
         $builder->add('email', EmailType::class, [
             'constraints' => [new Email()],
             'required' => true,
+            'label' => 'user.property.email.title'
         ]);
         $builder->add('password', PasswordRepeatType::class, ['label' => false]);
 
