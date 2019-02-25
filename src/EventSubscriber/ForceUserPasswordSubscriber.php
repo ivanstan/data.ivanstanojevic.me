@@ -37,20 +37,26 @@ class ForceUserPasswordSubscriber implements EventSubscriberInterface
 
     public function onKernelController(FilterControllerEvent $event): void
     {
+        if (!$this->tokenStorage->getToken()) {
+            return;
+        }
+
         /** @var User $user */
         $user = $this->tokenStorage->getToken()->getUser();
 
-        if ($user && $user->getPassword() === null) {
-            if ($this->getControllerName($event) !== SecurityController::class && $event->getRequest()->getMethod() !== 'settings') {
+        if (!is_object($user) || $user->getPassword() !== null) {
+            return;
+        }
+
+        if ($this->getControllerName($event) !== SecurityController::class && $event->getRequest()->getMethod() !== 'settings') {
+            $redirectUrl = $this->urlGenerator->generate('security_settings');
+            $event->setController(function () use ($redirectUrl, $event) {
                 $event->getRequest()->getSession()->getFlashBag()->add('info',
                     $this->translator->trans('settings.password_is_null')
                 );
 
-                $redirectUrl = $this->urlGenerator->generate('security_settings');
-                $event->setController(function () use ($redirectUrl) {
-                    return new RedirectResponse($redirectUrl);
-                });
-            }
+                return new RedirectResponse($redirectUrl);
+            });
         }
     }
 

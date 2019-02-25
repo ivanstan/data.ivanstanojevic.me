@@ -36,6 +36,8 @@ user:
     invite:
       title: 'Send invitation email'
   messages:
+    misc:
+      deleting_own_user: You can't delete your own account.
     invitation:
       success: 'You have successfully verified your account.'
       bad_token: 'Link you used to verify your account is no longer valid.'

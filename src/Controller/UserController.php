@@ -111,6 +111,15 @@ class UserController extends AbstractController implements LoggerAwareInterface
      */
     public function delete(Request $request, User $user): Response
     {
+        /** @var User $currentUser */
+        $currentUser = $this->getUser();
+
+        if ($currentUser->getId() === $user->getId()) {
+            $this->addFlash('warning', $this->translator->trans('user.messages.misc.deleting_own_user'));
+
+            return $this->redirectToRoute('user_index');
+        }
+
         if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($user);
