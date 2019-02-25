@@ -61,12 +61,11 @@ class SecurityService
         $this->eventDispatcher->dispatch('security.interactive_login', $event);
     }
 
-
     public function verify(string $token): ?User
     {
-        $token = $this->em->getRepository(Token::class)->findOneBy(['token' => $token, 'type' => Token::TYPE_VERIFY]);
+        $token = $this->em->getRepository(Token::class)->getVerificationToken($token);
 
-        if (!$token || !$token->getUser()) {
+        if (!$token || !$token->getUser() || !$this->isTokenValid($token)) {
             return null;
         }
 
@@ -84,9 +83,9 @@ class SecurityService
 
     public function recover(string $token): ?User
     {
-        $token = $this->em->getRepository(Token::class)->findOneBy(['token' => $token, 'type' => Token::TYPE_RECOVER]);
+        $token = $this->em->getRepository(Token::class)->getRecoveryToken($token);
 
-        if (!$token || !$token->getUser()) {
+        if (!$token || !$token->getUser() || !$this->isTokenValid($token)) {
             return null;
         }
 
@@ -100,5 +99,12 @@ class SecurityService
         $this->em->flush();
 
         return $user;
+    }
+
+    private function isTokenValid(Token $token): bool
+    {
+        $interval = new \DateInterval('P1D');
+
+        return $token->getDateTime()->add($interval) > new \DateTime('now', new \DateTimeZone('UTC'));
     }
 }
