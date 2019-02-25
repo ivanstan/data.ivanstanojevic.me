@@ -48,7 +48,11 @@ class UserController extends AbstractController implements LoggerAwareInterface
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-            $user->setPassword($this->encoder->encodePassword($user, $user->getPassword()));
+
+            if ($user->getPassword()) {
+                $user->setPassword($this->encoder->encodePassword($user, $user->getPassword()));
+            }
+
             $entityManager->persist($user);
             $entityManager->flush();
 

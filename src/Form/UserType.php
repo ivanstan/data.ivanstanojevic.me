@@ -29,7 +29,7 @@ class UserType extends AbstractType
             ]);
 
             if ($isNew) {
-                $form->add('password', PasswordRepeatType::class, ['label' => false]);
+                $form->add('password', PasswordRepeatType::class, ['label' => false, 'required' => false]);
             }
 
             $form->add('roles', ChoiceType::class, [

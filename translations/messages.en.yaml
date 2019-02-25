@@ -55,6 +55,7 @@ user:
 settings:
   title: Settings
   change_password: Change Password
+  password_is_null: Please set your password to continue using application.
 
 register:
   title: Register
