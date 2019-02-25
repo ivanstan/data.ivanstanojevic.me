@@ -2,7 +2,9 @@
 
 namespace App\Security;
 
+use App\Entity\Token;
 use App\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -12,15 +14,23 @@ use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 class SecurityService
 {
+    /** @var EntityManagerInterface */
+    private $em;
+
+    /** @var RequestStack  */
     private $requestStack;
 
+    /** @var TokenStorageInterface  */
     private $tokenStorage;
 
+    /** @var EventDispatcherInterface  */
     private $eventDispatcher;
 
+    /** @var SessionInterface  */
     private $session;
 
     public function __construct(
+        EntityManagerInterface $em,
         RequestStack $requestStack,
         TokenStorageInterface $tokenStorage,
         EventDispatcherInterface $eventDispatcher,
@@ -30,6 +40,7 @@ class SecurityService
         $this->tokenStorage = $tokenStorage;
         $this->eventDispatcher = $eventDispatcher;
         $this->session = $session;
+        $this->em = $em;
     }
 
     public function login(User $user): void
@@ -48,5 +59,46 @@ class SecurityService
 
         $event = new InteractiveLoginEvent($this->requestStack->getMasterRequest(), $token);
         $this->eventDispatcher->dispatch('security.interactive_login', $event);
+    }
+
+
+    public function verify(string $token): ?User
+    {
+        $token = $this->em->getRepository(Token::class)->findOneBy(['token' => $token, 'type' => Token::TYPE_VERIFY]);
+
+        if (!$token || !$token->getUser()) {
+            return null;
+        }
+
+        /** @var User $user */
+        $user = $token->getUser();
+
+        $this->login($user);
+
+        $user->setVerified(true);
+        $this->em->remove($token);
+        $this->em->flush();
+
+        return $user;
+    }
+
+    public function recover(string $token): ?User
+    {
+        $token = $this->em->getRepository(Token::class)->findOneBy(['token' => $token, 'type' => Token::TYPE_RECOVER]);
+
+        if (!$token || !$token->getUser()) {
+            return null;
+        }
+
+        /** @var User $user */
+        $user = $token->getUser();
+
+        $this->login($user);
+
+        $user->setVerified(true);
+        $this->em->remove($token);
+        $this->em->flush();
+
+        return $user;
     }
 }

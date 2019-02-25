@@ -13,22 +13,14 @@ class SecurityMailerService
 {
     use TranslatorAwareTrait;
 
-    private const TOKEN_LENGTH = 24;
-
     private $em;
 
     private $mailer;
 
-    private $securityService;
-
-    public function __construct(
-        MailerService $mailer,
-        EntityManagerInterface $em,
-        SecurityService $securityService
-    ) {
+    public function __construct(EntityManagerInterface $em, MailerService $mailer)
+    {
         $this->em = $em;
         $this->mailer = $mailer;
-        $this->securityService = $securityService;
     }
 
     /**
@@ -45,26 +37,6 @@ class SecurityMailerService
         return $this->mailer->send($subject, $body, $user->getEmail());
     }
 
-    public function verify(string $token): ?User
-    {
-        $token = $this->em->getRepository(Token::class)->findOneBy(['token' => $token, 'type' => Token::TYPE_VERIFY]);
-
-        if (!$token || !$token->getUser()) {
-            return null;
-        }
-
-        /** @var User $user */
-        $user = $token->getUser();
-
-        $this->securityService->login($user);
-
-        $user->setVerified(true);
-        $this->em->remove($token);
-        $this->em->flush();
-
-        return $user;
-    }
-
     /**
      * @throws \Exception
      */
@@ -77,26 +49,6 @@ class SecurityMailerService
         ]);
 
         return $this->mailer->send($subject, $body, $user->getEmail());
-    }
-
-    public function recover(string $token): ?User
-    {
-        $token = $this->em->getRepository(Token::class)->findOneBy(['token' => $token, 'type' => Token::TYPE_RECOVER]);
-
-        if (!$token || !$token->getUser()) {
-            return null;
-        }
-
-        /** @var User $user */
-        $user = $token->getUser();
-
-        $this->securityService->login($user);
-
-        $user->setVerified(true);
-        $this->em->remove($token);
-        $this->em->flush();
-
-        return $user;
     }
 
     /**

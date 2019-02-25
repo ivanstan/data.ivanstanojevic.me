@@ -7,6 +7,7 @@ use App\Form\PasswordRecoveryType;
 use App\Form\PasswordRepeatType;
 use App\Form\RegisterType;
 use App\Security\SecurityMailerService;
+use App\Security\SecurityService;
 use App\Service\Traits\TranslatorAwareTrait;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
@@ -23,14 +24,24 @@ class SecurityController extends AbstractController implements LoggerAwareInterf
     use TranslatorAwareTrait;
     use LoggerAwareTrait;
 
+    /** @var SecurityMailerService  */
     private $securityMailer;
 
+    /** @var UserPasswordEncoderInterface  */
     private $encoder;
 
-    public function __construct(SecurityMailerService $securityMailer, UserPasswordEncoderInterface $encoder)
+    /** @var SecurityService */
+    private $securityService;
+
+    public function __construct(
+        SecurityMailerService $securityMailer,
+        UserPasswordEncoderInterface $encoder,
+        SecurityService $securityService
+    )
     {
         $this->securityMailer = $securityMailer;
         $this->encoder = $encoder;
+        $this->securityService = $securityService;
     }
 
     /**
@@ -158,7 +169,7 @@ class SecurityController extends AbstractController implements LoggerAwareInterf
      */
     public function verifyToken(string $token): RedirectResponse
     {
-        $user = $this->securityMailer->verify($token);
+        $user = $this->securityService->verify($token);
 
         if ($user === null) {
             $this->addFlash('danger', $this->translator->trans('user.messages.verify.bad_token'));
@@ -178,7 +189,7 @@ class SecurityController extends AbstractController implements LoggerAwareInterf
      */
     public function recoverToken(string $token): RedirectResponse
     {
-        $user = $this->securityMailer->recover($token);
+        $user = $this->securityService->recover($token);
 
         if ($user === null) {
             $this->addFlash('danger', $this->translator->trans('user.messages.recovery.bad_token'));
@@ -198,7 +209,7 @@ class SecurityController extends AbstractController implements LoggerAwareInterf
      */
     public function invitation(string $token)
     {
-        $user = $this->securityMailer->recover($token);
+        $user = $this->securityService->recover($token);
 
         if ($user === null) {
             $this->addFlash('danger', $this->translator->trans('user.messages.invitation.bad_token'));
