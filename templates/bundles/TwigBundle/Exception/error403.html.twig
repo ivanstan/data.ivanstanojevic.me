@@ -1,9 +1,6 @@
 {% extends 'bundles/TwigBundle/Exception/error.html.twig' %}
 
 {% block content %}
-    <h1>{% trans %}Forbidden{% endtrans %}</h1>
-
-    <p>
-        {{ 'The requested page couldn\'t be located. Checkout for any URL misspelling or <a href="%path%">return to the homepage</a>.'|trans({'%path%': path('app_index')})|raw }}
-    </p>
+    <h1 class="my-3">{{ 'error.403.title'|trans }}</h1>
+    <p>{{ 'error.403.message'|trans({'%path%': path('app_index')})|raw }}</p>
 {% endblock %}

@@ -49,6 +49,8 @@ user:
       request: Hey <strong>%email%</strong> email account owner. You will shortly receive verification email.
       success: Account verified successfully.
       bad_token: 'Link you used to verify your account is no longer valid.'
+      notice: <b>Please verify account.</b> We sent you a verification email to confirm that you are the owner of address <strong>%email%</strong>. Didn't recive any email?
+      resend: Resend
     password:
       change: 'You have successfully changed your password.'
     register:
@@ -103,6 +105,17 @@ email:
     explanation: You may now log in by clicking the button bellow.
     footer: This link can only be used once to log in and will lead you to a page where you can set your password. It expires after one day and nothing will happen if it's not used.
     cta: Verify my account
+
+error:
+  500:
+    title: Page Error
+    message: The requested page couldn\'t be located. Checkout for any URL misspelling or <a href="%path%">return to the homepage</a>.
+  403:
+    title: Forbidden
+    message: You don't have permission to access this page. Checkout for any URL misspelling or <a href="%path%">return to the homepage</a>.
+  404:
+    title: Page Not Found
+    message: The requested page couldn\'t be located. Checkout for any URL misspelling or <a href="%path%">return to the homepage</a>.
 
 misc:
   messages:

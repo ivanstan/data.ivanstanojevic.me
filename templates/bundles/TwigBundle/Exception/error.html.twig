@@ -6,10 +6,8 @@
         <div class="row">
             <div class="col-12">
                 {% block content %}
-                    <h1 class="my-3">{% trans %}Page error{% endtrans %}</h1>
-                    <p>
-                        {{ 'The requested page couldn\'t be located. Checkout for any URL misspelling or <a href="%path%">return to the homepage</a>.'|trans({'%path%': path('app_index')})|raw }}
-                    </p>
+                    <h1 class="my-3">{{ 'error.500.title'|trans }}</h1>
+                    <p>{{ 'error.500.message'|trans({'%path%': path('app_index')})|raw }}</p>
                 {% endblock %}
             </div>
         </div>
