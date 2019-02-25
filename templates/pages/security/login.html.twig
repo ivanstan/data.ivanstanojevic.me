@@ -3,10 +3,10 @@
 {% block title %}{% trans %}login.title{% endtrans %} | {{ parent() }}{% endblock %}
 
 {% block body %}
-    <div class="container">
-        <div class="row">
+    <div class="container vertical-align">
+        <div class="row align-items-center">
             <div class="col-lg-6 mx-auto">
-                <h3>{% trans %}login.title{% endtrans %}</h3>
+                <h3 class="mb-3">{% trans %}login.title{% endtrans %}</h3>
                 {% include 'pages/security/_login_form.html.twig' %}
             </div>
         </div>
