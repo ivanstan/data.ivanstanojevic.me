@@ -20,6 +20,7 @@ class UserController extends AbstractController implements LoggerAwareInterface
     use TranslatorAwareTrait;
     use LoggerAwareTrait;
 
+    /** @var UserPasswordEncoderInterface */
     private $encoder;
 
     public function __construct(UserPasswordEncoderInterface $encoder)

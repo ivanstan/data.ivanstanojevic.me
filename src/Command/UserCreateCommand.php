@@ -15,8 +15,10 @@ class UserCreateCommand extends Command
 {
     protected const NAME = 'user:create';
 
+    /** @var EntityManagerInterface  */
     private $em;
 
+    /** @var UserPasswordEncoderInterface  */
     private $encoder;
 
     public function __construct(EntityManagerInterface $em, UserPasswordEncoderInterface $encoder)

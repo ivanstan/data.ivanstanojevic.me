@@ -13,8 +13,10 @@ class SecurityMailerService
 {
     use TranslatorAwareTrait;
 
+    /** @var EntityManagerInterface  */
     private $em;
 
+    /** @var MailerService  */
     private $mailer;
 
     public function __construct(EntityManagerInterface $em, MailerService $mailer)

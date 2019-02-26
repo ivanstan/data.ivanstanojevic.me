@@ -7,12 +7,16 @@ use Symfony\Component\Templating\EngineInterface;
 
 class MailerService
 {
+    /** @var \Swift_Mailer  */
     private $mailer;
 
+    /** @var EngineInterface  */
     private $twig;
 
+    /** @var UrlGeneratorInterface  */
     private $generator;
 
+    /** @var string */
     private $mailFrom;
 
     public function __construct(
