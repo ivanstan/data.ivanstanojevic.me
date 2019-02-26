@@ -25,16 +25,16 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     use TargetPathTrait;
     use TranslatorAwareTrait;
 
-    /** @var EntityManagerInterface  */
+    /** @var EntityManagerInterface */
     private $entityManager;
 
-    /** @var RouterInterface  */
+    /** @var RouterInterface */
     private $router;
 
-    /** @var CsrfTokenManagerInterface  */
+    /** @var CsrfTokenManagerInterface */
     private $csrfTokenManager;
 
-    /** @var UserPasswordEncoderInterface  */
+    /** @var UserPasswordEncoderInterface */
     private $passwordEncoder;
 
     public function __construct(

@@ -17,16 +17,16 @@ class SecurityService
     /** @var EntityManagerInterface */
     private $em;
 
-    /** @var RequestStack  */
+    /** @var RequestStack */
     private $requestStack;
 
-    /** @var TokenStorageInterface  */
+    /** @var TokenStorageInterface */
     private $tokenStorage;
 
-    /** @var EventDispatcherInterface  */
+    /** @var EventDispatcherInterface */
     private $eventDispatcher;
 
-    /** @var SessionInterface  */
+    /** @var SessionInterface */
     private $session;
 
     public function __construct(

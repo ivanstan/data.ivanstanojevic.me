@@ -7,13 +7,13 @@ use Symfony\Component\Templating\EngineInterface;
 
 class MailerService
 {
-    /** @var \Swift_Mailer  */
+    /** @var \Swift_Mailer */
     private $mailer;
 
-    /** @var EngineInterface  */
+    /** @var EngineInterface */
     private $twig;
 
-    /** @var UrlGeneratorInterface  */
+    /** @var UrlGeneratorInterface */
     private $generator;
 
     /** @var string */
