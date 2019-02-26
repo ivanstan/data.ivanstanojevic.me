@@ -105,6 +105,6 @@ class SecurityService
     {
         $interval = new \DateInterval('P1D');
 
-        return $token->getDateTime()->add($interval) > new \DateTime('now', new \DateTimeZone('UTC'));
+        return $token->getDateTime()->add($interval) >= new \DateTime('now', new \DateTimeZone('UTC'));
     }
 }
