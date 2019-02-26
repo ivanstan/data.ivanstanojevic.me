@@ -172,7 +172,9 @@ class SecurityController extends AbstractController implements LoggerAwareInterf
         $user = $this->securityService->verify($token);
 
         if ($user === null) {
-            $this->addFlash('danger', $this->translator->trans('user.messages.verify.bad_token'));
+            $this->addFlash('danger', $this->translator->trans('user.messages.verify.bad_token', [
+                '%url%' => $this->generateUrl('security_recovery'),
+            ]));
 
             return $this->redirectToRoute('security_recovery');
         }
@@ -192,7 +194,9 @@ class SecurityController extends AbstractController implements LoggerAwareInterf
         $user = $this->securityService->recover($token);
 
         if ($user === null) {
-            $this->addFlash('danger', $this->translator->trans('user.messages.recovery.bad_token'));
+            $this->addFlash('danger', $this->translator->trans('user.messages.recovery.bad_token', [
+                '%url%' => $this->generateUrl('security_recovery'),
+            ]));
 
             return $this->redirectToRoute('security_recovery');
         }
@@ -212,7 +216,9 @@ class SecurityController extends AbstractController implements LoggerAwareInterf
         $user = $this->securityService->recover($token);
 
         if ($user === null) {
-            $this->addFlash('danger', $this->translator->trans('user.messages.invitation.bad_token'));
+            $this->addFlash('danger', $this->translator->trans('user.messages.invitation.bad_token', [
+                '%url%' => $this->generateUrl('security_recovery'),
+            ]));
 
             return $this->redirectToRoute('security_recovery');
         }

@@ -40,15 +40,15 @@ user:
       deleting_own_user: You can't delete your own account.
     invitation:
       success: 'You have successfully verified your account.'
-      bad_token: 'Link you used to verify your account is no longer valid.'
+      bad_token: Your invitation has expired. Use <a href="%url%">Password Recovery</a> to receive a new account recovery mail.
     recovery:
       request: Recovery instructions are sent to email.
       success: 'Authenticated successfully. You may now change your password.'
-      bad_token: 'Link you used to verify your account is no longer valid.'
+      bad_token: Link you used to recover your account has expired. Use <a href="%url%">Password Recovery</a> to receive a new account recovery mail.
     verify:
       request: Hey <strong>%email%</strong> email account owner. You will shortly receive verification email.
       success: Account verified successfully.
-      bad_token: 'Link you used to verify your account is no longer valid.'
+      bad_token: Link you used to verify your account has expired. Use <a href="%url%">Password Recovery</a> to receive a new verification mail.
       notice: <b>Please verify account.</b> We sent you a verification email to confirm that you are the owner of address <strong>%email%</strong>. Didn't recive any email?
       resend: Resend
     password:
@@ -67,7 +67,7 @@ register:
   submit: Register
 
 recovery:
-  title: Recover password
+  title: Password recovery
   submit: Submit
 
 login:
@@ -92,19 +92,19 @@ email:
     heading: Account was created for this email at %app_name%.
     explanation: You may now log in by clicking the button bellow.
     footer: This link can only be used once to log in and will lead you to a page where you can set your password. It expires after one day and nothing will happen if it's not used.
-    cta: Accept invitation
+    cta: Accept Invitation
   recovery:
     subject: Password Recovery
     heading: A request to reset the password for your account has been made at %app_name%.
     explanation: You may now log in by clicking the button bellow.
     footer: This link can only be used once to log in and will lead you to a page where you can set your password. It expires after one day and nothing will happen if it's not used.
-    cta: Recover my account
+    cta: Recover Account
   verify:
     subject: Account Verification
     heading: Account was created for this email at %app_name%.
     explanation: You may now log in by clicking the button bellow.
     footer: This link can only be used once to log in and will lead you to a page where you can set your password. It expires after one day and nothing will happen if it's not used.
-    cta: Verify my account
+    cta: Verify Account
 
 error:
   500:
@@ -119,5 +119,5 @@ error:
 
 misc:
   messages:
-    invalid_csrf: Ops! This form has expired. Please refresh and try again.
+    invalid_csrf: This form has expired. Please refresh and try again.
     email_fail: We are unable to send email at the moment. Please try again later.
