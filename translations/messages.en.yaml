@@ -1,123 +1,145 @@
-user:
-  actions:
-    create: Create
-  property:
-    email:
-      title: Email
-    password:
-      title: Password
-      repeat: Repeat Password
-      validation:
-        min_length: 'Your password should be at least 6 characters'
-        not_blank: 'Password should not be blank'
-        must_match: 'The password fields must match.'
-    roles:
-      title: Roles
-    active:
-      title: Active
-    verified:
-      title: Verified
-    last_login:
-      title: 'Last Login'
-    ip:
-      title: IP
-  verified:
-    value_true: Yes
-    value_false: No
-  active:
-    value_true: Yes
-    value_false: No
-  index:
-    title: Users
-    table:
-      actions: Actions
-      empty: 'No users have been created so far.'
-  form:
-    invite:
-      title: 'Send invitation email'
-  messages:
-    misc:
-      deleting_own_user: You can't delete your own account.
-    invitation:
-      success: 'You have successfully verified your account.'
-      bad_token: Your invitation has expired. Use <a href="%url%">Password Recovery</a> to receive a new account recovery mail.
-    recovery:
-      request: Recovery instructions are sent to email.
-      success: 'Authenticated successfully. You may now change your password.'
-      bad_token: Link you used to recover your account has expired. Use <a href="%url%">Password Recovery</a> to receive a new account recovery mail.
-    verify:
-      request: Hey <strong>%email%</strong> email account owner. You will shortly receive verification email.
-      success: Account verified successfully.
-      bad_token: Link you used to verify your account has expired. Use <a href="%url%">Password Recovery</a> to receive a new verification mail.
-      notice: <b>Please verify account.</b> We sent you a verification email to confirm that you are the owner of address <strong>%email%</strong>. Didn't recive any email?
-      resend: Resend
-    password:
-      change: 'You have successfully changed your password.'
-    register:
-      success: Your account is created. Account verification email has been sent.
-
-settings:
-  title: Settings
-  change_password: Change Password
-  password_is_null: Please set your password to continue using application.
-
-register:
-  title: Register
-  goto_login: Already have account? Login.
-  submit: Register
-
-recovery:
-  title: Password recovery
-  submit: Submit
-
+email:
+  invite:
+    cta: Accept Invitation
+    explanation: You may now log in by clicking the button bellow.
+    footer: >-
+      This link can only be used once to log in and will lead you to a page
+      where you can set your password. It expires after one day and nothing will
+      happen if it's not used.
+    heading: Account was created for this email at %app_name%.
+    subject: Account Created
+  recovery:
+    cta: Recover Account
+    explanation: You may now log in by clicking the button bellow.
+    footer: >-
+      This link can only be used once to log in and will lead you to a page
+      where you can set your password. It expires after one day and nothing will
+      happen if it's not used.
+    heading: >-
+      A request to reset the password for your account has been made at
+      %app_name%.
+    subject: Password Recovery
+  verify:
+    cta: Verify Account
+    explanation: You may now log in by clicking the button bellow.
+    footer: >-
+      This link can only be used once to log in and will lead you to a page
+      where you can set your password. It expires after one day and nothing will
+      happen if it's not used.
+    heading: Account was created for this email at %app_name%.
+    subject: Account Verification
+error:
+  '403':
+    message: >-
+      You don't have permission to access this page. Checkout for any URL
+      misspelling or <a href="%path%">return to the homepage</a>.
+    title: Forbidden
+  '404':
+    message: >-
+      The requested page could not be located. Checkout for any URL misspelling
+      or <a href="%path%">return to the homepage</a>.
+    title: Page Not Found
+  '500':
+    message: >-
+      The requested page could not be located. Checkout for any URL misspelling
+      or <a href="%path%">return to the homepage</a>.
+    title: Page Error
 login:
-  title: Login
-  remember_me: Keep me logged in
   links:
-      goto_recovery: Forgot password?
-      goto_register: New here? Register.
+    goto_recovery: Forgot password?
+    goto_register: New here? Register.
   messages:
-    bad_credentials: Wrong email or password. Have you forgot your password? Try visiting "Password Recovery" link bellow and we will send you maginc login link to your email.
-    user_blocked: How unfortunate, your account is blocked. Is this a mistake? Please contact our customer support to resolve this issue.
+    bad_credentials: >-
+      Wrong email or password. Have you forgot your password? Try visiting
+      "Password Recovery" link bellow and we will send you login link to your
+      email.
+    user_blocked: >-
+      How unfortunate, your account is blocked. Is this a mistake? Please
+      contact our customer support to resolve this issue.
+  remember_me: Keep me logged in
+  title: Login
 logout:
   title: Logout
-
+misc:
+  messages:
+    email_fail: We are unable to send email at the moment. Please try again later.
+    invalid_csrf: This form has expired. Please refresh and try again.
 navigation:
   index: Index
   users: Users
-
-email:
-  invite:
-    subject: Account Created
-    heading: Account was created for this email at %app_name%.
-    explanation: You may now log in by clicking the button bellow.
-    footer: This link can only be used once to log in and will lead you to a page where you can set your password. It expires after one day and nothing will happen if it's not used.
-    cta: Accept Invitation
-  recovery:
-    subject: Password Recovery
-    heading: A request to reset the password for your account has been made at %app_name%.
-    explanation: You may now log in by clicking the button bellow.
-    footer: This link can only be used once to log in and will lead you to a page where you can set your password. It expires after one day and nothing will happen if it's not used.
-    cta: Recover Account
-  verify:
-    subject: Account Verification
-    heading: Account was created for this email at %app_name%.
-    explanation: You may now log in by clicking the button bellow.
-    footer: This link can only be used once to log in and will lead you to a page where you can set your password. It expires after one day and nothing will happen if it's not used.
-    cta: Verify Account
-
-error:
-  500:
-    title: Page Error
-    message: The requested page couldn\'t be located. Checkout for any URL misspelling or <a href="%path%">return to the homepage</a>.
-  403:
-    title: Forbidden
-    message: You don't have permission to access this page. Checkout for any URL misspelling or <a href="%path%">return to the homepage</a>.
-  404:
-    title: Page Not Found
-    message: The requested page couldn\'t be located. Checkout for any URL misspelling or <a href="%path%">return to the homepage</a>.
-
-misc:
+recovery:
+  submit: Submit
+  title: Password recovery
+register:
+  goto_login: Already have account? Login.
+  submit: Register
+  title: Register
+settings:
+  change_password: Change Password
+  password_is_null: Please set your password to continue using application.
+  title: Settings
+user:
+  actions:
+    create: Create
+  active:
+    value_false: 'No'
+    value_true: 'Yes'
+  form:
+    invite:
+      title: Send invitation email
+  index:
+    table:
+      actions: Actions
+      empty: No users have been created so far.
+    title: Users
   messages:
-    invalid_csrf: This form has expired. Please refresh and try again.
-    email_fail: We are unable to send email at the moment. Please try again later.
+    invitation:
+      bad_token: >-
+        Your invitation has expired. Use <a href="%url%">Password Recovery</a>
+        to receive a new account recovery mail.
+      success: You have successfully verified your account.
+    misc:
+      deleting_own_user: You can't delete your own account.
+    password:
+      change: You have successfully changed your password.
+    recovery:
+      bad_token: >-
+        Link you used to recover your account has expired. Use <a
+        href="%url%">Password Recovery</a> to receive a new account recovery
+        mail.
+      request: Recovery instructions are sent to email.
+      success: Authenticated successfully. You may now change your password.
+    register:
+      success: Your account is created. Account verification email has been sent.
+    verify:
+      bad_token: >-
+        Link you used to verify your account has expired. Use <a
+        href="%url%">Password Recovery</a> to receive a new verification mail.
+      notice: >-
+        <b>Please verify account.</b> We sent you a verification email to
+        confirm that you are the owner of address <strong>%email%</strong>.
+        Didn't receive any email?
+      request: >-
+        Hey <strong>%email%</strong> email account owner. You will shortly
+        receive verification email.
+      resend: Resend
+      success: Account verified successfully.
+  property:
+    active:
+      title: Active
+    email:
+      title: Email
+    ip:
+      title: IP
+    last_login:
+      title: Last Login
+    password:
+      repeat: Repeat Password
+      title: Password
+    roles:
+      title: Roles
+    verified:
+      title: Verified
+  verified:
+    value_false: 'No'
+    value_true: 'Yes'
