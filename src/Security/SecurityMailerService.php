@@ -32,8 +32,8 @@ class SecurityMailerService
     {
         $subject = $this->translator->trans('email.verify.subject');
         $body = $this->mailer->getTwig()->render('email/verify.html.twig', [
-            'url' => $this->generateVerificationUrl($user),
-            'subject' => $subject
+            'url' => $this->generateUrl($user, SecurityService::VERIFICATION),
+            'subject' => $subject,
         ]);
 
         return $this->mailer->send($subject, $body, $user->getEmail());
@@ -46,8 +46,8 @@ class SecurityMailerService
     {
         $subject = $this->translator->trans('email.recovery.subject');
         $body = $this->mailer->getTwig()->render('email/recovery.html.twig', [
-            'url' => $this->generateLoginUrl($user),
-            'subject' => $subject
+            'url' => $this->generateUrl($user, SecurityService::RECOVERY),
+            'subject' => $subject,
         ]);
 
         return $this->mailer->send($subject, $body, $user->getEmail());
@@ -60,8 +60,8 @@ class SecurityMailerService
     {
         $subject = $this->translator->trans('email.invite.subject');
         $body = $this->mailer->getTwig()->render('email/invite.html.twig', [
-            'url' => $this->generateLoginUrl($user),
-            'subject' => $subject
+            'url' => $this->generateUrl($user, SecurityService::INVITATION),
+            'subject' => $subject,
         ]);
 
         return $this->mailer->send($subject, $body, $user->getEmail());
@@ -70,29 +70,15 @@ class SecurityMailerService
     /**
      * @throws \Exception
      */
-    private function generateVerificationUrl(User $user): string
+    private function generateUrl(User $user, string $type): string
     {
-        $token = new Token($user, Token::TYPE_VERIFY);
+        $token = new Token($user, SecurityService::VERIFICATION === $type ? Token::TYPE_VERIFICATION : Token::TYPE_RECOVERY);
         $this->em->persist($token);
         $this->em->flush();
 
         $this->em->flush();
 
-        return $this->mailer->getGenerator()->generate('security_verification_token', ['token' => $token->getToken()],
-            UrlGeneratorInterface::ABSOLUTE_URL
-        );
-    }
-
-    /**
-     * @throws \Exception
-     */
-    private function generateLoginUrl(User $user): string
-    {
-        $token = new Token($user);
-        $this->em->persist($token);
-        $this->em->flush();
-
-        return $this->mailer->getGenerator()->generate('security_invitation_token', ['token' => $token->getToken()],
+        return $this->mailer->getGenerator()->generate($type, ['token' => $token->getToken()],
             UrlGeneratorInterface::ABSOLUTE_URL
         );
     }

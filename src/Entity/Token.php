@@ -9,8 +9,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Token
 {
-    public const TYPE_VERIFY = 'verify';
-    public const TYPE_RECOVER = 'recover';
+    public const TYPE_VERIFICATION = 'verify';
+    public const TYPE_RECOVERY = 'recover';
 
     private const TOKEN_LENGTH = 24;
 
@@ -50,7 +50,7 @@ class Token
     /**
      * @throws \Exception
      */
-    public function __construct(User $user, string $type = self::TYPE_RECOVER)
+    public function __construct(User $user, string $type = self::TYPE_RECOVERY)
     {
         $this->dateTime = new \DateTime('now', new \DateTimeZone('UTC'));
         $this->token = bin2hex(random_bytes(self::TOKEN_LENGTH));

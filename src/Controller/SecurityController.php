@@ -166,67 +166,46 @@ class SecurityController extends AbstractController implements LoggerAwareInterf
 
     /**
      * @Route("/verify/{token}", name="security_verification_token")
-     */
-    public function verifyToken(string $token): RedirectResponse
-    {
-        $user = $this->securityService->verify($token);
-
-        if ($user === null) {
-            $this->addFlash('danger', $this->translator->trans('user.messages.verify.bad_token', [
-                '%url%' => $this->generateUrl('security_recovery'),
-            ]));
-
-            return $this->redirectToRoute('security_recovery');
-        }
-
-        $this->logger->info(sprintf('User %s has verified', $user->getEmail()));
-
-        $this->addFlash('success', $this->translator->trans('user.messages.verify.success'));
-
-        return $this->redirectToRoute('app_index');
-    }
-
-    /**
      * @Route("/recover-password/{token}", name="security_recovery_token")
-     */
-    public function recoverToken(string $token): RedirectResponse
-    {
-        $user = $this->securityService->recover($token);
-
-        if ($user === null) {
-            $this->addFlash('danger', $this->translator->trans('user.messages.recovery.bad_token', [
-                '%url%' => $this->generateUrl('security_recovery'),
-            ]));
-
-            return $this->redirectToRoute('security_recovery');
-        }
-
-        $this->logger->info(sprintf('User %s has used login token', $user->getEmail()));
-
-        $this->addFlash('success', $this->translator->trans('user.messages.recovery.success'));
-
-        return $this->redirectToRoute('security_settings');
-    }
-
-    /**
      * @Route("/invitation/{token}", name="security_invitation_token")
      */
-    public function invitation(string $token)
+    public function verifyToken(Request $request, string $token): RedirectResponse
     {
-        $user = $this->securityService->recover($token);
+        switch ($request->get('_route')) {
+            case 'security_verification_token': // verification
+                $redirect = 'app_index';
+                $failMessageId = 'user.messages.verify.bad_token';
+                $successMessage = $this->translator->trans('user.messages.verify.success');
+                $logMessage = 'User %s has verified';
+                $user = $this->securityService->verify($token);
+                break;
+            case 'security_recovery_token': // recovery
+                $redirect = 'security_settings';
+                $failMessageId = 'user.messages.recovery.bad_token';
+                $successMessage = $this->translator->trans('user.messages.recovery.success');
+                $logMessage = 'User %s has used login token';
+                $user = $this->securityService->recover($token);
+                break;
+            default: // invitation
+                $redirect = 'app_index';
+                $failMessageId = 'user.messages.invitation.bad_token';
+                $successMessage = $this->translator->trans('user.messages.invitation.success');
+                $logMessage = 'User %s has received invitation and verified account';
+                $user = $this->securityService->recover($token);
+        }
 
         if ($user === null) {
-            $this->addFlash('danger', $this->translator->trans('user.messages.invitation.bad_token', [
+            $this->addFlash('danger', $this->translator->trans($failMessageId, [
                 '%url%' => $this->generateUrl('security_recovery'),
             ]));
 
             return $this->redirectToRoute('security_recovery');
         }
 
-        $this->logger->info(sprintf('User %s has verified account', $user->getEmail()));
+        $this->logger->info(sprintf($logMessage, $user->getEmail()));
 
-        $this->addFlash('success', $this->translator->trans('user.messages.invitation.success'));
+        $this->addFlash('success', $successMessage);
 
-        return $this->redirectToRoute('app_index');
+        return $this->redirectToRoute($redirect);
     }
 }

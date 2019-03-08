@@ -14,6 +14,10 @@ use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 class SecurityService
 {
+    public const VERIFICATION = 'security_verification_token';
+    public const INVITATION = 'security_invitation_token';
+    public const RECOVERY = 'security_recovery_token';
+
     /** @var EntityManagerInterface */
     private $em;
 

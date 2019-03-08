@@ -17,7 +17,7 @@ class TokenRepository extends ServiceEntityRepository
     {
         $builder =  $this->createQueryBuilder('t')
             ->where('t.token = :token')->setParameter('token', $token)
-            ->andWhere('t.type = :type')->setParameter('type', Token::TYPE_VERIFY);
+            ->andWhere('t.type = :type')->setParameter('type', Token::TYPE_VERIFICATION);
 
         $result = $builder->getQuery()->getResult();
 
@@ -28,7 +28,7 @@ class TokenRepository extends ServiceEntityRepository
     {
         $builder =  $this->createQueryBuilder('t')
             ->where('t.token = :token')->setParameter('token', $token)
-            ->andWhere('t.type = :type')->setParameter('type', Token::TYPE_RECOVER);
+            ->andWhere('t.type = :type')->setParameter('type', Token::TYPE_RECOVERY);
 
         $result = $builder->getQuery()->getResult();
 
