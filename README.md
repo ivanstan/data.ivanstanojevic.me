@@ -9,4 +9,3 @@
 4. Create database `bin/console doctrine:database:create`
 5. Execute database migrations `bin/console doctrine:migrations:migrate`
 6. Create user `bin/console user:create`;
-7. Manually add `ROLE_ADMIN` to newly created user in database table user if needed.
