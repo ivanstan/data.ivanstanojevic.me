@@ -141,5 +141,5 @@ user:
     verified:
       title: Verified
   verified:
-    value_false: 'No'
-    value_true: 'Yes'
+    value_false: No
+    value_true: Yes
