@@ -1,12 +1,12 @@
 {% extends 'pages/container.html.twig' %}
 
-{% block title %}{% trans %}Create User{% endtrans %} | {{ parent() }}{% endblock %}
+{% block title %}{{ 'user.create'|trans }} | {{ parent() }}{% endblock %}
 
 {% block content %}
     <div class="container pb-3">
         <div class="row">
             <div class="col-12">
-                <h3 class="mt-3">{% trans %}Create{% endtrans %}</h3>
+                <h3 class="mt-3">{{ 'general.create'|trans }}</h3>
                 {{ include('pages/user/_form.html.twig') }}
             </div>
         </div>

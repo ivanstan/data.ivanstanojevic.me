@@ -7,12 +7,12 @@
     {{ include('components/messages.html.twig') }}
 
     <div class="form-group">
-        <label for="inputEmail" class="sr-only">{% trans %}user.property.email.title{% endtrans %}</label>
+        <label for="inputEmail" class="sr-only">{{ 'user.property.email.title'|trans }}</label>
         <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control"
                placeholder="Email" required autofocus>
     </div>
     <div class="form-group">
-        <label for="inputPassword" class="sr-only">{% trans %}user.property.password.title{% endtrans %}</label>
+        <label for="inputPassword" class="sr-only">{{ 'user.property.password.title'|trans }}</label>
         <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password"
                required>
     </div>
@@ -20,16 +20,16 @@
 
     <div class="checkbox mb-3 d-none">
         <input type="checkbox" name="_remember_me" id="remember_me" checked/>
-        <label for="remember_me">{% trans %}login.remember_me{% endtrans %}</label>
+        <label for="remember_me">{{ 'login.remember_me'|trans }}</label>
     </div>
 
     <div class="text-center mb-3">
-        <a href="{{ path('security_recovery') }}">{% trans %}login.links.goto_recovery{% endtrans %}</a>
+        <a href="{{ path('security_recovery') }}">{{ 'login.links.goto_recovery'|trans }}</a>
     </div>
 
     <div class="text-center mb-3">
-        <a href="{{ path('security_register') }}">{% trans %}login.links.goto_register{% endtrans %}</a>
+        <a href="{{ path('security_register') }}">{{ 'login.links.goto_register'|trans }}</a>
     </div>
 
-    <button class="btn btn-lg btn-primary mx-auto d-block" type="submit">{% trans %}login.title{% endtrans %}</button>
+    <button class="btn btn-lg btn-primary mx-auto d-block" type="submit">{{ 'login.title'|trans }}</button>
 </form>

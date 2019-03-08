@@ -1,21 +1,19 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{% trans %}register.title{% endtrans %} | {{ parent() }}{% endblock %}
+{% block title %}{{ 'register.title'|trans }} | {{ parent() }}{% endblock %}
 
 {% block body %}
     <div class="container vertical-align">
         <div class="row">
             <div class="col-lg-6 mx-auto">
-                <h3 class="mb-3">{% trans %}register.title{% endtrans %}</h3>
+                <h3 class="mb-3">{{ 'register.title'|trans }}</h3>
                 {{ include('components/messages.html.twig') }}
                 {{ form_start(form) }}
                 {{ form_widget(form) }}
-
                 <div class="text-center mb-3">
-                    <a href="{{ path('security_login') }}">{% trans %}register.goto_login{% endtrans %}</a>
+                    <a href="{{ path('security_login') }}">{{ 'register.goto_login'|trans }}</a>
                 </div>
-
-                <button class="btn btn-lg btn-primary mx-auto d-block">{% trans %}register.submit{% endtrans %}</button>
+                <button class="btn btn-lg btn-primary mx-auto d-block">{{ 'register.submit'|trans }}</button>
                 {{ form_end(form) }}
             </div>
         </div>
