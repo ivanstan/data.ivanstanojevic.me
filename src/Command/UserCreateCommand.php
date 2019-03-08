@@ -59,6 +59,6 @@ class UserCreateCommand extends Command
         $this->em->persist($user);
         $this->em->flush();
 
-        $io->success(\sprintf('Successfully create user %s', $email));
+        $io->success(\sprintf('Successfully created user %s', $email));
     }
 }
