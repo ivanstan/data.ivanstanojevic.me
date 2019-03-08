@@ -29,17 +29,17 @@ email:
     heading: Account was created for this email at %app_name%.
     subject: Account Verification
 error:
-  '403':
+  403:
     message: >-
       You don't have permission to access this page. Checkout for any URL
       misspelling or <a href="%path%">return to the homepage</a>.
     title: Forbidden
-  '404':
+  404:
     message: >-
       The requested page could not be located. Checkout for any URL misspelling
       or <a href="%path%">return to the homepage</a>.
     title: Page Not Found
-  '500':
+  500:
     message: >-
       The requested page could not be located. Checkout for any URL misspelling
       or <a href="%path%">return to the homepage</a>.
@@ -86,9 +86,6 @@ user:
     admin: Admin
   actions:
     create: Create
-  active:
-    value_false: 'No'
-    value_true: 'Yes'
   form:
     invite:
       title: Send invitation email
@@ -144,14 +141,14 @@ user:
       title: Roles
     verified:
       title: Verified
-  verified:
-    value_false: No
-    value_true: Yes
+
 general:
   submit: Submit
   create: Create
   save: Save
   actions: Actions
+  yes: Yes
+  no: No
 
 alert:
   confirm_delete: Are you sure you want to delete this item?

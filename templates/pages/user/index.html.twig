@@ -33,16 +33,16 @@
                                 </td>
                                 <td class="d-none d-sm-table-cell">
                                     {% if user.active %}
-                                        <span class="badge badge-success">{{ 'user.active.value_true'|trans }}</span>
+                                        <span class="badge badge-success">{{ 'general.yes'|trans }}</span>
                                     {% else %}
-                                        <span class="badge badge-danger">{{ 'user.active.value_false'|trans }}</span>
+                                        <span class="badge badge-danger">{{ 'general.no'|trans }}</span>
                                     {% endif %}
                                 </td>
                                 <td class="d-none d-md-table-cell">
                                     {% if user.verified %}
-                                        <span class="badge badge-success">{{ 'user.verified.value_true'|trans }}</span>
+                                        <span class="badge badge-success">{{ 'general.yes'|trans }}</span>
                                     {% else %}
-                                        <span class="badge badge-danger">{{ 'user.verified.value_false'|trans }}</span>
+                                        <span class="badge badge-danger">{{ 'general.no'|trans }}</span>
                                     {% endif %}
                                 </td>
                                 <td class="d-none d-lg-table-cell">{{ user.lastLogin ? user.lastLogin|date : '-' }}</td>
