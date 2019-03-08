@@ -52,10 +52,18 @@ class Token
      */
     public function __construct(User $user, string $type = self::TYPE_RECOVERY)
     {
-        $this->dateTime = new \DateTime('now', new \DateTimeZone('UTC'));
+        $this->dateTime = $this->getCurrentDateTime();
         $this->token = bin2hex(random_bytes(self::TOKEN_LENGTH));
         $this->type = $type;
         $this->user = $user;
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function isValid(string $interval): bool
+    {
+        return $this->getDateTime()->add(new \DateInterval($interval)) >= $this->getCurrentDateTime();
     }
 
     public function getId()
@@ -81,5 +89,13 @@ class Token
     public function getDateTime(): \DateTime
     {
         return $this->dateTime;
+    }
+
+    /**
+     * @throws \Exception
+     */
+    private function getCurrentDateTime(): \DateTime
+    {
+        return new \DateTime('now', new \DateTimeZone('UTC'));
     }
 }

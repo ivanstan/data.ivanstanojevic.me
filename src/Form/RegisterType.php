@@ -19,7 +19,6 @@ class RegisterType extends AbstractType
             'label' => 'user.property.email.title'
         ]);
         $builder->add('password', PasswordRepeatType::class, ['label' => false]);
-
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Form\PasswordRecoveryType;
 use App\Form\PasswordRepeatType;
 use App\Form\RegisterType;
 use App\Security\SecurityMailerService;
@@ -12,12 +11,14 @@ use App\Service\Traits\TranslatorAwareTrait;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\Validator\Constraints\Email;
 
 class SecurityController extends AbstractController implements LoggerAwareInterface
 {
@@ -115,7 +116,12 @@ class SecurityController extends AbstractController implements LoggerAwareInterf
      */
     public function recovery(Request $request): Response
     {
-        $form = $this->createForm(PasswordRecoveryType::class);
+        $form = $this->createFormBuilder()->add('email', EmailType::class, [
+            'constraints' => [new Email()],
+            'label' => 'user.property.email.title',
+            'required' => true,
+        ])->getForm();
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

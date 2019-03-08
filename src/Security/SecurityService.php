@@ -18,6 +18,8 @@ class SecurityService
     public const INVITATION = 'security_invitation_token';
     public const RECOVERY = 'security_recovery_token';
 
+    public const TOKEN_VALIDITY_INTERVAL = 'P1D';
+
     /** @var EntityManagerInterface */
     private $em;
 
@@ -69,7 +71,7 @@ class SecurityService
     {
         $token = $this->em->getRepository(Token::class)->getVerificationToken($token);
 
-        if (!$token || !$token->getUser() || !$this->isTokenValid($token)) {
+        if (!$token || !$token->getUser() || !$token->isValid(self::TOKEN_VALIDITY_INTERVAL)) {
             return null;
         }
 
@@ -89,7 +91,7 @@ class SecurityService
     {
         $token = $this->em->getRepository(Token::class)->getRecoveryToken($token);
 
-        if (!$token || !$token->getUser() || !$this->isTokenValid($token)) {
+        if (!$token || !$token->getUser() || !$token->isValid(self::TOKEN_VALIDITY_INTERVAL)) {
             return null;
         }
 
@@ -103,12 +105,5 @@ class SecurityService
         $this->em->flush();
 
         return $user;
-    }
-
-    private function isTokenValid(Token $token): bool
-    {
-        $interval = new \DateInterval('P1D');
-
-        return $token->getDateTime()->add($interval) >= new \DateTime('now', new \DateTimeZone('UTC'));
     }
 }
