@@ -71,27 +71,18 @@ class SecurityService
     {
         $token = $this->em->getRepository(Token::class)->getVerificationToken($token);
 
-        if (!$token || !$token->getUser() || !$token->isValid(self::TOKEN_VALIDITY_INTERVAL)) {
-            return null;
-        }
-
-        /** @var User $user */
-        $user = $token->getUser();
-
-        $this->login($user);
-
-        $user->setVerified(true);
-        $this->em->remove($token);
-        $this->em->flush();
-
-        return $user;
+        return $this->loginAndVerify($token);
     }
 
     public function recover(string $token): ?User
     {
         $token = $this->em->getRepository(Token::class)->getRecoveryToken($token);
 
-        if (!$token || !$token->getUser() || !$token->isValid(self::TOKEN_VALIDITY_INTERVAL)) {
+        return $this->loginAndVerify($token);
+    }
+
+    private function loginAndVerify(Token $token): ?User {
+        if (!$token || !$token->getUser() || $token->isValid(self::TOKEN_VALIDITY_INTERVAL)) {
             return null;
         }
 
