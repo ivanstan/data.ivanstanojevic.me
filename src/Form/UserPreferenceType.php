@@ -12,7 +12,7 @@ class UserPreferenceType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder->add('timezone', TimezoneType::class);
+        $builder->add('timezone', TimezoneType::class, ['label' => 'preference.timezone']);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -151,5 +151,13 @@ general:
   yes: Yes
   no: No
 
+pages:
+  ban:
+    title: Alert
+    body: We detected suspicious activity originating from your IP address, this page is unavailable temporarily. Please try again later.
+
+preference:
+  timezone: Timezone
+
 alert:
   confirm_delete: Are you sure you want to delete this item?

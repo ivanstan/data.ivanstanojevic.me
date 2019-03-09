@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }}{% endblock %}
+
+{% block body %}
+    <div class="container vertical-align">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mx-auto">
+                <h3 class="mb-3 text-center">{{ 'pages.ban.title'|trans }}</h3>
+                <p class="text-center">{{ 'pages.ban.body'|trans }}</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
