@@ -1,6 +1,12 @@
-{% extends 'pages/container-fluid.html.twig' %}
+{% extends 'pages/container.html.twig' %}
 
 {% block title %}{{ 'user.index.title'|trans }} | {{ parent() }}{% endblock %}
+
+{% block messages %}
+    <div class="container-fluid">
+        {% include 'components/messages.html.twig' %}
+    </div>
+{% endblock %}
 
 {% block content %}
     <div class="container-fluid pb-3">

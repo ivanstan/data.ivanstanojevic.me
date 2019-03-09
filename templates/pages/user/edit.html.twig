@@ -2,6 +2,16 @@
 
 {% block title %}{{ 'user.edit'|trans }} | {{ parent() }}{% endblock %}
 
+{% block messages %}
+    <div class="container">
+        <div class="row">
+            <div class="col-8 mx-auto">
+                {% include 'components/messages.html.twig' %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
 {% block content %}
     <div class="container pb-3">
         <div class="row">
