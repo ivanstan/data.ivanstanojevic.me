@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\PasswordRepeatType;
 use App\Form\RegisterType;
+use App\Form\UserPreferenceType;
 use App\Security\SecurityMailerService;
 use App\Security\SecurityService;
 use App\Service\Traits\TranslatorAwareTrait;
@@ -61,11 +62,20 @@ class SecurityController extends AbstractController implements LoggerAwareInterf
      */
     public function settings(Request $request): Response
     {
+        /** @var User $user */
         $user = $this->getUser();
-        $form = $this->createForm(PasswordRepeatType::class, $user);
-        $form->handleRequest($request);
+        $passwordForm = $this->createForm(PasswordRepeatType::class, $user);
+        $passwordForm->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        $preference = $user->getPreference();
+        if (!$preference->getId()) {
+            $preference->setTimezone($this->getParameter('default_timezone'));
+        }
+
+        $preferenceForm = $this->createForm(UserPreferenceType::class, $preference);
+        $preferenceForm->handleRequest($request);
+
+        if ($passwordForm->isSubmitted() && $passwordForm->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $user->setPassword($this->encoder->encodePassword($user, $user->getPassword()));
             $entityManager->flush();
@@ -75,8 +85,22 @@ class SecurityController extends AbstractController implements LoggerAwareInterf
             return $this->redirectToRoute('security_settings');
         }
 
+        if ($preferenceForm->isSubmitted() && $preferenceForm->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+
+            if (!$preference->getId()) {
+                $user->setPreference($preference);
+                $entityManager->persist($preference);
+            }
+
+            $entityManager->flush();
+
+            return $this->redirectToRoute('security_settings');
+        }
+
         return $this->render('pages/security/settings.html.twig', [
-            'form' => $form->createView(),
+            'password_form' => $passwordForm->createView(),
+            'preference_form' => $preferenceForm->createView(),
         ]);
     }
 

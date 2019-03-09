@@ -69,6 +69,12 @@ class User implements UserInterface
      */
     private $verified = false;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\UserPreference", cascade={"persist"}, fetch="EAGER")
+     * @ORM\JoinColumn(name="preference_id", referencedColumnName="id")
+     */
+    protected $preference;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -150,6 +156,20 @@ class User implements UserInterface
     public function setVerified(bool $verified): void
     {
         $this->verified = $verified;
+    }
+
+    public function getPreference(): ?UserPreference
+    {
+        if ($this->preference) {
+            return $this->preference;
+        }
+
+        return new UserPreference();
+    }
+
+    public function setPreference(UserPreference $preference): void
+    {
+        $this->preference = $preference;
     }
 
     public function getSalt()

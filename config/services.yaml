@@ -6,6 +6,9 @@
 parameters:
     locale: 'en'
     mail_from: 'no-replay@domain.com'
+    default_timezone: 'Europe/Belgrade'
+    date_format: 'd-m-Y H:i'
+    app_name: 'Application Name'
 
 services:
     # default configuration for services in *this* file
