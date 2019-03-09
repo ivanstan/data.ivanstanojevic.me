@@ -82,7 +82,7 @@ class SecurityService
     }
 
     private function loginAndVerify(Token $token): ?User {
-        if (!$token || !$token->getUser() || $token->isValid(self::TOKEN_VALIDITY_INTERVAL)) {
+        if (!$token || !$token->getUser() || !$token->isValid(self::TOKEN_VALIDITY_INTERVAL)) {
             return null;
         }
 
