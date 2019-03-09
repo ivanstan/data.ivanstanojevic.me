@@ -22,3 +22,10 @@
 4. Create database `bin/console doctrine:database:create`
 5. Execute database migrations `bin/console doctrine:migrations:migrate`
 6. Create user `bin/console user:create`
+
+## Developer features
+* Adding URL parameters `info`, `warning`, `danger`, `success`
+  anywhere in application will render corresponding flash message.
+* Endpoints `/_error/{http_code}` (e.g. /_error/404) will give preview of http error page.
+* Endpoints `/_email/recovery`, `/_email/verify`, `/_email/invite` will show email templates
+  for corresponding email actions.
