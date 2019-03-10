@@ -154,7 +154,7 @@ general:
 pages:
   ban:
     title: Alert
-    body: We detected suspicious activity originating from your IP address, this page is unavailable temporarily. Please try again later.
+    body: We detected suspicious activity originating from your IP address <b>(%ip%)</b>, this page is unavailable temporarily. Please try again later.
 
 preference:
   timezone: Timezone

@@ -7,7 +7,7 @@
         <div class="row align-items-center">
             <div class="col-lg-6 mx-auto">
                 <h3 class="mb-3 text-center">{{ 'pages.ban.title'|trans }}</h3>
-                <p class="text-center">{{ 'pages.ban.body'|trans }}</p>
+                <p class="text-center">{{ 'pages.ban.body'|trans({'%ip%': app.request.clientIp})|raw }}</p>
             </div>
         </div>
     </div>

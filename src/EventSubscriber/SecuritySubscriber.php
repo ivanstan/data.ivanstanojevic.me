@@ -74,7 +74,7 @@ class SecuritySubscriber implements EventSubscriberInterface, LoggerAwareInterfa
         );
 
         if ($lock && $lock->getValue() > self::BAN_AFTER_ATTEMPTS) {
-            $event->setResponse(new Response($this->twig->render('pages/misc/ban.html.twig')));
+            $event->setResponse(new Response($this->twig->render('pages/misc/block.html.twig')));
         }
     }
 
