@@ -16,7 +16,8 @@ class BlockController extends AbstractController
     public function index(): Response
     {
         return $this->render('pages/block/index.html.twig', [
-            'active' => $this->getDoctrine()->getRepository(Lock::class)->getActiveLocks()
+            'active' => $this->getDoctrine()->getRepository(Lock::class)->getActiveLocks(),
+            'expired' => $this->getDoctrine()->getRepository(Lock::class)->getExpiredLocks()
         ]);
     }
 

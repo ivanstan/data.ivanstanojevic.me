@@ -16,23 +16,50 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-                <h3 class="mt-3">{{ 'block.title'|trans }}</h3>
-
                 <table class="table">
                     <thead>
                     <tr>
-                        <th>Reason</th>
-                        <th>IP</th>
-                        <th>Expire</th>
-                        <th>Delete</th>
+                        <td colspan="4">
+                            <h3 class="mt-3">{{ 'block.active'|trans }}</h3>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>{{ 'block.reason'|trans }}</th>
+                        <th>{{ 'general.ip'|trans }}</th>
+                        <th class="d-none d-sm-table-cell">{{ 'block.expire'|trans }}</th>
+                        <th>{{ 'general.delete'|trans }}</th>
                     </tr>
                     </thead>
                     <tbody>
                     {% for lock in active %}
+                        <tr class="table-danger">
+                            <td>{{ lock.name }}</td>
+                            <td>{{ lock.data }}</td>
+                            <td class="d-none d-sm-table-cell">{{ lock.expire ? lock.expire|date : '-' }}</td>
+                            <td>{{ include('pages/block/_delete_form.html.twig') }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                    <tbody>
+                    <thead>
+                    <tr>
+                        <td colspan="4">
+                            <h3 class="mt-3">{{ 'block.expired'|trans }}</h3>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>{{ 'block.reason'|trans }}</th>
+                        <th>{{ 'general.ip'|trans }}</th>
+                        <th class="d-none d-sm-table-cell">{{ 'block.expire'|trans }}</th>
+                        <th>{{ 'general.delete'|trans }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for lock in expired %}
                         <tr>
                             <td>{{ lock.name }}</td>
                             <td>{{ lock.data }}</td>
-                            <td>{{ lock.expire ? lock.expire|date : '-' }}</td>
+                            <td class="d-none d-sm-table-cell">{{ lock.expire ? lock.expire|date : '-' }}</td>
                             <td>{{ include('pages/block/_delete_form.html.twig') }}</td>
                         </tr>
                     {% endfor %}

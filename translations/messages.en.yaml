@@ -142,6 +142,9 @@ user:
       title: Roles
     verified:
       title: Verified
+  created: Created
+  updated: Updated
+  lastLogin: Last Login
 
 general:
   submit: Submit
@@ -150,6 +153,8 @@ general:
   actions: Actions
   yes: Yes
   no: No
+  ip: IP
+  delete: Delete
 
 pages:
   ban:
@@ -163,3 +168,7 @@ alert:
   confirm_delete: Are you sure you want to delete this item?
 block:
   title: Block
+  active: Active Blocks
+  expired: Expired Blocks
+  reason: Reason
+  expire: Expire

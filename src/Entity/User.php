@@ -9,6 +9,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @UniqueEntity(fields={"email"}, message="user.email.unique")
+ * @ORM\HasLifecycleCallbacks()
  */
 class User implements UserInterface
 {
@@ -44,6 +45,18 @@ class User implements UserInterface
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $lastLogin;
+
+    /**
+     * @var \DateTime
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $created;
+
+    /**
+     * @var \DateTime
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updated;
 
     /**
      * @var string
@@ -118,6 +131,36 @@ class User implements UserInterface
         $this->lastLogin = $lastLogin;
     }
 
+    /**
+     * @return \DateTime
+     */
+    public function getCreated(): ?\DateTime
+    {
+        return $this->created;
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setCreated(): void
+    {
+        $this->created = new \DateTime('now', new \DateTimeZone('UTC'));
+        $this->updated = new \DateTime('now', new \DateTimeZone('UTC'));
+    }
+
+    public function getUpdated(): ?\DateTime
+    {
+        return $this->updated;
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function setUpdated(): void
+    {
+        $this->updated = new \DateTime('now', new \DateTimeZone('UTC'));
+    }
+
     public function getIp(): ?string
     {
         return $this->ip;
@@ -172,6 +215,15 @@ class User implements UserInterface
         $this->preference = $preference;
     }
 
+    public function getAvatar(): string
+    {
+        $hash = md5(strtolower(trim($this->getEmail())));
+
+        $fallback = 'https://ui-avatars.com/api/'.$this->getEmail();
+
+        return 'https://www.gravatar.com/avatar/'.$hash.'?d='.$fallback;
+    }
+
     public function getSalt()
     {
         // not needed when using the "bcrypt" algorithm in security.yaml
@@ -180,14 +232,5 @@ class User implements UserInterface
     public function eraseCredentials(): void
     {
         // If you store any temporary, sensitive data on the user, clear it here
-    }
-
-    public function getAvatar(): string
-    {
-        $hash = md5(strtolower(trim($this->getEmail())));
-
-        $fallback = 'https://ui-avatars.com/api/'.$this->getEmail();
-
-        return 'https://www.gravatar.com/avatar/'.$hash.'?d='.$fallback;
     }
 }

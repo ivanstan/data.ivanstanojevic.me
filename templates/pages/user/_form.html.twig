@@ -1,6 +1,27 @@
 {{ form_start(form) }}
     {{ form_row(form.email) }}
 
+    {% if user.id %}
+        <table class="table">
+            <tr>
+                <th>{{ 'user.created'|trans }}</th>
+                <td>{% include 'components/_date_field.html.twig' with {date: user.created} only %}</td>
+            </tr>
+            <tr>
+                <th>{{ 'user.updated'|trans }}</th>
+                <td>{% include 'components/_date_field.html.twig' with {date: user.updated} only %}</td>
+            </tr>
+            <tr>
+                <th>{{ 'user.lastLogin'|trans }}</th>
+                <td>{% include 'components/_date_field.html.twig' with {date: user.lastLogin} only %}</td>
+            </tr>
+            <tr>
+                <th>{{ 'general.ip'|trans }}</th>
+                <td>{{ user.ip|default('-') }}</td>
+            </tr>
+        </table>
+    {% endif %}
+
     {% if form.password is defined %}
         {{ form_row(form.password) }}
     {% endif %}
