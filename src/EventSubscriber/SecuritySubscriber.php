@@ -24,8 +24,8 @@ class SecuritySubscriber implements EventSubscriberInterface, LoggerAwareInterfa
 {
     use LoggerAwareTrait;
 
-    private const LOGIN_ATTEMPT_FAILURE = 'login_attempt_failure';
-    private const BAN_AFTER_ATTEMPTS = 5;
+    public const LOGIN_ATTEMPT_FAILURE = 'login_attempt_failure';
+    public const BAN_AFTER_ATTEMPTS = 5;
 
     /** @var EntityManagerInterface */
     private $em;

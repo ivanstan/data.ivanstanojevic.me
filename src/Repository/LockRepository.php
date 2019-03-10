@@ -3,7 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Lock;
+use App\EventSubscriber\SecuritySubscriber;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 class LockRepository extends ServiceEntityRepository
@@ -24,7 +26,9 @@ class LockRepository extends ServiceEntityRepository
         $builder = $this
             ->createQueryBuilder('l')
             ->select('l')
-            ->andWhere('l.expire > :now OR l.expire IS NULL')->setParameter('now', $now)
+            ->andWhere('l.expire > :now AND l.value > :value')
+            ->setParameter('now', $now)
+            ->setParameter('value', SecuritySubscriber::BAN_AFTER_ATTEMPTS)
         ;
 
         return $builder->getQuery()->getResult();

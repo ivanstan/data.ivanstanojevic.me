@@ -35,8 +35,6 @@
                             <td>{{ lock.expire ? lock.expire|date : '-' }}</td>
                             <td>{{ include('pages/block/_delete_form.html.twig') }}</td>
                         </tr>
-                    {% else %}
-
                     {% endfor %}
                     </tbody>
                 </table>
