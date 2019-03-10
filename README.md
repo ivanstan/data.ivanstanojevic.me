@@ -11,6 +11,7 @@
 * IP ban for suspicious user behavior
 * User preferences (Timezone)
 * Password change form
+* User avatars (Gravatar and ui-avatar.com as fallback)
 * Bootstrap 4 frontend
 
 ## Installation

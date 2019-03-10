@@ -181,4 +181,13 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
     }
+
+    public function getAvatar(): string
+    {
+        $hash = md5(strtolower(trim($this->getEmail())));
+
+        $fallback = 'https://ui-avatars.com/api/'.$this->getEmail();
+
+        return 'https://www.gravatar.com/avatar/'.$hash.'?d='.$fallback;
+    }
 }
