@@ -13,6 +13,23 @@ class LockRepository extends ServiceEntityRepository
         parent::__construct($registry, Lock::class);
     }
 
+    /**
+     * @return array[Lock]
+     * @throws \Exception
+     */
+    public function getActiveLocks(): array
+    {
+        $now = new \DateTime('now', new \DateTimeZone('UTC'));
+
+        $builder = $this
+            ->createQueryBuilder('l')
+            ->select('l')
+            ->andWhere('l.expire > :now OR l.expire IS NULL')->setParameter('now', $now)
+        ;
+
+        return $builder->getQuery()->getResult();
+    }
+
     public function getLock(string $name, $data = null): ?Lock
     {
         $now = new \DateTime('now', new \DateTimeZone('UTC'));

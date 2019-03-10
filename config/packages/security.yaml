@@ -46,7 +46,8 @@ security:
     - { path: "^/register", role: IS_AUTHENTICATED_ANONYMOUSLY }
     - { path: "^/verify", role: IS_AUTHENTICATED_ANONYMOUSLY }
 
-    - { path: "^/users", roles: ROLE_ADMIN }
-    - { path: "^/user/new", roles: ROLE_ADMIN }
-    - { path: "^/user/[0-9]+/edit", roles: ROLE_ADMIN }
-    - { path: "^/user/[0-9]+/delete", roles: ROLE_ADMIN }
+    - { path: "^/admin*", roles: ROLE_ADMIN }
+    - { path: "^/admin/users", roles: ROLE_ADMIN }
+    - { path: "^/admin/user/new", roles: ROLE_ADMIN }
+    - { path: "^/admin/user/[0-9]+/edit", roles: ROLE_ADMIN }
+    - { path: "^/admin/user/[0-9]+/delete", roles: ROLE_ADMIN }

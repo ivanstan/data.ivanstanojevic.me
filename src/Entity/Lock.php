@@ -37,7 +37,7 @@ class Lock
 
     /**
      * @var \DateTime
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $expire;
 
@@ -84,7 +84,7 @@ class Lock
         $this->data = $data;
     }
 
-    public function getExpire(): \DateTime
+    public function getExpire(): ?\DateTime
     {
         return $this->expire;
     }

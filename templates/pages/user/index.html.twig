@@ -4,7 +4,11 @@
 
 {% block messages %}
     <div class="container-fluid">
-        {% include 'components/messages.html.twig' %}
+        <div class="row">
+            <div class="col-12">
+                {% include 'components/messages.html.twig' %}
+            </div>
+        </div>
     </div>
 {% endblock %}
 

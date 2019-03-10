@@ -29,7 +29,7 @@ class UserController extends AbstractController implements LoggerAwareInterface
     }
 
     /**
-     * @Route("/users", name="user_index", methods={"GET"})
+     * @Route("/admin/users", name="user_index", methods={"GET"})
      */
     public function index(): Response
     {
@@ -39,7 +39,7 @@ class UserController extends AbstractController implements LoggerAwareInterface
     }
 
     /**
-     * @Route("/user/new", name="user_new", methods={"GET","POST"})
+     * @Route("/admin/user/new", name="user_new", methods={"GET","POST"})
      */
     public function new(Request $request, SecurityMailerService $recovery): Response
     {
@@ -77,7 +77,7 @@ class UserController extends AbstractController implements LoggerAwareInterface
     }
 
     /**
-     * @Route("/user/{id}/edit", name="user_edit", methods={"GET","POST"})
+     * @Route("/admin/user/{id}/edit", name="user_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, User $user): Response
     {
@@ -108,7 +108,7 @@ class UserController extends AbstractController implements LoggerAwareInterface
     }
 
     /**
-     * @Route("/user/{id}/delete", name="user_delete", methods={"DELETE"})
+     * @Route("/admin/user/{id}/delete", name="user_delete", methods={"DELETE"})
      */
     public function delete(Request $request, User $user): Response
     {
