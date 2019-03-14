@@ -4,7 +4,7 @@ namespace App\EventSubscriber;
 
 use Doctrine\DBAL\Event\ConnectionEventArgs;
 
-class DoctrineEventSubscriber
+class DoctrineSubscriber
 {
     public const MYSQL_TIMEZONE = '+0:00';
 
