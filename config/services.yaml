@@ -35,3 +35,7 @@ services:
 
     App\EventSubscriber\DevSubscriber:
         arguments: ["%kernel.environment%"]
+
+    App\EventSubscriber\DoctrineEventSubscriber:
+        tags:
+            - { name: doctrine.event_listener, event: postConnect }
