@@ -12,7 +12,7 @@
                     <div class="col-8 mx-auto py-3">
                         <h3>{{ index + 1 }}. {{ question.content }}</h3>
                         {% for answer in question.answers %}
-                            <input type="radio" required checked name="question[{{ question.id }}]"
+                            <input type="radio" required name="question[{{ question.id }}]"
                                    value="{{ answer.answer.id }}"> {{ answer.answer.content }}
                             <br>
                         {% endfor %}
