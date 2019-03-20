@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Quiz{% endblock %}
+
+{% block nav %}{% endblock %}
+
+{% block main %}
+    <div class="container my-5">
+
+        <div class="row">
+            <div class="col-8 mx-auto py-3">
+                <h2 class="text-center">{{ report.score.correct }}/{{ report.score.total }}</h2>
+            </div>
+        </div>
+
+        {% for index, question in report.result %}
+            <div class="row">
+                <div class="col-8 mx-auto py-3">
+                    <h3>{{ index + 1 }}. {{ question.content }}</h3>
+                    <ul class="list-group">
+                        {% for answer in question.answers %}
+                            <li class="list-group-item {% if answer.correct %}list-group-item-success{% endif %} {% if answer.selected and not answer.correct %}list-group-item-danger{% endif %}">
+                                <input type="radio"
+                                        {% if answer.selected %}checked{% endif %}
+                                       disabled> {{ answer.content }}
+                            </li>
+
+                        {% endfor %}
+
+                    </ul>
+                </div>
+            </div>
+        {% endfor %}
+        <div class="row">
+            <div class="col-8 mx-auto">
+                <a href="{{ path('app_quiz', {id: 1}) }}" class="btn btn-primary btn-lg d-block mx-auto">Back</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer %}{% endblock %}
