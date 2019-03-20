@@ -33,23 +33,29 @@ class DoctrineReloadCommand extends Command
         $io = new SymfonyStyle($input, $output);
         $helper = $this->getHelper('question');
         $question = new ChoiceQuestion('All data will be lost. Do you wish to continue?', self::$choices, false);
+
         if ('dev' !== $this->env) {
-            $io->warning('This is intended only for dev environment.');
+            $io->warning('This is intended only for use in dev environment.');
 
             return;
         }
+
         if ($helper->ask($input, $output, $question) === 'y') {
             $application = $this->getApplication();
             $application->setAutoExit(false);
+
             $io->writeln('Drop database');
             $options = ['command' => 'doctrine:database:drop', '--force' => true];
             $application->run(new \Symfony\Component\Console\Input\ArrayInput($options));
+
             $io->writeln('Create database');
             $options = ['command' => 'doctrine:database:create', '--if-not-exists' => true];
             $application->run(new \Symfony\Component\Console\Input\ArrayInput($options));
+
             $io->writeln('Executing migrations');
             $options = ['command' => 'doctrine:migration:migrate', '--no-interaction' => true];
             $application->run(new \Symfony\Component\Console\Input\ArrayInput($options));
+
             $io->writeln('Load fixtures');
             $options = ['command' => 'doctrine:fixtures:load', '--no-interaction' => true];
             $application->run(new \Symfony\Component\Console\Input\ArrayInput($options));
