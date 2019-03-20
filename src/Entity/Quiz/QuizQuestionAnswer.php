@@ -3,7 +3,6 @@
 namespace App\Entity\Quiz;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity()
