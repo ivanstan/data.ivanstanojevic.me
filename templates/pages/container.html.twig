@@ -12,7 +12,7 @@
     {% endblock %}
 
     {% block messages %}
-        {% if app.flashes is not empty %}
+        {% if app.session.flashbag.peekAll() is not empty %}
             <div class="container">
                 <div class="row">
                     <div class="col-12">

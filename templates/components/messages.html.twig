@@ -1,4 +1,4 @@
-{% for label, messages in app.flashes %}
+{% for label, messages in app.session.flashbag.all %}
     {% for message in messages %}
         <div class="alert alert-{{ label }}" role="alert">
             {{ message|raw }}
