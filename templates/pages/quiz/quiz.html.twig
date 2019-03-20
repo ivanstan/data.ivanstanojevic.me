@@ -9,18 +9,20 @@
         <form action="{{ path('app_quiz', {id: quiz.id}) }}" method="post">
             {% for index, question in quiz.questions %}
                 <div class="row">
-                    <div class="col-8 mx-auto py-3">
+                    <div class="col-lg-8 mx-auto py-3">
                         <h3>{{ index + 1 }}. {{ question.content }}</h3>
                         {% for answer in question.answers %}
-                            <input type="radio" required name="question[{{ question.id }}]"
-                                   value="{{ answer.answer.id }}"> {{ answer.answer.content }}
+                            <label>
+                                <input type="radio" required name="question[{{ question.id }}]"
+                                       value="{{ answer.answer.id }}"> {{ answer.answer.content }}
+                            </label>
                             <br>
                         {% endfor %}
                     </div>
                 </div>
             {% endfor %}
             <div class="row">
-                <div class="col-8 mx-auto">
+                <div class="col-lg-8 mx-auto">
                     <div class="form-group">
                         <label for="email">Email</label>
                         <input type="email" required class="form-control" id="email" name="email">
@@ -28,7 +30,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-8 mx-auto">
+                <div class="col-lg-8 mx-auto">
                     <button class="btn btn-primary btn-lg d-block mx-auto">Submit</button>
                 </div>
             </div>
