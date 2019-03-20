@@ -29,7 +29,6 @@ class QuizQuestionAnswer
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Quiz\QuizAnswer", inversedBy="answers")
-     * @Groups({"api_course_instance"})
      */
     private $answer;
 

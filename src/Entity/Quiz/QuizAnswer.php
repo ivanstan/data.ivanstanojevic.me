@@ -16,7 +16,6 @@ class QuizAnswer
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"api_course_instance"})
      */
     private $id;
 

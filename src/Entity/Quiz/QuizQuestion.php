@@ -35,20 +35,17 @@ class QuizQuestion
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"api_course_instance"})
      */
     private $type;
 
     /**
      * @var string
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"api_course_instance"})
      */
     private $content;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Quiz\QuizQuestionAnswer", mappedBy="question")
-     * @Groups({"api_course_instance"})
      */
     private $answers;
 
