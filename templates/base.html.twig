@@ -9,6 +9,11 @@
     </head>
     <body>
         {% block body %}{% endblock %}
+        <script>
+            window.globals = {
+                baseUrl: "{{ app.request.baseUrl }}"
+            };
+        </script>
         <script src="{{ asset('build/runtime.js') }}"></script>
         <script src="{{ asset('build/vendors~app.js') }}"></script>
         <script src="{{ asset('build/app.js') }}"></script>

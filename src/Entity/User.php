@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Service\DateTimeService;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -144,8 +145,8 @@ class User implements UserInterface
      */
     public function setCreated(): void
     {
-        $this->created = new \DateTime('now', new \DateTimeZone('UTC'));
-        $this->updated = new \DateTime('now', new \DateTimeZone('UTC'));
+        $this->created = DateTimeService::getCurrentUTC();
+        $this->updated = DateTimeService::getCurrentUTC();
     }
 
     public function getUpdated(): ?\DateTime
@@ -158,7 +159,7 @@ class User implements UserInterface
      */
     public function setUpdated(): void
     {
-        $this->updated = new \DateTime('now', new \DateTimeZone('UTC'));
+        $this->updated = DateTimeService::getCurrentUTC();
     }
 
     public function getIp(): ?string

@@ -4,6 +4,7 @@ namespace App\EventSubscriber;
 
 use App\Entity\Lock;
 use App\Entity\User;
+use App\Service\DateTimeService;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
@@ -93,7 +94,7 @@ class SecuritySubscriber implements EventSubscriberInterface, LoggerAwareInterfa
         /** @var User $user */
         $user = $this->tokenStorage->getToken()->getUser();
 
-        $user->setLastLogin(new \DateTime('now', new \DateTimeZone('UTC')));
+        $user->setLastLogin(DateTimeService::getCurrentUTC());
         $user->setIp($this->requestStack->getCurrentRequest()->getClientIp());
 
         $this->em->flush();
@@ -107,7 +108,7 @@ class SecuritySubscriber implements EventSubscriberInterface, LoggerAwareInterfa
     public function updateLock(string $lockName, string $ip): void
     {
         $interval = new \DateInterval('PT1H');
-        $expire = (new \DateTime('now', new \DateTimeZone('UTC')))->add($interval);
+        $expire = DateTimeService::getCurrentUTC()->add($interval);
 
         $lock = $this->em->getRepository(Lock::class)->getLock($lockName, $ip);
         if ($lock) {

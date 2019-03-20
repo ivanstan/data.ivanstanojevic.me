@@ -46,6 +46,9 @@ security:
     - { path: "^/register", role: IS_AUTHENTICATED_ANONYMOUSLY }
     - { path: "^/verify", role: IS_AUTHENTICATED_ANONYMOUSLY }
 
+    - { path: "^/settings", roles: ROLE_USER }
+    - { path: "^/logout", roles: ROLE_USER }
+
     - { path: "^/admin*", roles: ROLE_ADMIN }
     - { path: "^/admin/users", roles: ROLE_ADMIN }
     - { path: "^/admin/user/new", roles: ROLE_ADMIN }

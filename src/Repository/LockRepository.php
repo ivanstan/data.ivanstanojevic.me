@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Lock;
 use App\EventSubscriber\SecuritySubscriber;
+use App\Service\DateTimeService;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -20,13 +21,11 @@ class LockRepository extends ServiceEntityRepository
      */
     public function getActiveLocks(): array
     {
-        $now = new \DateTime('now', new \DateTimeZone('UTC'));
-
         $builder = $this
             ->createQueryBuilder('l')
             ->select('l')
             ->andWhere('l.expire > :now AND l.value > :value')
-            ->setParameter('now', $now)
+            ->setParameter('now', DateTimeService::getCurrentUTC())
             ->setParameter('value', SecuritySubscriber::BAN_AFTER_ATTEMPTS)
         ;
 
@@ -35,13 +34,11 @@ class LockRepository extends ServiceEntityRepository
 
     public function getExpiredLocks(): array
     {
-        $now = new \DateTime('now', new \DateTimeZone('UTC'));
-
         $builder = $this
             ->createQueryBuilder('l')
             ->select('l')
             ->andWhere('l.expire <= :now')
-            ->setParameter('now', $now)
+            ->setParameter('now', DateTimeService::getCurrentUTC())
         ;
 
         return $builder->getQuery()->getResult();
@@ -49,13 +46,13 @@ class LockRepository extends ServiceEntityRepository
 
     public function getLock(string $name, $data = null): ?Lock
     {
-        $now = new \DateTime('now', new \DateTimeZone('UTC'));
-
         $builder = $this
             ->createQueryBuilder('l')
             ->select('l')
-            ->where('l.name = :name')->setParameter('name', $name)
-            ->andWhere('l.expire > :now')->setParameter('now', $now)
+            ->where('l.name = :name')
+            ->setParameter('name', $name)
+            ->andWhere('l.expire > :now')
+            ->setParameter('now', DateTimeService::getCurrentUTC())
         ;
 
         if ($data) {

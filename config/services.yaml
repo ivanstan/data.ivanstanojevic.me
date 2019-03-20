@@ -4,38 +4,41 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    locale: 'en'
-    mail_from: 'no-replay@domain.com'
-    default_timezone: 'Europe/Belgrade'
-    date_format: 'd-m-Y H:i'
-    app_name: 'Application Name'
+  locale: 'en'
+  mail_from: 'no-replay@domain.com'
+  default_timezone: 'Europe/Belgrade'
+  date_format: 'd-m-Y H:i'
+  app_name: 'Application Name'
 
 services:
-    # default configuration for services in *this* file
-    _defaults:
-        autowire: true      # Automatically injects dependencies in your services.
-        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+  # default configuration for services in *this* file
+  _defaults:
+    autowire: true      # Automatically injects dependencies in your services.
+    autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
 
-    # makes classes in src/ available to be used as services
-    # this creates a service per class whose id is the fully-qualified class name
-    App\:
-        resource: '../src/*'
-        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
-        bind:
-            $mailFrom: '%mail_from%'
+  # makes classes in src/ available to be used as services
+  # this creates a service per class whose id is the fully-qualified class name
+  App\:
+    resource: '../src/*'
+    exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
+    bind:
+      $env: '%kernel.environment%'
+      $rootDir: '%kernel.project_dir%'
+      $mailFrom: '%mail_from%'
 
-    # controllers are imported separately to make sure services can be injected
-    # as action arguments even if you don't extend any base controller class
-    App\Controller\:
-        resource: '../src/Controller'
-        tags: ['controller.service_arguments']
+  # controllers are imported separately to make sure services can be injected
+  # as action arguments even if you don't extend any base controller class
+  App\Controller\:
+    resource: '../src/Controller'
+    tags: ['controller.service_arguments']
 
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+  # add more service definitions when explicit configuration is needed
+  # please note that last definitions always *replace* previous ones
 
-    App\EventSubscriber\DevSubscriber:
-        arguments: ["%kernel.environment%"]
+  App\EventSubscriber\FileDoctrineSubscriber:
+    tags:
+      - { name: doctrine.event_subscriber }
 
-    App\EventSubscriber\DoctrineSubscriber:
-        tags:
-            - { name: doctrine.event_listener, event: postConnect }
+  App\EventSubscriber\DoctrineSubscriber:
+    tags:
+      - { name: doctrine.event_listener, event: postConnect }

@@ -6,10 +6,10 @@
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <a class="navbar-brand" href="{{ path('app_index') }}">{{ app_name }}</a>
+    <div class="collapse navbar-collapse py-3 py-md-0" id="navbarSupportedContent">
+        <a class="navbar-brand d-none d-md-block" href="{{ path('app_index') }}">{{ app_name }}</a>
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item {% if route == 'app_index' %}active{% endif %}">
+            <li class="nav-item pl-3 pl-md-0 {% if route == 'app_index' %}active{% endif %}">
                 <a class="nav-link" href="{{ path('app_index') }}">{{ 'navigation.index'|trans }}
                     {% if route == 'app_index' %}<span class="sr-only">(current)</span>{% endif %}
                 </a>
