@@ -33,7 +33,7 @@ class UserFixtures extends Fixture
         $user->setPassword($passwordHash);
         $manager->persist($user);
         $this->addReference(self::ADMIN_USER_REFERENCE, $user);
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 1; $i < 10; $i++) {
             $user = new User();
             $user->setEmail("user{$i}@example.com");
             $user->setRoles([User::ROLE_USER]);

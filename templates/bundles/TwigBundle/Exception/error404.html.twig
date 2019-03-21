@@ -1,6 +1,5 @@
 {% extends 'bundles/TwigBundle/Exception/error.html.twig' %}
 
-{% block content %}
-    <h1 class="my-3">{{ 'error.404.title'|trans }}</h1>
+{% block message %}
     <p>{{ 'error.404.message'|trans({'%path%': path('app_index')})|raw }}</p>
 {% endblock %}

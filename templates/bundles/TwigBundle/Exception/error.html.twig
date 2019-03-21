@@ -2,13 +2,25 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="container">
+    <div class="container vertical-align">
         <div class="row">
             <div class="col-12">
-                {% block content %}
-                    <h1 class="my-3">{{ 'error.500.title'|trans }}</h1>
-                    <p>{{ 'error.500.message'|trans({'%path%': path('app_index')})|raw }}</p>
-                {% endblock %}
+                <div class="jumbotron">
+                    <div class="px-5 py-1">
+                        {% block content %}
+                            <h1 class="mb-5 display-3">{{ status_text }}</h1>
+                            <p class="lead">The server returned a "{{ status_code }} {{ status_text }}".</p>
+                            <hr class="mt-2 mb-3">
+                            {% block message %}
+                                <p>{{ 'error.500.message'|trans({'%path%': path('app_index')})|raw }}</p>
+                            {% endblock %}
+                        {% endblock %}
+                        <p class="lead mt-3 d-block">
+                            <a class="btn btn-primary btn-lg" href="/"
+                               role="button">Home</a>
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -220,7 +220,7 @@ class User implements UserInterface
     {
         $hash = md5(strtolower(trim($this->getEmail())));
 
-        $fallback = 'https://ui-avatars.com/api/'.$this->getEmail();
+        $fallback = 'https://ui-avatars.com/api/'.$this->getEmail().'?background=007bff&color=fff';
 
         return 'https://www.gravatar.com/avatar/'.$hash.'?d='.$fallback;
     }

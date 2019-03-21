@@ -6,8 +6,12 @@
     <div class="container vertical-align">
         <div class="row align-items-center">
             <div class="col-lg-6 mx-auto">
-                <h3 class="mb-3">{{ 'login.title'|trans }}</h3>
-                {% include 'pages/security/_login_form.html.twig' %}
+                <div class="card py-4 px-lg-4">
+                    <div class="card-body">
+                        <h3 class="mb-3">{{ 'login.title'|trans }}</h3>
+                        {% include 'pages/security/_login_form.html.twig' %}
+                    </div>
+                </div>
             </div>
         </div>
     </div>

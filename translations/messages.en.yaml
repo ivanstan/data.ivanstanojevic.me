@@ -31,19 +31,15 @@ email:
 error:
   403:
     message: >-
-      You don't have permission to access this page. Checkout for any URL
-      misspelling or <a href="%path%">return to the homepage</a>.
-    title: Forbidden
+      You don't have sufficient permission to access this page. Checkout for any URL
+      misspelling or return to the homepage.
   404:
     message: >-
-      The requested page could not be located. Checkout for any URL misspelling
-      or <a href="%path%">return to the homepage</a>.
-    title: Page Not Found
+      The requested page could not be found. Checkout for any URL misspelling
+      or return to the homepage.
   500:
     message: >-
-      The requested page could not be located. Checkout for any URL misspelling
-      or <a href="%path%">return to the homepage</a>.
-    title: Page Error
+      Checkout for any URL misspelling or return to the homepage.
 login:
   links:
     goto_recovery: Forgot password?
