@@ -1,0 +1,29 @@
+invite:
+  cta: Accept Invitation
+  explanation: You may now log in by clicking the button bellow.
+  footer: >-
+    This link can only be used once to log in and will lead you to a page
+    where you can set your password. It expires after one day and nothing will
+    happen if it's not used.
+  heading: Account was created for this email at %app_name%.
+  subject: Account Created
+recovery:
+  cta: Recover Account
+  explanation: You may now log in by clicking the button bellow.
+  footer: >-
+    This link can only be used once to log in and will lead you to a page
+    where you can set your password. It expires after one day and nothing will
+    happen if it's not used.
+  heading: >-
+    A request to reset the password for your account has been made at
+    %app_name%.
+  subject: Password Recovery
+verify:
+  cta: Verify Account
+  explanation: You can verify your account by clicking the button bellow.
+  footer: >-
+    This link can only be used once to log in and will lead you to a page
+    where you can set your password. It expires after one day and nothing will
+    happen if it's not used.
+  heading: Account verification is required for your account at %app_name%.
+  subject: Account Verification

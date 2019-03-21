@@ -14,7 +14,7 @@
                             <p class="lead">The server returned a "{{ status_code }} {{ status_text }}".</p>
                             <hr class="mt-2 mb-3">
                             {% block message %}
-                                <p>{{ 'error.500.message'|trans({'%path%': path('app_index')})|raw }}</p>
+                                <p>{{ 'error.500'|trans({'%path%': path('app_index')})|raw }}</p>
                             {% endblock %}
                         {% endblock %}
                         <p class="lead mt-3 d-block">

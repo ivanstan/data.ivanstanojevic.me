@@ -7,10 +7,10 @@
 {% block content %}
     <tr>
         <td>
-            <p>{{ "email.verify.heading"|trans({'%app_name%': app_name}) }}</p>
-            <p>{{ "email.verify.explanation"|trans }}</p>
-            <a class="btn btn-primary" href="{{ url }}">{{ 'email.verify.cta'|trans }}</a>
-            <p>{{ "email.verify.footer"|trans }}</p>
+            <p>{{ "verify.heading"|trans({'%app_name%': app_name}, 'email') }}</p>
+            <p>{{ "verify.explanation"|trans({}, 'email') }}</p>
+            <a class="btn btn-primary" href="{{ url }}">{{ 'verify.cta'|trans({}, 'email') }}</a>
+            <p>{{ "verify.footer"|trans({}, 'email') }}</p>
         </td>
     </tr>
 {% endblock %}

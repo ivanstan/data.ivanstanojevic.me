@@ -7,10 +7,10 @@
 {% block content %}
     <tr>
         <td>
-            <p>{{ "email.invite.heading"|trans({'%app_name%': app_name}) }}</p>
-            <p>{{ "email.invite.explanation"|trans }}</p>
-            <a class="btn btn-primary" href="{{ url }}">{{ 'email.invite.cta'|trans }}</a>
-            <p>{{ "email.invite.footer"|trans }}</p>
+            <p>{{ "invite.heading"|trans({'%app_name%': app_name}, 'email') }}</p>
+            <p>{{ "invite.explanation"|trans({}, 'email') }}</p>
+            <a class="btn btn-primary" href="{{ url }}">{{ 'invite.cta'|trans({}, 'email') }}</a>
+            <p>{{ "invite.footer"|trans({}, 'email') }}</p>
         </td>
     </tr>
 {% endblock %}
