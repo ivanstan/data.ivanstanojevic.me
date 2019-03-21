@@ -2,7 +2,9 @@
 
 namespace App\EventSubscriber;
 
+use App\Kernel;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
@@ -26,7 +28,7 @@ class DevSubscriber implements EventSubscriberInterface
 
     public function onKernelRequest(GetResponseEvent $event): void
     {
-        if ('dev' !== $this->env) {
+        if (Kernel::DEV !== $this->env) {
             return;
         }
 
@@ -34,9 +36,10 @@ class DevSubscriber implements EventSubscriberInterface
             $type = $event->getRequest()->query->get($key);
 
             if ($type !== null) {
-                $event
-                    ->getRequest()
-                    ->getSession()
+                /** @var Session $session */
+                $session = $event->getRequest()->getSession();
+
+                $session
                     ->getFlashBag()
                     ->add($key, 'This is a sample message. It\'s only available in dev environment.');
             }

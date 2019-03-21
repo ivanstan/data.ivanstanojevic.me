@@ -2,6 +2,7 @@
 
 namespace App\EventSubscriber;
 
+use App\Kernel;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -49,7 +50,7 @@ class ApiExceptionSubscriber implements EventSubscriberInterface
             $this->setResponse($event, Response::HTTP_FORBIDDEN, 'Forbidden');
         }
 
-        if ('dev' === $this->env) {
+        if (Kernel::DEV === $this->env) {
             $this->setResponse($event, $exception->getCode(), $exception->getMessage());
         }
     }

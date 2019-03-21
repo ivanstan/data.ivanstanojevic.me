@@ -2,6 +2,7 @@
 
 namespace App\Command;
 
+use App\Kernel;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -34,7 +35,7 @@ class DoctrineReloadCommand extends Command
         $helper = $this->getHelper('question');
         $question = new ChoiceQuestion('All data will be lost. Do you wish to continue?', self::$choices, false);
 
-        if ('dev' !== $this->env) {
+        if (Kernel::DEV !== $this->env) {
             $io->warning('This is intended only for use in dev environment.');
 
             return;

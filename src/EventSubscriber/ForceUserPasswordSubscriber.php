@@ -7,6 +7,7 @@ use App\Entity\User;
 use App\Service\Traits\TranslatorAwareTrait;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -51,7 +52,11 @@ class ForceUserPasswordSubscriber implements EventSubscriberInterface
         if ($this->getControllerName($event) !== SecurityController::class && $event->getRequest()->getMethod() !== 'settings') {
             $redirectUrl = $this->urlGenerator->generate('security_settings');
             $event->setController(function () use ($redirectUrl, $event) {
-                $event->getRequest()->getSession()->getFlashBag()->add('info',
+
+                /** @var Session $session */
+                $session = $event->getRequest()->getSession();
+
+                $session->getFlashBag()->add('info',
                     $this->translator->trans('settings.password_is_null')
                 );
 

@@ -9,17 +9,15 @@ use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\AuthenticationEvents;
 use Symfony\Component\Security\Core\Event\AuthenticationFailureEvent;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Symfony\Component\Security\Http\SecurityEvents;
+use Symfony\Component\Templating\EngineInterface;
 
 class SecuritySubscriber implements EventSubscriberInterface, LoggerAwareInterface
 {
@@ -31,30 +29,16 @@ class SecuritySubscriber implements EventSubscriberInterface, LoggerAwareInterfa
     /** @var EntityManagerInterface */
     private $em;
 
-    /** @var TokenStorageInterface */
-    private $tokenStorage;
-
     /** @var RequestStack */
-    private $requestStack;
-
-    /** @var AuthenticationUtils */
-    private $authenticationUtils;
+    private $request;
 
     /** @var EngineInterface */
     private $twig;
 
-    public function __construct(
-        EntityManagerInterface $em,
-        TokenStorageInterface $tokenStorage,
-        RequestStack $requestStack,
-        AuthenticationUtils $authenticationUtils,
-        EngineInterface $twig
-    ) {
-
+    public function __construct(EntityManagerInterface $em, RequestStack $request, EngineInterface $twig)
+    {
         $this->em = $em;
-        $this->tokenStorage = $tokenStorage;
-        $this->requestStack = $requestStack;
-        $this->authenticationUtils = $authenticationUtils;
+        $this->request = $request;
         $this->twig = $twig;
     }
 
@@ -81,8 +65,8 @@ class SecuritySubscriber implements EventSubscriberInterface, LoggerAwareInterfa
 
     public function onAuthenticationFailure(AuthenticationFailureEvent $event): void
     {
-        $username = $this->authenticationUtils->getLastUsername();
-        $ip = $this->requestStack->getCurrentRequest()->getClientIp();
+        $username = $event->getAuthenticationToken()->getUsername();
+        $ip = $this->request->getCurrentRequest()->getClientIp();
 
         $this->updateLock(self::LOGIN_ATTEMPT_FAILURE, $ip);
 
@@ -92,10 +76,10 @@ class SecuritySubscriber implements EventSubscriberInterface, LoggerAwareInterfa
     public function onSecurityInteractiveLogin(InteractiveLoginEvent $event): void
     {
         /** @var User $user */
-        $user = $this->tokenStorage->getToken()->getUser();
+        $user = $event->getAuthenticationToken()->getUser();
 
         $user->setLastLogin(DateTimeService::getCurrentUTC());
-        $user->setIp($this->requestStack->getCurrentRequest()->getClientIp());
+        $user->setIp($this->request->getCurrentRequest()->getClientIp());
 
         $this->em->flush();
 
