@@ -92,10 +92,6 @@ user:
   property:
     active:
       title: Active
-    email:
-      title: Email
-    ip:
-      title: IP
     last_login:
       title: Last Login
     password:
@@ -110,6 +106,7 @@ user:
   lastLogin: Last Login
 
 general:
+  email: Email
   submit: Submit
   create: Create
   save: Save
@@ -129,6 +126,7 @@ preference:
 
 alert:
   confirm_delete: Are you sure you want to delete this item?
+
 block:
   title: Block
   active: Active Blocks
