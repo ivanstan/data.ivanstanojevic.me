@@ -45,13 +45,13 @@ Encore
     .enableSassLoader(function(sassOptions) {}, {resolveUrlLoader: false})
 
     // uncomment if you use TypeScript
-    //.enableTypeScriptLoader()
+    .enableTypeScriptLoader()
 
     // uncomment if you're having problems with a jQuery plugin
     .autoProvidejQuery()
 
     // uncomment if you use API Platform Admin (composer req api-admin)
-    //.enableReactPreset()
+    .enableReactPreset()
     //.addEntry('admin', './assets/js/admin.js')
 ;
 
