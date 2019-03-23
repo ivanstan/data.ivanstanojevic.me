@@ -1,0 +1,9 @@
+bin/console
+config
+private
+public
+src
+templates
+translations
+vendor
+composer.json
