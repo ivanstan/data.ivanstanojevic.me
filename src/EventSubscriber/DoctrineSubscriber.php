@@ -2,7 +2,7 @@
 
 namespace App\EventSubscriber;
 
-use App\Service\DateTimeService;
+use App\Service\System\DateTimeService;
 use Doctrine\DBAL\Event\ConnectionEventArgs;
 
 class DoctrineSubscriber

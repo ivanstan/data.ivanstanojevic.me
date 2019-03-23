@@ -4,7 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Lock;
 use App\EventSubscriber\SecuritySubscriber;
-use App\Service\DateTimeService;
+use App\Service\System\DateTimeService;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -16,8 +16,7 @@ class LockRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return array[Lock]
-     * @throws \Exception
+     * @return Lock[]
      */
     public function getActiveLocks(): array
     {

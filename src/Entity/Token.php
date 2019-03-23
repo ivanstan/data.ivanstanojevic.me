@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use App\Service\DateTimeService;
+use App\Service\System\DateTimeService;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -59,12 +59,9 @@ class Token
         $this->user = $user;
     }
 
-    /**
-     * @throws \Exception
-     */
     public function isValid(string $interval): bool
     {
-        return $this->getDateTime()->add(new \DateInterval($interval)) >= DateTimeService::getCurrentUTC();
+        return $this->getDateTime()->add(DateTimeService::interval($interval)) >= DateTimeService::getCurrentUTC();
     }
 
     public function getId()

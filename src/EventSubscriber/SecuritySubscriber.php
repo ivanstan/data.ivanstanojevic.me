@@ -4,7 +4,7 @@ namespace App\EventSubscriber;
 
 use App\Entity\Lock;
 use App\Entity\User;
-use App\Service\DateTimeService;
+use App\Service\System\DateTimeService;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;

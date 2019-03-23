@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service;
+namespace App\Service\System;
 
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Templating\EngineInterface;

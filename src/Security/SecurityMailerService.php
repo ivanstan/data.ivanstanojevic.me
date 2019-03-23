@@ -4,7 +4,7 @@ namespace App\Security;
 
 use App\Entity\Token;
 use App\Entity\User;
-use App\Service\MailerService;
+use App\Service\System\MailerService;
 use App\Service\Traits\TranslatorAwareTrait;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -25,12 +25,9 @@ class SecurityMailerService
         $this->mailer = $mailer;
     }
 
-    /**
-     * @throws \Exception
-     */
     public function requestVerification(User $user): int
     {
-        $subject = $this->translator->trans('email.verify.subject');
+        $subject = $this->translator->trans('verify.subject', [], 'email');
         $body = $this->mailer->getTwig()->render('email/verify.html.twig', [
             'url' => $this->generateUrl($user, SecurityService::VERIFICATION),
             'subject' => $subject,
@@ -39,12 +36,9 @@ class SecurityMailerService
         return $this->mailer->send($subject, $body, $user->getEmail());
     }
 
-    /**
-     * @throws \Exception
-     */
     public function requestRecovery(User $user): int
     {
-        $subject = $this->translator->trans('email.recovery.subject');
+        $subject = $this->translator->trans('recovery.subject', [], 'email');
         $body = $this->mailer->getTwig()->render('email/recovery.html.twig', [
             'url' => $this->generateUrl($user, SecurityService::RECOVERY),
             'subject' => $subject,
@@ -53,12 +47,9 @@ class SecurityMailerService
         return $this->mailer->send($subject, $body, $user->getEmail());
     }
 
-    /**
-     * @throws \Exception
-     */
     public function invite(User $user): int
     {
-        $subject = $this->translator->trans('email.invite.subject');
+        $subject = $this->translator->trans('invite.subject', [], 'email');
         $body = $this->mailer->getTwig()->render('email/invite.html.twig', [
             'url' => $this->generateUrl($user, SecurityService::INVITATION),
             'subject' => $subject,
@@ -67,9 +58,6 @@ class SecurityMailerService
         return $this->mailer->send($subject, $body, $user->getEmail());
     }
 
-    /**
-     * @throws \Exception
-     */
     private function generateUrl(User $user, string $type): string
     {
         $token = new Token($user, SecurityService::VERIFICATION === $type ? Token::TYPE_VERIFICATION : Token::TYPE_RECOVERY);

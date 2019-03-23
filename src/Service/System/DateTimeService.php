@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service;
+namespace App\Service\System;
 
 use App\Kernel;
 
@@ -19,5 +19,10 @@ class DateTimeService
         }
 
         return new \DateTime('now', new \DateTimeZone(self::UTC_TIMEZONE_NAME));
+    }
+
+    public static function interval(string $interval): \DateInterval
+    {
+        return new \DateInterval($interval);
     }
 }

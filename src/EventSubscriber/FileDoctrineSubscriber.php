@@ -3,7 +3,7 @@
 namespace App\EventSubscriber;
 
 use App\Entity\File;
-use App\Service\FileManager;
+use App\Service\System\FileManager;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\OnFlushEventArgs;
 use Doctrine\ORM\Events;

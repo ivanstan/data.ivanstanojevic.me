@@ -2,7 +2,7 @@
 
 namespace App\EventSubscriber;
 
-use App\Controller\SecurityController;
+use App\Controller\System\SecurityController;
 use App\Entity\User;
 use App\Service\Traits\TranslatorAwareTrait;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;

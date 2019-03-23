@@ -12,11 +12,11 @@ use Doctrine\Migrations\AbstractMigration;
  */
 final class Version20190320121107 extends AbstractMigration
 {
-    public function getDescription() : string
-    {
-        return '';
-    }
-
+    /**
+     * @param Schema $schema
+     *
+     * @throws \Doctrine\DBAL\DBALException
+     */
     public function up(Schema $schema) : void
     {
         // this up() migration is auto-generated, please modify it to your needs
@@ -26,6 +26,11 @@ final class Version20190320121107 extends AbstractMigration
         $this->addSql('ALTER TABLE file ADD CONSTRAINT FK_8C9F3610A76ED395 FOREIGN KEY (user_id) REFERENCES user (id)');
     }
 
+    /**
+     * @param Schema $schema
+     *
+     * @throws \Doctrine\DBAL\DBALException
+     */
     public function down(Schema $schema) : void
     {
         // this down() migration is auto-generated, please modify it to your needs
