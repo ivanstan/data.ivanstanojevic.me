@@ -31,6 +31,9 @@ services:
   App\Controller\:
     resource: '../src/Controller'
     tags: ['controller.service_arguments']
+    bind:
+      $mapsApiKey: '%env(MAPS_API_KEY)%'
+      $rootDir: '%kernel.project_dir%'
 
   # add more service definitions when explicit configuration is needed
   # please note that last definitions always *replace* previous ones

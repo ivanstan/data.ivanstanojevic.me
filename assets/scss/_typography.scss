@@ -1,0 +1,13 @@
+/* pt-sans-narrow-regular - latin-ext_cyrillic_latin_cyrillic-ext */
+@font-face {
+  font-family: 'PT Sans Narrow';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/pt-sans-narrow-v9-latin-ext_cyrillic_latin_cyrillic-ext-regular.eot'); /* IE9 Compat Modes */
+  src: local('PT Sans Narrow'), local('PTSans-Narrow'),
+  url('../fonts/pt-sans-narrow-v9-latin-ext_cyrillic_latin_cyrillic-ext-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('../fonts/pt-sans-narrow-v9-latin-ext_cyrillic_latin_cyrillic-ext-regular.woff2') format('woff2'), /* Super Modern Browsers */
+  url('../fonts/pt-sans-narrow-v9-latin-ext_cyrillic_latin_cyrillic-ext-regular.woff') format('woff'), /* Modern Browsers */
+  url('../fonts/pt-sans-narrow-v9-latin-ext_cyrillic_latin_cyrillic-ext-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+  url('../fonts/pt-sans-narrow-v9-latin-ext_cyrillic_latin_cyrillic-ext-regular.svg#PTSansNarrow') format('svg'); /* Legacy iOS */
+}

@@ -1,4 +1,14 @@
+$primary: #2C3E4E;
+
 @import "~bootstrap/scss/bootstrap";
+
+@import "typography";
+@import "navigation";
+@import "blog";
+@import "general";
+@import "menu";
+@import "tle";
+@import "metar";
 @import "nprogress";
 
 html {

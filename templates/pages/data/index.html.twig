@@ -1,0 +1,98 @@
+{% extends 'content.html.twig' %}
+
+{% block title %}Browse Catalog | {{ parent() }}{% endblock %}
+
+{% block head %}
+    {{ parent() }}
+    <meta name="description"
+          content="OpenData collection of free to use APIs and data sources. Weather and satellite information.">
+{% endblock %}
+
+{% block featured %}
+    <header class="featured"
+            style="background: url(https://res.cloudinary.com/dn9s7hvks/image/upload/v1542983565/data.webp)">
+        <div class="content" style="margin-top: 8em">
+            <h2 class="mb-3">Browse catalog</h2>
+        </div>
+        <div class="overlay"></div>
+    </header>
+{% endblock %}
+
+{% block content %}
+    <div class="media mb-5">
+        <img class="d-flex mr-3" width="60" src="{{ asset('assets/images/satellite.svg') }}" alt="Satellite">
+        <div class="media-body">
+            <h5 class="mt-0 mb-1">
+                <a href="{{ path('app_api_docs', {name: 'tle'}) }}">NORAD TLE</a>
+            </h5>
+            Two line element set - orbital perturbation data sets published by North American Aerospace
+            Defense Command are periodically updated and published in JSON format over REST API.
+            <div class="row mt-2">
+                <div class="col-6">
+                    • <a href="{{ path('app_tle_view_item', {id: 25544}) }}">International Space Station</a>
+                </div>
+                <div class="col-6">
+                    • <a href="{{ path('app_tle_view_item', {id: 25682}) }}">LANDSAT 7</a>
+                </div>
+                <div class="col-6">
+                    • <a href="{{ path('app_tle_view_item', {id: 28190}) }}">GPS BIIR-11 (PRN 19)</a>
+                </div>
+                <div class="col-6">
+                    • <a rel="nofollow" href="{{ path('app_tle_view') }}">More...</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="media mb-5">
+        <img class="d-flex mr-3" width="60" src="{{ asset('assets/images/plane.svg') }}" alt="Airplane">
+        <div class="media-body">
+            <h5 class="mt-0 mb-1">
+                <a href="{{ path('airport_show', {icao: 'lybe'}) }}">Airport Information</a>
+            </h5>
+            Information including METAR which is currently available for following airports in near real
+            time.
+            <div class="row mt-2">
+                {% for airport in airports %}
+                    <div class="col-6">
+                        • <a href="{{ path('airport_show', {icao: airport.icao}) }}">{{ airport.name }}</a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="media mb-5">
+        <img class="d-flex mr-3" width="60" src="{{ asset('assets/images/flame.svg') }}" alt="Airplane">
+        <div class="media-body">
+            <h5 class="mt-0 mb-1">
+                <a href="{{ path('firms_main') }}">Active Fire Data - Europe</a>
+            </h5>
+            Near real time updates of detected active fires over Europe. Active fire products are obtained
+            from NASA's Moderate Resolution Imaging Spectroradiometer (MODIS) and NASA's Visible
+            Infrared Imaging Radiometer Suite (VIIRS)
+        </div>
+    </div>
+
+    <div class="media mb-5">
+        <div class="media-body">
+            <h5 class="mt-0 mb-1">
+                <a href="{{ path('app_api_docs', {name: 'metar'}) }}">METAR</a>
+            </h5>
+            Meteorological Terminal Air Report METAR - Aviation weather report updated every 30 minutes
+            currently available for limited number of airports.
+        </div>
+    </div>
+
+    <div class="media mb-5">
+        <div class="media-body">
+            <h5 class="mt-0 mb-1">
+                <a href="https://github.com/ivanstan/apollo-data/">Apollo JSON</a>
+            </h5>
+            Data repository contains JSON documents of data from NASA Apollo missions. Data ranges from
+            orbital parameters to food and medicine carried to each mission. Every dataset is obtained from
+            Apollo By Numbers and structured in JSON format.
+        </div>
+    </div>
+
+{% endblock %}

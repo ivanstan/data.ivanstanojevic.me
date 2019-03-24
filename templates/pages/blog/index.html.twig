@@ -1,0 +1,46 @@
+{% extends 'content.html.twig' %}
+
+{% block title %}Blog | Ivan Stanojević{% endblock %}
+
+{% block head %}
+    <meta name="description"
+          content="OpenData collection of free to use APIs and data sources. Weather and satellite information.">
+    {{ parent() }}
+{% endblock %}
+
+{% block nav %}
+    {% include 'components/menu/nav-main.html.twig' with {fixed: false} %}
+    {% include 'components/menu/nav-aside.html.twig' %}
+{% endblock %}
+
+{% block featured %}
+    <header class="featured"
+            style="background: url(https://res.cloudinary.com/dn9s7hvks/image/upload/v1542983565/data.webp)">
+        <div class="overlay"></div>
+    </header>
+{% endblock %}
+
+{% block content %}
+    {% for article in articles %}
+        <article>
+            <div class="row">
+                <div class="col-12">
+                    <a href="{{ path('app_article_canonical', {'slug': article.slug}) }}">
+                        <h3>{{ article.title }}</h3>
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <a href="{{ path('app_article_canonical', {'slug': article.slug}) }}"><img
+                                class="mb-3 mr-3 img-fluid"
+                                src="{{ asset(article.image) }}"
+                                alt="{{ article.title }}"></a>
+                </div>
+                <div class="col-md-8">
+                    <p>{{ article.teaser }}</p>
+                </div>
+            </div>
+        </article>
+    {% endfor %}
+{% endblock %}

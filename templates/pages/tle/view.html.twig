@@ -1,0 +1,15 @@
+{% extends 'content.html.twig' %}
+
+{% if model is not null %}
+    {% set title = model.name ~ ' | Latest two line element' %}
+{% else %}
+    {% set title = 'TLE Browser | Latest two line element' %}
+{% endif %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    <div>
+    <div class="w-100" id="tle-browser" data-url="{{ url('tle_collection') }}"></div>
+    </div>
+{% endblock %}

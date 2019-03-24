@@ -1,0 +1,102 @@
+{% extends 'content.html.twig' %}
+
+{% block title %}Airport information {{ airport.name }} | {{ parent() }}{% endblock %}
+
+{% block head %}
+    <meta name="description"
+          content="Airport information for {{ airport.name }} - {{ airport.icao|upper }} ICAO code. Latest weather reports from {{ airport.icao|upper }}">
+    {{ parent() }}
+{% endblock %}
+
+{% block featured %}
+    <header class="featured"
+            style="background: url(https://res.cloudinary.com/dn9s7hvks/image/upload/q_auto/v1542983289/terminal.webp)">
+        <div class="content">
+            <h1 class="mb-3">Airport Information</h1>
+            <p>{{ airport.name }}</p>
+        </div>
+        <div class="overlay"></div>
+    </header>
+{% endblock %}
+
+{% block content %}
+    {% if metar is not null %}
+    <h2>Weather</h2>
+        <div class="metar mb-4">
+            <div class="row">
+                <div class="col-md-4 mb-1">
+                    <div class="value-box">
+                        <p style="color: #5DA5DA">Air Temperature</p>
+                        <img width="50px" src="{{ asset('assets/images/temperature.svg') }}"
+                             alt="Temeperature gauge Image">
+                        <span>{{ metar.temperature.value }}°C</span>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-1">
+                    <div class="value-box">
+                        <p style="color: #60BD68">Dew Point Temperature</p>
+                        <img width="50px" src="{{ asset('assets/images/rain.svg') }}" alt="Rain Image">
+                        <span class="text-right">{{ metar.dewPoint.value }}°C</span>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-1">
+                    <div class="value-box">
+                        <p style="color: #F15854">Pressure</p>
+                        <img width="50px" src="{{ asset('assets/images/barometer.svg') }}" alt="Barometer Image">
+                        <span>{{ metar.pressure.value }}{{ metar.pressure.unit }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="metar loader" style="background-image: url({{ asset('assets/images/loader.gif') }})">
+        <canvas class="meter-temperature"
+                data-metar-url="{{ path('metar_collection', {'search': airport.icao}) }}"
+                data-taf-url="{{ path('taf_record', {'icao': airport.icao}) }}"
+                style="height: 500px;"></canvas>
+    </div>
+
+    {% if airport.latitude and airport.longitude %}
+        <div class="row mb-4">
+            <div class="col-12">
+                <h2>Location</h2>
+                <div id="airport-map" data-latitude="{{ airport.latitude }}"
+                     data-longitude="{{ airport.longitude }}"
+                style="min-height: 450px"></div>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if airport.frequencies|length > 0 %}
+        <div class="row">
+            <div class="col-12">
+                <h2>Comm</h2>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Description</th>
+                        <th>Frequency</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for frequency in airport.frequencies %}
+                        <tr>
+                            <td>{{ frequency.type }}</td>
+                            <td>{{ frequency.description|default('-') }}</td>
+                            <td>{{ frequency.frequency }} MHz</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+    <script src="//maps.googleapis.com/maps/api/js?key={{ api_key }}"></script>
+    <script src="{{ asset('assets/js/libs/google-maps-infobox.js') }}"></script>
+    {{ parent() }}
+{% endblock %}

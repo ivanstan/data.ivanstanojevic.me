@@ -1,0 +1,59 @@
+<!doctype html>
+{% set lang = app.request.locale == 'rs' ? 'sr' : 'en' %}
+<html lang="{{ lang }}" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}OpenData{% endblock %}</title>
+    {% block head %}
+        <link rel="stylesheet" href="{{ asset('assets/build/app.css') }}">
+    {% endblock %}
+</head>
+<body>
+
+{% block nav %}
+    <nav class="navbar bg-primary" id="nav-main">
+        <div class="container">
+            <div class="row" style="flex-grow: 1;">
+                <div class="col-xl-5 offset-xl-2 col-md-9 col-8">
+                    <ul class="nav nav-pills">
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://ivanstanojevic.me/">Home</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-xl-3 col-md-3 col-4">
+                    <ul class="nav nav-pills float-right">
+                        {#<li class="nav-item">#}
+                        {#<a class="nav-link active" href="https://blog.ivanstanojevic.me/">Blog</a>#}
+                        {#</li>#}
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://data.ivanstanojevic.me/">OpenData</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+{% endblock %}
+
+{% block header %}{% endblock %}
+{% block featured %}{% endblock %}
+{% block main %}{% endblock %}
+
+{% block footer %}
+    <footer class="bg-primary">
+        <div class="footer-copyright text-center py-3">Copyright © {{ "now"|date('Y') }}
+            <a href="https://ivanstanojevic.me/"> Ivan Stanojević</a>.
+        </div>
+    </footer>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('assets/build/runtime.js') }}"></script>
+    <script src="{{ asset('assets/build/app.js') }}"></script>
+    {% include 'components/google-analytics.html.twig' %}
+{% endblock %}
+</body>
+</html>

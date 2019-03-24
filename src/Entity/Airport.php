@@ -1,0 +1,135 @@
+<?php
+
+namespace App\Entity;
+
+use App\Entity\Field\CityField;
+use App\Entity\Field\CountryField;
+use App\Entity\Field\IataField;
+use App\Entity\Field\IcaoField;
+use App\Entity\Field\IdField;
+use App\Entity\Field\LatLngField;
+use App\Entity\Field\NameField;
+use App\Entity\Field\TypeField;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity()
+ * @ORM\Table(indexes={@ORM\Index(name="designator", columns={"icao", "iata"})})
+ * @see https://openflights.org/data.html
+ * @see http://ourairports.com/data/
+ */
+class Airport
+{
+    use IdField;
+    use NameField;
+    use CityField;
+    use CountryField;
+    use LatLngField;
+    use TypeField;
+    use IataField;
+    use IcaoField;
+
+    /**
+     * @var float
+     * @ORM\Column(name="altitude", type="decimal", scale=2)
+     */
+    private $altitude;
+
+    /**
+     * @var float
+     * @ORM\Column(name="utc_offset", type="decimal", scale=2)
+     */
+    private $utcOffset;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="source", type="string")
+     */
+    private $source;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="timezone", type="string")
+     */
+    private $timezone;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Frequency", mappedBy="airport")
+     */
+    private $frequencies;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="dst", type="string")
+     */
+    private $dst;
+
+    public function getAltitude(): float
+    {
+        return $this->altitude;
+    }
+
+    public function setAltitude(float $altitude): void
+    {
+        $this->altitude = $altitude;
+    }
+
+    public function getUtcOffset(): float
+    {
+        return $this->utcOffset;
+    }
+
+    public function setUtcOffset(float $utcOffset): void
+    {
+        $this->utcOffset = $utcOffset;
+    }
+
+    public function getSource(): string
+    {
+        return $this->source;
+    }
+
+    public function setSource(string $source): void
+    {
+        $this->source = $source;
+    }
+
+    public function getTimezone(): string
+    {
+        return $this->timezone;
+    }
+
+    public function setTimezone(string $timezone): void
+    {
+        $this->timezone = $timezone;
+    }
+
+    public function getDst(): string
+    {
+        return $this->dst;
+    }
+
+    public function setDst(string $dst): void
+    {
+        $this->dst = $dst;
+    }
+
+    /**
+     * @return Frequency[]
+     */
+    public function getFrequencies()
+    {
+        return $this->frequencies;
+    }
+
+    /**
+     * @param Frequency[]
+     */
+    public function setFrequencies($frequencies): void
+    {
+        $this->frequencies = $frequencies;
+    }
+}

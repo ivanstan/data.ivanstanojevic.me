@@ -1,0 +1,174 @@
+{% extends 'pages/blog/article.html.twig' %}
+
+{% block title %}Apolo 13 - Pogled u Mesec | Ivan Stanojević{% endblock %}
+
+{% block head %}
+    <meta name="description"
+          content="Koliko realno scene u filmu prikazuju nebeska tela utvrđujemo upromeru filma Apolo 13 uz korišćenje programa Virtual Moon Atlas">
+    <meta name="keywords" content="Apolo,13,Virtual,Moon,Atlas">
+    {{ parent() }}
+{% endblock %}
+
+{% block article %}
+    <article itemscope itemtype="http://schema.org/Article">
+        <meta itemprop="inLanguage" content="sr">
+        <meta itemprop="author" content="Ivan Stanojević">
+        <meta itemprop="datePublished" content="2018-12-19">
+        <meta itemprop="dateModified" content="2018-12-19">
+        {% include 'components/microdata/person-ivan-stanojevic.html.twig' %}
+
+        <h1 class="mb-3 d-inline-block" itemprop="name">Apolo 13 - Pogled u Mesec</h1>
+        <p itemprop="headline">
+            <i>Koliko (ne)realno scene u filmu prikazuju nebeska tela možemo utvrditi na osnovu jedne scene filma Apollo
+                13.</i>
+        </p>
+
+        <figure>
+            <img class="img-fluid" itemprop="image"
+                 src="https://res.cloudinary.com/dn9s7hvks/image/upload/v1542983520/blog.ivanstanojevic.me/apollo-moon-thumb.jpg"
+                 alt="Apollo 13 movie scene">
+            <figcaption>Scena iz filma Apollo 13</figcaption>
+        </figure>
+
+        <p>Gledajući film <a target="_blank" rel="nofollow" href="https://www.imdb.com/title/tt0112384/">Apollo 13</a> zapala mi je za
+            oko scena u kojoj Jim Lowell (Tom Hanks) upoređuje veličinu Meseca sa svojim palcem, u ovoj sceni Mesec je
+            pun i čini se nesrazmerno velikim. U daljem tekstu pokušavamo da utvrdimo da li prikaz jedinog Zemljinog
+            prirodnog satelita u filmu Apollo 13 odgovara realnim uslovima u datom trenutku.</p>
+
+        <p>Prilikom bilo kog astronomskog posmatranja neophodno znati epohu u kojoj je observacija načinjena. Scena
+            sa Mesecom u filmu dešava se neposredno nakon proslave u kući Lowellovih na kojoj su se ostale porodice
+            astronauta okupile da bi posmatrale prvu lunarnu ekskurziju Nila Armstronga i Baza Oldrina.</p>
+
+        <p>Imajući u vidu ovaj podatak i istorijske podatke o vremenu poletanja Apola 11, Jul 16, 1969 9:32 a.m.
+            EDT<sup><a href="#references">1</a></sup>,
+            i izlaska Armstronga iz kokpita lunarnog modula nakon 109 sati, 42 minuta MET<sup><a
+                        href="#references">2</a></sup>,
+            možemo zaključiti da je vreme posmatranja ponedeljak, 21 Jul 1969, plus zanemarljiv broj sati i minuta nakon
+            03:14:00 po koordinisanom univerzalnom vremenu<sup><a href="#references">3</a></sup>.</p>
+
+        <p>Precizna lokacija sa koje se vrši posmatranje nije presudan parametar u našem slučaju ali na osnovu
+            istorijskih podataka zakljucujemo da je u pitanju blizina Hjustona:
+            <a target="_blank" rel="nofollow"
+               href="https://www.google.com/maps/place/Timber+Cove+Dr,+Taylor+Lake+Village,+TX+77586,+%D0%A1%D1%98%D0%B5%D0%B4%D0%B8%D1%9A%D0%B5%D0%BD%D0%B5+%D0%94%D1%80%D0%B6%D0%B0%D0%B2%D0%B5/@29.5807549,-95.063844,14z/data=!4m5!3m4!1s0x863f620cee2685fd:0x368ab5c98e796965!8m2!3d29.5790152!4d-95.0535153">
+                Timber Cove, Taylor Lake Village, Texas 77586,
+                Sjedinjene Američke Države.</a>
+            <sup>
+                <a href="#references">4</a>
+            </sup>
+        </p>
+        <p>U našoj sceni prikazan je pun Mesec što ne odgovara jednom od zahteva Apolo misija, a to je da se sve
+            lunarne ekskurzije uvek odvijaju tokom perioda lunarne zore na željenom nestu sletanja.</p>
+
+        <figure>
+            <img class="img-fluid" src="https://res.cloudinary.com/dn9s7hvks/image/upload/v1542983519/blog.ivanstanojevic.me/apollo13.jpg"
+                 alt="Scena iz filma Apolo 13">
+        </figure>
+
+        <p>
+            Ovakav zahtev postavljen je iz razloga što pri oštrom uglu koji sunčevi zraci zaklapaju sa površinom Meseca,
+            senke neravnina i kamenja postaju izdužene.
+            Ovo omogucava pilotu lunarnog modula da ih lakše uoči i da sa sigurnošću nadje ravno mesto za sletanje.
+            Druga pogodnost je što se na ovaj način smanjuje izloženost astronauta sunčevim zracima i olakšava hlađenje
+            EVA<sup><a href="#references">5</a></sup> odela.</p>
+
+        <figure>
+            <img class="img-fluid" src="https://res.cloudinary.com/dn9s7hvks/image/upload/v1542983519/blog.ivanstanojevic.me/virtual-moon-atlas.jpg"
+                 alt="Virtual Moon Atlas">
+            <figcaption>Mesečeva mena na dan sletanja Apola 11. <i>Virtual Moon Atlas</i></figcaption>
+        </figure>
+
+        <p>Želeći da proverim zapažanje koristio sam se programom Virtual Moon Atlas<sup><a
+                        href="#references">6</a></sup> koji je potvrdio da je terminator
+            lunarne noći u tom
+            trenutku prolazio kroz <i>Mare Serenitatis</i> dok je u <i>Mare Tranquilitatis</i>, što je mesto sletanja
+            Apola 11, već bilo svanulo mirno lunarno jutro.</p>
+
+        <p>Pored ovoga ostaje nam još i pitanje veličine Meseca.</p>
+
+        <p>Znajući razdaljinu Zemlja-Mesec na dan sletanja Apola 11 (385,535 km) koju možemo saznati takođe iz Virtual
+            Moon
+            Atlas-a i poluprečnik Meseca koji iznosi 1737,1 km saznajemo da je ugaona veličina Meseca gledanog sa
+            Zemlje na
+            dan Apola 11 iznosila 0°30'59"<sup><a href="#references">7</a></sup>.
+        </p>
+
+        <p>Koristeći duzinu svoje ruke (72,5 cm) i debljinu svog palca (2 cm) izdračunao sam da ugaona veličina mog
+            palca pri potpuno ispruženoj ruci iznosi 1°34'50". Konverzijom stepena, minuta i sekundi dobijamo decimalne
+            stepene:</p>
+
+        <p class="text-center">
+            <math>
+                <mi>0°30'59"</mi>
+                <mo>=></mo>
+                <mn>0.5163889°</mn>
+            </math>
+            ;
+            <math>
+                <mi>1°34'50"</mi>
+                <mo>=></mo>
+                <mn>1.580556°</mn>
+            </math>
+        </p>
+
+        <p>Dalje proporcijom možemo ustanoviti da bi debljina palca Toma Henksa koja odgovara prečniku Meseca u filmu
+            trebala da iznosi 6,1 cm.</p>
+
+        <p class="text-center">
+            <math>
+                <mi>x</mi>
+                <mo>:</mo>
+                <mn>0.5163889</mn>
+                <mo>=</mo>
+                <mi>1.580556</mi>
+                <mo>:</mo>
+                <mn>2</mn>
+            </math>
+        </p>
+
+        <p class="text-center">
+            <math>
+                <mi>x</mi>
+                <mo>=</mo>
+                <mn>6.12 cm</mn>
+            </math>
+        </p>
+
+        <p>Ovo i nije u potpunosti u skladu sa zahtevima o kilaži astronauta koji propisuje NASA, ali ako zanemarimo
+            propust režisera ili umetničku slobodu koju je dao sebi, složićemo se da je ovo jedna odlična
+            scena.</p>
+
+        <div id="references">
+            <h4>Reference</h4>
+
+            <ol type="1">
+                <li><i>Apollo 11 Launch</i>, <a target="_blank" rel="nofollow"
+                                                href="https://www.nasa.gov/multimedia/imagegallery/image_feature_359a.html">nasa.gov</a>
+                </li>
+                <li><i>Apollo 11 Mission Overview</i>, <a target="_blank" rel="nofollow"
+                                                          href="https://www.nasa.gov/mission_pages/apollo/missions/apollo11.html">nasa.gov</a>
+                </li>
+                <li>UTC, <i>Universal Coordinated Time</i>, <a target="_blank" rel="nofollow"
+                                                               href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">wikipedia.org</a>
+                </li>
+                <li>
+                    <a target="_blank" rel="nofollow"
+                       href="https://www.houstonchronicle.com/local/gray-matters/article/John-Glenn-s-neighborhood-10784236.php">Houston
+                        Chronicle, John Glenn's neighborhood</a>
+                </li>
+                <li>EVA <i>Extra Vehicular Activity</i>, <a target="_blank" rel="nofollow"
+                                                            href="https://msis.jsc.nasa.gov/sections/section14.htm">msis.jsc.nasa.gov</a>
+                </li>
+                <li><a target="_blank" rel="nofollow" href="https://virtual-moon-atlas.en.uptodown.com/windows">Virtual Moon Atlas</a>
+                </li>
+                <li>Kalkulator ugaone veličine <i>Angular Size (Diameter) Calculator</i>, <a target="_blank" rel="nofollow"
+                                                                                             href="https://www.easycalculation.com/algebra/angular-diameter-calculator.php">easycalculation.com</a>
+                </li>
+            </ol>
+        </div>
+    </article>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+{% endblock %}

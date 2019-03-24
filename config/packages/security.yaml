@@ -50,6 +50,8 @@ security:
     - { path: "^/settings", roles: ROLE_USER }
     - { path: "^/logout", roles: ROLE_USER }
 
+    - { path: "^/archive", roles: ROLE_USER }
+
     - { path: "^/$", role: IS_AUTHENTICATED_ANONYMOUSLY }
     - { path: "^/login", role: IS_AUTHENTICATED_ANONYMOUSLY }
     - { path: "^/recovery", role: IS_AUTHENTICATED_ANONYMOUSLY }

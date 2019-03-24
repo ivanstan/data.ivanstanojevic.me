@@ -140,6 +140,12 @@
     "roave/security-advisories": {
         "version": "dev-master"
     },
+    "safran-cassiopee/php-metar-decoder": {
+        "version": "v0.7"
+    },
+    "safran-cassiopee/php-taf-decoder": {
+        "version": "v0.1"
+    },
     "sensio/framework-extra-bundle": {
         "version": "5.2",
         "recipe": {

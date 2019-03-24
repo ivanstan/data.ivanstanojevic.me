@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Ivan Stanojević | Web Developer, NASA Space Apps Local Lead</title>
+    <meta name="keywords" content="ivan,stanojevic,web,developer,nasa,local,lead">
+    <meta name="description"
+          content="Ivan Stanojević, software developer and NASA SpaceApps local lead with passion for space exploration, technology surfer, riding the first wave">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Ivan Stanojević">
+    <meta name="copyright" content="Ivan Stanojević"/>
+    <meta name="application-name" content="ivanstan/personal"/>
+    <meta property="og:site_name" content="Ivan Stanojević"/>
+    <meta property="og:title" content="Ivan Stanojević"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:image" content="{{ asset('images/me.png') }}"/>
+    <meta property="og:url" content="http://ivanstanojevic.me"/>
+    <meta property="og:description"
+          content="Ivan Stanojević, software developer with passion for space exploration, technology surfer, riding the first wave"/>
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="Ivan Stanojević"/>
+    <meta name="twitter:description"
+          content="Ivan Stanojević, software developer with passion for space exploration, technology surfer, riding the first wave"/>
+    <meta name="twitter:image" content="{{ asset('images/me.png') }}"/>
+    <meta name="twitter:url" content="http://ivanstanojevic.me">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+    <link rel="stylesheet" href="{{ asset('build/presentation.css') }}">
+    <link rel="icon" href="favicon.ico" type="image/x-icon"/>
+</head>
+
+<body data-spy="scroll" data-target=".navbar" data-offset="50" class="fixed-nav" itemscope
+      itemtype="http://schema.org/Person">
+
+<div class="loading">
+    <div class="spinner"></div>
+</div>
+
+<!-- Navigation -->
+<nav class="navbar fixed-top" id="nav-main">
+    <div class="container">
+        <div class="row" style="flex-grow: 1;">
+            <div class="col-xl-5 offset-xl-2 col-md-9 col-8">
+                {% include 'components/menu/menu.html.twig' with {renderOpenSide: true} %}
+                {% include 'components/menu/nav-aside.html.twig' %}
+            </div>
+
+            <div class="col-xl-3 col-md-3 col-4">
+                <ul class="nav nav-pills float-right">
+                    {#<li class="nav-item">#}
+                        {#<a class="nav-link active" href="https://blog.ivanstanojevic.me/">Blog</a>#}
+                    {#</li>#}
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://data.ivanstanojevic.me/">OpenData</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Intro Section -->
+<section id="intro" class="intro-section"
+         style="background: url({{ asset('assets/images/desk.png') }}) no-repeat 0 0; background-size: cover;">
+    <meta itemprop="jobTitle" content="Software Developer">
+    <meta itemprop="givenName" content="Ivan">
+    <meta itemprop="familyName" content="Stanojević">
+    <meta itemprop="email" content="ivanstan@gmail.com">
+    <meta itemprop="gender" content="male">
+
+    <div itemprop="worksFor" itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="url" content="https://byteout.com">
+        <meta itemprop="name" content="Byteout Software">
+    </div>
+
+    <div class="container">
+        <div class="vertical-align">
+            <div class="logo">
+                <img src="{{ asset('assets/images/me.png') }}" class="mb-2 img-fluid" alt="Photo of Ivan Stanojević"
+                     itemprop="image">
+            </div>
+            <h1 class="text-xs-center name mb-4" itemprop="name">Ivan Stanojević</h1>
+            <div class="slider">
+                <div>
+                    <blockquote>
+                        <p class="mb-0"> ...is the most talented athlete in Byteout, always pushing the limits. With his
+                            endurance he also
+                            outperforms everybody in programming when he sits in front of his computer and gets "into
+                            the zone".
+                            Always trying out new trends, he is a technology surfer, riding the first wave.</p>
+                        <footer class="blockquote-footer">Dušan Popović, <a href="http://byteout.com/" target="_blank" rel="nofollow">Byteout</a>
+                            CEO
+                        </footer>
+                    </blockquote>
+                </div>
+                <div>
+                    <blockquote>
+                        <p class="mb-0">I can tell you have a wide skillset and from all of the examples I can think of
+                            not one comes to mind in which I expected something from your side and it was not delivered
+                            as expected! Aside from that I appreciate the very clear explanations as from my side there
+                            are never outstanding questions once you have taken your time to clarify something, which
+                            you always do, thank you!</p>
+                        <footer class="blockquote-footer">Raluca Hreniuc, <a href="https://www.esome.com/">eSome
+                                Advertising</a> Manager
+                        </footer>
+                    </blockquote>
+                </div>
+                <div>
+                    <blockquote>
+                        <p class="mb-0">From our working experience together I absolutely appreciate the open
+                            communication and meticulously-sent updates!</p>
+                        <footer class="blockquote-footer">Raluca Hreniuc, <a href="https://www.esome.com/">eSome
+                                Advertising</a> Manager
+                        </footer>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section id="about" class="odd">
+    <div class="container">
+        <div class="vertical-align" itemprop="description">
+            <h2>About me</h2>
+            <p>I'm a software developer stretched between web technologies and space exploration.</p>
+            <p>
+                From my early years I was curious about new technologies and space is the cutting edge of it.
+                Since 2011 I work as a web developer in <a href="http://byteout.com">Byteout Software</a>, where I try
+                to converge these two.
+            </p>
+            <p>I also took a role of NASA SpaceApp Challenge local lead in Belgrade, Serbia.</p>
+            <p>Every project is a mission and failure is not an option. It serves to organize and measure the
+                best
+                of our energies and skills, as spoke President Kennedy. Web and mobile apps are at my primal
+                focus,
+                and I always try to make my code lightweight and robust. When there's a problem, trying to see
+                it as
+                a challenge and a chance for growth.</p>
+            <p>In my project management I'm inspired by word of Gene Kranz, who said that job we do requires
+                toughness and competence. Toughness means we hold ourselves forever responsible for what we do
+                and
+                what we fail to do, and competence means we take nothing for granted.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Projects Section -->
+<section id="projects" class="even">
+    <div class="container">
+
+        <div class="vertical-align">
+            <h2>Projects</h2>
+
+            <div class="media mt-1">
+                <div class="media-body">
+                    <h3 class="media-heading">
+                        <a href="https://data.ivanstanojevic.me/" target="_blank" rel="nofollow"> OpenData</a>
+                    </h3>
+                    In October 2018 I started this open data initiative with goal to make bulky scientific data
+                    available for web developers.
+                </div>
+            </div>
+
+            <div class="media mt-1">
+                <div class="media-body">
+                    <h3 class="media-heading">
+                        <a href="https://2015.spaceappschallenge.org/project/around-earth/" target="_blank"
+                           rel="nofollow"> Around Earth</a>
+                    </h3>
+                    People's award winning project presented on NASA's SpaceApps 2015 at ESA center in
+                    Noordwijk, which main goal is
+                    visualisation of LEO satellites and real time orbital situation awareness.
+                </div>
+            </div>
+
+            <div class="media mt-1">
+                <div class="media-body">
+                    <h3 class="media-heading">
+                        <a href="https://packagist.org/packages/yswery/dns" target="_blank" rel="nofollow"> Contributor
+                            of PHP DNS
+                            server project.</a>
+                    </h3>
+                    Implementation of Authoritative DNS Server written in pure PHP.
+                </div>
+            </div>
+
+            <div class="media mt-1">
+                <div class="media-body">
+                    <h3 class="media-heading">
+                        <a href="http://cafemusic.rs" target="_blank" rel="nofollow"> Caffe Music</a>
+                    </h3>
+                    Coffee Shop web site with eCommerce created with Drupal.
+                </div>
+            </div>
+
+            <div class="media mt-1">
+                <div class="media-body">
+                    <h3 class="media-heading">
+                        <a href="https://play.google.com/store/apps/details?id=com.ivanstan.glutenfree" target="_blank"
+                           rel="nofollow"> GlutenFree</a>
+                    </h3>
+                    GlutenFree contains a list of gluten-free products, their details and descriptions, making life
+                    easier
+                    for people suffering from gluten intolerance or those who simply want to eat healthy and follow the
+                    latest nutrition trends.
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Other Section -->
+<section id="other" class="odd">
+    <div class="container">
+
+        <div class="vertical-align">
+            <h2 class="mb-2">Certifications</h2>
+
+            <div class="media">
+                <div class="media-body">
+                    <h3 class="media-heading">
+                        <a href="https://www.dropbox.com/s/t84db32ap20nspe/SpaceApps2018.pdf?dl=0"
+                           target="_blank" rel="nofollow">SpaceApps 2018 local lead recognition</a>
+                    </h3>
+                    Acknowledgement letter as local lead for NASA Space Apps Challenge 2018 in Belgrade, Serbia.
+                </div>
+            </div>
+
+            <div class="media">
+                <div class="media-body">
+                    <h3 class="media-heading">
+                        <a href="https://www.dropbox.com/s/dpoc8ib5u70amg0/654286_1569494.pdf?dl=0" target="_blank"
+                           rel="nofollow">Basic Life Support - BLS</a>
+                    </h3>
+                    CPR (Adult / Child / Infant / Choking) AED / First-Aid / Bloodborne Pathogens
+                </div>
+            </div>
+
+            <div class="media mb-1">
+                <div class="media-body">
+                    <h3 class="media-heading">
+                        <a href="https://www.dropbox.com/s/h2aem5ghay9chby/EPFLxEE585xCertificate_edX.pdf?dl=0"
+                           target="_blank"
+                           rel="nofollow">Space Mission Design and Operations</a>
+                    </h3>
+                    This course builds on university-level mechanics to introduce and illustrate orbital
+                    dynamics as
+                    they are applied in the design of space missions. Course lecturer , ESA astronaut Claude
+                    Nicollier in his teaching focuses on conceptual understanding of space mechanics,
+                    maneuvers,
+                    propulsion and control systems used in all spacecraft.
+                </div>
+            </div>
+
+            <h2 class="mt-2 mb-2">Publications</h2>
+
+            <div class="media">
+                <div class="media-body">
+                    <h3 class="media-heading">
+                        <a href="https://www.dropbox.com/s/nni364cor5lesg5/SpaceMissionPreliminaryAnalisys.pdf?dl=0"
+                           target="_blank"
+                           rel="nofollow">Space Mission Preliminary Analysis - Lunar Far Side Radio Communications</a>
+                    </h3>
+                    Publication written as a final assignment of course "Space Exploration and Rocket Science",
+                    discusses the possibility of communicating with lunar far side using relay satellite
+                    positioned
+                    in
+                    Lagrange points in the Earth - Moon system.
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact">
+    <div class="vertical-align">
+        <h2 class="d-none">Contact</h2>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <ul class="contact">
+                        <li>
+                            <a class="contact-item" target="_blank" rel="nofollow" href="mailto:ivanstan@gmail.com">
+                                <i class="fa fa-envelope" aria-hidden="true"></i> ivanstan@gmail.com
+                            </a>
+                        </li>
+                        <li>
+                            <a class="contact-item" target="_blank" rel="nofollow"
+                               href="//www.linkedin.com/in/ivan-stanojevic-1405988">
+                                <i class="fab fa-linkedin" aria-hidden="true"></i> LinkedIn
+                            </a>
+                        </li>
+                        <li>
+                            <a class="contact-item" target="_blank" rel="nofollow" href="//github.com/ivanstan">
+                                <i class="fab fa-github"></i> GitHub
+                            </a>
+                        </li>
+                        <li>
+                            <a class="contact-item" target="_blank" rel="nofollow" href="skype:ivanstan88?call">
+                                <i class="fab fa-skype" aria-hidden="true"></i> ivanstan88
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <form action="https://formspree.io/ivanstan@gmail.com" method="POST">
+                        <div class="form-group">
+                            <input type="text" name="name" id="name" class="form-control" required
+                                   placeholder="Your name">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" name="_replyto" id="email" class="form-control" placeholder="Your email"
+                                   required>
+                        </div>
+                        <div class="form-group">
+                            <textarea placeholder="Your message" required class="form-control"></textarea>
+                        </div>
+                        <input type="submit" class="btn" value="Send">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="{{ asset('build/runtime.js') }}"></script>
+<script src="{{ asset('build/presentation.js') }}"></script>
+{% include 'components/google-analytics.html.twig' %}
+
+</body>
+
+</html>
