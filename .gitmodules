@@ -1,6 +1,3 @@
-[submodule "assets/js/libs/orb.js"]
-	path = assets/js/libs/orb.js
-	url = https://github.com/lizard-isana/orb.js
 [submodule "assets/js/libs/tle.js"]
 	path = assets/js/libs/tle.js
 	url = https://github.com/ivanstan/tle.js
