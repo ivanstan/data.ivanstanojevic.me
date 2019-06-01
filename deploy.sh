@@ -10,7 +10,7 @@ export ARTIFACT_NAME=artifact.tar.gz;
 composer install
 yarn build
 
-npm audit
+#npm audit
 #bin/phpunit --coverage-text --testsuite Test
 
 tar -czf ${ARTIFACT_NAME} -T deploy.list
