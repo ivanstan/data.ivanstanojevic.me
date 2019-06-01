@@ -1,0 +1,10 @@
+<div class="alert alert-warning mb-0" role="alert">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    {{ "user.messages.verify.notice"|trans({'%email%': app.user.email})|raw }}
+
+    <form class="d-inline-block" method="post" action="{{ path('security_verify') }}">
+        <input type="hidden" name="_method" value="POST">
+        <input type="hidden" name="_token" value="{{ csrf_token('verify' ~ app.user.id) }}">
+        <button class="bg-transparent border-0 px-0"><u>{{ "user.messages.verify.resend"|trans }}</u>.</button>
+    </form>
+</div>

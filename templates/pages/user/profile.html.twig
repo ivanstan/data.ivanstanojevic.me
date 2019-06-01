@@ -1,0 +1,20 @@
+{% extends 'pages/container.html.twig' %}
+
+{% block title %}{{ 'settings.title'|trans }} | {{ parent() }}{% endblock %}
+
+{% block messages %}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <h3 class="mt-3">{{ 'settings.preferences'|trans }}</h3>
+                {{ include('components/messages.html.twig') }}
+                {{ form_start(form) }}
+                {{ form_widget(form) }}
+                {% include 'components/form-submit.html.twig' with {'title':'general.submit'|trans } only %}
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

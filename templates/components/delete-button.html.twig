@@ -1,0 +1,6 @@
+<form class="d-inline-block" method="post" action="{{ action }}"
+      onsubmit="return confirm('{{'alert.confirm_delete'|trans({'%entity%': entity}) }}');">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" value="{{ csrf }}">
+    <button class="btn btn-outline-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+</form>

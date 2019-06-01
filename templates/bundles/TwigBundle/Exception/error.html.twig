@@ -1,29 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="{{ _charset }}"/>
-    <title>An Error Occurred: {{ status_text }}</title>
-    <link rel="stylesheet" href="{{ asset('assets/build/app.css') }}">
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=PT+Sans+Narrow">
-</head>
-<body>
+{# templates/bundles/TwigBundle/Exception/error404.html.twig #}
+{% extends 'base-empty.html.twig' %}
 
-<main class="container">
-    <div class="row">
-        <div class="col-12 mt-5">
-            <div class="jumbotron">
-                <h1 class="display-3">Oops! An Error Occurred</h1>
-                <p class="lead">The server returned a "{{ status_code }} {{ status_text }}".</p>
-                <hr class="my-2">
-                <p> Something is broken. Please let us know what you were doing when this error occurred.
-                    We will fix it as soon as possible. Sorry for any inconvenience caused.</p>
-                <p class="lead">
-                    <a class="btn btn-primary btn-lg" href="/"
-                       role="button">Home</a>
-                </p>
+{% block title %}{{ status_text }} | {{ parent() }}{% endblock %}
+
+{% block body %}
+    <div class="container vertical-align">
+        <div class="row">
+            <div class="col-12">
+                <div class="jumbotron">
+                    <div class="px-5 py-1">
+                        {% block content %}
+                            <h1 class="mb-5 display-3">{{ status_text }}</h1>
+                            <p class="lead">The server returned a "{{ status_code }} {{ status_text }}".</p>
+                            <hr class="mt-2 mb-3">
+                            {% block message %}
+                                <p>{{ 'error.500.message'|trans({'%path%': path('app_index')})|raw }}</p>
+                            {% endblock %}
+                        {% endblock %}
+                        <p class="lead mt-3 d-block">
+                            <a class="btn btn-primary btn-lg" href="/"
+                               role="button">Home</a>
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</main>
-</body>
-</html>
+{% endblock %}

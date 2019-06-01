@@ -1,0 +1,86 @@
+{% extends 'pages/admin/admin.html.twig' %}
+
+{% block title %}{{ 'user.index.title'|trans }} | {{ parent() }}{% endblock %}
+
+{% block content %}
+    <div class="container-fluid py-3">
+
+        <div class="row mb-3">
+            <div class="col-lg-9">
+                <a class="btn btn-primary" href="{{ path('user_new') }}">
+                    <i class="fa fa-plus" aria-hidden="true"></i> {{ 'user.actions.create'|trans }}
+                </a>
+            </div>
+            <div class="col-lg-3 pr-4">
+                {% include 'components/search-form.html.twig' %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>{{ 'user.property.email.title'|trans }}</th>
+                            <th class="d-none d-sm-table-cell">{{ 'user.property.roles.title'|trans }}</th>
+                            <th class="d-none d-sm-table-cell text-center"
+                                style="width: 110px">{{ 'user.property.active.title'|trans }}</th>
+                            <th class="d-none d-md-table-cell text-center"
+                                style="width: 110px">{{ 'user.property.verified.title'|trans }}</th>
+                            {#                            <th class="d-none d-lg-table-cell">{{ 'user.property.last_login.title'|trans }}</th>#}
+{#                            <th class="d-none d-md-table-cell">{{ 'user.property.ip.title'|trans }}</th>#}
+                            <th class="text-center" style="width: 110px">{{ 'general.actions'|trans }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for user in pager.currentPageResults %}
+                            <tr>
+                                <td>{{ user.email }}</td>
+                                <td class="d-none d-sm-table-cell">
+                                    {% for role in user.roles %}
+                                        <span class="badge badge-secondary">{{ role|replace({'ROLE_': '' })|capitalize|trans }}</span>
+                                    {% endfor %}
+                                </td>
+                                <td class="d-none d-sm-table-cell text-center">
+                                    {% if user.active %}
+                                        <span class="badge badge-success">{{ 'general.yes'|trans }}</span>
+                                    {% else %}
+                                        <span class="badge badge-danger">{{ 'general.no'|trans }}</span>
+                                    {% endif %}
+                                </td>
+                                <td class="d-none d-md-table-cell text-center">
+                                    {% if user.verified %}
+                                        <span class="badge badge-success">{{ 'general.yes'|trans }}</span>
+                                    {% else %}
+                                        <span class="badge badge-danger">{{ 'general.no'|trans }}</span>
+                                    {% endif %}
+                                </td>
+                                {#                                <td class="d-none d-lg-table-cell">{{ user.lastLogin ? user.lastLogin|date : '-' }}</td>#}
+{#                                <td class="d-none d-md-table-cell">{{ user.ip ? user.ip : '-' }}</td>#}
+                                <td>
+                                    <a class="btn btn-outline-primary" href="{{ path('user_edit', {'id': user.id}) }}">
+                                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                                    </a>
+                                    <div class="float-right">
+                                        {% include 'components/delete-button.html.twig' with {
+                                            'action': path('user_delete', {'id': user.id}),
+                                            'csrf': csrf_token('delete' ~ user.id),
+                                            'entity': 'user'
+                                        } only %}
+                                    </div>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="7" class="text-center">{{ 'user.index.table.empty'|trans }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% include 'components/pager.html.twig' with {pager: pager} only %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,157 @@
+error:
+  403:
+    message: >-
+      You don't have sufficient permission to access this page. Checkout for any URL
+      misspelling or return to the homepage.
+  404:
+    message: >-
+      The requested page could not be found. Checkout for any URL misspelling
+      or return to the homepage.
+  500:
+    message: >-
+      Checkout for any URL misspelling or return to the homepage.
+login:
+  links:
+    goto_recovery: Forgot password?
+    goto_register: New here? Register.
+  messages:
+    bad_credentials: >-
+      Wrong email or password. Have you forgot your password? Try visiting
+      "Password Recovery" link bellow and we will send you login link to your
+      email.
+    user_blocked: >-
+      How unfortunate, your account is blocked. Is this a mistake? Please
+      contact our customer support to resolve this issue.
+    attempts_left: >-
+      You have entered wrong password multiple times, you have %attempts_left% attempts left. After that your address will be
+      temporarily banned.
+  remember_me: Keep me logged in
+  title: Login
+logout:
+  title: Logout
+misc:
+  copyright: Copyright © %app_name% %now%. All right reserved.
+  messages:
+    email_fail: We are unable to send email at the moment. Please try again later.
+    invalid_csrf: This form has expired. Please refresh and try again.
+navigation:
+  index: Index
+  users: Users
+recovery:
+  submit: Submit
+  title: Password recovery
+register:
+  goto_login: Already have account? Login.
+  submit: Register
+  title: Register
+settings:
+  change_password: Change Password
+  preferences: Preferences
+  password_is_null: Please set your password to continue using application.
+  title: Settings
+user:
+  edit: Edit User
+  create: Create User
+  role:
+    admin: Admin
+  actions:
+    create: Create
+  form:
+    invite:
+      title: Send invitation email
+  index:
+    table:
+      empty: No users have been created so far.
+    title: Users
+  messages:
+    invitation:
+      bad_token: >-
+        Your invitation has expired. Use <a href="%url%">Password Recovery</a>
+        to receive a new account recovery mail.
+      success: You have successfully verified your account.
+    misc:
+      deleting_own_user: You can't delete your own account.
+    password:
+      change: You have successfully changed your password.
+    recovery:
+      bad_token: >-
+        Link you used to recover your account has expired. Use <a
+        href="%url%">Password Recovery</a> to receive a new account recovery
+        mail.
+      request: Recovery instructions are sent to email.
+      success: Authenticated successfully. You may now change your password.
+    register:
+      success: Your account is created. Account verification email has been sent.
+    verify:
+      bad_token: >-
+        Link you used to verify your account has expired. Use <a
+        href="%url%">Password Recovery</a> to receive a new verification mail.
+      notice: >-
+        <b>Please verify account.</b> We sent you a verification email to
+        confirm that you are the owner of address <strong>%email%</strong>.
+        Didn't receive any email?
+      request: >-
+        Hey <strong>%email%</strong> email account owner. You will shortly
+        receive verification email.
+      resend: Resend
+      success: Account verified successfully.
+  property:
+    active:
+      title: Active
+    email:
+      title: Email
+    ip:
+      title: IP
+    last_login:
+      title: Last Login
+    password:
+      repeat: Repeat Password
+      title: New Password
+    roles:
+      title: Roles
+    verified:
+      title: Verified
+  created: Created
+  updated: Updated
+  lastLogin: Last Login
+  password:
+    changed: Your password has been successfully changed.
+
+general:
+  submit: Submit
+  create: Create
+  save: Save
+  actions: Actions
+  yes: Yes
+  no: No
+  ip: IP
+  delete: Delete
+  search: Search
+
+pages:
+  ban:
+    title: Alert
+    body: We detected suspicious activity originating from your IP address (%ip%), this page is unavailable temporarily. Please try again later.
+
+preference:
+  timezone: Timezone
+
+Admin: Admin
+User: User
+
+alert:
+  confirm_delete: Are you sure you want to delete this %entity%?
+block:
+  title: Block
+  active: Active Blocks
+  expired: Expired Blocks
+  reason: Name
+  expire: Expire
+
+security:
+  token:
+    invalid: Token had expired or it might already been used.
+  title: Security
+  current_password: Current Password
+profile:
+  title: Profile

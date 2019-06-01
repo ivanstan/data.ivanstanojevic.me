@@ -1,0 +1,7 @@
+user:
+  email:
+    unique: There is already an account with this email.
+  password:
+    min_length: Your password should be at least 6 characters.
+    must_match: The password fields must match.
+    not_blank: Password cannot not be blank.

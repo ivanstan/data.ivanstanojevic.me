@@ -1,0 +1,16 @@
+{% extends 'email/base.html.twig' %}
+
+{% set url = url|default('#') %}
+{% set courseName = instance.course.name|default('Course Name') %}
+{% set courseDate = instance.date|default('now') %}
+
+{% block title %}{{ subject|default('Email') }} | {{ parent() }}{% endblock %}
+
+{% block content %}
+    <tr>
+        <td>
+            <p>Poruka od korisnika: <a href="mailto:{{ email }}">{{ email }}</a></p>
+            <p>{{ content }}</p>
+        </td>
+    </tr>
+{% endblock %}

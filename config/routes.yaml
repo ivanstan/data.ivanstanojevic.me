@@ -2,5 +2,5 @@
 #    path: /
 #    controller: App\Controller\ApiController\IndexController::index
 
-app_logout:
+security_logout:
   path: /logout

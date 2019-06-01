@@ -3,3 +3,13 @@ twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
     form_themes: ['bootstrap_4_layout.html.twig']
+    globals:
+        app_name: '%app_name%'
+    date:
+        format: '%date_format%'
+        interval_format: '%%d days'
+        timezone: '%default_timezone%'
+    number_format:
+        decimals: 2
+        decimal_point: ','
+        thousands_separator: '.'

@@ -1,0 +1,11 @@
+<form class="my-2 my-lg-0 d-flex w-100" method="get">
+    <input type="text"
+           name="search"
+           value="{{ app.request.get('search') }}"
+           class="form-control flex-grow-1"
+           placeholder="{{ 'general.search'|trans }}"
+           aria-label="Search">
+    <button class="btn btn-outline-primary ml-2" type="submit">
+        <i class="fa fa-search" aria-hidden="true"></i>
+    </button>
+</form>

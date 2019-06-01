@@ -1,0 +1,11 @@
+{% extends 'pages/container.html.twig' %}
+
+{% block content %}
+    <div id="tree-index-map"></div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmALZFYLBohOfPq8kYZQNxbrFVO09G7jA"></script>
+    <script src="{{ asset('public/build/main.js') }}"></script>
+{% endblock %}

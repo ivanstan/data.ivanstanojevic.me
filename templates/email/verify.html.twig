@@ -1,0 +1,16 @@
+{% extends 'email/base.html.twig' %}
+
+{% set url = url|default('#') %}
+
+{% block title %}{{ subject|default('Email') }} | {{ parent() }}{% endblock %}
+
+{% block content %}
+    <tr>
+        <td>
+            <p>{{ "verify.heading"|trans({'%app_name%': app_name}, 'email') }}</p>
+            <p>{{ "verify.explanation"|trans({}, 'email') }}</p>
+            <a class="btn btn-primary" href="{{ url }}">{{ 'verify.cta'|trans({}, 'email') }}</a>
+            <p>{{ "verify.footer"|trans({}, 'email') }}</p>
+        </td>
+    </tr>
+{% endblock %}

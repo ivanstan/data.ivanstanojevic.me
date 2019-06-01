@@ -1,0 +1,42 @@
+{{ form_start(form) }}
+    {{ form_row(form.email) }}
+
+    {% if user.id %}
+        <table class="table">
+            <tr>
+                <th>{{ 'user.created'|trans }}</th>
+                <td>{% include 'components/date-field.html.twig' with {date: user.createdAt} only %}</td>
+            </tr>
+            <tr>
+                <th>{{ 'user.updated'|trans }}</th>
+                <td>{% include 'components/date-field.html.twig' with {date: user.updated} only %}</td>
+            </tr>
+            <tr>
+                <th>{{ 'user.lastLogin'|trans }}</th>
+                <td>{% include 'components/date-field.html.twig' with {date: user.lastLogin} only %}</td>
+            </tr>
+            <tr>
+                <th>{{ 'general.ip'|trans }}</th>
+                <td>{{ user.ip|default('-') }}</td>
+            </tr>
+        </table>
+    {% endif %}
+
+    {% if form.password is defined %}
+        {{ form_row(form.password) }}
+    {% endif %}
+
+<div class="card pt-0 pl-3 mb-3">
+    {{ form_row(form.roles) }}
+</div>
+
+<div class="card pt-3 pl-3 mb-3">
+    {{ form_row(form.active) }}
+    {{ form_row(form.verified) }}
+    {% if form.invite is defined %}
+        {{ form_row(form.invite) }}
+    {% endif %}
+</div>
+
+{% include 'components/form-submit.html.twig' with {'title':'general.submit'|trans } only %}
+{{ form_end(form) }}

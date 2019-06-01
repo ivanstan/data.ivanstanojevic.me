@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}{{ app_name }}{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="{{ asset('assets/build/app.css') }}">
+    </head>
+    <body>
+        {% block body %}{% endblock %}
+        {% block javascripts %}
+            <script>
+                window.globals = {
+                    baseUrl: "{{ app.request.baseUrl }}"
+                };
+            </script>
+            <script src="{{ asset('assets/build/runtime.js') }}"></script>
+            <script src="{{ asset('assets/build/app.js') }}"></script>
+        {% endblock %}
+    </body>
+</html>

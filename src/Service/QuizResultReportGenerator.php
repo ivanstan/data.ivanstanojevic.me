@@ -29,7 +29,6 @@ class QuizResultReportGenerator
                 $userAnswerIds[] = $userAnswer->getAnswer()->getId();
             }
 
-            $answers = [];
             foreach ($questionResult->getQuestion()->getAnswers() as $answer) {
                 $correct = in_array($answer->getAnswer()->getId(), $correctAnswerIds, true);
                 $selected =  in_array($answer->getAnswer()->getId(), $userAnswerIds, true);

@@ -1,0 +1,17 @@
+{% extends 'base-empty.html.twig' %}
+
+{% block title %}{{ 'login.title'|trans }} | {{ parent() }}{% endblock %}
+
+{% block body %}
+    <div class="container vertical-align">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mx-auto">
+                <div class="card py-4 px-lg-4">
+                    <div class="card-body">
+                        {% block content %}{% endblock %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

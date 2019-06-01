@@ -1,0 +1,33 @@
+<form method="post">
+
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    <div class="form-group">
+        <label for="inputEmail" class="sr-only">{{ 'user.property.email.title'|trans }}</label>
+        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control"
+               placeholder="Email" required autofocus>
+    </div>
+    <div class="form-group">
+        <label for="inputPassword" class="sr-only">{{ 'user.property.password.title'|trans }}</label>
+        <input type="password" name="password" id="inputPassword" class="form-control view-password" placeholder="Password"
+               required>
+    </div>
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+    <div class="checkbox mb-3 d-none">
+        <input type="checkbox" name="_remember_me" id="remember_me" checked/>
+        <label for="remember_me">{{ 'login.remember_me'|trans }}</label>
+    </div>
+
+    <div class="text-center mb-3">
+        <a href="{{ path('security_recovery') }}">{{ 'login.links.goto_recovery'|trans }}</a>
+    </div>
+
+    <div class="text-center mb-3">
+        <a href="{{ path('security_register') }}">{{ 'login.links.goto_register'|trans }}</a>
+    </div>
+
+    {% include 'components/form-submit.html.twig' with {'title':'login.title'|trans } only %}
+</form>

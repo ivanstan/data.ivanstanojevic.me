@@ -1,0 +1,46 @@
+{% extends 'pages/admin/admin.html.twig' %}
+
+{% block title %}{{ 'block.title'|trans }} | {{ parent() }}{% endblock %}
+
+{% block content %}
+    <div class="container-fluid py-3">
+        <div class="row">
+            <div class="col-12">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>{{ 'block.reason'|trans }}</th>
+                        <th>{{ 'general.ip'|trans }}</th>
+                        <th class="d-none d-sm-table-cell">{{ 'block.expire'|trans }}</th>
+                        <th style="width: 110px;" class="text-center">Active</th>
+                        <th style="width: 50px;"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in pager.currentPageResults %}
+                        <tr>
+                            <td>{{ item.lock.name }}</td>
+                            <td>{{ item.lock.data }}</td>
+                            <td class="d-none d-sm-table-cell">{{ item.lock.expire ? item.lock.expire|date : '-' }}</td>
+                            <td class="text-center">
+                                {% if item.active %}
+                                    <span class="badge badge-success">{{ 'general.yes'|trans }}</span>
+                                {% else %}
+                                    <span class="badge badge-danger">{{ 'general.no'|trans }}</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% include 'components/delete-button.html.twig' with {
+                                    'action': path('block_delete', {'id': item.lock.id}),
+                                    'csrf': csrf_token('delete' ~ item.lock.id),
+                                    'entity': 'lock'
+                                } only %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+                {% include 'components/pager.html.twig' with {pager: pager} only %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

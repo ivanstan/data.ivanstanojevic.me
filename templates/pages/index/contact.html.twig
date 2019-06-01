@@ -1,0 +1,18 @@
+{% extends 'pages/container.html.twig' %}
+
+{% block messages %}{% endblock %}
+
+{% block content %}
+    <div class="container pt-3">
+        <div class="row">
+            <div class="col-12">
+                {% include 'components/messages.html.twig' %}
+                <form method="post" action="{{ path('app_contact') }}">
+                    <input class="form-control mb-3" required type="email" name="email" value="{{ app.user.email|default('') }}" placeholder="Email">
+                    <textarea name="content" required class="form-control mb-3"></textarea>
+                    <button class="btn-primary btn">Pošalji</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

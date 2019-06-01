@@ -5,6 +5,12 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: 'en'
+    mail_from: 'no-replay@domain.com'
+    default_timezone: 'Europe/Belgrade'
+    date_format: 'd-m-Y H:i'
+    app_name: 'Application Name'
+    primary_color: '007bff'
+    avatar_background: 'fff'
 
 services:
     # default configuration for services in *this* file
@@ -20,6 +26,10 @@ services:
     App\:
         resource: '../src/*'
         exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
+        bind:
+            $env: '%kernel.environment%'
+            $projectDir: "%kernel.project_dir%"
+            $mailFrom: '%mail_from%'
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
@@ -27,10 +37,29 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
         bind:
-          $projectDir: "%kernel.project_dir%"
           $mapsApiKey: "%env(MAPS_API_KEY)%"
+          $projectDir: "%kernel.project_dir%"
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
-    App\Service\MySqlNative:
-        arguments: ['%env(resolve:DATABASE_URL)%']
+
+    App\Service\ThemeService:
+        arguments:
+            - '%primary_color%'
+            - '%avatar_background%'
+
+    App\Event\Doctrine\DoctrineListener:
+        tags:
+            - { name: doctrine.event_listener, event: postConnect }
+
+    App\Event\Doctrine\PasswordListener:
+        tags:
+            - { name: doctrine.event_listener, event: prePersist }
+            - { name: doctrine.event_listener, event: preUpdate }
+
+    App\Event\Doctrine\UserListener:
+        arguments:
+            - '@App\Service\FileManager'
+            - '@App\Service\ThemeService'
+        tags:
+            - { name: doctrine.event_listener, event: postLoad }

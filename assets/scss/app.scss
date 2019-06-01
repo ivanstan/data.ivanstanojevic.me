@@ -9,3 +9,34 @@ $primary: #2C3E4E;
 @import "menu";
 @import "tle";
 @import "metar";
+
+html {
+  height: 100vh;
+}
+
+body {
+  height: 100vh;
+}
+
+.vertical-align {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.table th, .table td {
+  vertical-align: middle;
+}
+
+.pager {
+  display: flex;
+  justify-content: center;
+
+  .pagination {
+    margin-bottom: 0;
+  }
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}

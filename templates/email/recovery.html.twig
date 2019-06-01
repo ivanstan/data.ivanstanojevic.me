@@ -1,0 +1,16 @@
+{% extends 'email/base.html.twig' %}
+
+{% set url = url|default('#') %}
+
+{% block title %}{{ subject|default('Email') }} | {{ parent() }}{% endblock %}
+
+{% block content %}
+    <tr>
+        <td>
+            <p>{{ "recovery.heading"|trans({'%app_name%': app_name}, 'email') }}</p>
+            <p>{{ "recovery.explanation"|trans({}, 'email') }}</p>
+            <a class="btn btn-primary" href="{{ url }}">{{ 'recovery.cta'|trans({}, 'email') }}</a>
+            <p>{{ "recovery.footer"|trans({}, 'email') }}</p>
+        </td>
+    </tr>
+{% endblock %}

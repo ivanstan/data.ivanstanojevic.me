@@ -1,0 +1,13 @@
+{% extends 'pages/admin/admin.html.twig' %}
+
+{% block title %}{{ 'user.create'|trans }} | {{ parent() }}{% endblock %}
+
+{% block content %}
+    <div class="container-fluid py-3">
+        <div class="row">
+            <div class="col-12">
+                {{ include('pages/admin/user/_form.html.twig') }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'base-empty.html.twig' %}
+
+{% block body %}
+
+    <div id="main">
+        {% block notification %}
+            {% if app.user and not app.user.verified %}
+                {% include 'components/verify-notification.html.twig' %}
+            {% endif %}
+        {% endblock %}
+
+        {% block nav %}
+            {% include 'components/navigation.html.twig' %}
+        {% endblock %}
+    </div>
+
+{% endblock %}
