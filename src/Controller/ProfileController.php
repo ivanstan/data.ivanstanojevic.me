@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Form\PasswordRepeatType;
 use App\Form\UserType;
 use App\Service\Traits\TranslatorAwareTrait;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,7 +20,7 @@ class ProfileController extends AbstractController
 
     /**
      * @Route("/user/profile", name="user_profile_edit")
-     * @//IsGranted("ROLE_USER") todo: fix
+     * @IsGranted("ROLE_USER")
      */
     public function profile(Request $request): Response
     {
@@ -57,7 +58,7 @@ class ProfileController extends AbstractController
 
     /**
      * @Route("/user/security", name="user_profile_security")
-     * @//IsGranted("ROLE_USER") todo: fix
+     * @IsGranted("ROLE_USER")
      */
     public function security(Request $request): Response
     {

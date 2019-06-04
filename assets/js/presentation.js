@@ -1,7 +1,7 @@
 let $ = require('jquery');
 require('jquery.easing');
 require('bootstrap');
-require('@tehnoskarb/jquery-bxslider');
+require('@tehnoskarb/jquery-bxslider/jquery.bxslider');
 require('../scss/presentation.scss');
 require('./menu');
 
