@@ -5,6 +5,36 @@
 # to each configured DirectoryIndex file (e.g. index.php, index.html, index.pl).
 DirectoryIndex index.php
 
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/plain
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/xml
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE application/xml
+    AddOutputFilterByType DEFLATE application/xhtml+xml
+    AddOutputFilterByType DEFLATE application/rss+xml
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/x-javascript
+</IfModule>
+
+<IfModule mod_expires.c>
+    ExpiresActive on
+
+    ExpiresDefault "access plus 2 days"
+    ExpiresByType image/jpg "access plus 1 month"
+    ExpiresByType image/gif "access plus 1 month"
+    ExpiresByType image/jpeg "access plus 1 month"
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType text/javascript "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType application/x-shockwave-flash "access plus 1 month"
+    ExpiresByType text/css "now plus 1 month"
+    ExpiresByType image/ico "access plus 1 month"
+    ExpiresByType image/x-icon "access plus 1 month"
+    ExpiresByType text/html "access plus 600 seconds"
+</IfModule>
+
 # By default, Apache does not evaluate symbolic links if you did not enable this
 # feature in your server configuration. Uncomment the following line if you
 # install assets as symlinks or if you experience problems related to symlinks
@@ -19,6 +49,15 @@ DirectoryIndex index.php
 
 <IfModule mod_rewrite.c>
     RewriteEngine On
+
+    # strip www
+    RewriteCond %{HTTP_HOST} ^www\.(.*) [NC]
+    RewriteRule ^(.*)$ https://%1/$1 [R=301,NC,L]
+
+    # Rewritte to HTTPS
+    RewriteCond %{HTTPS} !on
+    RewriteCond %{HTTP_HOST} !^localhost$
+    RewriteRule .* https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L,QSA]
 
     # Determine the RewriteBase automatically and set it as environment variable.
     # If you are using Apache aliases to do mass virtual hosting or installed the

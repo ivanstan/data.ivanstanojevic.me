@@ -2,11 +2,11 @@ var Encore = require('@symfony/webpack-encore');
 
 Encore
 // directory where compiled assets will be stored
-  .setOutputPath('assets/build')
+  .setOutputPath('public/build')
 // public path used by the web server to access the output path
-  .setPublicPath('assets/build')
+  .setPublicPath('public')
 // only needed for CDN's or sub-directory deploy
-// .setManifestKeyPrefix('build/')
+// .setManifestKeyPrefix('public/build/')
 
 /*
      * ENTRY CONFIG
@@ -68,14 +68,10 @@ Encore
       // optional target path, relative to the output dir
       // to: 'images/[path][name].[ext]',
       // if versioning is enabled, add the file hash too
-      to: './images/[path][name].[hash:8].[ext]',
+      to: './images/[path][name].[ext]',
       // only copy files matching this pattern
       // pattern: /\.(png|jpg|jpeg)$/
     },
-    {
-      from: './assets/favicon',
-      to: './favicon/[path][name].[hash:8].[ext]',
-    }
   ])
 ;
 

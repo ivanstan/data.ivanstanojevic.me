@@ -15,7 +15,7 @@
     <meta property="og:site_name" content="Ivan Stanojević"/>
     <meta property="og:title" content="Ivan Stanojević"/>
     <meta property="og:type" content="website"/>
-    <meta property="og:image" content="{{ asset('assets/images/me.png') }}"/>
+    <meta property="og:image" content="{{ asset('build/images/me.png') }}"/>
     <meta property="og:url" content="http://ivanstanojevic.me"/>
     <meta property="og:description"
           content="Ivan Stanojević, software developer with passion for space exploration, technology surfer, riding the first wave"/>
@@ -23,11 +23,11 @@
     <meta name="twitter:title" content="Ivan Stanojević"/>
     <meta name="twitter:description"
           content="Ivan Stanojević, software developer with passion for space exploration, technology surfer, riding the first wave"/>
-    <meta name="twitter:image" content="{{ asset('assets/images/me.png') }}"/>
+    <meta name="twitter:image" content="{{ asset('build/images/me.png') }}"/>
     <meta name="twitter:url" content="http://ivanstanojevic.me">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
-    <link rel="stylesheet" href="{{ asset('assets/build/presentation.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/presentation.css') }}">
     <link rel="icon" href="favicon.ico" type="image/x-icon"/>
 </head>
 
@@ -63,7 +63,7 @@
 
 <!-- Intro Section -->
 <section id="intro" class="intro-section"
-         style="background: url({{ asset('assets/images/desk.png') }}) no-repeat 0 0; background-size: cover;">
+         style="background: url({{ asset('build/images/desk.png') }}) no-repeat 0 0; background-size: cover;">
     <meta itemprop="jobTitle" content="Software Developer">
     <meta itemprop="givenName" content="Ivan">
     <meta itemprop="familyName" content="Stanojević">
@@ -78,7 +78,7 @@
     <div class="container">
         <div class="vertical-align">
             <div class="logo">
-                <img src="{{ asset('assets/images/me.png') }}" class="mb-2 img-fluid" alt="Photo of Ivan Stanojević"
+                <img src="{{ asset('build/images/me.png') }}" class="mb-2 img-fluid" alt="Photo of Ivan Stanojević"
                      itemprop="image">
             </div>
             <h1 class="text-xs-center name mb-4" itemprop="name">Ivan Stanojević</h1>
@@ -329,8 +329,8 @@
     </div>
 </section>
 
-<script src="{{ asset('assets/build/runtime.js') }}"></script>
-<script src="{{ asset('assets/build/presentation.js') }}"></script>
+<script src="{{ asset('build/runtime.js') }}"></script>
+<script src="{{ asset('build/presentation.js') }}"></script>
 {% include 'components/google-analytics.html.twig' %}
 
 </body>

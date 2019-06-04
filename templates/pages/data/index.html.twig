@@ -20,7 +20,7 @@
 
 {% block content %}
     <div class="media mb-5">
-        <img class="d-flex mr-3" width="60" src="{{ asset('assets/images/satellite.svg') }}" alt="Satellite">
+        <img class="d-flex mr-3" width="60" src="{{ asset('build/images/satellite.svg') }}" alt="Satellite">
         <div class="media-body">
             <h5 class="mt-0 mb-1">
                 <a href="{{ path('app_api_docs', {name: 'tle'}) }}">NORAD TLE</a>
@@ -45,7 +45,7 @@
     </div>
 
     <div class="media mb-5">
-        <img class="d-flex mr-3" width="60" src="{{ asset('assets/images/plane.svg') }}" alt="Airplane">
+        <img class="d-flex mr-3" width="60" src="{{ asset('build/images/plane.svg') }}" alt="Airplane">
         <div class="media-body">
             <h5 class="mt-0 mb-1">
                 <a href="{{ path('airport_show', {icao: 'lybe'}) }}">Airport Information</a>
@@ -63,7 +63,7 @@
     </div>
 
     <div class="media mb-5">
-        <img class="d-flex mr-3" width="60" src="{{ asset('assets/images/flame.svg') }}" alt="Airplane">
+        <img class="d-flex mr-3" width="60" src="{{ asset('build/images/flame.svg') }}" alt="Airplane">
         <div class="media-body">
             <h5 class="mt-0 mb-1">
                 <a href="{{ path('firms_main') }}">Active Fire Data - Europe</a>

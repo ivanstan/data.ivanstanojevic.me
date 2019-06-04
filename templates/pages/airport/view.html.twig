@@ -27,7 +27,7 @@
                 <div class="col-md-4 mb-1">
                     <div class="value-box">
                         <p style="color: #5DA5DA">Air Temperature</p>
-                        <img width="50px" src="{{ asset('assets/images/temperature.svg') }}"
+                        <img width="50px" src="{{ asset('build/images/temperature.svg') }}"
                              alt="Temeperature gauge Image">
                         <span>{{ metar.temperature.value }}°C</span>
                     </div>
@@ -35,14 +35,14 @@
                 <div class="col-md-4 mb-1">
                     <div class="value-box">
                         <p style="color: #60BD68">Dew Point Temperature</p>
-                        <img width="50px" src="{{ asset('assets/images/rain.svg') }}" alt="Rain Image">
+                        <img width="50px" src="{{ asset('build/images/rain.svg') }}" alt="Rain Image">
                         <span class="text-right">{{ metar.dewPoint.value }}°C</span>
                     </div>
                 </div>
                 <div class="col-md-4 mb-1">
                     <div class="value-box">
                         <p style="color: #F15854">Pressure</p>
-                        <img width="50px" src="{{ asset('assets/images/barometer.svg') }}" alt="Barometer Image">
+                        <img width="50px" src="{{ asset('build/images/barometer.svg') }}" alt="Barometer Image">
                         <span>{{ metar.pressure.value }}{{ metar.pressure.unit }}</span>
                     </div>
                 </div>
@@ -50,7 +50,7 @@
         </div>
     {% endif %}
 
-    <div class="metar loader" style="background-image: url({{ asset('assets/images/loader.gif') }})">
+    <div class="metar loader" style="background-image: url({{ asset('build/images/loader.gif') }})">
         <canvas class="meter-temperature"
                 data-metar-url="{{ path('metar_collection', {'search': airport.icao}) }}"
                 data-taf-url="{{ path('taf_record', {'icao': airport.icao}) }}"
@@ -97,6 +97,6 @@
 
 {% block javascripts %}
     <script src="//maps.googleapis.com/maps/api/js?key={{ api_key }}"></script>
-    <script src="{{ asset('assets/js/libs/google-maps-infobox.js') }}"></script>
+    <script src="{{ asset('js/libs/google-maps-infobox.js') }}"></script>
     {{ parent() }}
 {% endblock %}

@@ -5,13 +5,6 @@
 # to each configured DirectoryIndex file (e.g. index.php, index.html, index.pl).
 DirectoryIndex index.php
 
-<IfModule mod_authz_core.c>
-    <Files ~ "\.(env|log|yaml|map|meta|lock|gitignore|twig)">
-        Order allow,deny
-        Deny from all
-    </Files>
-</IfModule>
-
 <IfModule mod_deflate.c>
     AddOutputFilterByType DEFLATE text/plain
     AddOutputFilterByType DEFLATE text/html

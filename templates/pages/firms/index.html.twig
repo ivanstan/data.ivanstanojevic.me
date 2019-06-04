@@ -3,11 +3,11 @@
 {% block title %}Active Fire Data | {{ parent() }}{% endblock %}
 
 {% block main %}
-    <div id="firms" data-api-key="{{ api_key }}" data-icon="{{ asset('assets/images/fire.png') }}" style="width: 100%; height: calc(100% - 100px)"></div>
+    <div id="firms" data-api-key="{{ api_key }}" data-icon="{{ asset('build/images/fire.png') }}" style="width: 100%; height: calc(100% - 100px)"></div>
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
     <script src="//maps.googleapis.com/maps/api/js?key={{ api_key }}&callback=renderFirms"></script>
-    <script src="{{ asset('assets/js/libs/google-maps-infobox.js') }}"></script>
+    <script src="{{ asset('js/libs/google-maps-infobox.js') }}"></script>
 {% endblock %}
