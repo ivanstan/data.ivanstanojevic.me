@@ -14,6 +14,6 @@ trait TranslatorAwareTrait
      */
 //    public function setTranslator(TranslatorInterface $translator): void
 //    {
-//        $this->translator = $translator; ToDo: Fix
+//        $this->translator = $translator;
 //    }
 }
