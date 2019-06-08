@@ -4,5 +4,6 @@ parameters:
   default_timezone: 'Europe/Belgrade'
   date_format: 'd-m-Y H:i'
   app_name: 'Application Name'
+  google_analytics_key: 'UA-37623519-7'
   primary_color: '007bff'
   avatar_background: 'fff'
