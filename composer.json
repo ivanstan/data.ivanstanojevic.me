@@ -33,6 +33,7 @@
         "white-october/pagerfanta-bundle": "^1.2"
     },
     "require-dev": {
+        "roave/security-advisories": "dev-master",
         "doctrine/doctrine-fixtures-bundle": "^3.1",
         "rexxars/html-validator": "^2.1",
         "symfony/browser-kit": "^4.1",
@@ -78,7 +79,7 @@
             "@auto-scripts"
         ],
         "deploy": [
-            "sh ./deploy.sh"
+            "sh ./bin/deploy.sh"
         ],
         "test": [
             "bin/phpunit --testsuite Test --coverage-text"

@@ -1,0 +1,7 @@
+bin/console
+config
+public
+src
+templates
+vendor
+composer.json

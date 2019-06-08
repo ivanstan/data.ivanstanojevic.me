@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{% block title %}OpenData{% endblock %}</title>
     {% block head %}
+{#        {{ encore_entry_link_tags('app') }}#}
         <link rel="stylesheet" href="{{ asset('build/app.css') }}">
     {% endblock %}
 </head>
@@ -51,6 +52,7 @@
 {% endblock %}
 
 {% block javascripts %}
+{#    {{ encore_entry_script_tags('app') }}#}
     <script src="{{ asset('build/runtime.js') }}"></script>
     <script src="{{ asset('build/app.js') }}"></script>
     {% include 'components/google-analytics.html.twig' %}

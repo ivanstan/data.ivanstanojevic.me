@@ -12,8 +12,8 @@ trait TranslatorAwareTrait
     /**
      * @required
      */
-//    public function setTranslator(TranslatorInterface $translator): void
-//    {
-//        $this->translator = $translator;
-//    }
+    public function setTranslator(TranslatorInterface $translator): void
+    {
+        $this->translator = $translator;
+    }
 }

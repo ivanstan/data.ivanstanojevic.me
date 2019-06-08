@@ -5,9 +5,9 @@ Encore
 // directory where compiled assets will be stored
   .setOutputPath('public/build')
   // public path used by the web server to access the output path
-  .setPublicPath('public')
+  .setPublicPath('/build')
   // only needed for CDN's or sub-directory deploy
-  // .setManifestKeyPrefix('public/build/')
+  .setManifestKeyPrefix('build/')
 
   /*
        * ENTRY CONFIG
@@ -73,11 +73,17 @@ Encore
       // only copy files matching this pattern
       // pattern: /\.(png|jpg|jpeg)$/
     },
+    {
+      from: './assets/favicon.ico',
+      to: './favicon.ico',
+    },
   ])
 ;
 
 let config = Encore.getWebpackConfig();
 
-config.resolve.alias = path.join(path.resolve(__dirname, "..", "assets"));
+config.resolve.alias = {
+  base: path.join(path.resolve(__dirname, "..", "assets"))
+};
 
 module.exports = config;
