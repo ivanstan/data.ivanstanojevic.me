@@ -7,7 +7,7 @@ use Symfony\Component\Mailer\Event\MessageEvent;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Mime\NamedAddress;
 
-class MailerFromListener implements EventSubscriberInterface
+class MailerFromSubscriber implements EventSubscriberInterface
 {
     /** @var string */
     private $appName;
@@ -34,6 +34,6 @@ class MailerFromListener implements EventSubscriberInterface
             return;
         }
 
-        $message->from(new NamedAddress($this->mailFrom, $this->appName));
+        $message->from($this->mailFrom);
     }
 }

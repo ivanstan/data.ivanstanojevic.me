@@ -3,5 +3,6 @@ config
 public
 src
 templates
+translations
 vendor
 composer.json

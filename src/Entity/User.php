@@ -86,9 +86,6 @@ class User implements UserInterface
      * @var string
      *
      * @ORM\Column(type="string", nullable=true)
-     *
-     * @Assert\NotBlank(message="Please, upload the product brochure as a PDF file.")
-     * @Assert\File(mimeTypes={ "image/png", "image/jpg", "image/jpeg" })
      */
     protected $avatar;
 
