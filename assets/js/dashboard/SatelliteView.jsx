@@ -1,7 +1,7 @@
 import React from 'react';
 import SatelliteSelect from './SatelliteSelect';
 import MapView from './MapView';
-import TleService, {Tle} from 'tle.js';
+import TleService, { Tle } from 'tle.js';
 import Color from './Color';
 import Propagator from './Propagator';
 
@@ -10,7 +10,7 @@ const ISS_SATELLITE_ID = 25544;
 
 export default class SatelliteView extends React.Component {
 
-  constructor (props) {
+  constructor(props) {
     super(props);
 
     let satellites = this.getTrackedSatellites();
@@ -27,21 +27,21 @@ export default class SatelliteView extends React.Component {
     this.interval = setInterval(this.onInterval.bind(this), interval);
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.onInterval();
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     clearInterval(this.interval);
   }
 
-  setupSatellites (satellites) {
+  setupSatellites(satellites) {
     return satellites.map(satellite => {
       return this.setupSatellite(satellite);
     });
   }
 
-  setupSatellite (satellite) {
+  setupSatellite(satellite) {
     satellite.sgp4 = Propagator.getSGP4(satellite);
     satellite.tracks = Propagator.precalculate(satellite.sgp4, satellite, this.date, this.state.orbits);
     satellite.color = this.color.new();
@@ -49,10 +49,8 @@ export default class SatelliteView extends React.Component {
     return satellite;
   }
 
-  onSatelliteChange (value) {
+  onSatelliteChange(value) {
     let satellites = [];
-
-//    localStorage.setItem('satellites', JSON.stringify(this.state.selected));
 
     value.map((satellite) => {
       satellites[satellite.tle.satelliteId] = this.setupSatellite(satellite);
@@ -64,7 +62,7 @@ export default class SatelliteView extends React.Component {
     });
   }
 
-  onInterval () {
+  onInterval() {
 //    this.date = new Date(this.date.getMilliseconds() + this.state.increase);
 
     Object.keys(this.state.satellites).map((id) => {
@@ -75,7 +73,7 @@ export default class SatelliteView extends React.Component {
   }
 
 
-  getTrackedSatellites () {
+  getTrackedSatellites() {
     let satellites = JSON.parse(localStorage.getItem('satellites')) || [];
 
     if (satellites.length === 0) {
@@ -103,12 +101,13 @@ export default class SatelliteView extends React.Component {
     return satellites;
   }
 
-  render () {
+  render() {
     return <React.Fragment>
       <nav className="navbar bg-primary" id="nav-main">
         <div className="container-fluid">
           <div className="col-4">
-            <SatelliteSelect url={this.props.url} multiple={true} onChange={this.onSatelliteChange.bind(this)} value={this.state.selected}/>
+            <SatelliteSelect url={this.props.url} multiple={true} onChange={this.onSatelliteChange.bind(this)}
+                             value={this.state.selected}/>
           </div>
         </div>
       </nav>

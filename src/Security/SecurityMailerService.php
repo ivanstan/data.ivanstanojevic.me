@@ -4,9 +4,11 @@ namespace App\Security;
 
 use App\Entity\Token;
 use App\Entity\User;
-use App\Service\MailerService;
 use App\Service\Traits\TranslatorAwareTrait;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
+use Symfony\Component\Mailer\MailerInterface;
 
 class SecurityMailerService
 {
@@ -15,13 +17,13 @@ class SecurityMailerService
     /** @var EntityManagerInterface */
     private $em;
 
-    /** @var MailerService */
+    /** @var MailerInterface */
     private $mailer;
 
     /** @var TokenGenerator */
     private $generator;
 
-    public function __construct(EntityManagerInterface $em, MailerService $mailer, TokenGenerator $generator)
+    public function __construct(EntityManagerInterface $em, MailerInterface $mailer, TokenGenerator $generator)
     {
         $this->em = $em;
         $this->mailer = $mailer;
@@ -29,56 +31,78 @@ class SecurityMailerService
     }
 
     /**
+     * @throws TransportExceptionInterface
      * @throws \Exception
      */
-    public function requestVerification(User $user): int
+    public function requestVerification(User $user): void
     {
         $token = new Token\UserVerificationToken($user);
         $this->em->persist($token);
         $this->em->flush();
 
         $subject = $this->translator->trans('verify.subject', [], 'email');
-        $body = $this->mailer->getTwig()->render('email/verify.html.twig', [
-            'url' => $this->generator->generateUrl($token),
-            'subject' => $subject,
-        ]);
 
-        return $this->mailer->send($subject, $body, $user->getEmail());
+        $email = (new TemplatedEmail())
+            ->to($user->getEmail())
+            ->subject($subject)
+            ->htmlTemplate('email/verify.html.twig')
+            ->context(
+                [
+                    'url' => $this->generator->generateUrl($token),
+                    'subject' => $subject,
+                ]
+            );
+
+        $this->mailer->send($email);
     }
 
     /**
+     * @throws TransportExceptionInterface
      * @throws \Exception
      */
-    public function requestRecovery(User $user): int
+    public function requestRecovery(User $user): void
     {
         $token = new Token\UserRecoveryToken($user);
         $this->em->persist($token);
         $this->em->flush();
 
         $subject = $this->translator->trans('recovery.subject', [], 'email');
-        $body = $this->mailer->getTwig()->render('email/recovery.html.twig', [
-            'url' => $this->generator->generateUrl($token),
-            'subject' => $subject,
-        ]);
+        $email = (new TemplatedEmail())
+            ->to($user->getEmail())
+            ->subject($subject)
+            ->htmlTemplate('email/recovery.html.twig')
+            ->context(
+                [
+                    'url' => $this->generator->generateUrl($token),
+                    'subject' => $subject,
+                ]
+            );
 
-        return $this->mailer->send($subject, $body, $user->getEmail());
+        $this->mailer->send($email);
     }
 
     /**
+     * @throws TransportExceptionInterface
      * @throws \Exception
      */
-    public function invite(User $user): int
+    public function invite(User $user): void
     {
         $token = new Token\UserInvitationToken($user);
         $this->em->persist($token);
         $this->em->flush();
 
         $subject = $this->translator->trans('invite.subject', [], 'email');
-        $body = $this->mailer->getTwig()->render('email/invite.html.twig', [
-            'url' => $this->generator->generateUrl($token),
-            'subject' => $subject,
-        ]);
+        $email = (new TemplatedEmail())
+            ->to($user->getEmail())
+            ->subject($subject)
+            ->htmlTemplate('email/invite.html.twig')
+            ->context(
+                [
+                    'url' => $this->generator->generateUrl($token),
+                    'subject' => $subject,
+                ]
+            );
 
-        return $this->mailer->send($subject, $body, $user->getEmail());
+        $this->mailer->send($email);
     }
 }

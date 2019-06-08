@@ -5,7 +5,7 @@ import Tle from 'tle.js';
 
 export default class TleBrowser extends React.Component {
 
-  constructor (props) {
+  constructor(props) {
     super(props);
 
     this.state = {
@@ -15,11 +15,11 @@ export default class TleBrowser extends React.Component {
     };
   }
 
-  handleChange (selected) {
-    this.setState({selected: selected});
+  handleChange(selected) {
+    this.setState({ selected: selected });
   }
 
-  componentDidMount () {
+  componentDidMount() {
     let match = window.location.pathname.match(/\/view\/([0-9]+)/);
     if (match !== null && typeof match[1] !== 'undefined') {
       let satelliteId = match[1];
@@ -28,7 +28,7 @@ export default class TleBrowser extends React.Component {
     }
   }
 
-  inputChange (input, selected = null) {
+  inputChange(input, selected = null) {
     fetch(`${this.props.url}?search=${input}`)
       .then(response => response.json())
       .then((response) => {
@@ -39,39 +39,39 @@ export default class TleBrowser extends React.Component {
           return item;
         });
 
-      let newSelected = null;
-      if (selected !== null) {
-        newSelected = options.find((item) => {
-          return parseInt(item.satelliteId) === parseInt(selected);
-        }) || null;
-      }
+        let newSelected = null;
+        if (selected !== null) {
+          newSelected = options.find((item) => {
+            return parseInt(item.satelliteId) === parseInt(selected);
+          }) || null;
+        }
 
         this.setState({
           options: options
         });
 
-      if (newSelected !== null) {
-        this.setState({
-          selected: newSelected,
-          tle: new Tle(newSelected)
-        });
-      }
+        if (newSelected !== null) {
+          this.setState({
+            selected: newSelected,
+            tle: new Tle(newSelected)
+          });
+        }
       });
   }
 
   handleChangeText(event) {
-    this.setState({value: event.target.value});
+    this.setState({ value: event.target.value });
   }
 
-  copyApiLink () {
+  copyApiLink() {
     navigator.clipboard.writeText(this.state.selected['@id']);
   }
 
-  render () {
-    var title = 'TLE Browser';
-    var preview = '';
-    var subtitle = '';
-    var api = '';
+  render() {
+    let title = 'TLE Browser';
+    let preview = '';
+    let subtitle = '';
+    let api = '';
     if (this.state.selected !== null) {
       title = this.state.selected.name;
       subtitle = <h5 className="text-muted">Latest two line element for {title}</h5>;

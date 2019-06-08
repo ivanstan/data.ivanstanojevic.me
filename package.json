@@ -34,9 +34,10 @@
     "tle.js": "./assets/js/libs/tle.js",
     "ts-loader": "^5.4.5",
     "tslint": "^4.0.0",
+    "tslint-react": "^4.0.0",
     "typescript": "^3.5.1",
-    "webpack-notifier": "^1.6.0",
-    "webpack": "^4.0"
+    "webpack": "^4.0",
+    "webpack-notifier": "^1.6.0"
   },
   "private": true,
   "scripts": {

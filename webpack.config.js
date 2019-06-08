@@ -72,11 +72,7 @@ Encore
       to: './images/[path][name].[ext]',
       // only copy files matching this pattern
       // pattern: /\.(png|jpg|jpeg)$/
-    },
-    {
-      from: './assets/favicon.ico',
-      to: './favicon.ico',
-    },
+    }
   ])
 ;
 

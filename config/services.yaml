@@ -3,15 +3,6 @@
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
-parameters:
-    locale: 'en'
-    mail_from: 'no-replay@domain.com'
-    default_timezone: 'Europe/Belgrade'
-    date_format: 'd-m-Y H:i'
-    app_name: 'Application Name'
-    primary_color: '007bff'
-    avatar_background: 'fff'
-
 services:
     # default configuration for services in *this* file
     _defaults:
@@ -35,6 +26,7 @@ services:
             $env: '%kernel.environment%'
             $projectDir: "%kernel.project_dir%"
             $mailFrom: '%mail_from%'
+            $appName: '%app_name%'
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
@@ -64,7 +56,6 @@ services:
 
     App\Event\Doctrine\UserListener:
         arguments:
-            - '@App\Service\FileManager'
             - '@App\Service\ThemeService'
         tags:
             - { name: doctrine.event_listener, event: postLoad }

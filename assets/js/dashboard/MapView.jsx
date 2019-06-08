@@ -1,5 +1,5 @@
 import React from 'react';
-import {primary, style} from '../abstract-map';
+import { primary, style } from '../abstract-map';
 
 const mapStyle = {
   minHeight: parseInt(window.innerHeight - 80) + 'px'
@@ -7,14 +7,14 @@ const mapStyle = {
 
 export default class MapView extends React.Component {
 
-  constructor (props) {
+  constructor(props) {
     super(props);
 
     this.satellites = {};
     this.element = React.createRef();
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.props.setUpdate(this.update.bind(this));
 
     this.setupMap();
@@ -24,9 +24,13 @@ export default class MapView extends React.Component {
     });
   }
 
-  componentWillReceiveProps (nextProps, nextContext) {
-    let removed = this.props.satellites.filter(index => {return nextProps.satellites.indexOf(index) < 0;});
-    let added = nextProps.satellites.filter(index => {return this.props.satellites.indexOf(index) < 0;});
+  componentWillReceiveProps(nextProps, nextContext) {
+    let removed = this.props.satellites.filter(index => {
+      return nextProps.satellites.indexOf(index) < 0;
+    });
+    let added = nextProps.satellites.filter(index => {
+      return this.props.satellites.indexOf(index) < 0;
+    });
 
     removed.map(satellite => {
       this.removeSatellite(satellite);
@@ -37,11 +41,11 @@ export default class MapView extends React.Component {
     });
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     this.map = null;
   }
 
-  setupMap () {
+  setupMap() {
     this.map = new google.maps.Map(this.element.current, {
       center: new google.maps.LatLng(10, 0),
       zoom: 2,
@@ -73,7 +77,7 @@ export default class MapView extends React.Component {
 //    });
   }
 
-  update (tle, geodetic) {
+  update(tle, geodetic) {
     let position = new google.maps.LatLng(geodetic.latitude, geodetic.longitude);
 
     if (this.satellites[tle.satelliteId].hasOwnProperty('marker')) {
@@ -96,18 +100,18 @@ export default class MapView extends React.Component {
     }
   }
 
-  getMarkerImage (satellite) {
+  getMarkerImage(satellite) {
     let color = satellite.color.substring(1, satellite.color.length);
 
     return new google.maps.MarkerImage(
-        'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|' + color,
-        new google.maps.Size(21, 34),
-        new google.maps.Point(0, 0),
-        new google.maps.Point(10, 34)
+      'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|' + color,
+      new google.maps.Size(21, 34),
+      new google.maps.Point(0, 0),
+      new google.maps.Point(10, 34)
     );
   }
 
-  addSatellite (satellite) {
+  addSatellite(satellite) {
     let satelliteId = satellite.tle.satelliteId;
 
     if (!this.satellites.hasOwnProperty(satelliteId)) {
@@ -136,7 +140,7 @@ export default class MapView extends React.Component {
     }
   }
 
-  removeSatellite (satellite) {
+  removeSatellite(satellite) {
     let satelliteId = satellite.tle.satelliteId;
 
     if (this.satellites[satelliteId].hasOwnProperty('marker')) {
@@ -150,7 +154,7 @@ export default class MapView extends React.Component {
     delete this.satellites[satelliteId];
   }
 
-  render () {
+  render() {
     return <div style={mapStyle} ref={this.element}/>;
   }
 }

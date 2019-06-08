@@ -49,7 +49,7 @@ class ForceUserPasswordSubscriber implements EventSubscriberInterface
         }
 
         if ($this->getControllerName($event) !== SecurityController::class && $event->getRequest()->getMethod() !== 'settings') {
-            $redirectUrl = $this->urlGenerator->generate('security_settings');
+            $redirectUrl = $this->urlGenerator->generate('user_profile_security');
             $event->setController(function () use ($redirectUrl, $event) {
                 $event->getRequest()->getSession()->getFlashBag()->add('info',
                     $this->translator->trans('settings.password_is_null')
