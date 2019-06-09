@@ -1,40 +1,40 @@
-let $ = require('jquery');
-require('jquery.easing');
-require('bootstrap');
-require('@tehnoskarb/jquery-bxslider/jquery.bxslider');
-require('../scss/presentation.scss');
-require('./menu');
+let $ = require("jquery");
+require("jquery.easing");
+require("bootstrap");
+require("@tehnoskarb/jquery-bxslider/jquery.bxslider");
+require("../scss/presentation.scss");
+require("./menu");
 
-$('img').each(function (index, element) {
+$("img").each(function (index, element) {
   let image = new Image();
-  image.src = $(element).attr('src');
+  image.src = $(element).attr("src");
 });
 
-$('.loading').remove();
+$(".loading").remove();
 
-let navBar = $('.navbar');
-let navBarFixed = $('.navbar-fixed-top');
+let navBar = $(".navbar");
+let navBarFixed = $(".navbar-fixed-top");
 
 if (navBar.length > 0 && navBarFixed.length > 0) {
   $(window).scroll(function () {
     if (navBar.offset().top > 50) {
-      navBarFixed.addClass('top-nav-collapse');
+      navBarFixed.addClass("top-nav-collapse");
     } else {
-      navBarFixed.removeClass('top-nav-collapse');
+      navBarFixed.removeClass("top-nav-collapse");
     }
   });
 }
 
-$('a.page-scroll').bind('click', function (event) {
+$("a.page-scroll").bind("click", function (event) {
   let $anchor = $(this);
-  $('html, body').stop().animate({
-    scrollTop: $($anchor.attr('href')).offset().top
-  }, 1500, 'easeInOutExpo');
+  $("html, body").stop().animate({
+    scrollTop: $($anchor.attr("href")).offset().top
+  }, 1500, "easeInOutExpo");
   event.preventDefault();
 });
 
 $(document).ready(function () {
-  $('.slider').bxSlider({
+  $(".slider").bxSlider({
     controls: false,
     auto: true,
     stopAutoOnClick: true,

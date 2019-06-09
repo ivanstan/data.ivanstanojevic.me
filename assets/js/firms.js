@@ -1,5 +1,5 @@
-import AbstractMap from './abstract-map';
-import moment from 'moment';
+import AbstractMap from "./abstract-map";
+import moment from "moment";
 
 export default class Firms extends AbstractMap {
   constructor () {
@@ -8,14 +8,14 @@ export default class Firms extends AbstractMap {
   }
 
   renderFirms () {
-    this.icon = $('#firms').data('icon');
-    this.map = new google.maps.Map(document.getElementById('firms'), {
+    this.icon = $("#firms").data("icon");
+    this.map = new google.maps.Map(document.getElementById("firms"), {
       center: {lat: 44.787197, lng: 20.457273},
       styles: this.style,
       zoom: 6
     });
 
-    fetch('api/firms')
+    fetch("api/firms")
       .then(response => response.json())
       .then(response => this.renderMarkers(response));
   }
@@ -32,31 +32,31 @@ export default class Firms extends AbstractMap {
         data: data,
         icon: this.icon
       });
-      marker.addListener('mouseover', function (e) {
+      marker.addListener("mouseover", function (e) {
         self.markerClick(this, self);
       });
 
       this.infoBox = new InfoBox({
-        disableAutoPan: false,
-        pixelOffset: new google.maps.Size(-140, 0),
-        zIndex: null,
         boxStyle: {
-          padding: '5px',
-          width: '200px',
-          height: '40px'
+          height: "40px",
+          padding: "5px",
+          width: "200px",
         },
-        closeBoxURL: '',
+        closeBoxURL: "",
+        disableAutoPan: false,
+        enableEventPropagation: false,
         infoBoxClearance: new google.maps.Size(1, 1),
         isHidden: false,
-        pane: 'floatPane',
-        enableEventPropagation: false
+        pane: "floatPane",
+        pixelOffset: new google.maps.Size(-140, 0),
+        zIndex: null,
       });
     }
   }
 
   markerClick (marker, self) {
     let data = marker.data;
-    let date = moment(data.date.timestamp * 1000).format('DD-MM-Y HH:mm');
+    let date = moment(data.date.timestamp * 1000).format("DD-MM-Y HH:mm");
 
     this.infoBox.setContent(
       `<div style="background: rgba(44, 62, 80, 0.75); color: #6589A8; padding: 5px">` +

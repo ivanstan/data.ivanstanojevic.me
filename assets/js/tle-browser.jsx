@@ -1,7 +1,7 @@
-import React from 'react';
-import Select from 'react-select';
-import ReactDOM from 'react-dom';
-import Tle from 'tle.js';
+import React from "react";
+import Select from "react-select";
+import ReactDOM from "react-dom";
+import Tle from "tle.js";
 
 export default class TleBrowser extends React.Component {
 
@@ -21,7 +21,7 @@ export default class TleBrowser extends React.Component {
 
   componentDidMount() {
     let match = window.location.pathname.match(/\/view\/([0-9]+)/);
-    if (match !== null && typeof match[1] !== 'undefined') {
+    if (match !== null && typeof match[1] !== "undefined") {
       let satelliteId = match[1];
 
       this.inputChange(satelliteId, satelliteId);
@@ -64,14 +64,14 @@ export default class TleBrowser extends React.Component {
   }
 
   copyApiLink() {
-    navigator.clipboard.writeText(this.state.selected['@id']);
+    navigator.clipboard.writeText(this.state.selected["@id"]);
   }
 
   render() {
-    let title = 'TLE Browser';
-    let preview = '';
-    let subtitle = '';
-    let api = '';
+    let title = "TLE Browser";
+    let preview = "";
+    let subtitle = "";
+    let api = "";
     if (this.state.selected !== null) {
       title = this.state.selected.name;
       subtitle = <h5 className="text-muted">Latest two line element for {title}</h5>;
@@ -105,7 +105,7 @@ export default class TleBrowser extends React.Component {
       api = <div className="alert alert-primary">
         <label>This data is available over HTTP API</label>
         <div className="input-group">
-          <input className="form-control" readOnly type="text" value={this.state.selected['@id']}
+          <input className="form-control" readOnly type="text" value={this.state.selected["@id"]}
                  onChange={this.handleChangeText}/>
           {/*<div className="input-group-append">*/}
           {/*<button className="input-group-text btn" onClick={this.copyApiLink}>Copy</button>*/}
@@ -138,8 +138,8 @@ export default class TleBrowser extends React.Component {
   }
 }
 
-let element = document.getElementById('tle-browser');
+let element = document.getElementById("tle-browser");
 if (element) {
-  let url = element.getAttribute('data-url');
+  let url = element.getAttribute("data-url");
   ReactDOM.render(<TleBrowser url={url}/>, element);
 }

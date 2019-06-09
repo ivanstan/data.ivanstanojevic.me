@@ -1,20 +1,13 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
 
-class Orbit extends React.Component
-{
-  componentDidMount()
-  {
-
-  }
-
-  render()
-  {
-    return ('');
+class Orbit extends React.Component {
+  render() {
+    return ("");
   }
 }
 
 ReactDOM.render(
-    <Orbit/>,
-    document.getElementById('dns-file-editor'),
+  <Orbit/>,
+  document.getElementById("orbit-view"),
 );

@@ -1,171 +1,171 @@
-export const primary = '#2C3E4E';
+export const primary = "#2C3E4E";
 
 export const style = [
   {
-    'featureType': 'all',
-    'elementType': 'labels.text.fill',
-    'stylers': [
+    "elementType": "labels.text.fill",
+    "featureType": "all",
+    "stylers": [
       {
-        'saturation': 36
+        "saturation": 36,
       },
       {
-        'color': primary
+        "color": primary,
       },
       {
-        'lightness': 38
-      }
-    ]
+        "lightness": 38,
+      },
+    ],
   },
   {
-    'featureType': 'all',
-    'elementType': 'labels.text.stroke',
-    'stylers': [
+    "elementType": "labels.text.stroke",
+    "featureType": "all",
+    "stylers": [
       {
-        'visibility': 'on'
+        "visibility": "on",
       },
       {
-        'color': primary
+        "color": primary,
       },
       {
-        'lightness': 13
-      }
-    ]
+        "lightness": 13,
+      },
+    ],
   },
   {
-    'featureType': 'all',
-    'elementType': 'labels.icon',
-    'stylers': [
+    "elementType": "labels.icon",
+    "featureType": "all",
+    "stylers": [
       {
-        'visibility': 'off'
-      }
-    ]
+        "visibility": "off",
+      },
+    ],
   },
   {
-    'featureType': 'administrative',
-    'elementType': 'geometry.fill',
-    'stylers': [
+    "elementType": "geometry.fill",
+    "featureType": "administrative",
+    "stylers": [
       {
-        'color': primary
+        "color": primary,
       },
       {
-        'lightness': 17
-      }
-    ]
+        "lightness": 17,
+      },
+    ],
   },
   {
-    'featureType': 'administrative',
-    'elementType': 'geometry.stroke',
-    'stylers': [
+    "elementType": "geometry.stroke",
+    "featureType": "administrative",
+    "stylers": [
       {
-        'color': primary
+        "color": primary,
       },
       {
-        'lightness': 14
+        "lightness": 14,
       },
       {
-        'weight': 1.2
-      }
-    ]
+        "weight": 1.2,
+      },
+    ],
   },
   {
-    'featureType': 'landscape',
-    'elementType': 'geometry',
-    'stylers': [
+    "elementType": "geometry",
+    "featureType": "landscape",
+    "stylers": [
       {
-        'color': primary
+        "color": primary,
       },
       {
-        'lightness': 18
-      }
-    ]
+        "lightness": 18,
+      },
+    ],
   },
   {
-    'featureType': 'poi',
-    'elementType': 'geometry',
-    'stylers': [
+    "elementType": "geometry",
+    "featureType": "poi",
+    "stylers": [
       {
-        'color': primary
+        "color": primary,
       },
       {
-        'lightness': 15
-      }
-    ]
+        "lightness": 15,
+      },
+    ],
   },
   {
-    'featureType': 'road.highway',
-    'elementType': 'geometry.fill',
-    'stylers': [
+    "elementType": "geometry.fill",
+    "featureType": "road.highway",
+    "stylers": [
       {
-        'color': primary
+        "color": primary,
       },
       {
-        'lightness': 14
-      }
-    ]
+        "lightness": 14,
+      },
+    ],
   },
   {
-    'featureType': 'road.highway',
-    'elementType': 'geometry.stroke',
-    'stylers': [
+    "elementType": "geometry.stroke",
+    "featureType": "road.highway",
+    "stylers": [
       {
-        'color': primary
+        "color": primary,
       },
       {
-        'lightness': 26
+        "lightness": 26,
       },
       {
-        'weight': 0.2
-      }
-    ]
+        "weight": 0.2,
+      },
+    ],
   },
   {
-    'featureType': 'road.arterial',
-    'elementType': 'geometry',
-    'stylers': [
+    "elementType": "geometry",
+    "featureType": "road.arterial",
+    "stylers": [
       {
-        'color': primary
+        "color": primary,
       },
       {
-        'lightness': 14
-      }
-    ]
+        "lightness": 14,
+      },
+    ],
   },
   {
-    'featureType': 'road.local',
-    'elementType': 'geometry',
-    'stylers': [
+    "elementType": "geometry",
+    "featureType": "road.local",
+    "stylers": [
       {
-        'color': primary
+        "color": primary,
       },
       {
-        'lightness': 13
-      }
-    ]
+        "lightness": 13,
+      },
+    ],
   },
   {
-    'featureType': 'transit',
-    'elementType': 'geometry',
-    'stylers': [
+    "elementType": "geometry",
+    "featureType": "transit",
+    "stylers": [
       {
-        'color': primary
+        "color": primary,
       },
       {
-        'lightness': 16
-      }
-    ]
+        "lightness": 16,
+      },
+    ],
   },
   {
-    'featureType': 'water',
-    'elementType': 'geometry',
-    'stylers': [
+    "elementType": "geometry",
+    "featureType": "water",
+    "stylers": [
       {
-        'color': primary
+        "color": primary,
       },
       {
-        'lightness': 12
-      }
-    ]
-  }
+        "lightness": 12,
+      },
+    ],
+  },
 ];
 
 export default class AbstractMap {

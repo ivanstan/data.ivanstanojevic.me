@@ -19,6 +19,7 @@
   "globals": {
     "document": true,
     "window": true,
+    "navigator": true,
 
     "fetch": true,
     "setInterval": true,
