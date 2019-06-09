@@ -2,7 +2,7 @@
 
 namespace App\ViewModel\Quiz;
 
-use App\Entity\QuizQuestionAnswer;
+use App\Entity\Quiz\QuizQuestionAnswer;
 
 class QuizAnswer
 {
