@@ -1,13 +1,13 @@
 {
-  "extends": "semistandard",
+  "extends": "eslint:recommended",
   "env": {
     "jquery": true
   },
   "parser": "babel-eslint",
   "rules": {
-    "linebreak-style": "off",
-    "object-curly-spacing": "off",
-    "no-new": "off"
+//    "linebreak-style": "off",
+//    "object-curly-spacing": "off",
+//    "no-new": "off"
   },
   "settings": {
     "import/resolver": {
@@ -17,7 +17,14 @@
     }
   },
   "globals": {
+    "document": true,
+    "window": true,
+
     "fetch": true,
+    "setInterval": true,
+    "clearInterval": true,
+    "localStorage": true,
+
     "google": true,
     "InfoBox": true,
     "Image": true,

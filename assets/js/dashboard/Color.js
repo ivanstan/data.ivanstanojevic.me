@@ -6,32 +6,32 @@ export default class Color {
   constructor () {
     this.nextSeries = 0;
     this.series = [
-      '111F74',
-      '515FB6',
-      '7985CF',
-      '074C6A',
-      '0F6388',
-      '287799',
-      '428AA9'
+      "111F74",
+      "515FB6",
+      "7985CF",
+      "074C6A",
+      "0F6388",
+      "287799",
+      "428AA9",
     ];
   }
 
   new () {
     let color = this.series[this.nextSeries];
     this.nextSeries++;
-    return '#' + color;
+    return "#" + color;
   }
 
   static get primaryLight () {
-    return '4757bd';
+    return "4757bd";
   }
 
   static get primaryNormal () {
-    return '3646a7';
+    return "3646a7";
   }
 
   static get primaryDark () {
-    return '263174';
+    return "263174";
   }
 
   get maxSeries () {
@@ -48,7 +48,7 @@ export default class Color {
     return result ? {
       r: parseInt(result[1], 16),
       g: parseInt(result[2], 16),
-      b: parseInt(result[3], 16)
+      b: parseInt(result[3], 16),
     } : null;
   }
 }

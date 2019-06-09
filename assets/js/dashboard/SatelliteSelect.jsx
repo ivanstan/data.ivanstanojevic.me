@@ -1,6 +1,6 @@
-import React from 'react';
-import Select from 'react-select';
-import TleService from 'tle.js';
+import React from "react";
+import Select from "react-select";
+import TleService from "tle.js";
 
 export default class SatelliteSelect extends React.Component {
 
@@ -10,21 +10,21 @@ export default class SatelliteSelect extends React.Component {
     this.tle = new TleService();
 
     this.state = {
+      options: [],
       value: props.value,
-      options: []
-    }
+    };
   }
 
   componentDidMount () {
-    this.inputChange('');
+    this.inputChange("");
     this.setState({
-      value: this.props.value
+      value: this.props.value,
     });
   }
 
-  componentWillReceiveProps (nextProps, nextContext) {
+  componentWillReceiveProps(nextProps) {
     this.setState({
-      value: nextProps.value
+      value: nextProps.value,
     });
   }
 
@@ -40,7 +40,7 @@ export default class SatelliteSelect extends React.Component {
         return {
           tle: tle,
           label: tle.name,
-          value: tle.satelliteId
+          value: tle.satelliteId,
         };
       });
 

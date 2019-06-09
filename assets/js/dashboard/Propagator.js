@@ -2,7 +2,7 @@ export default class Propagator {
   static getSGP4 (satellite) {
     return new Orb.SGP4({
       first_line: satellite.tle.line1,
-      second_line: satellite.tle.line2
+      second_line: satellite.tle.line2,
     });
   }
 

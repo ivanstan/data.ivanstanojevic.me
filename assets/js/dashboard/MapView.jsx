@@ -1,13 +1,13 @@
-import React from 'react';
-import { primary, style } from '../abstract-map';
+import React from "react";
+import { primary, style } from "../abstract-map";
 
 const mapStyle = {
-  minHeight: parseInt(window.innerHeight - 80) + 'px'
+  minHeight: parseInt(window.innerHeight - 80, 10) + "px",
 };
 
 export default class MapView extends React.Component {
 
-  constructor(props) {
+  constructor (props) {
     super(props);
 
     this.satellites = {};
@@ -24,7 +24,7 @@ export default class MapView extends React.Component {
     });
   }
 
-  componentWillReceiveProps(nextProps, nextContext) {
+  componentWillReceiveProps(nextProps) {
     let removed = this.props.satellites.filter(index => {
       return nextProps.satellites.indexOf(index) < 0;
     });
@@ -47,15 +47,15 @@ export default class MapView extends React.Component {
 
   setupMap() {
     this.map = new google.maps.Map(this.element.current, {
+      backgroundColor: primary,
       center: new google.maps.LatLng(10, 0),
-      zoom: 2,
       minZoom: 2,
       streetViewControl: false,
       styles: style,
-      backgroundColor: primary
+      zoom: 2,
     });
 
-//    google.maps.event.addListener(this.map, 'center_changed', () => {
+//    google.maps.event.addListener(this.map, "center_changed", () => {
 //      let latNorth = this.map.getBounds().getNorthEast().lat();
 //      let latSouth = this.map.getBounds().getSouthWest().lat();
 //      let newLat;
@@ -77,24 +77,24 @@ export default class MapView extends React.Component {
 //    });
   }
 
-  update(tle, geodetic) {
+  update (tle, geodetic) {
     let position = new google.maps.LatLng(geodetic.latitude, geodetic.longitude);
 
-    if (this.satellites[tle.satelliteId].hasOwnProperty('marker')) {
+    if (this.satellites[tle.satelliteId].hasOwnProperty("marker")) {
       this.satellites[tle.satelliteId].marker.setPosition(position);
       return;
     }
 
-    if (!this.satellites[tle.satelliteId].hasOwnProperty('marker')) {
+    if (!this.satellites[tle.satelliteId].hasOwnProperty("marker")) {
       this.satellites[tle.satelliteId].marker = new google.maps.Marker({
+        draggable: false,
+        icon: this.getMarkerImage(this.satellites[tle.satelliteId]),
         map: this.map,
         position: position,
         title: tle.name,
-        draggable: false,
-        icon: this.getMarkerImage(this.satellites[tle.satelliteId])
       });
 
-      google.maps.event.addListener(this.satellites[tle.satelliteId].marker, 'click', () => {
+      google.maps.event.addListener(this.satellites[tle.satelliteId].marker, "click", () => {
 //        this._propagator.setContext(marker);
       });
     }
@@ -104,10 +104,10 @@ export default class MapView extends React.Component {
     let color = satellite.color.substring(1, satellite.color.length);
 
     return new google.maps.MarkerImage(
-      'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|' + color,
+      "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + color,
       new google.maps.Size(21, 34),
       new google.maps.Point(0, 0),
-      new google.maps.Point(10, 34)
+      new google.maps.Point(10, 34),
     );
   }
 
@@ -120,18 +120,18 @@ export default class MapView extends React.Component {
 
     // setup tracks
 
-    if (satellite.hasOwnProperty('tracks')) {
+    if (satellite.hasOwnProperty("tracks")) {
       let tracks = [];
       Object.keys(satellite.tracks).map(time => {
         tracks.push(new google.maps.LatLng(satellite.tracks[time].latitude, satellite.tracks[time].longitude));
       });
 
       this.satellites[satelliteId].tracks = new google.maps.Polyline({
-        path: tracks,
         geodesic: true,
+        path: tracks,
         strokeColor: satellite.color,
         strokeOpacity: 0.5,
-        strokeWeight: 2
+        strokeWeight: 2,
       });
 
       this.satellites[satelliteId].tracks.setMap(this.map);
@@ -143,11 +143,11 @@ export default class MapView extends React.Component {
   removeSatellite(satellite) {
     let satelliteId = satellite.tle.satelliteId;
 
-    if (this.satellites[satelliteId].hasOwnProperty('marker')) {
+    if (this.satellites[satelliteId].hasOwnProperty("marker")) {
       this.satellites[satelliteId].marker.setMap(null);
     }
 
-    if (this.satellites[satelliteId].hasOwnProperty('tracks')) {
+    if (this.satellites[satelliteId].hasOwnProperty("tracks")) {
       this.satellites[satelliteId].tracks.setMap(null);
     }
 

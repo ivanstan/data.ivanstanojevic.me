@@ -1,9 +1,9 @@
-import React from 'react';
-import SatelliteSelect from './SatelliteSelect';
-import MapView from './MapView';
-import TleService, { Tle } from 'tle.js';
-import Color from './Color';
-import Propagator from './Propagator';
+import React from "react";
+import SatelliteSelect from "./SatelliteSelect";
+import MapView from "./MapView";
+import TleService, { Tle } from "tle.js";
+import Color from "./Color";
+import Propagator from "./Propagator";
 
 const interval = 1000;
 const ISS_SATELLITE_ID = 25544;
@@ -58,7 +58,7 @@ export default class SatelliteView extends React.Component {
 
     this.setState({
       satellites: satellites,
-      selected: value
+      selected: value,
     });
   }
 
@@ -74,20 +74,20 @@ export default class SatelliteView extends React.Component {
 
 
   getTrackedSatellites() {
-    let satellites = JSON.parse(localStorage.getItem('satellites')) || [];
+    let satellites = JSON.parse(localStorage.getItem("satellites")) || [];
 
     if (satellites.length === 0) {
       let service = new TleService();
 
       service.get(ISS_SATELLITE_ID).then(satellite => {
         let selected = {
-          tle: satellite,
           label: satellite.name,
-          value: satellite.satelliteId
+          tle: satellite,
+          value: satellite.satelliteId,
         };
 
         this.setState({
-          selected: [selected]
+          selected: [selected],
         });
 
         this.onSatelliteChange([selected]);
