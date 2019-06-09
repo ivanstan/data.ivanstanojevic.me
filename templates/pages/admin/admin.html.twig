@@ -1,18 +1,35 @@
-{% extends 'pages/navigation.html.twig' %}
-
-{% block messages %}
-    {% if app.request.hasPreviousSession and app.session.flashbag.peekAll() is not empty %}
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    {% include 'components/messages.html.twig' %}
-                </div>
-            </div>
-        </div>
-    {% endif %}
-{% endblock %}
+{% extends 'base-empty.html.twig' %}
 
 {% block body %}
+    {% block notification %}
+        {% if app.user and not app.user.verified %}
+            {% include 'components/verify-notification.html.twig' %}
+        {% endif %}
+    {% endblock %}
+
+    {% block nav %}
+        {% include 'pages/admin/top-navigation.html.twig' %}
+    {% endblock %}
+
+    {% block main %}
+        <main>
+            {% block messages %}
+                {% if app.request.hasPreviousSession and app.session.flashbag.peekAll() is not empty %}
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12">
+                                {% include 'components/messages.html.twig' %}
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endblock %}
+
+            {% block content %}{% endblock %}
+        </main>
+    {% endblock %}
+
+    {% block aside %}{% endblock %}
+
     {{ parent() }}
-    {% block content %}{% endblock %}
 {% endblock %}

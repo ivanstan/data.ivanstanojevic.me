@@ -12,7 +12,7 @@ class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder->add('avatar', FileType::class);
+//        $builder->add('avatar', FileType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
@@ -22,4 +22,3 @@ class UserType extends AbstractType
         ]);
     }
 }
-

@@ -1,10 +1,8 @@
-{% extends 'base.html.twig' %}
+{% extends 'base-empty.html.twig' %}
 
 {% block title %}Quiz{% endblock %}
 
-{% block nav %}{% endblock %}
-
-{% block main %}
+{% block body %}
     <div class="container my-5">
         <form action="{{ path('app_quiz', {id: quiz.id}) }}" method="post">
             {% for index, question in quiz.questions %}
@@ -37,5 +35,3 @@
         </form>
     </div>
 {% endblock %}
-
-{% block footer %}{% endblock %}

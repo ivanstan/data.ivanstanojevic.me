@@ -1,16 +1,14 @@
-{% extends 'base.html.twig' %}
+{% extends 'base-empty.html.twig' %}
 
 {% block title %} API Documentation | {{ parent() }}{% endblock %}
 
-{% block nav %}{% endblock %}
-
-{% block main %}
+{% block body %}
     <div id="redoc-container"></div>
+    {{ parent() }}
 {% endblock %}
 
-{% block footer %}{% endblock %}
-
 {% block javascripts %}
+    {{ parent() }}
     <script src="//cdn.jsdelivr.net/npm/redoc@2.0.0-alpha.38/bundles/redoc.standalone.js"></script>
     <script>
       Redoc.init("{{ path('app_api_docs_json', {name: name}) }}", {
@@ -18,10 +16,9 @@
         disableSearch: true,
         theme: {
           rightPanel: {
-//            backgroundColor: '#2c3e50',
+            // backgroundColor: '#2c3e50',
           },
         },
       }, document.getElementById('redoc-container'));
     </script>
-    {% include 'components/google-analytics.html.twig' %}
 {% endblock %}
