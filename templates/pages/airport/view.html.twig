@@ -1,10 +1,12 @@
 {% extends 'content.html.twig' %}
 
-{% block title %}Airport information {{ airport.name }} | {{ parent() }}{% endblock %}
+{% set name = airport is defined and airport ? airport.name : icao %}
+
+{% block title %}Airport information {{ name }} | {{ parent() }}{% endblock %}
 
 {% block head %}
     <meta name="description"
-          content="Airport information for {{ airport.name }} - {{ airport.icao|upper }} ICAO code. Latest weather reports from {{ airport.icao|upper }}">
+          content="Airport information for {{ name }} - {{ icao|upper }} ICAO code. Latest weather reports from {{ icao|upper }}">
     {{ parent() }}
 {% endblock %}
 
@@ -13,7 +15,7 @@
             style="background: url(https://res.cloudinary.com/dn9s7hvks/image/upload/q_auto/v1542983289/terminal.webp)">
         <div class="content">
             <h1 class="mb-3">Airport Information</h1>
-            <p>{{ airport.name }}</p>
+            <p>{{ name }}</p>
         </div>
         <div class="overlay"></div>
     </header>
@@ -50,53 +52,57 @@
         </div>
     {% endif %}
 
-    <div class="metar loader" style="background-image: url({{ asset('build/images/loader.gif') }})">
+    <div class="metar loader">
         <canvas class="meter-temperature"
-                data-metar-url="{{ path('metar_collection', {'search': airport.icao}) }}"
-                data-taf-url="{{ path('taf_record', {'icao': airport.icao}) }}"
+                data-metar-url="{{ path('metar_collection', {'search': icao}) }}"
                 style="height: 500px;"></canvas>
     </div>
 
-    {% if airport.latitude and airport.longitude %}
-        <div class="row mb-4">
-            <div class="col-12">
-                <h2>Location</h2>
-                <div id="airport-map" data-latitude="{{ airport.latitude }}"
-                     data-longitude="{{ airport.longitude }}"
-                style="min-height: 450px"></div>
+    {% if airport is defined and airport %}
+
+        {% if airport.latitude and airport.longitude %}
+            <div class="row mb-4">
+                <div class="col-12">
+                    <h2>Location</h2>
+                    <div id="airport-map" data-latitude="{{ airport.latitude }}"
+                         data-longitude="{{ airport.longitude }}"
+                         style="min-height: 450px"></div>
+                </div>
             </div>
-        </div>
+        {% endif %}
+
+        {% if airport.frequencies|length > 0 %}
+            <div class="row">
+                <div class="col-12">
+                    <h2>Comm</h2>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Description</th>
+                            <th>Frequency</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for frequency in airport.frequencies %}
+                            <tr>
+                                <td>{{ frequency.type }}</td>
+                                <td>{{ frequency.description|default('-') }}</td>
+                                <td>{{ frequency.frequency }} MHz</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        {% endif %}
+
     {% endif %}
 
-    {% if airport.frequencies|length > 0 %}
-        <div class="row">
-            <div class="col-12">
-                <h2>Comm</h2>
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>Type</th>
-                        <th>Description</th>
-                        <th>Frequency</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for frequency in airport.frequencies %}
-                        <tr>
-                            <td>{{ frequency.type }}</td>
-                            <td>{{ frequency.description|default('-') }}</td>
-                            <td>{{ frequency.frequency }} MHz</td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    {% endif %}
 {% endblock %}
 
 {% block javascripts %}
-    <script src="//maps.googleapis.com/maps/api/js?key={{ api_key }}"></script>
-    <script src="{{ asset('js/libs/google-maps-infobox.js') }}"></script>
+    <script src="//maps.googleapis.com/maps/api/js?key={{ google_maps_key }}"></script>
+    <script src="{{ asset('build/libs/google-maps-infobox.js') }}"></script>
     {{ parent() }}
 {% endblock %}

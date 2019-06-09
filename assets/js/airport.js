@@ -90,7 +90,7 @@ let config = {
   }
 };
 
-let renderChart = function (canvas, response, taf) {
+let renderChart = function (canvas, response) {
   let labels = response.member.map(function (element) {
     return moment(element.date).format('HH:mm DD-MM-YYYY');
   });
@@ -122,12 +122,7 @@ let createMeterTemperatureChart = function (canvas) {
   fetch(canvas.data('metar-url'))
     .then((metar) => metar.json())
     .then((metar) => {
-      fetch(canvas.data('taf-url'))
-        .then((taf) => taf.json())
-        .then((taf) => {
-          $('.metar.loader').removeAttr('style');
-          renderChart(canvas, metar, taf);
-        });
+      renderChart(canvas, metar);
     });
 
   let map = new Map();
@@ -138,6 +133,10 @@ class Map extends AbstractMap {
   render (element) {
     let latitude = element.data('latitude');
     let longitude = element.data('longitude');
+
+    if (!document.getElementById('airport-map')) {
+      return;
+    }
 
     this.map = new google.maps.Map(document.getElementById('airport-map'), {
       center: {lat: latitude, lng: longitude},

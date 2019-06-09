@@ -29,18 +29,6 @@ class MetarRepository extends ServiceEntityRepository
         return array_keys($result);
     }
 
-    public function getTaf(string $icao)
-    {
-        return $this->createQueryBuilder('m')
-            ->where('m.type = \'TAF\'')
-            ->andWhere('m.icao = :icao')
-            ->setParameter('icao', $icao)
-            ->addOrderBy('m.date', 'desc')
-            ->setMaxResults(1)
-            ->getQuery()
-            ->getResult();
-    }
-
     /**
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
@@ -49,8 +37,6 @@ class MetarRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('m')
             ->where('m.icao = :icao')
             ->setParameter('icao', $icao)
-            ->andWhere('m.type = :type')
-            ->setParameter('type', $type)
             ->addOrderBy('m.date', 'desc')
             ->setMaxResults(1)
             ->getQuery()

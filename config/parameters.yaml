@@ -5,5 +5,6 @@ parameters:
   date_format: 'd-m-Y H:i'
   app_name: 'Application Name'
   google_analytics_key: 'UA-37623519-7'
+  google_maps_key: 'AIzaSyBqMe3saKYfSyioFQggL4ZekWzHilem9E0'
   primary_color: '007bff'
   avatar_background: 'fff'

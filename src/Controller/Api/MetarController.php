@@ -21,7 +21,7 @@ class MetarController extends AbstractApiController
         $search = $request->get(self::SEARCH_PARAM);
         $sort = $this->getSort($request, MetarRepository::SORT_DATE, MetarRepository::$sort);
         $sortDir = $this->getSortDirection($request, self::SORT_DESC);
-        $pageSize = $this->getPageSize($request, self::PAGE_SIZE);
+        $pageSize = $this->getPageSize($request);
 
         $collection = $repository->collection(
             $search,

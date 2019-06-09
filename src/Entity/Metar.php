@@ -13,11 +13,9 @@ use Doctrine\ORM\Mapping as ORM;
 class Metar
 {
     use IdField;
-    use TypeField;
     use DateField;
 
     public const TYPE_METAR = 'METAR';
-    public const TYPE_TAF = 'TAF';
 
     /**
      * @var string

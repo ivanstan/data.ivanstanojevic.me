@@ -72,6 +72,11 @@ Encore
       to: './images/[path][name].[ext]',
       // only copy files matching this pattern
       // pattern: /\.(png|jpg|jpeg)$/
+    },
+    {
+      from: './assets/js/libs',
+      to: './libs/[path][name].[ext]',
+      pattern: /\.(js)$/
     }
   ])
 ;

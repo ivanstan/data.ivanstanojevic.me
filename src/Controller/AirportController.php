@@ -13,14 +13,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class AirportController extends AbstractController
 {
-    /** @var string */
-    private $apiKey;
-
-    public function __construct($mapsApiKey)
-    {
-        $this->apiKey = $mapsApiKey;
-    }
-
     /**
      * @Route("/airport/{icao}", name="airport_show")
      */
@@ -28,21 +20,16 @@ class AirportController extends AbstractController
     {
         $airport = $this->getDoctrine()->getRepository(Airport::class)->findOneBy(['icao' => $icao]);
 
-        if ($airport === null) {
-            throw new NotFoundHttpException(sprintf('Unable to find airport with ICAO code %s', $icao));
-        }
-
         try {
             $metar = $this->getDoctrine()->getRepository(Metar::class)->latest($icao);
-            $metar = $converter->convert($metar);
         } catch (NonUniqueResultException $exception) {
             $metar = null;
         }
 
         return $this->render('pages/airport/view.html.twig', [
+            'icao' => $icao,
             'airport' => $airport,
-            'metar' => $metar,
-            'api_key' => $this->apiKey,
+            'metar' => $converter->convert($metar),
         ]);
     }
 }

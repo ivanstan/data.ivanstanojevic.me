@@ -13,7 +13,6 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DomCrawler\Crawler;
-use TafDecoder\TafDecoder;
 
 class ImportMetarCommand extends Command
 {
@@ -42,9 +41,6 @@ class ImportMetarCommand extends Command
     /** @var MetarDecoder */
     private $metarDecoder;
 
-    /** @var TafDecoder */
-    private $tafDecoder;
-
     /** @var OutputInterface */
     private $output;
 
@@ -54,7 +50,6 @@ class ImportMetarCommand extends Command
         $this->em = $em;
         $this->repository = $this->em->getRepository(Metar::class);
         $this->metarDecoder = new MetarDecoder();
-        $this->tafDecoder = new TafDecoder();
     }
 
     protected function configure(): void
@@ -76,9 +71,6 @@ class ImportMetarCommand extends Command
             $metar->setIcao($item->getIcao());
             $metar->setDate($this->getMeterDateTime($item));
             $metar->setMetar($item->getRawMetar());
-
-            $type = strpos($item->getRawMetar(), Metar::TYPE_TAF) !== false ? Metar::TYPE_TAF : Metar::TYPE_METAR;
-            $metar->setType($type);
 
             $this->em->persist($metar);
             $this->output->writeln(\sprintf('<info>METAR record queued for insert: %s</info>', $item->getRawMetar()));
@@ -102,18 +94,7 @@ class ImportMetarCommand extends Command
         $result = [];
 
         foreach ($nodes as $node) {
-            $raw = $node->textContent;
-            $type = Metar::TYPE_METAR;
-
-            if (strpos($raw, 'TAF') === 0) {
-                $raw = trim(substr($raw, 2));
-                $type = Metar::TYPE_TAF;
-            }
-
-            $result[] = [
-                'raw' => $raw,
-                'type' => $type,
-            ];
+            $result[] = $node->textContent;
         }
 
         return $result;
@@ -123,15 +104,7 @@ class ImportMetarCommand extends Command
     {
         $results = [];
         foreach ($data as $item) {
-            $object = null;
-
-            if ($item['type'] === Metar::TYPE_METAR) {
-                $object = $this->metarDecoder->parseNotStrict($item['raw']);
-            }
-
-            if ($object) {
-                $results[] = $object;
-            }
+            $results[] = $this->metarDecoder->parseNotStrict($item);
         }
 
         return $results;
@@ -199,7 +172,6 @@ class ImportMetarCommand extends Command
             'ids' => implode(',', self::IMPORT_AIRPORT_ICAO),
             'format' => 'raw',
             'hours' => 36,
-            'taf' => 'on',
         ];
 
         return self::URL.'?'.http_build_query($query);

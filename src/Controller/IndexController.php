@@ -8,14 +8,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class IndexController extends AbstractController
 {
-    /** @var string */
-    private $apiKey;
-
-    public function __construct($mapsApiKey)
-    {
-        $this->apiKey = $mapsApiKey;
-    }
-
     /**
      * @Route("/", name="app_index")
      */
@@ -29,6 +21,6 @@ class IndexController extends AbstractController
      */
     public function dashboard(): Response
     {
-        return $this->render('pages/dashboard/index.html.twig', ['api_key' => $this->apiKey]);
+        return $this->render('pages/dashboard/index.html.twig');
     }
 }
