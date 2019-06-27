@@ -1,5 +1,10 @@
 <?php
 
+use App\Command\DoctrineReloadCommand;
+use App\Kernel;
+use Symfony\Bundle\FrameworkBundle\Console\Application;
+use Symfony\Component\Console\Input\ArrayInput;
+use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Dotenv\Dotenv;
 
 require dirname(__DIR__).'/vendor/autoload.php';
@@ -14,7 +19,7 @@ if ('prod' !== $_SERVER['APP_ENV']) {
     }
 
     $path = dirname(__DIR__).'/.env';
-    $dotenv = new Dotenv();
+    $dotenv = new Dotenv(true);
 
     if (method_exists($dotenv, 'loadEnv')) {
         $dotenv->loadEnv($path);
@@ -44,6 +49,24 @@ if ('prod' !== $_SERVER['APP_ENV']) {
             $dotenv->load($p);
         }
     }
+}
+
+if ('test' === $_SERVER['APP_ENV']) {
+    $kernel = new Kernel($_SERVER['APP_ENV'], true); // create a "test" kernel
+    $kernel->boot();
+
+    $application = new Application($kernel);
+
+    $command = new DoctrineReloadCommand($_SERVER['APP_ENV']);
+    $application->add($command);
+
+    $input = new ArrayInput(
+        [
+            'command' => 'doctrine:reload',
+            '--no-interaction' => true,
+        ]
+    );
+    $command->run($input, new ConsoleOutput());
 }
 
 $_SERVER['APP_ENV'] = $_ENV['APP_ENV'] = $_SERVER['APP_ENV'] ?: $_ENV['APP_ENV'] ?: 'dev';

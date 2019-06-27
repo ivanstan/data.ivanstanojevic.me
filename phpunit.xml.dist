@@ -13,12 +13,15 @@
     </php>
 
     <testsuites>
-        <testsuite name="Test">
-            <file>tests/PingTest.php</file>
-            <file>tests/TleModelTest.php</file>
+        <testsuite name="acceptance">
+            <directory>tests/Acceptance/</directory>
         </testsuite>
 
-        <testsuite name="Validate">
+        <testsuite name="unit">
+            <directory>tests/UnitTest/</directory>
+        </testsuite>
+
+        <testsuite name="validate">
             <file>tests/ValidateHtmlTest.php</file>
         </testsuite>
     </testsuites>

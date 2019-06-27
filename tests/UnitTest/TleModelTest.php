@@ -1,7 +1,9 @@
 <?php
 
-namespace App\Tests;
+namespace App\Tests\UnitTest;
 
+use App\Converter\TleModelConverter;
+use App\DataFixtures\TleFixtures;
 use App\Model\TleModel;
 use PHPUnit\Framework\TestCase;
 
@@ -9,14 +11,10 @@ class TleModelTest extends TestCase
 {
     public function testParse(): void
     {
-        $name = '1998-067NY';
-        $line1 = '1 43550U 98067NY  18321.21573649  .00013513  00000-0  18402-3 0  9990';
-        $line2 = '2 43550  51.6389 334.0891 0005785  67.0956 293.0647 15.57860024 19804';
-
-        $tle = new TleModel($line1, $line2, $name);
+        $tle = (new TleModelConverter())->convert(TleFixtures::create());
 
         static::assertEquals(
-            '2018-11-17T05:10:39+00:00',
+            TleFixtures::$date,
             $tle->getDate(),
             'Failed asserting TLE returned correct date'
         );

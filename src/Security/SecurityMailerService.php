@@ -4,6 +4,7 @@ namespace App\Security;
 
 use App\Entity\Token;
 use App\Entity\User;
+use App\Service\MailerService;
 use App\Service\Traits\TranslatorAwareTrait;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
@@ -23,7 +24,7 @@ class SecurityMailerService
     /** @var TokenGenerator */
     private $generator;
 
-    public function __construct(EntityManagerInterface $em, MailerInterface $mailer, TokenGenerator $generator)
+    public function __construct(EntityManagerInterface $em, MailerService $mailer, TokenGenerator $generator)
     {
         $this->em = $em;
         $this->mailer = $mailer;

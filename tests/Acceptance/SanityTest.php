@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Tests;
+namespace App\Tests\Acceptance;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
-class PingTest extends WebTestCase
+class SanityTest extends WebTestCase
 {
     protected static $pages = [
         '/',
@@ -19,15 +19,10 @@ class PingTest extends WebTestCase
         '/airport/lybe',
     ];
 
-    /**
-     * @var \Symfony\Bundle\FrameworkBundle\Client
-     */
-    private $client;
-
     public function __construct()
     {
         parent::__construct();
-        $this->client = static::createClient();
+        self::createClient();
     }
 
     public function testPages(): void
@@ -39,13 +34,13 @@ class PingTest extends WebTestCase
 
     protected function visit(string $path): Response
     {
-        $this->client->request('GET', $path);
+        self::$client->request('GET', $path);
         static::assertEquals(
             200,
-            $this->client->getResponse()->getStatusCode(),
+            self::$client->getResponse()->getStatusCode(),
             \sprintf('Endpoint %s returned HTTP code different to 200', $path)
         );
 
-        return $this->client->getResponse();
+        return self::$client->getResponse();
     }
 }

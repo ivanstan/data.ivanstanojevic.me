@@ -2,10 +2,11 @@
 
 namespace App\Tests;
 
+use App\Tests\Acceptance\SanityTest;
 use HtmlValidator\Response;
 use HtmlValidator\Validator;
 
-class ValidateHtmlTest extends PingTest
+class ValidateHtmlTest extends SanityTest
 {
     protected static $pages = [
         '/',

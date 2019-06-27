@@ -21,8 +21,14 @@ composer install
 print "> yarn build"
 yarn build
 
-#npm audit
-#bin/phpunit --coverage-text --testsuite Test
+print "> Security audit"
+npm audit
+
+print "> Unit test"
+composer unit-test
+
+print "> Acceptance test"
+composer acceptance-test
 
 print "> uploading artifact"
 tar -czf ${ARTIFACT_NAME} -T ./bin/deploy.list
